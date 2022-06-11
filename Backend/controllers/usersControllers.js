@@ -1,5 +1,6 @@
 const User = require("../models/userModel");
 const bcrypt = require("bcryptjs");
+const { generateUsersToken } = require("../helpers/generateUsersToken");
 
 //@desc   >>>> Get All Users
 //@route  >>>> GET /api/users
@@ -45,10 +46,40 @@ const createUser = async (req, res) => {
       full_addresse: req.body.addresse,
       zip_code: req.body.postal,
     });
-    res.status(201).json({ user: user });
+    res.status(201).json({
+      id: user.id,
+      name: user.name,
+      email: user.email,
+      token: generateUsersToken(user.id, user.email),
+    });
   } catch (error) {
     if (error.message.match(/(email|password|name|postal|phone|addresee)/gi))
       return res.status(400).json({ error: error.message });
+    res
+      .status(500)
+      .json({ error: "Ooops!! Something Went Wrong, Try again..." });
+  }
+};
+
+//@desc   >>>> user login
+//@route  >>>> GET /api/users/login
+//@Access >>>> privete(user only)
+const userLogin = async (req, res) => {
+  const { email, password } = req.body;
+  let user;
+  try {
+    user = await User.findOne({ email });
+    const isCorrectPassword = await bcrypt.compare(password, user.password);
+    if (isCorrectPassword)
+      return res.status(200).json({
+        id: user.id,
+        name: user.name,
+        email: user.email,
+        token: generateUsersToken(user.id, user.email),
+      });
+  } catch (error) {
+    if (!user || !isCorrectPassword)
+      return res.status(404).json({ error: "Wrong Credintials" });
     res
       .status(500)
       .json({ error: "Ooops!! Something Went Wrong, Try again..." });
@@ -100,6 +131,7 @@ module.exports = {
   getUsers,
   getOneUser,
   createUser,
+  userLogin,
   updateUser,
   deleteUser,
 };

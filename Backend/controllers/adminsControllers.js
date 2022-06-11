@@ -1,5 +1,6 @@
 const Admin = require("../models/adminModel");
 const bcrypt = require("bcryptjs");
+const { generateAdminsToken } = require("../helpers/generateAdminsToken");
 
 //@desc   >>>> Get All Admins
 //@route  >>>> GET /api/admins
@@ -22,9 +23,35 @@ const getOneAdmin = async (req, res) => {
   let admin;
   try {
     admin = await Admin.findById(req.params.id);
+    if (!admin) return res.status(404).json({ error: "Not Found!" });
     res.status(200).json(admin);
   } catch (error) {
-    if (!admin) return res.status(404).json({ error: "Not Found!" });
+    res
+      .status(500)
+      .json({ error: "Ooops!! Something Went Wrong, Try again..." });
+  }
+};
+
+//@desc   >>>> admin login
+//@route  >>>> GET /api/admins/login
+//@Access >>>> privete(admins + owner)
+const adminLogin = async (req, res) => {
+  const { email, password } = req.body;
+  let admin;
+  try {
+    admin = await Admin.findOne({ email });
+    const isCorrectPassword = await bcrypt.compare(password, admin.password);
+    if (isCorrectPassword)
+      return res.status(200).json({
+        id: admin.id,
+        name: admin.name,
+        email: admin.email,
+        role: admin.role,
+        token: generateAdminsToken(admin.id, admin.role),
+      });
+  } catch (error) {
+    if (!admin || !isCorrectPassword)
+      return res.status(404).json({ error: "Wrong Credintials" });
     res
       .status(500)
       .json({ error: "Ooops!! Something Went Wrong, Try again..." });
@@ -43,7 +70,13 @@ const createAdmin = async (req, res) => {
       password: hashedPassword,
       role: req.body.role,
     });
-    res.status(201).json({ admin: admin });
+    res.status(201).json({
+      id: admin.id,
+      name: admin.name,
+      email: admin.email,
+      role: admin.role,
+      token: generateAdminsToken(admin.id, admin.role),
+    });
   } catch (error) {
     if (error.message.match(/(email|password|name|role)/gi))
       return res.status(400).json({ error: error.message });
@@ -123,6 +156,7 @@ module.exports = {
   getAdmins,
   getOneAdmin,
   createAdmin,
+  adminLogin,
   updateAdmin,
   updateOwner,
   deleteAdmin,
