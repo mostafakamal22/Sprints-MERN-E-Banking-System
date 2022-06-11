@@ -14,6 +14,10 @@ const {
 
 router.route("/").get(getUsers).post(validatePassword, createUser);
 
-router.route("/:id").get(getOneUser).put(updateUser).delete(deleteUser);
+router
+  .route("/:id")
+  .get(getOneUser)
+  .put(validatePassword, updateUser)
+  .delete(deleteUser);
 
 module.exports = router;

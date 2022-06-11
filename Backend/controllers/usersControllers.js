@@ -45,28 +45,53 @@ const createUser = async (req, res) => {
     });
     res.status(201).json({ user: user });
   } catch (error) {
-    if (error.message.match(/(email|password|name|postal|phone|addresee)/gi)) {
+    if (error.message.match(/(email|password|name|postal|phone|addresee)/gi))
       return res.status(400).json({ error: error.message });
-    } else {
-      res
-        .status(500)
-        .json({ error: "Ooops!! Something Went Wrong, Try again..." });
-    }
+    res
+      .status(500)
+      .json({ error: "Ooops!! Something Went Wrong, Try again..." });
   }
 };
 
 //@desc   >>>> UPDATE User
 //@route  >>>> PUT /api/users/:id
-//@Access >>>> public(Admin + User)
+//@Access >>>> private(for User only)
 const updateUser = async (req, res) => {
-  res.status(200).json({ message: `Update User ${req.params.id}` });
+  try {
+    const hashedPassword = await bcrypt.hash(req.body.password, 10);
+    const updatedUser = await User.updateOne(
+      { id: req.params.id },
+      {
+        user_name: req.body.name,
+        email: req.body.email,
+        password: hashedPassword,
+        phone: req.body.phone,
+        full_addresse: req.body.addresse,
+        zip_code: req.body.postal,
+      }
+    );
+    res.status(200).json({ message: "updated seccessfully", updatedUser });
+  } catch (error) {
+    if (error.message.match(/(email|password|name|postal|phone|addresee)/gi))
+      return res.status(400).json({ error: error.message });
+    res
+      .status(500)
+      .json({ error: "Ooops!! Something Went Wrong, Try again..." });
+  }
 };
 
 //@desc   >>>> Delete one User
 //@route  >>>> DELETE /api/users/:id
-//@Access >>>> private
+//@Access >>>> private(for admins only)
 const deleteUser = async (req, res) => {
-  res.status(200).json({ message: `Delete User ${req.params.id}` });
+  try {
+    const deletedUser = await User.findByIdAndDelete(req.params.id);
+    res.status(200).json({ message: "deleted seccessfully", deletedUser });
+  } catch (error) {
+    res
+      .status(500)
+      .json({ error: "Ooops!! Something Went Wrong, Try again..." });
+  }
 };
 
 module.exports = {

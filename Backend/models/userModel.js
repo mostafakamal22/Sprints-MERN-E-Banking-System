@@ -10,7 +10,13 @@ const userSchema = new mongoose.Schema(
       validate: {
         validator: function (v) {
           let regex = new RegExp(
-            "^(?=[a-zA-Z0-9._ ]{10,20}$)(?!.*[_.]{2})[^_.].*[^_.]$"
+            "^(?=[a-zA-Z0-9._ ]{10,}$)(?!.*[_.]{2})[^_.].*[^_.]$"
+            /*   no >>> _ or . at the beginning
+            no >>>__ or _. or ._ or .. inside 
+            no >>> _ or . at the end
+            [a-zA-Z0-9._] >> allowed characters
+            username is {10-} characters long
+            */
           );
           return regex.test(v);
         },
@@ -39,8 +45,8 @@ const userSchema = new mongoose.Schema(
       unique: true,
       validate: {
         validator: function (v) {
-          let regex = new RegExp("^(201|1|00201)[0-2,5]{1}[0-9]{8}");
-          return regex.test(v);
+          let regex = new RegExp("^(1)[0-2,5]{1}[0-9]{8}");
+          return regex.test(v) && v.toString().length === 10;
         },
         message: "Please Enter A Valid EGY Phone Number!",
       },
@@ -96,7 +102,7 @@ userSchema.post("save", function (error, doc, next) {
 });
 
 //handle duplicate 'Key' error when 'UPDATING' a User
-userSchema.post("update", function (error, doc, next) {
+userSchema.post("updateOne", function (error, doc, next) {
   if (error.name === "MongoServerError" && error.code === 11000) {
     let dupKeys = Object.keys(error.keyPattern);
     next(new Error(`This ${dupKeys} is Already Used By Another User!`));
