@@ -19,10 +19,12 @@ const getUsers = async (req, res) => {
 //@route  >>>> GET /api/users/:id
 //@Access >>>> public(Admin + User)
 const getOneUser = async (req, res) => {
+  let user;
   try {
-    const user = await User.findById(req.params.id);
+    user = await User.findById(req.params.id);
     res.status(200).json(user);
   } catch (error) {
+    if (!user) return res.status(404).json({ error: "Not Found!" });
     res
       .status(500)
       .json({ error: "Ooops!! Something Went Wrong, Try again..." });

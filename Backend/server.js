@@ -11,9 +11,13 @@ connectToMongoose();
 //middlewares
 app.use(express.json());
 
-//users Route
-const UsersRoute = require("./routes/usersRoutes");
-app.use("/api/users", UsersRoute);
+//users Router
+const usersRoute = require("./routes/usersRoutes");
+app.use("/api/users", usersRoute);
+
+//admins Router
+const adminsRoute = require("./routes/adminRoutes");
+app.use("/api/admins", adminsRoute);
 
 app.listen(process.env.PORT, () => {
   console.log("server is running");
