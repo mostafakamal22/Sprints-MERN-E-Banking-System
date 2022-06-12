@@ -36,8 +36,14 @@ const getOneAdmin = async (req, res) => {
 //@route  >>>> GET /api/admins/login
 //@Access >>>> privete(admins + owner)
 const adminLogin = async (req, res) => {
+  //check for empty body
+  if (!req.body.email || !req.body.password)
+    return res.status(404).json({ error: "empty body request" });
   const { email } = req.admin;
   const { password } = req.body;
+  //check if email that comes from token is the email from request
+  if (email !== req.body.email)
+    return res.status(404).json({ error: "Wrong Credintials" });
   let admin;
   try {
     admin = await Admin.findOne({ email });

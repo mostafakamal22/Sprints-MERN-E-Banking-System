@@ -65,8 +65,14 @@ const createUser = async (req, res) => {
 //@route  >>>> GET /api/users/login
 //@Access >>>> privete(user only)
 const userLogin = async (req, res) => {
+  //check for empty body
+  if (!req.body.email || !req.body.password)
+    return res.status(404).json({ error: "empty body request" });
   const { email } = req.user;
   const { password } = req.body;
+  //check if email that comes from token is the email from request
+  if (email !== req.body.email)
+    return res.status(404).json({ error: "Wrong Credintials" });
   let user;
   try {
     user = await User.findOne({ email });

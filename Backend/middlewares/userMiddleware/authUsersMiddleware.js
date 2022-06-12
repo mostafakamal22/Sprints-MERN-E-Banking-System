@@ -1,10 +1,10 @@
 const jwt = require("jsonwebtoken");
 
-const Admin = require("../models/adminModel");
+const User = require("../../models/userModel");
 
-const authAdminProtect = async (req, res, next) => {
+const authUserProtect = async (req, res, next) => {
   let token;
-  let admin;
+  let user;
   let decoded;
   if (
     req.headers.authorization &&
@@ -15,15 +15,12 @@ const authAdminProtect = async (req, res, next) => {
       token = req.headers.authorization.split(" ")[1];
       //verify token
       decoded = jwt.verify(token, process.env.JWT_SECRET);
-      //Get Admin from Token
-      admin = await Admin.findById(decoded.id);
-      //check if email that comes from token is the email from request
-      if (admin.email !== req.body.email)
-        return res.status(404).json({ error: "Wrong Credintials" });
-      req.admin = await Admin.findById(decoded.id);
+      //Get User from Token
+      user = await User.findById(decoded.id);
+      req.user = await User.findById(decoded.id);
       next();
     } catch (error) {
-      if (!decoded || !(await Admin.findById(decoded.id)))
+      if (!decoded || !(await User.findById(decoded.id)))
         return res.status(401).json("error: Not Authorized with invalid token");
       return res
         .status(500)
@@ -35,5 +32,5 @@ const authAdminProtect = async (req, res, next) => {
 };
 
 module.exports = {
-  authAdminProtect,
+  authUserProtect,
 };

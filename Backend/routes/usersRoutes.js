@@ -1,7 +1,11 @@
 const express = require("express");
 const router = express.Router();
-const { validatePassword } = require("../middlewares/userMiddlewares");
-const { authUserProtect } = require("../middlewares/authUsersMiddleware");
+const {
+  validatePassword,
+} = require("../middlewares/userMiddleware/userMiddlewares");
+const {
+  authUserProtect,
+} = require("../middlewares/userMiddleware/authUsersMiddleware");
 const {
   getUsers,
   getOneUser,
