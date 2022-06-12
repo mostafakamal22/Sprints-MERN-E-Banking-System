@@ -36,7 +36,8 @@ const getOneAdmin = async (req, res) => {
 //@route  >>>> GET /api/admins/login
 //@Access >>>> privete(admins + owner)
 const adminLogin = async (req, res) => {
-  const { email, password } = req.body;
+  const { email } = req.admin;
+  const { password } = req.body;
   let admin;
   try {
     admin = await Admin.findOne({ email });
@@ -75,7 +76,7 @@ const createAdmin = async (req, res) => {
       name: admin.name,
       email: admin.email,
       role: admin.role,
-      token: generateAdminsToken(admin.id, admin.role),
+      token: generateAdminsToken(admin.id, admin.email, admin.role),
     });
   } catch (error) {
     if (error.message.match(/(email|password|name|role)/gi))

@@ -15,19 +15,23 @@ const authAdminProtect = async (req, res, next) => {
       token = req.headers.authorization.split(" ")[1];
       //verify token
       decoded = jwt.verify(token, process.env.JWT_SECRET);
-      //Get User from Token
+      //Get Admin from Token
       admin = await Admin.findById(decoded.id);
+      //check if email that comes from token is the email from request
+      if (admin.email !== req.body.email)
+        return res.status(404).json({ error: "Wrong Credintials" });
       req.admin = await Admin.findById(decoded.id);
       next();
     } catch (error) {
       if (!decoded || !(await Admin.findById(decoded.id)))
-        return res.status(401).json("error: Not Authorized");
+        return res.status(401).json("error: Not Authorized with invalid token");
       return res
         .status(500)
         .json({ error: "Ooops!! Something Went Wrong, Try again..." });
     }
   }
-  if (!token) return res.status(401).json("error: Not Authorized");
+  if (!token)
+    return res.status(401).json("error: Not Authorized without token");
 };
 
 module.exports = {

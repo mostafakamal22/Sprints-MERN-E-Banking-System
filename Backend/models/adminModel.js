@@ -8,7 +8,7 @@ const adminSchema = new mongoose.Schema(
       validate: {
         validator: function (v) {
           let regex = new RegExp(
-            "^(?=[a-zA-Z0-9._ ]{10,}$)(?!.*[_.]{2})[^_.].*[^_.]$"
+            "^(?=[a-zA-Z0-9._ ]{10,35}$)(?!.*[_.]{2})[^_.].*[^_.]$"
             /*  no >>> _ or . at the beginning
               no >>>__ or _. or ._ or .. inside 
               no >>> _ or . at the end

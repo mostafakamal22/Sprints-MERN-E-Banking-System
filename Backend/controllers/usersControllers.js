@@ -65,7 +65,8 @@ const createUser = async (req, res) => {
 //@route  >>>> GET /api/users/login
 //@Access >>>> privete(user only)
 const userLogin = async (req, res) => {
-  const { email, password } = req.body;
+  const { email } = req.user;
+  const { password } = req.body;
   let user;
   try {
     user = await User.findOne({ email });
