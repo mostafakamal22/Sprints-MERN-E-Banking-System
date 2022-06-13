@@ -2,6 +2,7 @@ import "./App.css";
 import { useEffect } from "react";
 import Register from "./components/froms/Register";
 import Login from "./components/froms/Login";
+import Home from "./components/Home";
 
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
@@ -18,7 +19,7 @@ function App() {
   return (
     <Router>
       <Routes>
-        <Route exact path="/" element={<Login />} />
+        <Route exact path="/" element={<Home />} />
         <Route exact path="/register" element={<Register />} />
         <Route exact path="/login" element={<Login />} />
       </Routes>

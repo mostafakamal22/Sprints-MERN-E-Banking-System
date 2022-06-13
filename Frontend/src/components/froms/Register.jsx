@@ -1,7 +1,9 @@
 import React from "react";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function Register() {
+  const navigate = useNavigate();
   const [fromInputs, setFromInputs] = useState({
     firstName: "",
     lastName: "",
@@ -54,8 +56,13 @@ export default function Register() {
 
       const data = await res.json();
       console.log(data);
-      if (data.error) {
-        setFromInputs({ ...fromInputs, error: data.error });
+      if (data.token) {
+        console.log("Register Successful");
+        localStorage.setItem("token", data.token);
+        navigate("/");
+        return;
+      } else {
+        setFromInputs({ ...fromInputs, error: data });
       }
     } catch (err) {
       console.log(err.error);
