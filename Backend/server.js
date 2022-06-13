@@ -1,6 +1,7 @@
 require("dotenv").config();
 
 const express = require("express");
+const cors = require("cors");
 
 const app = express();
 
@@ -10,6 +11,10 @@ connectToMongoose();
 
 //middlewares
 app.use(express.json());
+
+//cors
+const { corsDevOptions } = require("./config/corsConfig");
+app.use(cors(corsDevOptions));
 
 //users Router
 const usersRoute = require("./routes/usersRoutes");
