@@ -1,5 +1,9 @@
 import "./App.css";
 import { useEffect } from "react";
+import Register from "./components/froms/Register";
+import Login from "./components/froms/Login";
+
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 function App() {
   useEffect(() => {
@@ -11,7 +15,15 @@ function App() {
       .catch((err) => console.log(err));
   }, []);
 
-  return <div className="text-center text-red-900">Home Pgae</div>;
+  return (
+    <Router>
+      <Routes>
+        <Route exact path="/" element={<Login />} />
+        <Route exact path="/register" element={<Register />} />
+        <Route exact path="/login" element={<Login />} />
+      </Routes>
+    </Router>
+  );
 }
 
 export default App;
