@@ -1,9 +1,11 @@
 import React from "react";
+import { useEffect } from "react";
 import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { register, reset } from "../../features/Auth/authSlice";
 
 export default function Register() {
-  const navigate = useNavigate();
   const [fromInputs, setFromInputs] = useState({
     firstName: "",
     lastName: "",
@@ -28,6 +30,27 @@ export default function Register() {
     error,
   } = fromInputs;
 
+  const navigate = useNavigate();
+
+  const dispatch = useDispatch();
+
+  const { user, isError, isSuccess, message } = useSelector(
+    (state) => state.auth
+  );
+
+  useEffect(() => {
+    if (isError) {
+      setFromInputs({ ...fromInputs, error: message });
+    }
+
+    if (user || isSuccess) {
+      console.log("Registered Succesfully");
+      navigate("/login");
+    }
+
+    dispatch(reset());
+  }, [user, isError, isSuccess, message, navigate, dispatch]);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     //set error msg to none first
@@ -37,36 +60,17 @@ export default function Register() {
       setFromInputs({ ...fromInputs, error: "password does not match" });
       return;
     }
-    try {
-      //fetch form data to the backend
-      const res = await fetch("http://localhost:5000/api/users", {
-        method: "post",
-        headers: {
-          "content-type": "application/json",
-        },
-        body: JSON.stringify({
-          name: `${firstName.trim()} ${lastName.trim()}`,
-          email: email.trim(),
-          phone: phone.trim(),
-          postal: postCode.trim(),
-          addresse: address.trim(),
-          password,
-        }),
-      });
 
-      const data = await res.json();
-      console.log(data);
-      if (data.token) {
-        console.log("Register Successful");
-        localStorage.setItem("token", data.token);
-        navigate("/");
-        return;
-      } else {
-        setFromInputs({ ...fromInputs, error: data });
-      }
-    } catch (err) {
-      console.log(err.error);
-    }
+    const userData = {
+      name: `${firstName.trim()} ${lastName.trim()}`,
+      email: email.trim(),
+      phone: phone.trim(),
+      postal: postCode.trim(),
+      addresse: address.trim(),
+      password,
+    };
+
+    dispatch(register(userData));
   };
 
   return (

@@ -20,15 +20,13 @@ const authUserProtect = async (req, res, next) => {
       req.user = await User.findById(decoded.id);
       next();
     } catch (error) {
-      if (!decoded || !(await User.findById(decoded.id)))
-        return res.status(401).json("error: Not Authorized with invalid token");
-      return res
-        .status(500)
-        .json({ error: "Ooops!! Something Went Wrong, Try again..." });
+      if (!decoded || !(await User.findById(decoded.id))) {
+        return res.status(401).send("Not Authorized with invalid token");
+      }
+      return res.status(500).send("Ooops!! Something Went Wrong, Try again...");
     }
   }
-  if (!token)
-    return res.status(401).json("error: Not Authorized without token");
+  if (!token) return res.status(401).send("Not Authorized without token");
 };
 
 module.exports = {

@@ -2,8 +2,9 @@
 
 const validatePassword = (req, res, next) => {
   //check for empty request first
-  if (Object.keys(req.body).length === 0)
-    return res.status(400).json({ error: "empty body request" });
+  if (Object.keys(req.body).length === 0) {
+    return res.status(400).send("empty body request");
+  }
 
   let regex = new RegExp(
     "^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])(?=.{12,})"
@@ -15,11 +16,13 @@ const validatePassword = (req, res, next) => {
     (?=.*[!@#$%^&*])>>The string must contain at least one special character, 
     but we are escaping reserved RegEx characters to avoid conflict
     (?=.{8,})>>The string must be eight characters or longer */
-  if (regex.test(req.body.password)) return next();
 
-  return res
-    .status(400)
-    .json({ error: "Password validation: Not a Valid Password" });
+  //Invalid Password
+  if (!regex.test(req.body.password)) {
+    return res.status(400).send("Not a Valid Password");
+  }
+  //Okey Valid Password
+  return next();
 };
 
 module.exports = {

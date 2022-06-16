@@ -53,11 +53,10 @@ const createUser = async (req, res) => {
       token: generateUsersToken(user.id, user.email),
     });
   } catch (error) {
-    if (error.message.match(/(email|password|name|postal|phone|addresee)/gi))
-      return res.status(400).json({ error: error.message });
-    res
-      .status(500)
-      .json({ error: "Ooops!! Something Went Wrong, Try again..." });
+    if (error.message.match(/(email|password|name|postal|phone|addresee)/gi)) {
+      return res.status(400).send(error.message);
+    }
+    res.status(500).send("Ooops!! Something Went Wrong, Try again...");
   }
 };
 
@@ -67,29 +66,35 @@ const createUser = async (req, res) => {
 const userLogin = async (req, res) => {
   //check for empty body
   if (!req.body.email || !req.body.password)
-    return res.status(404).json({ error: "empty body request" });
+    return res.status(404).send("empty body request");
   const { email } = req.user;
   const { password } = req.body;
   //check if email that comes from token is the email from request
   if (email !== req.body.email)
-    return res.status(404).json({ error: "Wrong Credintials" });
+    return res.status(404).send("Wrong Credintials - invalid email");
   let user;
   try {
+    //okay user has valid token with his valid email
     user = await User.findOne({ email });
+    //ckeck for password
     const isCorrectPassword = await bcrypt.compare(password, user.password);
-    if (isCorrectPassword)
+
+    if (isCorrectPassword) {
       return res.status(200).json({
         id: user.id,
         name: user.name,
         email: user.email,
         token: generateUsersToken(user.id, user.email),
       });
+    } else {
+      return res.status(404).send("Wrong Credintials - wrong password");
+    }
   } catch (error) {
     if (!user || !isCorrectPassword)
-      return res.status(404).json({ error: "Wrong Credintials" });
-    res
-      .status(500)
-      .json({ error: "Ooops!! Something Went Wrong, Try again..." });
+      return res
+        .status(404)
+        .send("Wrong Credintials - wrong email or password");
+    res.status(500).send("Ooops!! Something Went Wrong, Try again...");
   }
 };
 

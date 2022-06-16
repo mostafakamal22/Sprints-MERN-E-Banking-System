@@ -1,10 +1,15 @@
 import React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
+import { login, reset } from "../../features/Auth/authSlice";
+
+useSelector;
+useDispatch;
+reset;
+login;
 
 export default function Login() {
-  const navigate = useNavigate();
-
   const [fromInputs, setFromInputs] = useState({
     email: "",
     password: "",
@@ -13,42 +18,44 @@ export default function Login() {
 
   const { email, password, error } = fromInputs;
 
+  const navigate = useNavigate();
+
+  const dispatch = useDispatch();
+
+  const { user, isError, isSuccess, message } = useSelector(
+    (state) => state.auth
+  );
+
+  useEffect(() => {
+    if (isError) {
+      setFromInputs({ ...fromInputs, error: message });
+    }
+
+    if (user && isSuccess) {
+      console.log("Login Succesfully");
+      navigate("/");
+    }
+
+    dispatch(reset());
+  }, [user, isError, isSuccess, message, navigate, dispatch]);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     //set error msg to none first
     setFromInputs({ ...fromInputs, error: "" });
-    try {
-      //fetch form data to the backend
-      const token = localStorage.getItem("token");
-      if (!token) {
-        setFromInputs({ ...fromInputs, error: "there is no token" });
-        return;
-      }
-      const res = await fetch("http://localhost:5000/api/users/login", {
-        method: "post",
-        headers: {
-          "content-type": "application/json",
-          authorization: `Bearer ${token.trim()}`,
-        },
-        body: JSON.stringify({
-          email: email.trim(),
-          password,
-        }),
-      });
 
-      const data = await res.json();
-      console.log(data);
-      if (data.token) {
-        console.log("Login Successfully");
-        localStorage.setItem("token", data.token);
-        navigate("/");
-      } else {
-        setFromInputs({ ...fromInputs, error: data });
-      }
-    } catch (err) {
-      console.log(err.error);
-      setFromInputs({ ...fromInputs, error: err });
+    //fetch form data to the backend
+    const token = JSON.parse(localStorage.getItem("user")).token;
+    if (!token) {
+      setFromInputs({ ...fromInputs, error: "there is no token" });
+      return;
     }
+    const userData = {
+      email: email.trim(),
+      token: token.trim(),
+      password,
+    };
+    dispatch(login(userData));
   };
 
   return (
