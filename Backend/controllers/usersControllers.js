@@ -23,12 +23,20 @@ const getOneUser = async (req, res) => {
   let user;
   try {
     user = await User.findById(req.params.id);
-    res.status(200).json(user);
+    res.status(200).json({
+      name: user.user_name,
+      email: user.email,
+      address: user.full_addresse,
+      id: user.id,
+      accountsCount: user.no_of_account,
+      createdAt: user.createdAt,
+      userStatus: user.user_status,
+      postal: user.zip_code,
+      phone: user.phone,
+    });
   } catch (error) {
-    if (!user) return res.status(404).json({ error: "Not Found!" });
-    res
-      .status(500)
-      .json({ error: "Ooops!! Something Went Wrong, Try again..." });
+    if (!user) return res.status(404).send("user Not Found!");
+    res.status(500).send("Ooops!! Something Went Wrong, Try again...");
   }
 };
 
@@ -67,11 +75,7 @@ const userLogin = async (req, res) => {
   //check for empty body
   if (!req.body.email || !req.body.password)
     return res.status(404).send("empty body request");
-  const { email } = req.user;
-  const { password } = req.body;
-  //check if email that comes from token is the email from request
-  if (email !== req.body.email)
-    return res.status(404).send("Wrong Credintials - invalid email");
+  const { email, password } = req.body;
   let user;
   try {
     //okay user has valid token with his valid email

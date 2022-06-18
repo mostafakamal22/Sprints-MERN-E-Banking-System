@@ -1,4 +1,5 @@
 import axios from "axios";
+import storage from "redux-persist/lib/storage";
 
 const API_URL = "http://localhost:5000/api/users/";
 
@@ -7,17 +8,9 @@ const login = async (userData) => {
   const res = await axios.post(API_URL + "login", userData, {
     headers: {
       "content-type": "application/json",
-      authorization: `Bearer ${userData.token}`,
     },
   });
-
-  console.log(res);
   const data = res.data;
-  console.log(data);
-
-  if (data.token) {
-    localStorage.setItem("user", JSON.stringify(data));
-  }
 
   return data;
 };
@@ -30,20 +23,14 @@ const register = async (userData) => {
     },
   });
 
-  console.log(res);
   const data = res.data;
-  console.log(data);
-
-  if (data.token) {
-    localStorage.setItem("user", JSON.stringify(data));
-  }
 
   return data;
 };
 
 //Logout
 const logout = () => {
-  localStorage.removeItem("user");
+  storage.removeItem("persist:root");
 };
 
 const authService = {

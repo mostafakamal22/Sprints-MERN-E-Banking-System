@@ -19,10 +19,10 @@ router.route("/").get(getUsers).post(validatePassword, createUser);
 
 router
   .route("/:id")
-  .get(getOneUser)
-  .put(validatePassword, updateUser)
+  .get(authUserProtect, getOneUser)
+  .put(validatePassword, authUserProtect, updateUser)
   .delete(deleteUser);
 
-router.route("/login").post(authUserProtect, userLogin);
+router.route("/login").post(userLogin);
 
 module.exports = router;

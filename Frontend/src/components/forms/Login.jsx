@@ -4,11 +4,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { login, reset } from "../../features/Auth/authSlice";
 
-useSelector;
-useDispatch;
-reset;
-login;
-
 export default function Login() {
   const [fromInputs, setFromInputs] = useState({
     email: "",
@@ -31,31 +26,23 @@ export default function Login() {
       setFromInputs({ ...fromInputs, error: message });
     }
 
-    if (user && isSuccess) {
+    if (user) {
       console.log("Login Succesfully");
+      dispatch(reset());
       navigate("/");
     }
-
-    dispatch(reset());
-  }, [user, isError, isSuccess, message, navigate, dispatch]);
+  }, [isError, message, user, error]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     //set error msg to none first
     setFromInputs({ ...fromInputs, error: "" });
 
-    //fetch form data to the backend
-    const token = JSON.parse(localStorage.getItem("user")).token;
-    if (!token) {
-      setFromInputs({ ...fromInputs, error: "there is no token" });
-      return;
-    }
     const userData = {
       email: email.trim(),
-      token: token.trim(),
       password,
     };
-    dispatch(login(userData));
+    await dispatch(login(userData));
   };
 
   return (

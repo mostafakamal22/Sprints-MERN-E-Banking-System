@@ -1,15 +1,12 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { logout, reset } from "../features/Auth/authSlice";
 
-useSelector;
 export default function Home() {
-  const user = localStorage.getItem("user");
-  console.log(user);
-
   const naviagte = useNavigate();
   const dispatch = useDispatch();
+  const { user } = useSelector((state) => state.auth);
 
   //logout function
   const handleLogout = () => {
@@ -23,6 +20,7 @@ export default function Home() {
       <button className="bg-red-800 text-white" onClick={handleLogout}>
         Logout
       </button>
+      {user && <Link to={`/profile/${user.id}`}>Go to profile</Link>}
     </div>
   );
 }

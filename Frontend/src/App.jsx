@@ -1,28 +1,57 @@
 import "./App.css";
 import { useEffect } from "react";
-import Register from "./components/froms/Register";
-import Login from "./components/froms/Login";
+import Register from "./components/forms/Register";
+import Login from "./components/forms/Login";
 import Home from "./components/Home";
-
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Navigate,
+} from "react-router-dom";
+import ProfilePage from "./views/ProfilePage";
+import { useDispatch, useSelector } from "react-redux";
+import NotFoundPage from "./views/NotFound";
+import { getUser } from "./features/User/userSlice";
 
 function App() {
+  const dispatch = useDispatch();
+  const { user } = useSelector((state) => state.auth);
+
+  console.log(user);
+
   useEffect(() => {
-    fetch("http://localhost:5000/api/users", {
-      method: "get",
-    })
-      .then((res) => res.json())
-      .then((data) => console.log(data))
-      .catch((err) => console.log(err));
-  }, []);
+    if (user) {
+      const userData = {
+        token: user.token,
+        id: user.id,
+      };
+      console.log("get user info");
+
+      dispatch(getUser(userData));
+    }
+  }, [user]);
 
   return (
     <Router>
-      <Routes>
-        <Route exact path="/" element={<Home />} />
-        <Route exact path="/register" element={<Register />} />
-        <Route exact path="/login" element={<Login />} />
-      </Routes>
+      {!user && (
+        <Routes>
+          <Route index element={<Login />} />
+          <Route exact path="/register" element={<Register />} />
+          <Route exact path="/login" element={<Login />} />
+          <Route path="*" element={<NotFoundPage />} />
+        </Routes>
+      )}
+
+      {user && (
+        <Routes>
+          <Route index element={<Home />} />
+          <Route exact path="/register" element={<Navigate to={"/"} />} />
+          <Route exact path="/login" element={<Navigate to={"/"} />} />
+          <Route exact path="/profile/:id" element={<ProfilePage />} />
+          <Route path="*" element={<NotFoundPage />} />
+        </Routes>
+      )}
     </Router>
   );
 }
