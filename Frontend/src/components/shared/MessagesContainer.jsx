@@ -5,7 +5,7 @@ export default function MessagesContainer({ msg, isSuccess }) {
     <div
       className={`${
         isSuccess ? "text-green-800 " : "text-red-800 "
-      } flex justify-center items-center text-center my-2 min-h-[30px]`}
+      } flex justify-center items-center text-center my-2 min-h-[20px]`}
     >
       {msg}
     </div>

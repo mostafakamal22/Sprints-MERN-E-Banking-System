@@ -1,7 +1,7 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { updateUser } from "../../features/User/userSlice";
+import { resetUserStatus, updateUser } from "../../features/User/userSlice";
 import FormButton from "../shared/FormButton";
 import MessagesContainer from "../shared/MessagesContainer";
 
@@ -47,11 +47,18 @@ export default function UpdateUser() {
     }
   }, [isError, message, msg, isSuccess]);
 
+  //seperate clean up for status msg (reset status only on unmount)
+  useEffect(() => {
+    return () => {
+      dispatch(resetUserStatus());
+    };
+  }, []);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     //set msg to none first
     setFromInputs({ ...fromInputs, msg: "" });
-    //check for password match > then show error msg
+    //check for password match >>> if not matched then show error msg
     if (password !== repeatedPassword) {
       setFromInputs({ ...fromInputs, msg: "password does not match" });
       return;
@@ -113,8 +120,9 @@ export default function UpdateUser() {
             htmlFor="oldPassword"
             className="form-label inline-block mb-2 text-gray-700"
           >
-            Old Password - if you DO NOT want change password just type it for
-            all password field
+            Old Password - if you{" "}
+            <span className="underline font-bold">DO NOT</span> want change
+            password just type it for all password field
           </label>
           <input
             type="password"
