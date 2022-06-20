@@ -12,7 +12,8 @@ import {
 import ProfilePage from "./views/ProfilePage";
 import { useDispatch, useSelector } from "react-redux";
 import NotFoundPage from "./views/NotFound";
-import { getUser } from "./features/User/userSlice";
+import { getUser, resetUserStatus } from "./features/User/userSlice";
+import UpdateUser from "./components/forms/UpdateUser";
 
 function App() {
   const dispatch = useDispatch();
@@ -29,6 +30,7 @@ function App() {
       console.log("get user info");
 
       dispatch(getUser(userData));
+      dispatch(resetUserStatus());
     }
   }, [user]);
 
@@ -49,6 +51,7 @@ function App() {
           <Route exact path="/register" element={<Navigate to={"/"} />} />
           <Route exact path="/login" element={<Navigate to={"/"} />} />
           <Route exact path="/profile/:id" element={<ProfilePage />} />
+          <Route exact path="/profile/:id/update" element={<UpdateUser />} />
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
       )}

@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const {
   validatePassword,
+  checkPassword,
 } = require("../middlewares/userMiddleware/userMiddlewares");
 const {
   authUserProtect,
@@ -20,7 +21,7 @@ router.route("/").get(getUsers).post(validatePassword, createUser);
 router
   .route("/:id")
   .get(authUserProtect, getOneUser)
-  .put(validatePassword, authUserProtect, updateUser)
+  .put(checkPassword, validatePassword, authUserProtect, updateUser)
   .delete(deleteUser);
 
 router.route("/login").post(userLogin);

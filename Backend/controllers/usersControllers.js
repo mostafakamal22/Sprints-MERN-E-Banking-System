@@ -108,24 +108,38 @@ const userLogin = async (req, res) => {
 const updateUser = async (req, res) => {
   try {
     const hashedPassword = await bcrypt.hash(req.body.password, 10);
-    const updatedUser = await User.updateOne(
-      { id: req.params.id },
-      {
-        user_name: req.body.name,
-        email: req.body.email,
-        password: hashedPassword,
-        phone: req.body.phone,
-        full_addresse: req.body.addresse,
-        zip_code: req.body.postal,
-      }
-    );
-    res.status(200).json({ message: "updated seccessfully", updatedUser });
+    //get user
+    const user = await User.findById(req.params.id);
+    //update user with new values
+    user.email = req.body.email;
+    user.markModified("email");
+    user.password = hashedPassword;
+    user.markModified("password");
+    user.phone = req.body.phone;
+    user.markModified("phone");
+    user.full_addresse = req.body.addresse;
+    user.markModified("full_addresse");
+    user.zip_code = req.body.postal;
+    user.markModified("zip_code");
+
+    //get updated user info & send it back
+    const updatedUser = await user.save();
+
+    res.status(200).json({
+      name: updatedUser.user_name,
+      email: updatedUser.email,
+      address: updatedUser.full_addresse,
+      id: updatedUser.id,
+      accountsCount: updatedUser.no_of_account,
+      createdAt: updatedUser.createdAt,
+      userStatus: updatedUser.user_status,
+      postal: updatedUser.zip_code,
+      phone: updatedUser.phone,
+    });
   } catch (error) {
     if (error.message.match(/(email|password|name|postal|phone|addresee)/gi))
-      return res.status(400).json({ error: error.message });
-    res
-      .status(500)
-      .json({ error: "Ooops!! Something Went Wrong, Try again..." });
+      return res.status(400).send(error.message);
+    res.status(500).send("Ooops!! Something Went Wrong, Try again...");
   }
 };
 
@@ -135,11 +149,9 @@ const updateUser = async (req, res) => {
 const deleteUser = async (req, res) => {
   try {
     const deletedUser = await User.findByIdAndDelete(req.params.id);
-    res.status(200).json({ message: "deleted seccessfully", deletedUser });
+    res.status(200).json({ id: deletedUser.id });
   } catch (error) {
-    res
-      .status(500)
-      .json({ error: "Ooops!! Something Went Wrong, Try again..." });
+    res.status(500).send("Ooops!! Something Went Wrong, Try again...");
   }
 };
 

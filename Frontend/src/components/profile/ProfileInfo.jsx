@@ -1,5 +1,6 @@
 import React from "react";
 import { AiOutlineUser } from "react-icons/ai";
+import { Link } from "react-router-dom";
 
 export default function ProfileInfo({ info }) {
   return (
@@ -35,9 +36,9 @@ export default function ProfileInfo({ info }) {
             <div className="px-4 py-2 font-semibold">Phone Number</div>
             <div className="px-4 py-2">{info.phone}</div>
           </div>
-          <div className="grid grid-cols-2">
-            <button>Update Information</button>
-          </div>
+        </div>
+        <div className="flex justify-end items-center">
+          <Link to={`/profile/${info.id}/update`}>Update Information</Link>
         </div>
       </div>
     </div>
