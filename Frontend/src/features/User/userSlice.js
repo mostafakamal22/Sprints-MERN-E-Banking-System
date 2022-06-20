@@ -16,10 +16,6 @@ export const getUser = createAsyncThunk(
     try {
       return await userServices.getUser(userData);
     } catch (error) {
-      console.log(error.message);
-      console.log(error.response.data);
-      console.log(error.response.status);
-      console.log(error.response.headers);
       const message = error.response.data;
 
       return thunkAPI.rejectWithValue(message);
@@ -34,16 +30,17 @@ export const updateUser = createAsyncThunk(
     try {
       return await userServices.updateUser(userData);
     } catch (error) {
-      console.log(error.message);
-      console.log(error.response.data);
-      console.log(error.response.status);
-      console.log(error.response.headers);
       const message = error.response.data;
 
       return thunkAPI.rejectWithValue(message);
     }
   }
 );
+
+//User Logout
+export const userLogout = createAsyncThunk("user/logout", async () => {
+  userServices.userLogout();
+});
 
 export const userSlice = createSlice({
   name: "userInfo",
@@ -96,6 +93,9 @@ export const userSlice = createSlice({
         state.isError = true;
         state.isSuccess = false;
         state.message = action.payload;
+      })
+      .addCase(userLogout.fulfilled, (state) => {
+        state.info = null;
       });
   },
 });

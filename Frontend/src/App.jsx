@@ -30,7 +30,6 @@ function App() {
       console.log("get user info");
 
       dispatch(getUser(userData));
-      dispatch(resetUserStatus());
     }
   }, [user]);
 

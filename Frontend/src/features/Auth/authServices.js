@@ -1,5 +1,4 @@
 import axios from "axios";
-import storage from "redux-persist/lib/storage";
 
 const API_URL = "http://localhost:5000/api/users/";
 
@@ -30,7 +29,7 @@ const register = async (userData) => {
 
 //Logout
 const logout = () => {
-  storage.removeItem("persist:root");
+  return;
 };
 
 const authService = {

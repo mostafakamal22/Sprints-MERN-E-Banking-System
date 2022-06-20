@@ -28,9 +28,15 @@ const updateUser = async (userData) => {
   return data;
 };
 
+//User Logout
+const userLogout = () => {
+  return;
+};
+
 const userServices = {
   getUser,
   updateUser,
+  userLogout,
 };
 
 export default userServices;
