@@ -5,10 +5,12 @@ import storage from "redux-persist/lib/storage";
 import { persistReducer, persistStore } from "redux-persist";
 import { encryptTransform } from "redux-persist-transform-encrypt";
 import thunk from "redux-thunk";
+import adminAuthReducer from "../features/Admin/Auth/adminAuthSlice";
 
 const persistConfig = {
   key: "root",
   storage,
+  //encrypting state being stored in localstorage
   transforms: [
     encryptTransform({
       secretKey: "my-super-secret-key",
@@ -23,11 +25,15 @@ const persistConfig = {
 const appReducer = combineReducers({
   auth: authReducer,
   data: userReducer,
+  adminAuth: adminAuthReducer,
 });
 
+//All Logout actions
+const logoutActions = ["user/logout", "auth/logout", "auth/admin/logout"];
+
+//remove All Stored state in local storage when logging out
 const rootReducer = (state, action) => {
-  if (action.type === "auth/logout" || action.type === "user/logout") {
-    console.log("logging out");
+  if (logoutActions.includes(action.type)) {
     // for all keys defined in your persistConfig(s)
     storage.removeItem("persist:root");
     // storage.removeItem('persist:otherKey')
