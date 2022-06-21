@@ -10,32 +10,26 @@ import {
   Navigate,
 } from "react-router-dom";
 import ProfilePage from "./views/ProfilePage";
-import { useDispatch, useSelector } from "react-redux";
 import NotFoundPage from "./views/NotFound";
-import { getUser } from "./features/User/userSlice";
 import UpdateUser from "./components/forms/UpdateUser";
+import UseDetectUser from "./features/Hooks/DetectUser";
+import UseDetectAdmin from "./features/Hooks/DetectAdmin";
 
 function App() {
-  const dispatch = useDispatch();
-  const { user } = useSelector((state) => state.auth);
-
-  console.log(user);
+  //Detect user
+  const user = UseDetectUser();
+  //Detect admin
+  const admin = UseDetectAdmin();
 
   useEffect(() => {
-    if (user) {
-      const userData = {
-        token: user.token,
-        id: user.id,
-      };
-      console.log("get user info");
-
-      dispatch(getUser(userData));
-    }
-  }, [user]);
+    console.log(user);
+    console.log(admin);
+  }, [user, admin]);
 
   return (
     <Router>
-      {!user && (
+      {/* Guest Routes */}
+      {!user && !admin && (
         <Routes>
           <Route index element={<Login />} />
           <Route exact path="/register" element={<Register />} />
@@ -44,7 +38,20 @@ function App() {
         </Routes>
       )}
 
-      {user && (
+      {/* Users Routes */}
+      {user && !admin && (
+        <Routes>
+          <Route index element={<Home />} />
+          <Route exact path="/register" element={<Navigate to={"/"} />} />
+          <Route exact path="/login" element={<Navigate to={"/"} />} />
+          <Route exact path="/profile/:id" element={<ProfilePage />} />
+          <Route exact path="/profile/:id/update" element={<UpdateUser />} />
+          <Route path="*" element={<NotFoundPage />} />
+        </Routes>
+      )}
+
+      {/* Admin Routes */}
+      {admin && !user && (
         <Routes>
           <Route index element={<Home />} />
           <Route exact path="/register" element={<Navigate to={"/"} />} />
