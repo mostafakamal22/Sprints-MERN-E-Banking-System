@@ -3,7 +3,7 @@ import { useEffect } from "react";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { register, reset } from "../../features/Auth/authSlice";
+import { register, resetAuthStatus } from "../../features/Auth/authSlice";
 
 export default function Register() {
   const [fromInputs, setFromInputs] = useState({
@@ -48,7 +48,7 @@ export default function Register() {
       navigate("/login");
     }
 
-    dispatch(reset());
+    dispatch(resetAuthStatus());
   }, [user, isError, isSuccess, message, navigate, dispatch]);
 
   const handleSubmit = async (e) => {

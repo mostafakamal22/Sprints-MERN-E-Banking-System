@@ -47,10 +47,10 @@ export const userSlice = createSlice({
   initialState,
   reducers: {
     resetUserStatus: (state) => {
-      (state.isLoading = false),
-        (state.isError = false),
-        (state.isSuccess = false),
-        (state.message = "");
+      state.isLoading = false;
+      state.isError = false;
+      state.isSuccess = false;
+      state.message = "";
     },
   },
   extraReducers: (builder) => {

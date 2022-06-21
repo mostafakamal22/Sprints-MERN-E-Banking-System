@@ -2,7 +2,7 @@ import React from "react";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-import { login, reset } from "../../features/Auth/authSlice";
+import { login, resetAuthStatus } from "../../features/Auth/authSlice";
 
 export default function Login() {
   const [fromInputs, setFromInputs] = useState({
@@ -28,7 +28,7 @@ export default function Login() {
 
     if (user) {
       console.log("Login Succesfully");
-      dispatch(reset());
+      dispatch(resetAuthStatus());
       navigate("/");
     }
   }, [isError, message, user, error]);

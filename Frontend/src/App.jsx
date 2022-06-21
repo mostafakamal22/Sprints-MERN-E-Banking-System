@@ -12,7 +12,7 @@ import {
 import ProfilePage from "./views/ProfilePage";
 import { useDispatch, useSelector } from "react-redux";
 import NotFoundPage from "./views/NotFound";
-import { getUser, resetUserStatus } from "./features/User/userSlice";
+import { getUser } from "./features/User/userSlice";
 import UpdateUser from "./components/forms/UpdateUser";
 
 function App() {

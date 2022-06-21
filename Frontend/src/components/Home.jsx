@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-import { logout, reset } from "../features/Auth/authSlice";
+import { logout, resetAuthStatus } from "../features/Auth/authSlice";
 import { resetUserStatus, userLogout } from "../features/User/userSlice";
 
 export default function Home() {
@@ -12,8 +12,8 @@ export default function Home() {
   //clean up user status on unmount
   useEffect(() => {
     return () => {
-      dispatch(reset());
       dispatch(resetUserStatus());
+      dispatch(resetAuthStatus());
     };
   }, []);
 
@@ -22,7 +22,7 @@ export default function Home() {
     dispatch(logout());
     dispatch(userLogout());
     dispatch(resetUserStatus());
-    dispatch(reset());
+    dispatch(resetAuthStatus());
     naviagte("/login");
   };
   return (
