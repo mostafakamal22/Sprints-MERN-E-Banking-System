@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import adminAuthServices from "./AdminAuthServices";
+import adminAuthServices from "./adminAuthServices";
 
 const initialState = {
   info: null,
@@ -12,9 +12,9 @@ const initialState = {
 //Login
 export const adminLogin = createAsyncThunk(
   "auth/admin/login",
-  async (userData, thunkAPI) => {
+  async (adminData, thunkAPI) => {
     try {
-      return await adminAuthServices.adminLogin(userData);
+      return await adminAuthServices.adminLogin(adminData);
     } catch (error) {
       const message = error.response.data;
 
@@ -109,7 +109,7 @@ export const adminAuthSlice = createSlice({
         state.isSuccess = false;
         state.info = null;
       })
-      .addCase(logout.fulfilled, (state) => {
+      .addCase(adminLogout.fulfilled, (state) => {
         state.info = null;
       })
       .addCase(getAdmin.pending, (state) => {
@@ -134,11 +134,10 @@ export const adminAuthSlice = createSlice({
         state.isError = true;
         state.message = action.payload;
         state.isSuccess = false;
-        state.info = null;
       });
   },
 });
 
-export const { resetAdminAuthStatus } = authSlice.actions;
+export const { resetAdminAuthStatus } = adminAuthSlice.actions;
 
 export default adminAuthSlice.reducer;

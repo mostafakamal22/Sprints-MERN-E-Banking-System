@@ -36,7 +36,7 @@ const adminLogout = () => {
 const getAdmin = async (adminData) => {
   const res = await axios.get(API_URL + adminData.id, {
     headers: {
-      authorization: `Bearer ${userData.token}`,
+      authorization: `Bearer ${adminData.token}`,
     },
   });
   const data = res.data;

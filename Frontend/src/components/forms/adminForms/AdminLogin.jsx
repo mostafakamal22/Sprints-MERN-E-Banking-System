@@ -6,8 +6,8 @@ import {
   adminLogin,
   resetAdminAuthStatus,
 } from "../../../features/Admin/Auth/adminAuthSlice";
-import FormButton from "../shared/FormButton";
-import MessagesContainer from "../shared/MessagesContainer";
+import FormButton from "../../shared/FormButton";
+import MessagesContainer from "../../shared/MessagesContainer";
 
 export default function AdminLogin() {
   const [formInputs, setFormInputs] = useState({
