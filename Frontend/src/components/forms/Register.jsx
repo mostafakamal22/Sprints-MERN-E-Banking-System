@@ -4,9 +4,11 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { register, resetAuthStatus } from "../../features/Auth/authSlice";
+import FormButton from "../shared/FormButton";
+import MessagesContainer from "../shared/MessagesContainer";
 
 export default function Register() {
-  const [fromInputs, setFromInputs] = useState({
+  const [formInputs, setFormInputs] = useState({
     firstName: "",
     lastName: "",
     password: "",
@@ -15,7 +17,7 @@ export default function Register() {
     phone: "",
     address: "",
     postCode: "",
-    error: "",
+    msg: "",
   });
 
   const {
@@ -27,37 +29,47 @@ export default function Register() {
     lastName,
     firstName,
     repeatPassword,
-    error,
-  } = fromInputs;
+    msg,
+  } = formInputs;
 
   const navigate = useNavigate();
 
   const dispatch = useDispatch();
 
-  const { user, isError, isSuccess, message } = useSelector(
+  const { user, isError, isSuccess, isLoading, message } = useSelector(
     (state) => state.auth
   );
 
   useEffect(() => {
     if (isError) {
-      setFromInputs({ ...fromInputs, error: message });
+      setFormInputs({ ...formInputs, msg: message });
     }
 
     if (user || isSuccess) {
-      console.log("Registered Succesfully");
-      navigate("/login");
+      setFormInputs({
+        ...formInputs,
+        msg: "Registered Succesfully",
+      });
+      setTimeout(() => {
+        navigate("/login");
+      }, 3000);
     }
+  }, [user, isError, isSuccess, message]);
 
-    dispatch(resetAuthStatus());
-  }, [user, isError, isSuccess, message, navigate, dispatch]);
+  //clean up status
+  useEffect(() => {
+    return () => {
+      dispatch(resetAuthStatus());
+    };
+  }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     //set error msg to none first
-    setFromInputs({ ...fromInputs, error: "" });
+    setFormInputs({ ...formInputs, msg: "" });
     //check for password match > then show error msg
     if (password !== repeatPassword) {
-      setFromInputs({ ...fromInputs, error: "password does not match" });
+      setFormInputs({ ...formInputs, msg: "password does not match" });
       return;
     }
 
@@ -75,7 +87,7 @@ export default function Register() {
 
   return (
     <form
-      className="max-w-[650px] p-10 mx-auto border border-blue-800 rounded-md"
+      className="max-w-[650px] p-10 pb-5 mx-auto border bg-slate-100 border-blue-800 rounded-md"
       onSubmit={handleSubmit}
     >
       <div className="grid xl:grid-cols-2 xl:gap-6">
@@ -86,15 +98,15 @@ export default function Register() {
             id="first_name"
             defaultValue={firstName}
             onChange={(e) =>
-              setFromInputs({ ...fromInputs, firstName: e.target.value })
+              setFormInputs({ ...formInputs, firstName: e.target.value })
             }
-            className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+            className="block py-2.5 px-0 w-full text-sm text-blue-900 font-bold bg-transparent border-0 border-b-2 border-gray-600 appearance-none  focus:outline-none focus:ring-0 focus:border-blue-600 peer"
             placeholder=" "
             required
           />
           <label
             htmlFor="first_name"
-            className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
+            className="peer-focus:font-medium absolute text-sm text-dark font-semibold  duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
           >
             First name
           </label>
@@ -106,15 +118,15 @@ export default function Register() {
             id="last_name"
             defaultValue={lastName}
             onChange={(e) =>
-              setFromInputs({ ...fromInputs, lastName: e.target.value })
+              setFormInputs({ ...formInputs, lastName: e.target.value })
             }
-            className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+            className="block py-2.5 px-0 w-full text-sm text-blue-900 font-bold bg-transparent border-0 border-b-2 border-gray-600 appearance-none  focus:outline-none focus:ring-0 focus:border-blue-600 peer"
             placeholder=" "
             required
           />
           <label
             htmlFor="last_name"
-            className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
+            className="peer-focus:font-medium absolute text-sm text-dark font-semibold  duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
           >
             Last name
           </label>
@@ -126,15 +138,15 @@ export default function Register() {
           name="email"
           defaultValue={email}
           onChange={(e) =>
-            setFromInputs({ ...fromInputs, email: e.target.value })
+            setFormInputs({ ...formInputs, email: e.target.value })
           }
-          className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+          className="block py-2.5 px-0 w-full text-sm text-blue-900 font-bold bg-transparent border-0 border-b-2 border-gray-600 appearance-none  focus:outline-none focus:ring-0 focus:border-blue-600 peer"
           placeholder=" "
           required
         />
         <label
           htmlFor="email"
-          className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
+          className="peer-focus:font-medium absolute text-sm text-dark font-semibold  duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
         >
           Email address
         </label>
@@ -145,15 +157,15 @@ export default function Register() {
           name="address"
           defaultValue={address}
           onChange={(e) =>
-            setFromInputs({ ...fromInputs, address: e.target.value })
+            setFormInputs({ ...formInputs, address: e.target.value })
           }
-          className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+          className="block py-2.5 px-0 w-full text-sm text-blue-900 font-bold bg-transparent border-0 border-b-2 border-gray-600 appearance-none  focus:outline-none focus:ring-0 focus:border-blue-600 peer"
           placeholder=" "
           required
         />
         <label
           htmlFor="address"
-          className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
+          className="peer-focus:font-medium absolute text-sm text-dark font-semibold  duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
         >
           Full Address
         </label>
@@ -165,15 +177,15 @@ export default function Register() {
           id="password"
           defaultValue={password}
           onChange={(e) =>
-            setFromInputs({ ...fromInputs, password: e.target.value })
+            setFormInputs({ ...formInputs, password: e.target.value })
           }
-          className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+          className="block py-2.5 px-0 w-full text-sm text-blue-900 font-bold bg-transparent border-0 border-b-2 border-gray-600 appearance-none  focus:outline-none focus:ring-0 focus:border-blue-600 peer"
           placeholder=" "
           required
         />
         <label
           htmlFor="password"
-          className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
+          className="peer-focus:font-medium absolute text-sm text-dark font-semibold  duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
         >
           Password
         </label>
@@ -185,15 +197,15 @@ export default function Register() {
           id="repeat_password"
           defaultValue={repeatPassword}
           onChange={(e) =>
-            setFromInputs({ ...fromInputs, repeatPassword: e.target.value })
+            setFormInputs({ ...formInputs, repeatPassword: e.target.value })
           }
-          className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+          className="block py-2.5 px-0 w-full text-sm text-blue-900 font-bold bg-transparent border-0 border-b-2 border-gray-600 appearance-none  focus:outline-none focus:ring-0 focus:border-blue-600 peer"
           placeholder=" "
           required
         />
         <label
           htmlFor="repeat_password"
-          className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
+          className="peer-focus:font-medium absolute text-sm text-dark font-semibold  duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
         >
           Confirm password
         </label>
@@ -207,15 +219,15 @@ export default function Register() {
             id="phone"
             defaultValue={phone}
             onChange={(e) =>
-              setFromInputs({ ...fromInputs, phone: e.target.value })
+              setFormInputs({ ...formInputs, phone: e.target.value })
             }
-            className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+            className="block py-2.5 px-0 w-full text-sm text-blue-900 font-bold bg-transparent border-0 border-b-2 border-gray-600 appearance-none  focus:outline-none focus:ring-0 focus:border-blue-600 peer"
             placeholder=" "
             required
           />
           <label
             htmlFor="phone"
-            className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
+            className="peer-focus:font-medium absolute text-sm text-dark font-semibold  duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
           >
             Phone Number Ex:(01008878980)
           </label>
@@ -227,29 +239,30 @@ export default function Register() {
             id="postal"
             defaultValue={postCode}
             onChange={(e) =>
-              setFromInputs({ ...fromInputs, postCode: e.target.value })
+              setFormInputs({ ...formInputs, postCode: e.target.value })
             }
-            className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+            className="block py-2.5 px-0 w-full text-sm text-blue-900 font-bold bg-transparent border-0 border-b-2 border-gray-600 appearance-none  focus:outline-none focus:ring-0 focus:border-blue-600 peer"
             placeholder=" "
             required
           />
 
           <label
             htmlFor="postal"
-            className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
+            className="peer-focus:font-medium absolute text-sm text-dark font-semibold  duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
           >
             Postal Code (Ex. 12345)
           </label>
         </div>
       </div>
-      <button
-        type="submit"
-        className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-      >
-        Register
-      </button>
-      <br />
-      <div className="text-red-800 text-center">{error}</div>
+
+      {/*Request Status and Errors*/}
+      <MessagesContainer msg={msg} isSuccess={isSuccess} />
+
+      {/*form button */}
+      <FormButton
+        text={{ loading: "Processing", default: "Register" }}
+        isLoading={isLoading}
+      />
     </form>
   );
 }

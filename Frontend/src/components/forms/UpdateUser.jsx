@@ -78,7 +78,7 @@ export default function UpdateUser() {
   };
 
   return (
-    <div className="block p-6 pb-2 my-4 rounded-lg shadow-lg bg-white max-w-[990px] mx-auto">
+    <div className="block p-6 m-10 rounded-lg shadow-lg bg-white max-w-[990px]">
       <form onSubmit={handleSubmit}>
         <div className="form-group mb-6">
           <label
@@ -120,9 +120,12 @@ export default function UpdateUser() {
             htmlFor="oldPassword"
             className="form-label inline-block mb-2 text-gray-700"
           >
-            Old Password - if you{" "}
-            <span className="underline font-bold">DO NOT</span> want change
-            password just type it for all password field
+            Old Password
+            <br />
+            <span className="text-blue-700">
+              - if you <span className="underline font-bold">DO NOT</span> want
+              to change password, just type it for all password field.
+            </span>
           </label>
           <input
             type="password"
@@ -323,14 +326,14 @@ export default function UpdateUser() {
           />
         </div>
 
+        {/*Request Status and Errors*/}
+        <MessagesContainer msg={msg} isSuccess={isSuccess} />
+
         {/*form button */}
         <FormButton
           text={{ loading: "Updating", default: "Update" }}
           isLoading={isLoading}
         />
-
-        {/*Request Status and Errors*/}
-        <MessagesContainer msg={msg} isSuccess={isSuccess} />
       </form>
     </div>
   );
