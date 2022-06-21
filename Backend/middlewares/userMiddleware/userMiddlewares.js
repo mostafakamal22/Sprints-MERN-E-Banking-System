@@ -28,6 +28,7 @@ const validatePassword = (req, res, next) => {
 };
 
 //check password that comes from request is the password that being saved into database
+//@usedCase:- when user updating his info
 const checkPassword = async (req, res, next) => {
   try {
     //get user

@@ -4,6 +4,7 @@ const router = express.Router();
 
 const {
   validatePassword,
+  checkPassword,
 } = require("../middlewares/adminMiddlewares/adminMiddlewares");
 
 const {
@@ -27,16 +28,18 @@ const {
 router
   .route("/")
   .get(authAdminProtect, checkRole, getAdmins)
-  .post(validatePassword, createAdmin);
+  .post(authAdminProtect, checkRole, validatePassword, createAdmin);
 
 router
   .route("/:id")
-  .get(getOneAdmin)
-  .put(validatePassword, updateAdmin)
-  .delete(deleteAdmin);
+  .get(authAdminProtect, getOneAdmin)
+  .put(authAdminProtect, checkPassword, validatePassword, updateAdmin)
+  .delete(authAdminProtect, checkRole, deleteAdmin);
 
-router.route("/owner/:id").put(validatePassword, updateOwner);
+router
+  .route("/owner/:id")
+  .put(authAdminProtect, checkPassword, validatePassword, updateOwner);
 
-router.route("/login").post(authAdminProtect, adminLogin);
+router.route("/login").post(adminLogin);
 
 module.exports = router;

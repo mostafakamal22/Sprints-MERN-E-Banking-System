@@ -10,25 +10,21 @@ const getAdmins = async (req, res) => {
     const admins = await Admin.find();
     res.status(200).json(admins);
   } catch (error) {
-    res
-      .status(500)
-      .json({ error: "Ooops!! Something Went Wrong, Try again..." });
+    res.status(500).send("Ooops!! Something Went Wrong, Try again...");
   }
 };
 
 //@desc   >>>> Get one admin
 //@route  >>>> GET /api/admin/:id
-//@Access >>>> privete(Owner Only)
+//@Access >>>> privete(admins Only)
 const getOneAdmin = async (req, res) => {
   let admin;
   try {
     admin = await Admin.findById(req.params.id);
-    if (!admin) return res.status(404).json({ error: "Not Found!" });
     res.status(200).json(admin);
   } catch (error) {
-    res
-      .status(500)
-      .json({ error: "Ooops!! Something Went Wrong, Try again..." });
+    if (!admin) return res.status(404).send("Admin Not Found!");
+    res.status(500).send("Ooops!! Something Went Wrong, Try again...");
   }
 };
 
@@ -38,30 +34,32 @@ const getOneAdmin = async (req, res) => {
 const adminLogin = async (req, res) => {
   //check for empty body
   if (!req.body.email || !req.body.password)
-    return res.status(404).json({ error: "empty body request" });
-  const { email } = req.admin;
-  const { password } = req.body;
-  //check if email that comes from token is the email from request
-  if (email !== req.body.email)
-    return res.status(404).json({ error: "Wrong Credintials" });
+    return res.status(404).send("empty body request");
+  const { email, password } = req.body;
   let admin;
   try {
     admin = await Admin.findOne({ email });
+    //check for password
     const isCorrectPassword = await bcrypt.compare(password, admin.password);
-    if (isCorrectPassword)
+    if (isCorrectPassword) {
       return res.status(200).json({
         id: admin.id,
         name: admin.name,
         email: admin.email,
         role: admin.role,
-        token: generateAdminsToken(admin.id, admin.role),
+        token: generateAdminsToken(admin.id, admin.email, admin.role),
       });
+    } else {
+      return res.status(404).send("Wrong Credintials - wrong password");
+    }
   } catch (error) {
-    if (!admin || !isCorrectPassword)
-      return res.status(404).json({ error: "Wrong Credintials" });
-    res
-      .status(500)
-      .json({ error: "Ooops!! Something Went Wrong, Try again..." });
+    if (!admin || !isCorrectPassword) {
+      return res
+        .status(404)
+        .send("Wrong Credintials - wrong email or password");
+    }
+
+    res.status(500).send("Ooops!! Something Went Wrong, Try again...");
   }
 };
 
@@ -85,11 +83,11 @@ const createAdmin = async (req, res) => {
       token: generateAdminsToken(admin.id, admin.email, admin.role),
     });
   } catch (error) {
-    if (error.message.match(/(email|password|name|role)/gi))
-      return res.status(400).json({ error: error.message });
-    res
-      .status(500)
-      .json({ error: "Ooops!! Something Went Wrong, Try again..." });
+    if (error.message.match(/(email|password|name|role)/gi)) {
+      return res.status(400).send(error.message);
+    }
+
+    res.status(500).send("Ooops!! Something Went Wrong, Try again...");
   }
 };
 
@@ -99,24 +97,24 @@ const createAdmin = async (req, res) => {
 const updateAdmin = async (req, res) => {
   try {
     const hashedPassword = await bcrypt.hash(req.body.password, 10);
-    const updatedAdmin = await Admin.updateOne(
-      { id: req.params.id },
-      {
-        $set: {
-          admin_name: req.body.name,
-          email: req.body.email,
-          password: hashedPassword,
-          role: req.body.role,
-        },
-      }
-    );
-    res.status(200).json({ message: "updated seccessfully", updatedAdmin });
+    //get admin
+    const admin = await Admin.findById(req.params.id);
+    //update user with new values
+    user.email = req.body.email;
+    user.markModified("email");
+    user.password = hashedPassword;
+    user.markModified("password");
+
+    //get updated admin info & send it back
+    const updatedAdmin = await admin.save();
+
+    res.status(200).json(updatedAdmin);
   } catch (error) {
-    if (error.message.match(/(email|password|name|role)/gi))
-      return res.status(400).json({ error: error.message });
-    res
-      .status(500)
-      .json({ error: "Ooops!! Something Went Wrong, Try again..." });
+    if (error.message.match(/(email|password|name|role)/gi)) {
+      return res.status(400).send(error.message);
+    }
+
+    res.status(500).send("Ooops!! Something Went Wrong, Try again...");
   }
 };
 
@@ -126,22 +124,23 @@ const updateAdmin = async (req, res) => {
 const updateOwner = async (req, res) => {
   try {
     const hashedPassword = await bcrypt.hash(req.body.password, 10);
-    const updatedOwner = await Admin.updateOne(
-      { id: req.params.id },
-      {
-        admin_name: req.body.name,
-        email: req.body.email,
-        password: hashedPassword,
-        role: req.body.role,
-      }
-    );
-    res.status(200).json({ message: "updated seccessfully", updatedOwner });
+    //get owner
+    const owner = await Admin.findById(req.params.id);
+    //update owner info
+    owner.email = req.body.email;
+    owner.markModified("email");
+    owner.password = hashedPassword;
+    owner.markModified("password");
+
+    //get updated Owner and send it back
+    const updatedOwner = await owner.save();
+
+    res.status(200).json(updatedOwner);
   } catch (error) {
-    if (error.message.match(/(email|password|name|role)/gi))
-      return res.status(400).json({ error: error.message });
-    res
-      .status(500)
-      .json({ error: "Ooops!! Something Went Wrong, Try again..." });
+    if (error.message.match(/(email|password|name|role)/gi)) {
+      return res.status(400).send(error.message);
+    }
+    res.status(500).send("Ooops!! Something Went Wrong, Try again...");
   }
 };
 
@@ -151,11 +150,9 @@ const updateOwner = async (req, res) => {
 const deleteAdmin = async (req, res) => {
   try {
     const deletedAdmin = await Admin.findByIdAndDelete(req.params.id);
-    res.status(200).json({ message: "deleted seccessfully", deletedAdmin });
+    res.status(200).json({ id: deletedAdmin.id });
   } catch (error) {
-    res
-      .status(500)
-      .json({ error: "Ooops!! Something Went Wrong, Try again..." });
+    res.status(500).send("Ooops!! Something Went Wrong, Try again...");
   }
 };
 

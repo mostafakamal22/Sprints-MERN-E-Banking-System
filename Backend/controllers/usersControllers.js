@@ -42,7 +42,7 @@ const getOneUser = async (req, res) => {
 
 //@desc   >>>> Create one User
 //@route  >>>> POST /api/users/:id
-//@Access >>>> private
+//@Access >>>> public
 const createUser = async (req, res) => {
   try {
     const hashedPassword = await bcrypt.hash(req.body.password, 10);
@@ -78,7 +78,6 @@ const userLogin = async (req, res) => {
   const { email, password } = req.body;
   let user;
   try {
-    //okay user has valid token with his valid email
     user = await User.findOne({ email });
     //ckeck for password
     const isCorrectPassword = await bcrypt.compare(password, user.password);

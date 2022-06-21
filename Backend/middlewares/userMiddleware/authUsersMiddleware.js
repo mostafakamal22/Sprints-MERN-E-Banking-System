@@ -17,6 +17,9 @@ const authUserProtect = async (req, res, next) => {
       decoded = jwt.verify(token, process.env.JWT_SECRET);
       //Get User from Token
       user = await User.findById(decoded.id);
+      if (!user) {
+        return res.status(401).send("Not Authorized with invalid token");
+      }
       req.user = await User.findById(decoded.id);
       next();
     } catch (error) {

@@ -17,18 +17,18 @@ const authAdminProtect = async (req, res, next) => {
       decoded = jwt.verify(token, process.env.JWT_SECRET);
       //Get Admin from Token
       admin = await Admin.findById(decoded.id);
+      if (!admin) {
+        return res.status(401).send("Not Authorized with invalid token");
+      }
       req.admin = await Admin.findById(decoded.id);
       next();
     } catch (error) {
       if (!decoded || !(await Admin.findById(decoded.id)))
-        return res.status(401).json("error: Not Authorized with invalid token");
-      return res
-        .status(500)
-        .json({ error: "Ooops!! Something Went Wrong, Try again..." });
+        return res.status(401).send("Not Authorized with invalid token");
+      return res.status(500).send("Ooops!! Something Went Wrong, Try again...");
     }
   }
-  if (!token)
-    return res.status(401).json("error: Not Authorized without token");
+  if (!token) return res.status(401).send("Not Authorized without token");
 };
 
 module.exports = {
