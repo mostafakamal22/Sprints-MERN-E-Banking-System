@@ -1,12 +1,15 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
-import { login, resetAuthStatus } from "../../features/Auth/authSlice";
+import { useNavigate } from "react-router-dom";
+import {
+  adminLogin,
+  resetAdminAuthStatus,
+} from "../../../features/Admin/Auth/adminAuthSlice";
 import FormButton from "../shared/FormButton";
 import MessagesContainer from "../shared/MessagesContainer";
 
-export default function Login() {
+export default function AdminLogin() {
   const [formInputs, setFormInputs] = useState({
     email: "",
     password: "",
@@ -19,8 +22,8 @@ export default function Login() {
 
   const dispatch = useDispatch();
 
-  const { user, isError, isSuccess, isLoading, message } = useSelector(
-    (state) => state.auth
+  const { info, isError, isSuccess, isLoading, message } = useSelector(
+    (state) => state.adminAuth
   );
 
   useEffect(() => {
@@ -28,16 +31,16 @@ export default function Login() {
       setFormInputs({ ...formInputs, msg: message });
     }
 
-    if (user) {
+    if (info) {
       setFormInputs({ ...formInputs, msg: "Login Succesfully" });
       navigate("/");
     }
-  }, [isError, message, user, msg]);
+  }, [isError, message, info, msg]);
 
   //clean up status
   useEffect(() => {
     return () => {
-      dispatch(resetAuthStatus());
+      dispatch(resetAdminAuthStatus());
     };
   }, []);
 
@@ -46,11 +49,11 @@ export default function Login() {
     //set msg to none first
     setFormInputs({ ...formInputs, msg: "" });
 
-    const userData = {
+    const adminData = {
       email: email.trim(),
       password,
     };
-    dispatch(login(userData));
+    dispatch(adminLogin(adminData));
   };
 
   return (
@@ -141,18 +144,6 @@ export default function Login() {
           text={{ loading: "Processing", default: "Login" }}
           isLoading={isLoading}
         />
-
-        {/*Redirect for Register */}
-
-        <p className="text-gray-800 mt-6 text-center">
-          Not a Client?
-          <Link
-            to="/register"
-            className="mx-2 text-blue-600 hover:text-blue-700 focus:text-blue-700 transition duration-200 ease-in-out"
-          >
-            Register
-          </Link>
-        </p>
       </form>
     </div>
   );
