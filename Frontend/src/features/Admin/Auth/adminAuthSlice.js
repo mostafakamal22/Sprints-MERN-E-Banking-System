@@ -37,6 +37,20 @@ export const adminRegister = createAsyncThunk(
   }
 );
 
+//Get Admin
+export const getAdmin = createAsyncThunk(
+  "auth/admin/getAdmin",
+  async (adminData, thunkAPI) => {
+    try {
+      return await adminAuthServices.getAdmin(adminData);
+    } catch (error) {
+      const message = error.response.data;
+
+      return thunkAPI.rejectWithValue(message);
+    }
+  }
+);
+
 //Logout
 export const adminLogout = createAsyncThunk("auth/admin/logout", async () => {
   adminAuthServices.adminLogout();
@@ -96,6 +110,30 @@ export const adminAuthSlice = createSlice({
         state.info = null;
       })
       .addCase(logout.fulfilled, (state) => {
+        state.info = null;
+      })
+      .addCase(getAdmin.pending, (state) => {
+        state.isLoading = true;
+        state.isError = false;
+        state.isSuccess = false;
+        state.message = "";
+      })
+      .addCase(getAdmin.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = true;
+        state.isError = false;
+        state.message = "";
+        state.info = {
+          ...state.info,
+          email: action.payload.email,
+          role: action.payload.role,
+        };
+      })
+      .addCase(getAdmin.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.message = action.payload;
+        state.isSuccess = false;
         state.info = null;
       });
   },

@@ -32,10 +32,23 @@ const adminLogout = () => {
   return;
 };
 
+//Get Admin
+const getAdmin = async (adminData) => {
+  const res = await axios.get(API_URL + adminData.id, {
+    headers: {
+      authorization: `Bearer ${userData.token}`,
+    },
+  });
+  const data = res.data;
+
+  return data;
+};
+
 const adminAuthServices = {
   adminRegister,
   adminLogin,
   adminLogout,
+  getAdmin,
 };
 
 export default adminAuthServices;

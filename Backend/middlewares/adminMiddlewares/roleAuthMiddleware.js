@@ -1,6 +1,5 @@
 //check admin role (Owner or admin)
 const checkRole = async (req, res, next) => {
-  console.log(req.admin);
   //check for invalid user token
   if (!req.admin.role) {
     return res.status(401).send("Not Authorized for users");
