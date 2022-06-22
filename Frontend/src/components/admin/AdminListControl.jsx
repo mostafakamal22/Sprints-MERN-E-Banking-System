@@ -1,7 +1,10 @@
 import React from "react";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { deleteAdmin } from "../../features/Admin/Owener/ownerSlice";
+import {
+  deleteAdmin,
+  updateAdminRole,
+} from "../../features/Admin/Owener/ownerSlice";
 import FormButton from "../shared/FormButton";
 
 const AdminListControl = ({ adminsList }) => {
@@ -40,7 +43,7 @@ const AdminListControl = ({ adminsList }) => {
       token,
     };
 
-    // dispatch(deleteAdmin(adminData))
+    dispatch(updateAdminRole(adminData));
   };
 
   return (
