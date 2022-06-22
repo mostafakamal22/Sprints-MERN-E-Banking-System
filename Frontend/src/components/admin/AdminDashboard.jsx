@@ -30,7 +30,7 @@ export default function AdminDashboard() {
       <button className="bg-red-800 text-white" onClick={handleLogout}>
         Logout
       </button>
-      {info && <Link to={`/profile/${info.id}`}>Go to profile</Link>}
+      {info && <Link to={`/admins/profile/${info.id}`}>Go to profile</Link>}
     </div>
   );
 }

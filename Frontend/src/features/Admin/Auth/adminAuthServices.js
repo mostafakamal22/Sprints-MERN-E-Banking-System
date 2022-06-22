@@ -44,11 +44,24 @@ const getAdmin = async (adminData) => {
   return data;
 };
 
+//Update Admin
+const updateAdmin = async (adminData) => {
+  const res = await axios.put(API_URL + adminData.id, {
+    headers: {
+      authorization: `Bearer ${adminData.token}`,
+    },
+  });
+  const data = res.data;
+
+  return data;
+};
+
 const adminAuthServices = {
   adminRegister,
   adminLogin,
   adminLogout,
   getAdmin,
+  updateAdmin,
 };
 
 export default adminAuthServices;

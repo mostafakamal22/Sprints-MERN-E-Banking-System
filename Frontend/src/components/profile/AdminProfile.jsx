@@ -24,6 +24,11 @@ export default function AdminProfile() {
           <span>Email Address</span>
           <span className="ml-auto">{info.email}</span>
         </li>
+
+        <li className="flex items-center py-3">
+          <span>Update Profile</span>
+          <Link to={`/admins/profile/${info.id}/update`}>Update</Link>
+        </li>
       </ul>
     </div>
   );
