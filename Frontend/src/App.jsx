@@ -16,6 +16,7 @@ import UseDetectUser from "./features/Hooks/DetectUser";
 import UseDetectAdmin from "./features/Hooks/DetectAdmin";
 import AdminLogin from "./components/forms/adminForms/AdminLogin";
 import AdminDashboard from "./components/admin/AdminDashboard";
+import AdminProfile from "./components/profile/AdminProfile";
 
 function App() {
   //Detect user
@@ -55,7 +56,7 @@ function App() {
           <Route exact path="/register" element={<Navigate to={"/"} />} />
           <Route exact path="/login" element={<Navigate to={"/"} />} />
           <Route exact path="/admins/login" element={<Navigate to={"/"} />} />
-          <Route exact path="/profile/:id" element={<ProfilePage />} />
+          <Route exact path="/admins/profile/:id" element={<AdminProfile />} />
           <Route exact path="/profile/:id/update" element={<UpdateUser />} />
           <Route path="*" element={<NotFoundPage />} />
         </Routes>

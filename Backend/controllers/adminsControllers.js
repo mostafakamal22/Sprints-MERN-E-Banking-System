@@ -21,7 +21,12 @@ const getOneAdmin = async (req, res) => {
   let admin;
   try {
     admin = await Admin.findById(req.params.id);
-    res.status(200).json(admin);
+    res.status(200).json({
+      id: admin.id,
+      name: admin.admin_name,
+      email: admin.email,
+      role: admin.role,
+    });
   } catch (error) {
     if (!admin) return res.status(404).send("Admin Not Found!");
     res.status(500).send("Ooops!! Something Went Wrong, Try again...");
@@ -44,7 +49,7 @@ const adminLogin = async (req, res) => {
     if (isCorrectPassword) {
       return res.status(200).json({
         id: admin.id,
-        name: admin.name,
+        name: admin.admin_name,
         email: admin.email,
         role: admin.role,
         token: generateAdminsToken(admin.id, admin.email, admin.role),
