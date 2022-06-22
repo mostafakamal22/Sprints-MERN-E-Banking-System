@@ -161,6 +161,35 @@ const deleteAdmin = async (req, res) => {
   }
 };
 
+//@desc   >>>> Update Admin Role
+//@route  >>>> put /api/admins/updaterole/:id
+//@Access >>>> private(Owner Only)
+const updateAdminRole = async (req, res) => {
+  try {
+    //get admin wanted to update
+    const admin = await Admin.findById(req.params.id);
+    //update user with new role
+    user.role = "owner";
+    user.markModified("email");
+
+    //get updated admin info & send it back
+    const updatedAdmin = await admin.save();
+
+    res.status(200).json({
+      id: updatedAdmin.id,
+      name: updatedAdmin.admin_name,
+      email: updatedAdmin.email,
+      role: updatedAdmin.role,
+    });
+  } catch (error) {
+    if (error.message.match(/(email|password|name|role)/gi)) {
+      return res.status(400).send(error.message);
+    }
+
+    res.status(500).send("Ooops!! Something Went Wrong, Try again...");
+  }
+};
+
 module.exports = {
   getAdmins,
   getOneAdmin,
@@ -169,4 +198,5 @@ module.exports = {
   updateAdmin,
   updateOwner,
   deleteAdmin,
+  updateAdminRole,
 };

@@ -23,6 +23,7 @@ const {
   updateOwner,
   deleteAdmin,
   adminLogin,
+  updateAdminRole,
 } = require("../controllers/adminsControllers");
 
 router
@@ -35,6 +36,10 @@ router
   .get(authAdminProtect, getOneAdmin)
   .put(authAdminProtect, checkPassword, validatePassword, updateAdmin)
   .delete(authAdminProtect, checkRole, deleteAdmin);
+
+router
+  .route("/updaterole/:id")
+  .put(authAdminProtect, checkRole, updateAdminRole);
 
 router
   .route("/owner/:id")
