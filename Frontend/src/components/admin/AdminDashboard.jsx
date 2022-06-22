@@ -7,6 +7,7 @@ import {
 } from "../../features/Admin/Auth/adminAuthSlice";
 import AdminListControl from "./AdminListControl";
 import { DashboardNavbar } from "./DashboardNavbar";
+import { UsersListControl } from "./UsersListControl";
 
 export default function AdminDashboard() {
   const naviagte = useNavigate();
@@ -41,6 +42,7 @@ export default function AdminDashboard() {
       <AdminListControl />
 
       {/* users control panel */}
+      <UsersListControl />
 
       {/* users Account Request*/}
     </div>
