@@ -38,6 +38,20 @@ export const deleteAdmin = createAsyncThunk(
   }
 );
 
+//Update Admin Role
+export const updateAdminRole = createAsyncThunk(
+  "owner/admin/updateAdminRole",
+  async (adminData, thunkAPI) => {
+    try {
+      return await ownerServices.updateAdminRole(adminData);
+    } catch (error) {
+      const message = error.response.data;
+
+      return thunkAPI.rejectWithValue(message);
+    }
+  }
+);
+
 export const ownerSlice = createSlice({
   name: "OwnerData",
   initialState,
@@ -81,11 +95,35 @@ export const ownerSlice = createSlice({
         state.isSuccess = true;
         state.isError = false;
         state.message = "";
-        state.adminsList = state.filter(
+        state.adminsList = state.adminsList.filter(
           (admin) => admin.id !== action.payload.id
         );
       })
       .addCase(deleteAdmin.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.message = action.payload;
+        state.isSuccess = false;
+      })
+      .addCase(updateAdminRole.pending, (state) => {
+        state.isLoading = true;
+        state.isError = false;
+        state.isSuccess = false;
+        state.message = "";
+      })
+      .addCase(updateAdminRole.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = true;
+        state.isError = false;
+        state.message = "";
+        state.adminsList = state.adminsList.map((admin) => {
+          if (admin.id === action.payload.id) {
+            return action.payload;
+          }
+          return admin;
+        });
+      })
+      .addCase(updateAdminRole.rejected, (state, action) => {
         state.isLoading = false;
         state.isError = true;
         state.message = action.payload;

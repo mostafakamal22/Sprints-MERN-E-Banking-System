@@ -26,9 +26,22 @@ const deleteAdmin = async (adminData) => {
   return data;
 };
 
+//Update Admin Role
+const updateAdminRole = async (adminData) => {
+  const res = await axios.put(API_URL + "updaterole/" + adminData.id, {
+    headers: {
+      authorization: `Bearer ${adminData.token}`,
+    },
+  });
+  const data = res.data;
+
+  return data;
+};
+
 const ownerServices = {
   getAllAdmins,
   deleteAdmin,
+  updateAdminRole,
 };
 
 export default ownerServices;
