@@ -5,6 +5,8 @@ import {
   adminLogout,
   resetAdminAuthStatus,
 } from "../../features/Admin/Auth/adminAuthSlice";
+import AdminListControl from "./AdminListControl";
+import { DashboardNavbar } from "./DashboardNavbar";
 
 export default function AdminDashboard() {
   const naviagte = useNavigate();
@@ -26,11 +28,21 @@ export default function AdminDashboard() {
   };
   return (
     <div className="text-center text-blue-800">
-      <p>Admin Dashboard</p>
+      <h2>Admin Dashboard</h2>
       <button className="bg-red-800 text-white" onClick={handleLogout}>
         Logout
       </button>
       {info && <Link to={`/admins/profile/${info.id}`}>Go to profile</Link>}
+
+      {/* admin dashboard navabr */}
+      <DashboardNavbar />
+
+      {/* admins control panel */}
+      <AdminListControl />
+
+      {/* users control panel */}
+
+      {/* users Account Request*/}
     </div>
   );
 }
