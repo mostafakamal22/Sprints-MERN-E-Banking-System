@@ -1,6 +1,9 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { resetAdminAuthStatus } from "../../../features/Admin/Auth/adminAuthSlice";
+import {
+  resetAdminAuthStatus,
+  updateAdmin,
+} from "../../../features/Admin/Auth/adminAuthSlice";
 import FormButton from "../../shared/FormButton";
 import MessagesContainer from "../../shared/MessagesContainer";
 
@@ -57,7 +60,7 @@ export default function UpdateAdmin() {
       password,
       oldPassword,
     };
-    dispatch(/*(adminData)*/);
+    dispatch(updateAdmin(adminData));
   };
 
   return (
