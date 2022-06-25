@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import {
@@ -10,6 +10,7 @@ import { DashboardNavbar } from "./DashboardNavbar";
 import { UsersListControl } from "./UsersListControl";
 
 export default function AdminDashboard() {
+  const [activeTab, setActiveTab] = useState("usersList");
   const naviagte = useNavigate();
   const dispatch = useDispatch();
   const { info } = useSelector((state) => state.adminAuth);
@@ -36,13 +37,13 @@ export default function AdminDashboard() {
       {info && <Link to={`/admins/profile/${info.id}`}>Go to profile</Link>}
 
       {/* admin dashboard navabr */}
-      <DashboardNavbar />
+      <DashboardNavbar setActiveTab={setActiveTab} />
 
       {/* admins control panel */}
-      <AdminListControl />
+      {activeTab === "adminsList" && <AdminListControl />}
 
       {/* users control panel */}
-      <UsersListControl />
+      {activeTab === "usersList" && <UsersListControl />}
 
       {/* users Account Request*/}
     </div>
