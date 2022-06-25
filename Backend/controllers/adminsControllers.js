@@ -69,7 +69,7 @@ const adminLogin = async (req, res) => {
 };
 
 //@desc   >>>> Create admin
-//@route  >>>> POST /api/admins/:id
+//@route  >>>> POST /api/admins/
 //@Access >>>> privete(Owner Only)
 const createAdmin = async (req, res) => {
   try {
@@ -81,11 +81,10 @@ const createAdmin = async (req, res) => {
       role: req.body.role,
     });
     res.status(201).json({
-      id: admin.id,
-      name: admin.name,
+      _id: admin.id,
+      admin_name: admin.admin_name,
       email: admin.email,
       role: admin.role,
-      token: generateAdminsToken(admin.id, admin.email, admin.role),
     });
   } catch (error) {
     if (error.message.match(/(email|password|name|role)/gi)) {

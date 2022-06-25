@@ -66,41 +66,42 @@ const AdminListControl = ({ adminsList }) => {
           <span>Update Role</span>
         </li>
 
-        {adminsList.map((admin) => (
-          <li
-            key={admin._id}
-            className="flex justify-between items-center flex-wrap border p-2"
-          >
-            {/*Admin Role*/}
-            <span> {admin.admin_name} </span>
-
-            {/*Admin Role*/}
-            <span> {admin.role} </span>
-
-            {/* Remove Admin */}
-            <form onSubmit={(event) => handleRemoving(event, admin._id)}>
-              <FormButton
-                text={{ loading: "Removing", default: "Remove" }}
-                isLoading={isLoading}
-              />
-            </form>
-
-            {/* Update Admin Role */}
-            <form
-              className="flex flex-col justify-center items-center"
-              onSubmit={(event) => handleUpdating(event, admin._id)}
+        {adminsList &&
+          adminsList.map((admin) => (
+            <li
+              key={admin._id}
+              className="flex justify-between items-center flex-wrap border p-2"
             >
-              <select className="my-2 p-2 rounded" defaultValue={admin.role}>
-                <option defaultValue={"owner"}>owner</option>
-                <option defaultValue={"admin"}>admin</option>
-              </select>
-              <FormButton
-                text={{ loading: "Updating", default: "Update Role" }}
-                isLoading={isLoading}
-              />
-            </form>
-          </li>
-        ))}
+              {/*Admin Role*/}
+              <span> {admin.admin_name} </span>
+
+              {/*Admin Role*/}
+              <span> {admin.role} </span>
+
+              {/* Remove Admin */}
+              <form onSubmit={(event) => handleRemoving(event, admin._id)}>
+                <FormButton
+                  text={{ loading: "Removing", default: "Remove" }}
+                  isLoading={isLoading}
+                />
+              </form>
+
+              {/* Update Admin Role */}
+              <form
+                className="flex flex-col justify-center items-center"
+                onSubmit={(event) => handleUpdating(event, admin._id)}
+              >
+                <select className="my-2 p-2 rounded" defaultValue={admin.role}>
+                  <option defaultValue={"owner"}>owner</option>
+                  <option defaultValue={"admin"}>admin</option>
+                </select>
+                <FormButton
+                  text={{ loading: "Updating", default: "Update Role" }}
+                  isLoading={isLoading}
+                />
+              </form>
+            </li>
+          ))}
       </ul>
     </div>
   );

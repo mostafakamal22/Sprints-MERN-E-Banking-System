@@ -13,6 +13,7 @@ import {
   getAllUsers,
   resetUsersStatus,
 } from "../../features/Admin/UsersActions/usersSlice";
+import { RegisterAdmin } from "../forms/adminForms/RegisterAdmin";
 import AdminListControl from "./AdminListControl";
 import { DashboardNavbar } from "./DashboardNavbar";
 import { UsersListControl } from "./UsersListControl";
@@ -65,6 +66,9 @@ export default function AdminDashboard() {
 
       {/* admin dashboard navabr */}
       <DashboardNavbar activeTab={activeTab} setActiveTab={setActiveTab} />
+
+      {/* Add New Admin panel */}
+      {activeTab === "addAdmin" && <RegisterAdmin />}
 
       {/* admins control panel */}
       {activeTab === "adminsList" && (

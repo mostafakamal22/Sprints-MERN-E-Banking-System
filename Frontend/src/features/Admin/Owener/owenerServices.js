@@ -2,6 +2,19 @@ import axios from "axios";
 
 const API_URL = "http://localhost:5000/api/admins/";
 
+//Register Admin
+const adminRegister = async (payload) => {
+  const res = await axios.post(API_URL, payload, {
+    headers: {
+      authorization: `Bearer ${payload.token}`,
+    },
+  });
+
+  const data = res.data;
+
+  return data;
+};
+
 //Get All Admins
 const getAllAdmins = async (adminData) => {
   const res = await axios.get(API_URL, {
@@ -46,6 +59,7 @@ const ownerServices = {
   getAllAdmins,
   deleteAdmin,
   updateAdminRole,
+  adminRegister,
 };
 
 export default ownerServices;

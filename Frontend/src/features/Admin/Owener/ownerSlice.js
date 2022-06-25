@@ -10,6 +10,20 @@ const initialState = {
   message: "",
 };
 
+//Register
+export const adminRegister = createAsyncThunk(
+  "owner/admin/registerAdmin",
+  async (payload, thunkAPI) => {
+    try {
+      return await ownerServices.adminRegister(payload);
+    } catch (error) {
+      const message = error.response.data;
+
+      return thunkAPI.rejectWithValue(message);
+    }
+  }
+);
+
 //Get All Admins
 export const getAllAdmins = createAsyncThunk(
   "owner/admin/getAllAdmins",
@@ -124,6 +138,25 @@ export const ownerSlice = createSlice({
         });
       })
       .addCase(updateAdminRole.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.message = action.payload;
+        state.isSuccess = false;
+      })
+      .addCase(adminRegister.pending, (state) => {
+        state.isLoading = true;
+        state.isError = false;
+        state.isSuccess = false;
+        state.message = "";
+      })
+      .addCase(adminRegister.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = true;
+        state.isError = false;
+        state.message = "";
+        state.adminsList = [...state.adminsList, action.payload];
+      })
+      .addCase(adminRegister.rejected, (state, action) => {
         state.isLoading = false;
         state.isError = true;
         state.message = action.payload;

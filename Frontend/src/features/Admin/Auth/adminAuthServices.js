@@ -14,19 +14,6 @@ const adminLogin = async (adminData) => {
   return data;
 };
 
-//Register Admin
-const adminRegister = async (adminData) => {
-  const res = await axios.post(API_URL, adminData, {
-    headers: {
-      "content-type": "application/json",
-    },
-  });
-
-  const data = res.data;
-
-  return data;
-};
-
 //Logout
 const adminLogout = () => {
   return;
@@ -57,7 +44,6 @@ const updateAdmin = async (adminData) => {
 };
 
 const adminAuthServices = {
-  adminRegister,
   adminLogin,
   adminLogout,
   getAdmin,
