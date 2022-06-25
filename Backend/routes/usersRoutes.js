@@ -19,6 +19,7 @@ const {
   updateUser,
   deleteUser,
   userLogin,
+  updateUserStatus,
 } = require("../controllers/usersControllers");
 
 router
@@ -33,5 +34,7 @@ router
   .delete(authAdminProtect, deleteUser);
 
 router.route("/login").post(userLogin);
+
+router.route("/:id/updatestatus").put(authAdminProtect, updateUserStatus);
 
 module.exports = router;

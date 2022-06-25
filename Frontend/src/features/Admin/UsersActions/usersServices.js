@@ -26,21 +26,26 @@ const deleteUser = async (payload) => {
   return data;
 };
 
-// //Update Admin Role
-// const updateAdminRole = async (adminData) => {
-//   const res = await axios.put(API_URL + "updaterole/" + adminData.id, {
-//     headers: {
-//       authorization: `Bearer ${adminData.token}`,
-//     },
-//   });
-//   const data = res.data;
+//Update User Role
+const updateUserStatus = async (payload) => {
+  const res = await axios.put(
+    API_URL + payload.id + "/updatestatus/",
+    payload,
+    {
+      headers: {
+        authorization: `Bearer ${payload.token}`,
+      },
+    }
+  );
+  const data = res.data;
 
-//   return data;
-// };
+  return data;
+};
 
 const usersServices = {
   getAllUsers,
   deleteUser,
+  updateUserStatus,
 };
 
 export default usersServices;

@@ -38,19 +38,19 @@ export const deleteUser = createAsyncThunk(
   }
 );
 
-// //Update User Status
-// export const updateAdminRole = createAsyncThunk(
-//   "owner/admin/updateAdminRole",
-//   async (adminData, thunkAPI) => {
-//     try {
-//       return await usersServices.updateAdminRole(adminData);
-//     } catch (error) {
-//       const message = error.response.data;
+//Update User Status
+export const updateUserStatus = createAsyncThunk(
+  "admin/updateUserStatus",
+  async (payload, thunkAPI) => {
+    try {
+      return await usersServices.updateUserStatus(payload);
+    } catch (error) {
+      const message = error.response.data;
 
-//       return thunkAPI.rejectWithValue(message);
-//     }
-//   }
-// );
+      return thunkAPI.rejectWithValue(message);
+    }
+  }
+);
 
 export const usersSlice = createSlice({
   name: "UsersData",
@@ -104,31 +104,31 @@ export const usersSlice = createSlice({
         state.isError = true;
         state.message = action.payload;
         state.isSuccess = false;
+      })
+      .addCase(updateUserStatus.pending, (state) => {
+        state.isLoading = true;
+        state.isError = false;
+        state.isSuccess = false;
+        state.message = "";
+      })
+      .addCase(updateUserStatus.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = true;
+        state.isError = false;
+        state.message = "";
+        state.usersList = state.usersList.map((user) => {
+          if (user._id === action.payload._id) {
+            return action.payload;
+          }
+          return user;
+        });
+      })
+      .addCase(updateUserStatus.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.message = action.payload;
+        state.isSuccess = false;
       });
-    //   .addCase(updateAdminRole.pending, (state) => {
-    //     state.isLoading = true;
-    //     state.isError = false;
-    //     state.isSuccess = false;
-    //     state.message = "";
-    //   })
-    //   .addCase(updateAdminRole.fulfilled, (state, action) => {
-    //     state.isLoading = false;
-    //     state.isSuccess = true;
-    //     state.isError = false;
-    //     state.message = "";
-    //     state.adminsList = state.adminsList.map((admin) => {
-    //       if (admin.id === action.payload.id) {
-    //         return action.payload;
-    //       }
-    //       return admin;
-    //     });
-    //   })
-    //   .addCase(updateAdminRole.rejected, (state, action) => {
-    //     state.isLoading = false;
-    //     state.isError = true;
-    //     state.message = action.payload;
-    //     state.isSuccess = false;
-    //   });
   },
 });
 

@@ -6,7 +6,7 @@ export const DashboardNavbar = ({ activeTab, setActiveTab }) => {
       <nav className="m-auto bg-blue-700 rounded text-white">
         <ul className="flex justify-center flex-wrap gap-6 p-4">
           <li
-            className={`font-semibold select-none cursor-pointer hover:text-black ${
+            className={`font-semibold select-none cursor-pointer hover:text-black hover:underline ${
               activeTab === "adminsList" && "text-black"
             }`}
             onClick={() => setActiveTab("adminsList")}
@@ -15,7 +15,7 @@ export const DashboardNavbar = ({ activeTab, setActiveTab }) => {
           </li>
 
           <li
-            className={`font-semibold select-none cursor-pointer hover:text-black ${
+            className={`font-semibold select-none cursor-pointer hover:text-black hover:underline ${
               activeTab === "usersRequests" && "text-black"
             }`}
             onClick={() => setActiveTab("usersRequests")}
@@ -24,7 +24,7 @@ export const DashboardNavbar = ({ activeTab, setActiveTab }) => {
           </li>
 
           <li
-            className={`font-semibold select-none cursor-pointer hover:text-black ${
+            className={`font-semibold select-none cursor-pointer hover:text-black hover:underline ${
               activeTab === "usersList" && "text-black"
             }`}
             onClick={() => setActiveTab("usersList")}

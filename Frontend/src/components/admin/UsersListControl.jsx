@@ -1,11 +1,14 @@
 import React from "react";
+import { useState } from "react";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   deleteUser,
   resetUsersStatus,
+  updateUserStatus,
 } from "../../features/Admin/UsersActions/usersSlice";
 import FormButton from "../shared/FormButton";
+import { UpdateUserStatus } from "./UpdateUserStatus";
 
 export const UsersListControl = ({ usersList }) => {
   const { info } = useSelector((state) => state.adminAuth);
@@ -31,7 +34,7 @@ export const UsersListControl = ({ usersList }) => {
   };
 
   // handle updating user status
-  const handleUpdating = (e, UpdatedUserID) => {
+  const handleUpdating = (e, UpdatedUserID, newStatus) => {
     e.preventDefault();
 
     //get admin token
@@ -41,9 +44,10 @@ export const UsersListControl = ({ usersList }) => {
     const userData = {
       id: UpdatedUserID,
       token,
+      newStatus,
     };
 
-    // dispatch(updateUserStatus(userData));
+    dispatch(updateUserStatus(userData));
   };
 
   //clean up usersList status
@@ -76,7 +80,7 @@ export const UsersListControl = ({ usersList }) => {
               <span> {user.user_name} </span>
 
               {/*user Email*/}
-              <span> {user.email} </span>
+              <span className="underline"> {user.email} </span>
 
               {/*User Status*/}
               <span
@@ -84,6 +88,8 @@ export const UsersListControl = ({ usersList }) => {
                   text-white p-1 rounded ${
                     user.user_status === 0 && "bg-green-600"
                   }
+                  ${user.user_status === 1 && "bg-gray-600"}
+                  ${user.user_status === 2 && "bg-yellow-600"}
                 `}
               >
                 {user.user_status === 0 && "active"}
@@ -92,7 +98,10 @@ export const UsersListControl = ({ usersList }) => {
               </span>
 
               {/*User No. Of Accounts*/}
-              <span> {user.no_of_account} </span>
+              <span className="flex justify-center items-center w-[30px] h-[30px] rounded-full bg-blue-600 text-white ">
+                {" "}
+                {user.no_of_account}{" "}
+              </span>
 
               {/* Remove User */}
               <form onSubmit={(event) => handleRemoving(event, user._id)}>
@@ -103,23 +112,7 @@ export const UsersListControl = ({ usersList }) => {
               </form>
 
               {/* Update User Status */}
-              <form
-                className="flex flex-col justify-center items-center"
-                onSubmit={(event) => handleUpdating(event, user._id)}
-              >
-                <select
-                  className="my-2 p-2 rounded"
-                  defaultValue={user.user_status}
-                >
-                  <option defaultValue={0}>active</option>
-                  <option defaultValue={1}>unactive</option>
-                  <option defaultValue={2}>suspended</option>
-                </select>
-                <FormButton
-                  text={{ loading: "Updating", default: "Update Status" }}
-                  isLoading={isLoading}
-                />
-              </form>
+              <UpdateUserStatus user={user} handleUpdating={handleUpdating} />
             </li>
           ))}
       </ul>

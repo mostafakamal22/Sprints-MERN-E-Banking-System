@@ -154,6 +154,34 @@ const deleteUser = async (req, res) => {
   }
 };
 
+//@desc   >>>> Update User's Status
+//@route  >>>> put /api/users/:id/updatestatus
+//@Access >>>> private(for admins only)
+const updateUserStatus = async (req, res) => {
+  try {
+    //get user
+    const user = await User.findById(req.params.id);
+    //update user with new Status
+    user.user_status = req.body.newStatus;
+    user.markModified("user_status");
+
+    //get updated user info & send it back
+    const updatedUser = await user.save();
+
+    res.status(200).json({
+      _id: updatedUser.id,
+      user_name: updatedUser.user_name,
+      email: updatedUser.email,
+      no_of_account: updatedUser.no_of_account,
+      user_status: updatedUser.user_status,
+    });
+  } catch (error) {
+    if (error.message.match(/(email|password|name|postal|phone|addresee)/gi))
+      return res.status(400).send(error.message);
+    res.status(500).send("Ooops!! Something Went Wrong, Try again...");
+  }
+};
+
 module.exports = {
   getUsers,
   getOneUser,
@@ -161,4 +189,5 @@ module.exports = {
   userLogin,
   updateUser,
   deleteUser,
+  updateUserStatus,
 };
