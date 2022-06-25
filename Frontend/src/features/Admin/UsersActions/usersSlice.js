@@ -52,6 +52,11 @@ export const updateUserStatus = createAsyncThunk(
   }
 );
 
+//Logout
+export const adminsLogout = createAsyncThunk("admins/logout", async () => {
+  usersServices.adminsLogout();
+});
+
 export const usersSlice = createSlice({
   name: "UsersData",
   initialState,
@@ -128,6 +133,9 @@ export const usersSlice = createSlice({
         state.isError = true;
         state.message = action.payload;
         state.isSuccess = false;
+      })
+      .addCase(adminsLogout.fulfilled, (state) => {
+        state.usersList = null;
       });
   },
 });

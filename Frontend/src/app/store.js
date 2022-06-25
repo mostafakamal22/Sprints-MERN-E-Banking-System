@@ -33,7 +33,13 @@ const appReducer = combineReducers({
 });
 
 //All Logout actions
-const logoutActions = ["user/logout", "auth/logout", "auth/admin/logout"];
+const logoutActions = [
+  "user/logout",
+  "auth/logout",
+  "auth/admin/logout",
+  "owner/logout",
+  "admins/logout",
+];
 
 //remove All Stored state in local storage when logging out
 const rootReducer = (state, action) => {

@@ -55,11 +55,17 @@ const updateAdminRole = async (adminData) => {
   return data;
 };
 
+//Logout
+const ownerLogout = () => {
+  return;
+};
+
 const ownerServices = {
   getAllAdmins,
   deleteAdmin,
   updateAdminRole,
   adminRegister,
+  ownerLogout,
 };
 
 export default ownerServices;

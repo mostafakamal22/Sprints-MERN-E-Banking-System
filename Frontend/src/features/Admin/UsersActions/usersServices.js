@@ -42,10 +42,16 @@ const updateUserStatus = async (payload) => {
   return data;
 };
 
+//Logout
+const adminsLogout = () => {
+  return;
+};
+
 const usersServices = {
   getAllUsers,
   deleteUser,
   updateUserStatus,
+  adminsLogout,
 };
 
 export default usersServices;

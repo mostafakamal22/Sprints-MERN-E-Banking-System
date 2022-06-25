@@ -66,6 +66,11 @@ export const updateAdminRole = createAsyncThunk(
   }
 );
 
+//Logout
+export const ownerLogout = createAsyncThunk("owner/logout", async () => {
+  ownerServices.ownerLogout();
+});
+
 export const ownerSlice = createSlice({
   name: "OwnerData",
   initialState,
@@ -161,6 +166,9 @@ export const ownerSlice = createSlice({
         state.isError = true;
         state.message = action.payload;
         state.isSuccess = false;
+      })
+      .addCase(ownerLogout.fulfilled, (state) => {
+        state.adminsList = null;
       });
   },
 });

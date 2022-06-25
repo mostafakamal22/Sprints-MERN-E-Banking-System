@@ -7,9 +7,11 @@ import {
 } from "../../features/Admin/Auth/adminAuthSlice";
 import {
   getAllAdmins,
+  ownerLogout,
   resetOwnerStatus,
 } from "../../features/Admin/Owener/ownerSlice";
 import {
+  adminsLogout,
   getAllUsers,
   resetUsersStatus,
 } from "../../features/Admin/UsersActions/usersSlice";
@@ -52,8 +54,9 @@ export default function AdminDashboard() {
 
   //logout function
   const handleLogout = () => {
+    dispatch(adminsLogout());
+    dispatch(ownerLogout());
     dispatch(adminLogout());
-    dispatch(resetAdminAuthStatus());
     naviagte("/admins/login");
   };
   return (
