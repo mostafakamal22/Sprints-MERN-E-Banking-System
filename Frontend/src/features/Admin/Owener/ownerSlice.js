@@ -96,7 +96,7 @@ export const ownerSlice = createSlice({
         state.isError = false;
         state.message = "";
         state.adminsList = state.adminsList.filter(
-          (admin) => admin.id !== action.payload.id
+          (admin) => admin._id !== action.payload.id
         );
       })
       .addCase(deleteAdmin.rejected, (state, action) => {
@@ -117,7 +117,7 @@ export const ownerSlice = createSlice({
         state.isError = false;
         state.message = "";
         state.adminsList = state.adminsList.map((admin) => {
-          if (admin.id === action.payload.id) {
+          if (admin._id === action.payload._id) {
             return action.payload;
           }
           return admin;

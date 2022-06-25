@@ -1,8 +1,9 @@
 import React from "react";
-import { useState } from "react";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   deleteAdmin,
+  resetOwnerStatus,
   updateAdminRole,
 } from "../../features/Admin/Owener/ownerSlice";
 import FormButton from "../shared/FormButton";
@@ -46,13 +47,30 @@ const AdminListControl = ({ adminsList }) => {
     dispatch(updateAdminRole(adminData));
   };
 
-  return (
-    <div>
-      <h3> Admins List </h3>
+  //clean up adminList status
+  useEffect(() => {
+    return () => {
+      dispatch(resetOwnerStatus());
+    };
+  }, []);
 
-      <ul>
+  return (
+    <div className="bg-white p-5">
+      <h3 className="text-lg font-bold text-blue-900 my-5"> Admins List </h3>
+
+      <ul className="flex flex-col justify-center">
+        <li className="flex justify-between items-center flex-wrap text-black border p-2">
+          <span>Admin Name</span>
+          <span>Admin Role</span>
+          <span>Remove Admin</span>
+          <span>Update Role</span>
+        </li>
+
         {adminsList.map((admin) => (
-          <li key={admin.id}>
+          <li
+            key={admin._id}
+            className="flex justify-between items-center flex-wrap border p-2"
+          >
             {/*Admin Role*/}
             <span> {admin.admin_name} </span>
 
@@ -60,7 +78,7 @@ const AdminListControl = ({ adminsList }) => {
             <span> {admin.role} </span>
 
             {/* Remove Admin */}
-            <form onSubmit={(event) => handleRemoving(event, admin.id)}>
+            <form onSubmit={(event) => handleRemoving(event, admin._id)}>
               <FormButton
                 text={{ loading: "Removing", default: "Remove" }}
                 isLoading={isLoading}
@@ -68,11 +86,14 @@ const AdminListControl = ({ adminsList }) => {
             </form>
 
             {/* Update Admin Role */}
-            <form onSubmit={(event) => handleUpdating(event, admin.id)}>
-              <option>
-                <select defaultChecked={admin.role === "owner"}>owner</select>
-                <select defaultChecked={admin.role === "admin"}>admin</select>
-              </option>
+            <form
+              className="flex flex-col justify-center items-center"
+              onSubmit={(event) => handleUpdating(event, admin._id)}
+            >
+              <select className="my-2 p-2 rounded" defaultValue={admin.role}>
+                <option defaultValue={"owner"}>owner</option>
+                <option defaultValue={"admin"}>admin</option>
+              </select>
               <FormButton
                 text={{ loading: "Updating", default: "Update Role" }}
                 isLoading={isLoading}

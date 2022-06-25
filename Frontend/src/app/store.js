@@ -7,6 +7,7 @@ import { encryptTransform } from "redux-persist-transform-encrypt";
 import thunk from "redux-thunk";
 import adminAuthReducer from "../features/Admin/Auth/adminAuthSlice";
 import ownerReducer from "../features/Admin/Owener/ownerSlice";
+import usersReducer from "../features/Admin/UsersActions/usersSlice";
 
 const persistConfig = {
   key: "root",
@@ -28,6 +29,7 @@ const appReducer = combineReducers({
   data: userReducer,
   adminAuth: adminAuthReducer,
   ownerData: ownerReducer,
+  usersData: usersReducer,
 });
 
 //All Logout actions

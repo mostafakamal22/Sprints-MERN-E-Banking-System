@@ -7,7 +7,7 @@ const { generateAdminsToken } = require("../helpers/generateAdminsToken");
 //@Access >>>> private(Owner Only)
 const getAdmins = async (req, res) => {
   try {
-    const admins = await Admin.find();
+    const admins = await Admin.find().select("_id email role admin_name");
     res.status(200).json(admins);
   } catch (error) {
     res.status(500).send("Ooops!! Something Went Wrong, Try again...");
@@ -105,10 +105,10 @@ const updateAdmin = async (req, res) => {
     //get admin
     const admin = await Admin.findById(req.params.id);
     //update user with new values
-    user.email = req.body.email;
-    user.markModified("email");
-    user.password = hashedPassword;
-    user.markModified("password");
+    admin.email = req.body.email;
+    admin.markModified("email");
+    admin.password = hashedPassword;
+    admin.markModified("password");
 
     //get updated admin info & send it back
     const updatedAdmin = await admin.save();
@@ -169,15 +169,15 @@ const updateAdminRole = async (req, res) => {
     //get admin wanted to update
     const admin = await Admin.findById(req.params.id);
     //update user with new role
-    user.role = "owner";
-    user.markModified("email");
+    admin.role = admin.role === "owner" ? "admin" : "owner";
+    admin.markModified("email");
 
     //get updated admin info & send it back
     const updatedAdmin = await admin.save();
 
     res.status(200).json({
-      id: updatedAdmin.id,
-      name: updatedAdmin.admin_name,
+      _id: updatedAdmin.id,
+      admin_name: updatedAdmin.admin_name,
       email: updatedAdmin.email,
       role: updatedAdmin.role,
     });

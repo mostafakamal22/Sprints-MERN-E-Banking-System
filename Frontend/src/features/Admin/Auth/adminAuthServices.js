@@ -46,7 +46,7 @@ const getAdmin = async (adminData) => {
 
 //Update Admin
 const updateAdmin = async (adminData) => {
-  const res = await axios.put(API_URL + adminData.id, {
+  const res = await axios.put(API_URL + adminData.id, adminData, {
     headers: {
       authorization: `Bearer ${adminData.token}`,
     },

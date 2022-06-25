@@ -4,21 +4,21 @@ const { generateUsersToken } = require("../helpers/generateUsersToken");
 
 //@desc   >>>> Get All Users
 //@route  >>>> GET /api/users
-//@Access >>>> private
+//@Access >>>> private(admins)
 const getUsers = async (req, res) => {
   try {
-    const users = await User.find();
+    const users = await User.find().select(
+      "_id user_name email user_status no_of_account"
+    );
     res.status(200).json(users);
   } catch (error) {
-    res
-      .status(500)
-      .json({ error: "Ooops!! Something Went Wrong, Try again..." });
+    res.status(500).send("Ooops!! Something Went Wrong, Try again...");
   }
 };
 
 //@desc   >>>> Get one User
 //@route  >>>> GET /api/users/:id
-//@Access >>>> public(Admin + User)
+//@Access >>>> private(User)
 const getOneUser = async (req, res) => {
   let user;
   try {

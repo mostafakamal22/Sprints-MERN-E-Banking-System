@@ -7,6 +7,11 @@ const {
 const {
   authUserProtect,
 } = require("../middlewares/userMiddleware/authUsersMiddleware");
+
+const {
+  authAdminProtect,
+} = require("../middlewares/adminMiddlewares/authAdminsMiddleware");
+
 const {
   getUsers,
   getOneUser,
@@ -16,13 +21,16 @@ const {
   userLogin,
 } = require("../controllers/usersControllers");
 
-router.route("/").get(getUsers).post(validatePassword, createUser);
+router
+  .route("/")
+  .get(authAdminProtect, getUsers)
+  .post(validatePassword, createUser);
 
 router
   .route("/:id")
   .get(authUserProtect, getOneUser)
   .put(checkPassword, validatePassword, authUserProtect, updateUser)
-  .delete(deleteUser);
+  .delete(authAdminProtect, deleteUser);
 
 router.route("/login").post(userLogin);
 

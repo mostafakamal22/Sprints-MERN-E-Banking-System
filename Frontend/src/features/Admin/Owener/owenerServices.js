@@ -16,7 +16,7 @@ const getAllAdmins = async (adminData) => {
 
 //Delete Admin
 const deleteAdmin = async (adminData) => {
-  const res = await axios.put(API_URL + adminData.id, {
+  const res = await axios.delete(API_URL + adminData.id, {
     headers: {
       authorization: `Bearer ${adminData.token}`,
     },
@@ -28,11 +28,15 @@ const deleteAdmin = async (adminData) => {
 
 //Update Admin Role
 const updateAdminRole = async (adminData) => {
-  const res = await axios.put(API_URL + "updaterole/" + adminData.id, {
-    headers: {
-      authorization: `Bearer ${adminData.token}`,
-    },
-  });
+  const res = await axios.put(
+    API_URL + "updaterole/" + adminData.id,
+    adminData,
+    {
+      headers: {
+        authorization: `Bearer ${adminData.token}`,
+      },
+    }
+  );
   const data = res.data;
 
   return data;

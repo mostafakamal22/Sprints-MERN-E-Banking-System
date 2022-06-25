@@ -5,6 +5,14 @@ import {
   adminLogout,
   resetAdminAuthStatus,
 } from "../../features/Admin/Auth/adminAuthSlice";
+import {
+  getAllAdmins,
+  resetOwnerStatus,
+} from "../../features/Admin/Owener/ownerSlice";
+import {
+  getAllUsers,
+  resetUsersStatus,
+} from "../../features/Admin/UsersActions/usersSlice";
 import AdminListControl from "./AdminListControl";
 import { DashboardNavbar } from "./DashboardNavbar";
 import { UsersListControl } from "./UsersListControl";
@@ -15,10 +23,29 @@ export default function AdminDashboard() {
   const dispatch = useDispatch();
   const { info } = useSelector((state) => state.adminAuth);
 
+  //Get Users' & AdminsList
+  useEffect(() => {
+    //Get admins list only if owner logged in
+    if (info.role === "owner") {
+      dispatch(getAllAdmins({ token: info.token }));
+    }
+
+    //Get users
+    dispatch(getAllUsers({ token: info.token }));
+  }, [info]);
+
+  //users list
+  const { usersList } = useSelector((state) => state.usersData);
+
+  //amins list
+  const { adminsList } = useSelector((state) => state.ownerData);
+
   //clean up admin status on unmount
   useEffect(() => {
     return () => {
       dispatch(resetAdminAuthStatus());
+      dispatch(resetOwnerStatus());
+      dispatch(resetUsersStatus());
     };
   }, []);
 
@@ -37,13 +64,15 @@ export default function AdminDashboard() {
       {info && <Link to={`/admins/profile/${info.id}`}>Go to profile</Link>}
 
       {/* admin dashboard navabr */}
-      <DashboardNavbar setActiveTab={setActiveTab} />
+      <DashboardNavbar activeTab={activeTab} setActiveTab={setActiveTab} />
 
       {/* admins control panel */}
-      {activeTab === "adminsList" && <AdminListControl />}
+      {activeTab === "adminsList" && (
+        <AdminListControl adminsList={adminsList} />
+      )}
 
       {/* users control panel */}
-      {activeTab === "usersList" && <UsersListControl />}
+      {activeTab === "usersList" && <UsersListControl usersList={usersList} />}
 
       {/* users Account Request*/}
     </div>
