@@ -1,5 +1,4 @@
-import React from "react";
-import { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   deleteAdmin,
@@ -14,6 +13,22 @@ const AdminListControl = ({ adminsList }) => {
   const { isLoading } = useSelector((state) => state.ownerData);
 
   const dispatch = useDispatch();
+
+  //search query state
+  const [searchQuery, setSearchQuery] = useState("");
+
+  //filtered admins list
+  const filteredAdmins =
+    adminsList &&
+    adminsList.filter((admin) => {
+      if (
+        admin.admin_name
+          .toLowerCase()
+          .includes(searchQuery.trim().toLowerCase())
+      ) {
+        return admin;
+      }
+    });
 
   // handle removing admin
   const handleRemoving = (e, removedAdminID) => {
@@ -56,7 +71,46 @@ const AdminListControl = ({ adminsList }) => {
 
   return (
     <div className="bg-white p-5">
-      <h3 className="text-lg font-bold text-blue-900 my-5"> Admins List </h3>
+      <h3 className="text-lg font-bold text-blue-900 my-5">
+        {" "}
+        Admins List ({filteredAdmins.length}){" "}
+      </h3>
+
+      {/*search admins with name*/}
+      <div className="flex justify-center items-center flex-wrap md:flex-nowrap gap-4 mb-6 p-4 bg-blue-400 rounded-md">
+        <label
+          htmlFor="searchQuery"
+          className="block w-full
+          md:w-auto text-black
+          "
+        >
+          Search Admin By Name:-
+        </label>
+
+        <input
+          type="text"
+          name="searchQuery"
+          className="
+          block
+          w-full
+          md:w-auto
+          px-3
+          py-1.5
+          text-base
+          font-normal
+          text-gray-700
+          bg-white bg-clip-padding
+          border border-solid border-gray-500
+          rounded
+          transition
+          ease-in-out
+          m-0
+          focus:text-gray-700 focus:bg-white focus:border-black focus:shadow-md focus:outline-none"
+          placeholder="search admin"
+          defaultValue={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
+        />
+      </div>
 
       <ul className="flex flex-col justify-center">
         <li className="flex justify-between items-center flex-wrap text-black border p-2">
@@ -66,8 +120,9 @@ const AdminListControl = ({ adminsList }) => {
           <span>Update Role</span>
         </li>
 
-        {adminsList &&
-          adminsList.map((admin) => (
+        {/* if there no search query >>> just display adminsList === filteredAdmins  */}
+        {filteredAdmins &&
+          filteredAdmins.map((admin) => (
             <li
               key={admin._id}
               className="flex justify-between items-center flex-wrap border p-2"
@@ -102,6 +157,14 @@ const AdminListControl = ({ adminsList }) => {
               </form>
             </li>
           ))}
+
+        {/* if there is search query no admin matches >>> just display msg  */}
+
+        {searchQuery && filteredAdmins.length === 0 && (
+          <li className="bg-red-500 text-white my-4 py-4 px-2 rounded">
+            There No Search Result!
+          </li>
+        )}
       </ul>
     </div>
   );

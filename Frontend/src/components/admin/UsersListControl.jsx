@@ -17,6 +17,20 @@ export const UsersListControl = ({ usersList }) => {
 
   const { isLoading } = useSelector((state) => state.usersData);
 
+  //search query state
+  const [searchQuery, setSearchQuery] = useState("");
+
+  //filtered users list
+  const filteredUsers =
+    usersList &&
+    usersList.filter((user) => {
+      if (
+        user.user_name.toLowerCase().includes(searchQuery.trim().toLowerCase())
+      ) {
+        return user;
+      }
+    });
+
   // handle removing user
   const handleRemoving = (e, removedUserID) => {
     e.preventDefault();
@@ -59,7 +73,46 @@ export const UsersListControl = ({ usersList }) => {
 
   return (
     <div className="bg-white p-5">
-      <h3 className="text-lg font-bold text-blue-900 my-5"> Users List </h3>
+      <h3 className="text-lg font-bold text-blue-900 my-5">
+        {" "}
+        Users List ({filteredUsers.length}){" "}
+      </h3>
+
+      {/*search users with name*/}
+      <div className="flex justify-center items-center flex-wrap md:flex-nowrap gap-4 mb-6 p-4 bg-blue-400 rounded-md">
+        <label
+          htmlFor="searchQuery"
+          className="block w-full
+          md:w-auto text-black
+          "
+        >
+          Search Users By Name:-
+        </label>
+
+        <input
+          type="text"
+          name="searchQuery"
+          className="
+          block
+          w-full
+          md:w-auto
+          px-3
+          py-1.5
+          text-base
+          font-normal
+          text-gray-700
+          bg-white bg-clip-padding
+          border border-solid border-gray-500
+          rounded
+          transition
+          ease-in-out
+          m-0
+          focus:text-gray-700 focus:bg-white focus:border-black focus:shadow-md focus:outline-none"
+          placeholder="search admin"
+          defaultValue={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
+        />
+      </div>
 
       <ul className="flex flex-col justify-center">
         <li className="flex justify-between items-center flex-wrap text-black border p-2">
@@ -70,8 +123,10 @@ export const UsersListControl = ({ usersList }) => {
           <span>Remove User</span>
           <span>Update Status</span>
         </li>
-        {usersList &&
-          usersList.map((user) => (
+
+        {/* if there no search query >>> just display adminsList === filteredAdmins  */}
+        {filteredUsers &&
+          filteredUsers.map((user) => (
             <li
               key={user._id}
               className="flex justify-between items-center flex-wrap border p-1"
@@ -115,6 +170,14 @@ export const UsersListControl = ({ usersList }) => {
               <UpdateUserStatus user={user} handleUpdating={handleUpdating} />
             </li>
           ))}
+
+        {/* if there is search query no admin matches >>> just display msg  */}
+
+        {searchQuery && filteredUsers.length === 0 && (
+          <li className="bg-red-500 text-white my-4 py-4 px-2 rounded">
+            There No Search Result!
+          </li>
+        )}
       </ul>
     </div>
   );
