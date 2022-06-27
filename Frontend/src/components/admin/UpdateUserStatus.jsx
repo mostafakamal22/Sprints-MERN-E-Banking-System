@@ -37,10 +37,7 @@ export const UpdateUserStatus = ({ user, handleUpdating }) => {
         <option defaultValue={"unactive"}>unactive</option>
         <option defaultValue={"suspended"}>suspended</option>
       </select>
-      <FormButton
-        text={{ loading: "Updating", default: "Update Status" }}
-        isLoading={isLoading}
-      />
+      <FormButton text={{ default: "Update Status" }} />
     </form>
   );
 };

@@ -1,7 +1,7 @@
 import React from "react";
 import SmallSpinner from "./SmallSpinner";
 
-export default function FormButton({ text, isLoading }) {
+export default function FormButton({ text, isLoading = false }) {
   return (
     <button
       type="submit"

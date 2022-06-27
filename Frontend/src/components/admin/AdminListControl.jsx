@@ -135,10 +135,7 @@ const AdminListControl = ({ adminsList }) => {
 
               {/* Remove Admin */}
               <form onSubmit={(event) => handleRemoving(event, admin._id)}>
-                <FormButton
-                  text={{ loading: "Removing", default: "Remove" }}
-                  isLoading={isLoading}
-                />
+                <FormButton text={{ default: "Remove" }} />
               </form>
 
               {/* Update Admin Role */}
@@ -150,10 +147,7 @@ const AdminListControl = ({ adminsList }) => {
                   <option defaultValue={"owner"}>owner</option>
                   <option defaultValue={"admin"}>admin</option>
                 </select>
-                <FormButton
-                  text={{ loading: "Updating", default: "Update Role" }}
-                  isLoading={isLoading}
-                />
+                <FormButton text={{ default: "Update Role" }} />
               </form>
             </li>
           ))}

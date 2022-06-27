@@ -160,10 +160,7 @@ export const UsersListControl = ({ usersList }) => {
 
               {/* Remove User */}
               <form onSubmit={(event) => handleRemoving(event, user._id)}>
-                <FormButton
-                  text={{ loading: "Removing", default: "Remove" }}
-                  isLoading={isLoading}
-                />
+                <FormButton text={{ default: "Remove" }} />
               </form>
 
               {/* Update User Status */}
@@ -171,8 +168,7 @@ export const UsersListControl = ({ usersList }) => {
             </li>
           ))}
 
-        {/* if there is search query no admin matches >>> just display msg  */}
-
+        {/* if there is search query no user matches >>> just display msg  */}
         {searchQuery && filteredUsers.length === 0 && (
           <li className="bg-red-500 text-white my-4 py-4 px-2 rounded">
             There No Search Result!
