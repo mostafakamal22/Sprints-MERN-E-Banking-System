@@ -8,6 +8,7 @@ import {
   updateUserStatus,
 } from "../../features/Admin/UsersActions/usersSlice";
 import FormButton from "../shared/FormButton";
+import { MainSpinner } from "../shared/MainSpinner";
 import { UpdateUserStatus } from "./UpdateUserStatus";
 
 export const UsersListControl = ({ usersList }) => {
@@ -124,8 +125,12 @@ export const UsersListControl = ({ usersList }) => {
           <span>Update Status</span>
         </li>
 
-        {/* if there no search query >>> just display adminsList === filteredAdmins  */}
+        {/* Show spinner when Loading State is true */}
+        {isLoading && <MainSpinner />}
+
+        {/* if there no search query >>> just display adminsList which == filteredAdmins */}
         {filteredUsers &&
+          !isLoading &&
           filteredUsers.map((user) => (
             <li
               key={user._id}
@@ -169,7 +174,7 @@ export const UsersListControl = ({ usersList }) => {
           ))}
 
         {/* if there is search query no user matches >>> just display msg  */}
-        {searchQuery && filteredUsers.length === 0 && (
+        {searchQuery && filteredUsers.length === 0 && !isLoading && (
           <li className="bg-red-500 text-white my-4 py-4 px-2 rounded">
             There No Search Result!
           </li>

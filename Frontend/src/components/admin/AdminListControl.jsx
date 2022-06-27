@@ -6,6 +6,7 @@ import {
   updateAdminRole,
 } from "../../features/Admin/Owener/ownerSlice";
 import FormButton from "../shared/FormButton";
+import { MainSpinner } from "../shared/MainSpinner";
 
 const AdminListControl = ({ adminsList }) => {
   const { info } = useSelector((state) => state.adminAuth);
@@ -120,8 +121,12 @@ const AdminListControl = ({ adminsList }) => {
           <span>Update Role</span>
         </li>
 
+        {/* Show spinner when Loading State is true */}
+        {isLoading && <MainSpinner />}
+
         {/* if there no search query >>> just display adminsList === filteredAdmins  */}
         {filteredAdmins &&
+          !isLoading &&
           filteredAdmins.map((admin) => (
             <li
               key={admin._id}
@@ -154,7 +159,7 @@ const AdminListControl = ({ adminsList }) => {
 
         {/* if there is search query no admin matches >>> just display msg  */}
 
-        {searchQuery && filteredAdmins.length === 0 && (
+        {searchQuery && filteredAdmins.length === 0 && !isLoading && (
           <li className="bg-red-500 text-white my-4 py-4 px-2 rounded">
             There No Search Result!
           </li>

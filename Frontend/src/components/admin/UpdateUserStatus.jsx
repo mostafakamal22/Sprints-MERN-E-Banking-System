@@ -1,13 +1,10 @@
 import React from "react";
 import { useState } from "react";
-import { useSelector } from "react-redux";
 import FormButton from "../shared/FormButton";
 
 export const UpdateUserStatus = ({ user, handleUpdating }) => {
   //state for user's status
   const [userStatus, setUserStatus] = useState(user.user_status);
-
-  const { isLoading } = useSelector((state) => state.usersData);
 
   return (
     <form
