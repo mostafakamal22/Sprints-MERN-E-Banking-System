@@ -7,16 +7,22 @@ import {
 } from "../../features/Admin/Owener/ownerSlice";
 import FormButton from "../shared/FormButton";
 import { MainSpinner } from "../shared/MainSpinner";
+import MessagesContainer from "../shared/MessagesContainer";
 
 const AdminListControl = ({ adminsList }) => {
   const { info } = useSelector((state) => state.adminAuth);
 
-  const { isLoading } = useSelector((state) => state.ownerData);
+  const { isLoading, isError, isSuccess, message } = useSelector(
+    (state) => state.ownerData
+  );
 
   const dispatch = useDispatch();
 
   //search query state
   const [searchQuery, setSearchQuery] = useState("");
+
+  //search message state
+  const [msg, setMsg] = useState("");
 
   //filtered admins list
   const filteredAdmins =
@@ -62,6 +68,16 @@ const AdminListControl = ({ adminsList }) => {
 
     dispatch(updateAdminRole(adminData));
   };
+
+  useEffect(() => {
+    if (isError) {
+      setMsg(message);
+    }
+
+    if (isSuccess) {
+      setMsg("Success!");
+    }
+  }, [isError, message, isSuccess, msg]);
 
   //clean up adminList status
   useEffect(() => {
@@ -113,6 +129,10 @@ const AdminListControl = ({ adminsList }) => {
         />
       </div>
 
+      {/*Request Status and Errors*/}
+      {(isError || isSuccess) && (
+        <MessagesContainer msg={msg} isSuccess={isSuccess} isError={isError} />
+      )}
       <ul className="flex flex-col justify-center">
         <li className="flex justify-between items-center flex-wrap text-black border p-2">
           <span>Admin Name</span>

@@ -9,6 +9,7 @@ import {
 } from "../../features/Admin/UsersActions/usersSlice";
 import FormButton from "../shared/FormButton";
 import { MainSpinner } from "../shared/MainSpinner";
+import MessagesContainer from "../shared/MessagesContainer";
 import { UpdateUserStatus } from "./UpdateUserStatus";
 
 export const UsersListControl = ({ usersList }) => {
@@ -16,10 +17,15 @@ export const UsersListControl = ({ usersList }) => {
 
   const dispatch = useDispatch();
 
-  const { isLoading } = useSelector((state) => state.usersData);
+  const { isLoading, isError, isSuccess, message } = useSelector(
+    (state) => state.usersData
+  );
 
   //search query state
   const [searchQuery, setSearchQuery] = useState("");
+
+  //search message state
+  const [msg, setMsg] = useState("");
 
   //filtered users list
   const filteredUsers =
@@ -64,6 +70,16 @@ export const UsersListControl = ({ usersList }) => {
 
     dispatch(updateUserStatus(userData));
   };
+
+  useEffect(() => {
+    if (isError) {
+      setMsg(message);
+    }
+
+    if (isSuccess) {
+      setMsg("Success!");
+    }
+  }, [isError, message, isSuccess, msg]);
 
   //clean up usersList status
   useEffect(() => {
@@ -114,6 +130,11 @@ export const UsersListControl = ({ usersList }) => {
           onChange={(e) => setSearchQuery(e.target.value)}
         />
       </div>
+
+      {/*Request Status and Errors*/}
+      {(isError || isSuccess) && (
+        <MessagesContainer msg={msg} isSuccess={isSuccess} isError={isError} />
+      )}
 
       <ul className="flex flex-col justify-center">
         <li className="flex justify-between items-center flex-wrap text-black border p-2">

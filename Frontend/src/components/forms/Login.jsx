@@ -134,7 +134,13 @@ export default function Login() {
         </div>
 
         {/*Request Status and Errors*/}
-        <MessagesContainer msg={msg} isSuccess={isSuccess} />
+        {(isError || isSuccess) && (
+          <MessagesContainer
+            msg={msg}
+            isSuccess={isSuccess}
+            isError={isError}
+          />
+        )}
 
         {/*form button */}
         <FormButton
