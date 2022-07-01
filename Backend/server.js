@@ -24,6 +24,10 @@ app.use("/api/users", usersRoute);
 const adminsRoute = require("./routes/adminRoutes");
 app.use("/api/admins", adminsRoute);
 
+//account Router
+const accountRoute = require("./routes/accountRoutes");
+app.use("/api/account", accountRoute);
+
 app.listen(process.env.PORT, () => {
   console.log("server is running");
 });

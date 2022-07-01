@@ -1,5 +1,4 @@
 const mongoose = require("mongoose");
-const { accountsSchema } = require("./accountSchema");
 
 //Define User Schema
 const userSchema = new mongoose.Schema(
@@ -83,7 +82,7 @@ const userSchema = new mongoose.Schema(
         "Sorry, You Can Not Add More Than 3 Accounts in your Bank Profile",
       ],
     },
-    accounts: [accountsSchema],
+    accounts: [String],
   },
   {
     timestamps: true,
