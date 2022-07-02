@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const { notificationSchema } = require("./notificationSchema");
 
 //Define User Schema
 const userSchema = new mongoose.Schema(
@@ -83,6 +84,7 @@ const userSchema = new mongoose.Schema(
       ],
     },
     accounts: [String],
+    notification: [notificationSchema],
   },
   {
     timestamps: true,
