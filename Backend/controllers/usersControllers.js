@@ -33,6 +33,8 @@ const getOneUser = async (req, res) => {
       userStatus: user.user_status,
       postal: user.zip_code,
       phone: user.phone,
+      accounts: user.accounts,
+      notifications: user.notification,
     });
   } catch (error) {
     if (!user) return res.status(404).send("user Not Found!");
@@ -70,7 +72,7 @@ const createUser = async (req, res) => {
 
 //@desc   >>>> user login
 //@route  >>>> GET /api/users/login
-//@Access >>>> privete(user only)
+//@Access >>>> public
 const userLogin = async (req, res) => {
   //check for empty body
   if (!req.body.email || !req.body.password)
@@ -134,6 +136,8 @@ const updateUser = async (req, res) => {
       userStatus: updatedUser.user_status,
       postal: updatedUser.zip_code,
       phone: updatedUser.phone,
+      accounts: updatedUser.accounts,
+      notifications: updatedUser.notification,
     });
   } catch (error) {
     if (error.message.match(/(email|password|name|postal|phone|addresee)/gi))

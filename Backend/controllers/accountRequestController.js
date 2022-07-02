@@ -3,13 +3,15 @@ const AccountRequest = require("../models/accountRequestModel");
 //@desc   >>>> Create Account Request
 //@route  >>>> POST /api/request/create
 //@Access >>>> Private (user only)
-const createAccountRequest = async (req, res) => {
+const createAccountRequest = async (req, res, next) => {
   try {
     const accountRequest = await AccountRequest.create({
       client_id: req.body.id,
       initial_balance: req.body.balance,
     });
-    res.status(201).json({ id: accountRequest.id });
+    //go to notification with data
+    req.created = { account_id: accountRequest.id };
+    next();
   } catch (error) {
     if (error.message.match(/(Blanace|id)/gi)) {
       return res.status(400).send(error.message);
@@ -39,9 +41,9 @@ const deleteAccountRequest = async (req, res) => {
       req.params.id
     );
     //return back initial balance to user
-    res
-      .status(200)
-      .json({ initial_balance: deletedAccountRequest.initial_balance });
+    req.declined = { initial_balance: deletedAccountRequest.initial_balance };
+    //go to notification
+    next();
   } catch (error) {
     res.status(500).send("Ooops!! Something Went Wrong, Try again...");
   }

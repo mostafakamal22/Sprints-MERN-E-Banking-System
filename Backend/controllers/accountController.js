@@ -3,13 +3,15 @@ const Account = require("../models/accountModel");
 //@desc   >>>> Create Account
 //@route  >>>> POST /api/account/create
 //@Access >>>> Private (through admin approve only)
-const createAccount = async (req, res) => {
+const createAccount = async (req, res, next) => {
   try {
     const account = await Account.create({
       client_id: req.body.id,
       balance: req.body.balance,
     });
-    res.status(201).json({ id: account.id });
+    //go to notification
+    req.approved = { account_id: account.id };
+    next();
   } catch (error) {
     if (error.message.match(/(Blanace|id)/gi)) {
       return res.status(400).send(error.message);
@@ -51,35 +53,41 @@ const transfer = async (req, res) => {
   const { balanceTransfered } = req.body;
   try {
     //get sending user account
-    const sendingUser = await Account.findById(req.params.from_id);
+    const sendingAccount = await Account.findById(req.params.from_id);
 
     //get receiving user account
-    const receivingUser = await User.findById(req.params.from_id);
+    const receivingAccount = await Account.findById(req.params.from_id);
 
     //update both users' accounts with new tranfer values
     // 1- balance
-    sendingUser.balance -= balanceTransfered;
-    sendingUser.markModified("balance");
-    receivingUser.balance += balanceTransfered;
-    receivingUser.markModified("balance");
+    sendingAccount.balance -= balanceTransfered;
+    sendingAccount.markModified("balance");
+    receivingAccount.balance += balanceTransfered;
+    receivingAccount.markModified("balance");
     // 2- transfer log >> out (sending user)
-    sendingUser.out.push({
-      to: receivingUser.id,
+    sendingAccount.out.push({
+      to: receivingAccount.id,
       balance_transfered: balanceTransfered,
     });
-    sendingUser.markModified("out");
+    sendingAccount.markModified("out");
     // 2- transfer log >> in (receiving user)
-    receivingUser.in.push({
-      from: sendingUser.id,
+    receivingAccount.in.push({
+      from: sendingAccount.id,
       balance_transfered: balanceTransfered,
     });
-    receivingUser.markModified("out");
+    receivingAccount.markModified("out");
 
     //Save Transfer operation for both users' accounts
-    const updatedSendingAccount = await sendingUser.save();
-    const updatedReceivingAccount = await receivingUser.save();
+    const updatedSendingAccount = await sendingAccount.save();
+    const updatedReceivingAccount = await receivingAccount.save();
 
-    res.status(200).json(updatedSendingAccount);
+    //go to notification
+    req.transfered = {
+      updatedSendingAccount,
+      updatedReceivingAccount,
+      balanceTransfered,
+    };
+    next();
   } catch (error) {
     if (error.message.match(/(transfer|id)/gi))
       return res.status(400).send(error.message);

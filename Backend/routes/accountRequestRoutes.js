@@ -18,13 +18,18 @@ const {
   createAccountRequest,
   deleteAccountRequest,
 } = require("../controllers/accountRequestController");
+const {
+  sendNotification,
+} = require("../middlewares/notificationMiddleware/sendNotificationMiddleware");
 
 router.route("/").get(authAdminProtect, getAccountRequests);
 
 router
   .route("/create")
-  .post(authUserProtect, checkPassword, createAccountRequest);
+  .post(authUserProtect, checkPassword, createAccountRequest, sendNotification);
 
-router.route("/:id").delete(authAdminProtect, deleteAccountRequest);
+router
+  .route("/:id")
+  .delete(authAdminProtect, deleteAccountRequest, sendNotification);
 
 module.exports = router;

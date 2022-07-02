@@ -84,7 +84,7 @@ const userSchema = new mongoose.Schema(
       ],
     },
     accounts: [String],
-    notification: [notificationSchema],
+    notifications: [notificationSchema],
   },
   {
     timestamps: true,

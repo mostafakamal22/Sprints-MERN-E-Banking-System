@@ -7,7 +7,7 @@ const notificationSchema = new mongoose.Schema(
       type: String,
       required: [true, "please provide notification type"],
       enum: {
-        values: ["approved", "declined"],
+        values: ["approved", "declined", "account-request", "transfered-in"],
         message: "{VALUE} is not supported as a notification type",
       },
     },

@@ -22,8 +22,13 @@ const {
 const {
   checkBalance,
 } = require("../middlewares/accountMiddlewares/checkBalance");
+const {
+  sendNotification,
+} = require("../middlewares/notificationMiddleware/sendNotificationMiddleware");
 
-router.route("/create").post(authUserProtect, checkPassword, createAccount);
+router
+  .route("/create")
+  .post(authUserProtect, checkPassword, createAccount, sendNotification);
 
 router
   .route("/:id")
@@ -32,7 +37,14 @@ router
 
 router
   .route("/transfer/:from_id/:to_id")
-  .put(authUserProtect, checkPassword, checkAccount, checkBalance, transfer);
+  .put(
+    authUserProtect,
+    checkPassword,
+    checkAccount,
+    checkBalance,
+    transfer,
+    sendNotification
+  );
 
 router.route("/deposit/:id").put(authUserProtect, checkPassword, deposit);
 
