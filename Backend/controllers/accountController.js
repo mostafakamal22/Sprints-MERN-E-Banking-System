@@ -11,6 +11,7 @@ const createAccount = async (req, res, next) => {
     });
     //go to notification
     req.approved = {
+      request_id: req.body.request_id,
       client_id: account.client_id,
       account_id: account.id,
     };

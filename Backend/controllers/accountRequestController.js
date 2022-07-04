@@ -44,6 +44,7 @@ const deleteAccountRequest = async (req, res, next) => {
     );
     //return back initial balance to user
     req.declined = {
+      deleted_request_id: deletedAccountRequest.id,
       client_id: deletedAccountRequest.client_id,
       initial_balance: deletedAccountRequest.initial_balance,
     };

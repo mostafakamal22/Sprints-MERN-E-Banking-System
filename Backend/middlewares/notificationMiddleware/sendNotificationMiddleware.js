@@ -1,3 +1,4 @@
+const AccountRequest = require("../../models/accountRequestModel");
 const User = require("../../models/userModel");
 
 //send notification to user {add notification object to user document}
@@ -73,8 +74,12 @@ const sendNotification = async (req, res) => {
       user.markModified("notifications");
 
       //save changes
-      const updatedUser = await user.save();
-      res.status(200).json(updatedUser.id);
+      await user.save();
+      //then delete account request
+      const deletedAccountRequest = await AccountRequest.findByIdAndDelete(
+        req.approved.request_id
+      );
+      res.status(200).json({ id: deletedAccountRequest.id });
     } catch (error) {
       if (error.message.match(/(notification|Profile)/gi)) {
         return res.status(400).send(error.message);
@@ -103,8 +108,9 @@ const sendNotification = async (req, res) => {
       user.markModified("notifications");
 
       //save changes
-      const updatedUser = await user.save();
-      return res.status(200).json(updatedUser.id);
+      await user.save();
+      //send deleted request id back
+      return res.status(200).json({ id: req.declined.deleted_request_id });
     } catch (error) {
       if (error.message.match(/(notification)/gi)) {
         return res.status(400).send(error.message);
