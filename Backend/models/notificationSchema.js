@@ -19,6 +19,10 @@ const notificationSchema = new mongoose.Schema(
       type: String,
       require: [true, "please provide notification message"],
     },
+    isSeen: {
+      type: Boolean,
+      default: false,
+    },
     data: [],
   },
   {
