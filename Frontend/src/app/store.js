@@ -8,6 +8,7 @@ import thunk from "redux-thunk";
 import adminAuthReducer from "../features/Admin/Auth/adminAuthSlice";
 import ownerReducer from "../features/Admin/Owener/ownerSlice";
 import usersReducer from "../features/Admin/UsersActions/usersSlice";
+import accountRequestsReducer from "../features/Admin/AccountRequests/accountRequestsSlice";
 
 const persistConfig = {
   key: "root",
@@ -30,6 +31,7 @@ const appReducer = combineReducers({
   adminAuth: adminAuthReducer,
   ownerData: ownerReducer,
   usersData: usersReducer,
+  accountRequests: accountRequestsReducer,
 });
 
 //All Logout actions
