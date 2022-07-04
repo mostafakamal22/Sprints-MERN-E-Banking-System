@@ -2,6 +2,11 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import {
+  adminsLogoutRequets,
+  getAllAccountRequests,
+  resetAccountRequestsStatus,
+} from "../../features/Admin/AccountRequests/accountRequestsSlice";
+import {
   adminLogout,
   resetAdminAuthStatus,
 } from "../../features/Admin/Auth/adminAuthSlice";
@@ -18,6 +23,7 @@ import {
 import { RegisterAdmin } from "../forms/adminForms/RegisterAdmin";
 import AdminListControl from "./AdminListControl";
 import { DashboardNavbar } from "./DashboardNavbar";
+import UsersAccountRequests from "./UsersAccountRequests";
 import { UsersListControl } from "./UsersListControl";
 
 export default function AdminDashboard() {
@@ -26,7 +32,7 @@ export default function AdminDashboard() {
   const dispatch = useDispatch();
   const { info } = useSelector((state) => state.adminAuth);
 
-  //Get Users' & AdminsList
+  //Get (Users & Admins and AccountRequests) Lists
   useEffect(() => {
     //Get admins list only if owner logged in
     if (info.role === "owner") {
@@ -35,13 +41,19 @@ export default function AdminDashboard() {
 
     //Get users
     dispatch(getAllUsers({ token: info.token }));
+
+    //Get All Account Requests
+    dispatch(getAllAccountRequests({ token: info.token }));
   }, [info]);
 
   //users list
   const { usersList } = useSelector((state) => state.usersData);
 
-  //amins list
+  //admins list
   const { adminsList } = useSelector((state) => state.ownerData);
+
+  //Account Requests list
+  const { accountRequestsList } = useSelector((state) => state.accountRequests);
 
   //clean up admin status on unmount
   useEffect(() => {
@@ -49,6 +61,7 @@ export default function AdminDashboard() {
       dispatch(resetAdminAuthStatus());
       dispatch(resetOwnerStatus());
       dispatch(resetUsersStatus());
+      dispatch(resetAccountRequestsStatus());
     };
   }, []);
 
@@ -57,6 +70,7 @@ export default function AdminDashboard() {
     dispatch(adminsLogout());
     dispatch(ownerLogout());
     dispatch(adminLogout());
+    dispatch(adminsLogoutRequets());
     naviagte("/admins/login");
   };
   return (
@@ -82,6 +96,9 @@ export default function AdminDashboard() {
       {activeTab === "usersList" && <UsersListControl usersList={usersList} />}
 
       {/* users Account Request*/}
+      {activeTab === "usersRequests" && (
+        <UsersAccountRequests accountRequestsList={accountRequestsList} />
+      )}
     </div>
   );
 }

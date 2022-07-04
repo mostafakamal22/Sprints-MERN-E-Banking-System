@@ -1,19 +1,19 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  deleteAdmin,
-  resetOwnerStatus,
-  updateAdminRole,
-} from "../../features/Admin/Owener/ownerSlice";
+  ApproveAccountRequest,
+  declineAccountRequest,
+  resetAccountRequestsStatus,
+} from "../../features/Admin/AccountRequests/accountRequestsSlice";
 import FormButton from "../shared/FormButton";
 import { MainSpinner } from "../shared/MainSpinner";
 import MessagesContainer from "../shared/MessagesContainer";
 
-const AdminListControl = ({ adminsList }) => {
+const UsersAccountRequests = ({ accountRequestsList }) => {
   const { info } = useSelector((state) => state.adminAuth);
 
   const { isLoading, isError, isSuccess, message } = useSelector(
-    (state) => state.ownerData
+    (state) => state.accountRequests
   );
 
   const dispatch = useDispatch();
@@ -24,49 +24,47 @@ const AdminListControl = ({ adminsList }) => {
   //search message state
   const [msg, setMsg] = useState("");
 
-  //filtered admins list
-  const filteredAdmins =
-    adminsList &&
-    adminsList.filter((admin) => {
-      if (
-        admin.admin_name
-          .toLowerCase()
-          .includes(searchQuery.trim().toLowerCase())
-      ) {
-        return admin;
+  //filtered requests list
+  const filteredRequests =
+    accountRequestsList &&
+    accountRequestsList.filter((request) => {
+      if (request._id.includes(searchQuery.trim())) {
+        return request;
       }
     });
 
-  // handle removing admin
-  const handleRemoving = (e, removedAdminID) => {
+  // handle decline request
+  const handleDecline = (e, declinedID) => {
     e.preventDefault();
 
     //get owner token
     const token = info.token;
 
-    //payload (owner token + id of the admin to remove)
-    const adminData = {
-      id: removedAdminID,
+    //payload (owner token + id of the request to decline)
+    const payload = {
+      id: declinedID,
       token,
     };
 
-    dispatch(deleteAdmin(adminData));
+    dispatch(declineAccountRequest(payload));
   };
 
-  // handle updating admin role
-  const handleUpdating = (e, UpdatedAdminID) => {
+  // handle Approve Account Request
+  const handleApproving = (e, userId, requestId, balance) => {
     e.preventDefault();
 
     //get owner token
     const token = info.token;
 
-    //payload (owner token + id of the admin to update)
-    const adminData = {
-      id: UpdatedAdminID,
+    //payload
+    const payload = {
+      id: userId,
+      request_id: requestId,
+      balance,
       token,
     };
 
-    dispatch(updateAdminRole(adminData));
+    dispatch(ApproveAccountRequest(payload));
   };
 
   useEffect(() => {
@@ -79,10 +77,10 @@ const AdminListControl = ({ adminsList }) => {
     }
   }, [isError, message, isSuccess, msg]);
 
-  //clean up adminList status
+  //clean up account requests status
   useEffect(() => {
     return () => {
-      dispatch(resetOwnerStatus());
+      dispatch(resetAccountRequestsStatus());
     };
   }, []);
 
@@ -90,7 +88,8 @@ const AdminListControl = ({ adminsList }) => {
     <div className="bg-white p-5">
       <h3 className="text-lg font-bold text-blue-900 my-5">
         {" "}
-        Admins List ({filteredAdmins && filteredAdmins.length}){" "}
+        Users Account Requests List (
+        {filteredRequests && filteredRequests.length}){" "}
       </h3>
 
       {/*search admins with name*/}
@@ -101,7 +100,7 @@ const AdminListControl = ({ adminsList }) => {
           md:w-auto text-black
           "
         >
-          Search Admin By Name:-
+          Search Requests By id:-
         </label>
 
         <input
@@ -123,7 +122,7 @@ const AdminListControl = ({ adminsList }) => {
           ease-in-out
           m-0
           focus:text-gray-700 focus:bg-white focus:border-black focus:shadow-md focus:outline-none"
-          placeholder="search admin"
+          placeholder="search Request"
           defaultValue={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
         />
@@ -135,51 +134,58 @@ const AdminListControl = ({ adminsList }) => {
       )}
       <ul className="flex flex-col justify-center">
         <li className="flex justify-between items-center flex-wrap text-black border p-2">
-          <span>Admin Name</span>
-          <span>Admin Role</span>
-          <span>Remove Admin</span>
-          <span>Update Role</span>
+          <span>User Id</span>
+          <span>Request Id</span>
+          <span>Initial Balance</span>
+          <span>Decline Request</span>
+          <span>Approve Request</span>
         </li>
 
         {/* Show spinner when Loading State is true */}
         {isLoading && <MainSpinner />}
 
-        {/* if there no search query >>> just display adminsList === filteredAdmins  */}
-        {filteredAdmins &&
+        {/* if there no search query >>> just display accountRequestsList === filteredRequests  */}
+        {filteredRequests &&
           !isLoading &&
-          filteredAdmins.map((admin) => (
+          filteredRequests.map((request) => (
             <li
-              key={admin._id}
+              key={request._id}
               className="flex justify-between items-center flex-wrap border p-2"
             >
-              {/*Admin Role*/}
-              <span> {admin.admin_name} </span>
+              {/*User Id*/}
+              <span> {request.client_id} </span>
 
-              {/*Admin Role*/}
-              <span> {admin.role} </span>
+              {/*request Id*/}
+              <span> {request._id} </span>
 
-              {/* Remove Admin */}
-              <form onSubmit={(event) => handleRemoving(event, admin._id)}>
-                <FormButton text={{ default: "Remove" }} />
+              {/*request Initial Balance*/}
+              <span> {request.initial_balance} </span>
+
+              {/* Decline request */}
+              <form onSubmit={(event) => handleDecline(event, request._id)}>
+                <FormButton text={{ default: "Decline" }} />
               </form>
 
-              {/* Update Admin Role */}
+              {/* approve request */}
               <form
                 className="flex flex-col justify-center items-center"
-                onSubmit={(event) => handleUpdating(event, admin._id)}
+                onSubmit={(event) =>
+                  handleApproving(
+                    event,
+                    request.client_id,
+                    request._id,
+                    request.initial_balance
+                  )
+                }
               >
-                <select className="my-2 p-2 rounded" defaultValue={admin.role}>
-                  <option defaultValue={"owner"}>owner</option>
-                  <option defaultValue={"admin"}>admin</option>
-                </select>
-                <FormButton text={{ default: "Update Role" }} />
+                <FormButton text={{ default: "Approve" }} />
               </form>
             </li>
           ))}
 
         {/* if there is search query no admin matches >>> just display msg  */}
 
-        {searchQuery && filteredAdmins.length === 0 && !isLoading && (
+        {searchQuery && filteredRequests.length === 0 && !isLoading && (
           <li className="bg-red-500 text-white my-4 py-4 px-2 rounded">
             There No Search Result!
           </li>
@@ -189,4 +195,4 @@ const AdminListControl = ({ adminsList }) => {
   );
 };
 
-export default AdminListControl;
+export default UsersAccountRequests;

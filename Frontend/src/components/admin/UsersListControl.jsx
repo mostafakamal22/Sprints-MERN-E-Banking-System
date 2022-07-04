@@ -92,7 +92,7 @@ export const UsersListControl = ({ usersList }) => {
     <div className="bg-white p-5">
       <h3 className="text-lg font-bold text-blue-900 my-5">
         {" "}
-        Users List ({filteredUsers.length}){" "}
+        Users List ({filteredUsers && filteredUsers.length}){" "}
       </h3>
 
       {/*search users with name*/}

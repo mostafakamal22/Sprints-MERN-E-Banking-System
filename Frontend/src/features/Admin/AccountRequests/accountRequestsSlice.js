@@ -53,9 +53,12 @@ export const ApproveAccountRequest = createAsyncThunk(
 );
 
 //Logout
-export const adminsLogout = createAsyncThunk("admins/logout", async () => {
-  accountRequestsServices.adminsLogout();
-});
+export const adminsLogoutRequets = createAsyncThunk(
+  "admins/logout",
+  async () => {
+    accountRequestsServices.adminsLogout();
+  }
+);
 
 export const accountRequestsSlice = createSlice({
   name: "AccountRequests",
@@ -131,7 +134,7 @@ export const accountRequestsSlice = createSlice({
         state.message = action.payload;
         state.isSuccess = false;
       })
-      .addCase(adminsLogout.fulfilled, (state) => {
+      .addCase(adminsLogoutRequets.fulfilled, (state) => {
         state.accountRequestsList = null;
       });
   },
