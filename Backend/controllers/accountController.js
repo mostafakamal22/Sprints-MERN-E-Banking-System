@@ -10,7 +10,10 @@ const createAccount = async (req, res, next) => {
       balance: req.body.balance,
     });
     //go to notification
-    req.approved = { account_id: account.id };
+    req.approved = {
+      client_id: account.client_id,
+      account_id: account.id,
+    };
     next();
   } catch (error) {
     if (error.message.match(/(Blanace|id)/gi)) {
@@ -29,7 +32,7 @@ const getAccount = async (req, res) => {
     account = await Account.findById(req.params.id);
     res.status(200).json(account);
   } catch (error) {
-    if (!user) return res.status(404).send("Account Not Found!");
+    if (!account) return res.status(404).send("Account Not Found!");
     res.status(500).send("Ooops!! Something Went Wrong, Try again...");
   }
 };
@@ -49,14 +52,14 @@ const deleteAccount = async (req, res) => {
 //@desc   >>>> Transfer Money
 //@route  >>>> PUT /api/account/transfer/:from_id/:to_id
 //@Access >>>> private(for User only)
-const transfer = async (req, res) => {
+const transfer = async (req, res, next) => {
   const { balanceTransfered } = req.body;
   try {
     //get sending user account
     const sendingAccount = await Account.findById(req.params.from_id);
 
     //get receiving user account
-    const receivingAccount = await Account.findById(req.params.from_id);
+    const receivingAccount = await Account.findById(req.params.to_id);
 
     //update both users' accounts with new tranfer values
     // 1- balance
@@ -75,12 +78,10 @@ const transfer = async (req, res) => {
       from: sendingAccount.id,
       balance_transfered: balanceTransfered,
     });
-    receivingAccount.markModified("out");
-
+    receivingAccount.markModified("in");
     //Save Transfer operation for both users' accounts
     const updatedSendingAccount = await sendingAccount.save();
     const updatedReceivingAccount = await receivingAccount.save();
-
     //go to notification
     req.transfered = {
       updatedSendingAccount,
@@ -127,6 +128,10 @@ const deposit = async (req, res) => {
 //@route  >>>> PUT /api/account/withdraw/:id
 //@Access >>>> private(for User only)
 const withdraw = async (req, res) => {
+  //check for empty body request
+  if (!req.body.withdrawAmount) {
+    return res.status(400).send("empty body request");
+  }
   const { withdrawAmount } = req.body;
   try {
     //get account

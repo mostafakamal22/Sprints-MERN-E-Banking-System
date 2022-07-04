@@ -12,18 +12,18 @@ const sendNotification = async (req, res) => {
       //create a notification for created request
       const user = await User.findById(req.user.id);
       //add notification to user
-      user.notification.push({
+      user.notifications.push({
         type: "account-request",
         title: "Account Request",
         message: `Your Account Request Has Been Created Successfully!
                     We Will Let Know Whether Been Approved or Not Soon.`,
         data: [
           {
-            account_id: created.account_id,
+            account_id: req.created.account_id,
           },
         ],
       });
-      user.markModified("notification");
+      user.markModified("notifications");
 
       //save changes
       const updatedUser = await user.save();
@@ -38,7 +38,7 @@ const sendNotification = async (req, res) => {
         postal: updatedUser.zip_code,
         phone: updatedUser.phone,
         accounts: updatedUser.accounts,
-        notifications: updatedUser.notification,
+        notifications: updatedUser.notifications,
       });
     } catch (error) {
       if (error.message.match(/(notification)/gi)) {
@@ -52,30 +52,29 @@ const sendNotification = async (req, res) => {
   if (req.approved) {
     try {
       //create a notification for approved request
-      const user = await User.findById(req.user.id);
-
+      const user = await User.findById(req.approved.client_id);
       //update user (no_of_account + accounts IDS array)
       user.no_of_account += 1;
       user.markModified("no_of_account");
-      user.accounts.push(req.approved.account.id);
+      user.accounts.push(req.approved.account_id);
       user.markModified("accounts");
       //add notification to user
-      user.notification.push({
+      user.notifications.push({
         type: "approved",
         title: "Account Approved!",
         message: `Your Account Request Has Been Approved Successfully!
         you Can Now (Deposit-Withdraw-Transfer) Money any Time you Want.`,
         data: [
           {
-            account_id: approved.account_id,
+            account_id: req.approved.account_id,
           },
         ],
       });
-      user.markModified("notification");
+      user.markModified("notifications");
 
       //save changes
-      await user.save();
-      res.status(200);
+      const updatedUser = await user.save();
+      res.status(200).json(updatedUser.id);
     } catch (error) {
       if (error.message.match(/(notification|Profile)/gi)) {
         return res.status(400).send(error.message);
@@ -88,24 +87,24 @@ const sendNotification = async (req, res) => {
   if (req.declined) {
     try {
       //create a notification for declined request
-      const user = await User.findById(req.user.id);
+      const user = await User.findById(req.declined.client_id);
       //add notification to user
-      user.notification.push({
+      user.notifications.push({
         type: "declined",
         title: "Account Declined!",
         message: `We Are Sorry! Your Account Request Has Been Declined!
         If You Want More Details, Please Do Not Hesitate To Contact Us For More Information.`,
         data: [
           {
-            initial_balance: declined.initial_balance,
+            initial_balance: req.declined.initial_balance,
           },
         ],
       });
-      user.markModified("notification");
+      user.markModified("notifications");
 
       //save changes
-      await user.save();
-      res.status(200);
+      const updatedUser = await user.save();
+      return res.status(200).json(updatedUser.id);
     } catch (error) {
       if (error.message.match(/(notification)/gi)) {
         return res.status(400).send(error.message);
@@ -115,17 +114,17 @@ const sendNotification = async (req, res) => {
   }
 
   //case of balance transfer
-  if (req.transferd) {
+  if (req.transfered) {
     try {
       //create a notification for transfered balance
       const ReceivingUser = await User.findById(
         req.transfered.updatedReceivingAccount.client_id
       );
-      //add notification to user
-      ReceivingUser.notification.push({
+      //add notification to ReceivingUser
+      ReceivingUser.notifications.push({
         type: "transfered-in",
         title: "Received Balance!",
-        message: `You Have Received New Balance Successfull!`,
+        message: `You Have Received New Balance Successfully!`,
         data: [
           {
             transfered_Amount: req.transfered.balanceTransfered,
@@ -133,7 +132,7 @@ const sendNotification = async (req, res) => {
           },
         ],
       });
-      ReceivingUser.markModified("notification");
+      ReceivingUser.markModified("notifications");
 
       //save changes
       await ReceivingUser.save();

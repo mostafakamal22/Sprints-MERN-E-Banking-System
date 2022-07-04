@@ -34,7 +34,7 @@ const getOneUser = async (req, res) => {
       postal: user.zip_code,
       phone: user.phone,
       accounts: user.accounts,
-      notifications: user.notification,
+      notifications: user.notifications,
     });
   } catch (error) {
     if (!user) return res.status(404).send("user Not Found!");
@@ -137,7 +137,7 @@ const updateUser = async (req, res) => {
       postal: updatedUser.zip_code,
       phone: updatedUser.phone,
       accounts: updatedUser.accounts,
-      notifications: updatedUser.notification,
+      notifications: updatedUser.notifications,
     });
   } catch (error) {
     if (error.message.match(/(email|password|name|postal|phone|addresee)/gi))

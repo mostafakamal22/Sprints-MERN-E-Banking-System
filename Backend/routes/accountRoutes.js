@@ -25,10 +25,11 @@ const {
 const {
   sendNotification,
 } = require("../middlewares/notificationMiddleware/sendNotificationMiddleware");
+const {
+  authAdminProtect,
+} = require("../middlewares/adminMiddlewares/authAdminsMiddleware");
 
-router
-  .route("/create")
-  .post(authUserProtect, checkPassword, createAccount, sendNotification);
+router.route("/create").post(authAdminProtect, createAccount, sendNotification);
 
 router
   .route("/:id")

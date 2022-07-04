@@ -1,13 +1,13 @@
 const Account = require("../../models/accountModel");
 
 //check account balance is above requested (transfer or withdraw) money
-//@usedCase:- when user updating his account balance (tranfer)
+//@usedCase:- when user updating his account balance (tranfer or withdraw)
 const checkBalance = async (req, res, next) => {
   let requestedBalance;
   let accountId;
 
   //check for empty body request
-  if (!req.body.withdrawAmount || !req.body.balanceTransfered) {
+  if (!req.body.withdrawAmount && !req.body.balanceTransfered) {
     return res.status(400).send("empty body request");
   }
 
@@ -18,7 +18,7 @@ const checkBalance = async (req, res, next) => {
   }
 
   //for withdraw requests
-  if (req.body.balanceTransfered) {
+  if (req.body.withdrawAmount) {
     requestedBalance = req.body.withdrawAmount;
     accountId = req.params.id;
   }
