@@ -19,6 +19,7 @@ import AdminDashboard from "./components/admin/AdminDashboard";
 import AdminProfile from "./components/profile/AdminProfile";
 import UpdateAdmin from "./components/forms/adminForms/UpdateAdmin";
 import { NotificationOverView } from "./components/profile/NotificationOverView";
+import { Notification } from "./components/profile/Notification";
 
 function App() {
   //Detect user
@@ -52,6 +53,7 @@ function App() {
             path="/notifications"
             element={<NotificationOverView />}
           />
+          <Route exact path="/notifications/:id" element={<Notification />} />
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
       )}
