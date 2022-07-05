@@ -32,6 +32,7 @@ export default function Home() {
         Logout
       </button>
       {user && <Link to={`/profile/${user.id}`}>Go to profile</Link>}
+      {user && <Link to={`/notifications`}>See Notification</Link>}
     </div>
   );
 }
