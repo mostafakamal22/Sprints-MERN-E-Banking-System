@@ -21,6 +21,7 @@ import UpdateAdmin from "./components/forms/adminForms/UpdateAdmin";
 import { NotificationOverView } from "./components/profile/NotificationOverView";
 import { Notification } from "./components/profile/Notification";
 import { ChooseAccount } from "./components/account/ChooseAccount";
+import { Account } from "./components/account/Account";
 
 function App() {
   //Detect user
@@ -56,6 +57,7 @@ function App() {
           />
           <Route exact path="/notifications/:id" element={<Notification />} />
           <Route exact path="/choose-account" element={<ChooseAccount />} />
+          <Route exact path="/account/:id" element={<Account />} />
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
       )}
