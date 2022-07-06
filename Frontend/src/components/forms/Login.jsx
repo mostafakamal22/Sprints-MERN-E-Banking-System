@@ -20,7 +20,7 @@ export default function Login() {
   const dispatch = useDispatch();
 
   const { user, isError, isSuccess, isLoading, message } = useSelector(
-    (state) => state.auth
+    (state) => state.userAuth
   );
 
   useEffect(() => {

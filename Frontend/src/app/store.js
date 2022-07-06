@@ -27,8 +27,8 @@ const persistConfig = {
 };
 
 const appReducer = combineReducers({
-  auth: authReducer,
-  data: userReducer,
+  userAuth: authReducer,
+  userData: userReducer,
   adminAuth: adminAuthReducer,
   ownerData: ownerReducer,
   usersData: usersReducer,

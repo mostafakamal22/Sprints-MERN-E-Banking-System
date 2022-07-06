@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getUser } from "../User/userSlice";
 
 export default function UseDetectUser() {
-  const { user } = useSelector((state) => state.auth);
+  const { user } = useSelector((state) => state.userAuth);
   const dispatch = useDispatch();
 
   useEffect(() => {

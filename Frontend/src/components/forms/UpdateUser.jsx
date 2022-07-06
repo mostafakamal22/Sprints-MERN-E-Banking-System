@@ -7,9 +7,9 @@ import MessagesContainer from "../shared/MessagesContainer";
 
 export default function UpdateUser() {
   const dispatch = useDispatch();
-  const { user } = useSelector((state) => state.auth);
+  const { user } = useSelector((state) => state.userAuth);
   const { info, isError, isSuccess, isLoading, message } = useSelector(
-    (state) => state.data
+    (state) => state.userData
   );
 
   const [fromInputs, setFromInputs] = useState({

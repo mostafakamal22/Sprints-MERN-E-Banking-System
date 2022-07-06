@@ -4,7 +4,7 @@ import ProfileInfo from "../components/profile/ProfileInfo";
 import ProfileSummery from "../components/profile/ProfileSummery";
 
 export default function ProfilePage() {
-  const { info } = useSelector((state) => state.data);
+  const { info } = useSelector((state) => state.userData);
 
   return (
     <div className="bg-gray-200 mx-auto py-10 px-5">

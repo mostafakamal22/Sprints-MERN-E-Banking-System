@@ -11,7 +11,9 @@ export const Notification = () => {
   //get notification id from pathname
   const notificationId = location.pathname.split("/").at(-1);
   //Get Notifications from state
-  const notifications = useSelector((state) => state.data.info.notifications);
+  const notifications = useSelector(
+    (state) => state.userData.info.notifications
+  );
 
   let notification;
 

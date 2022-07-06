@@ -6,7 +6,9 @@ import moment from "moment";
 
 export const NotificationOverView = () => {
   //Get Notifications from state
-  const notifications = useSelector((state) => state.data.info.notifications);
+  const notifications = useSelector(
+    (state) => state.userData.info.notifications
+  );
 
   return (
     <div className="h-screen grid place-items-center my-8">

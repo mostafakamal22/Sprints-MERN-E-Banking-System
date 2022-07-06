@@ -1,13 +1,14 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
+import { resetAccountStatus } from "../features/Account/AccountSlice";
 import { logout, resetAuthStatus } from "../features/Auth/authSlice";
 import { resetUserStatus, userLogout } from "../features/User/userSlice";
 
 export default function Home() {
   const naviagte = useNavigate();
   const dispatch = useDispatch();
-  const { user } = useSelector((state) => state.auth);
+  const { user } = useSelector((state) => state.userAuth);
 
   //clean up user status on unmount
   useEffect(() => {
@@ -23,6 +24,7 @@ export default function Home() {
     dispatch(userLogout());
     dispatch(resetUserStatus());
     dispatch(resetAuthStatus());
+    dispatch(resetAccountStatus());
     naviagte("/login");
   };
   return (
@@ -33,6 +35,7 @@ export default function Home() {
       </button>
       {user && <Link to={`/profile/${user.id}`}>Go to profile</Link>}
       {user && <Link to={`/notifications`}>See Notification</Link>}
+      {user && <Link to={`/choose-account`}>Go to Account</Link>}
     </div>
   );
 }
