@@ -1,6 +1,7 @@
 import React from "react";
 import { useEffect } from "react";
 import { BiCoinStack, BiMoney, BiTransfer } from "react-icons/bi";
+import { RiFundsBoxFill, RiRefund2Line } from "react-icons/ri";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useLocation } from "react-router-dom";
 import { getAccount } from "../../features/Account/AccountSlice";
@@ -49,7 +50,6 @@ export const Account = () => {
     );
   }
 
-  console.log(account);
   return (
     <div className="flex flex-col min-h-[200px] p-4 md:p-10 m-4 md:m-10 shadow bg-gray-200 rounded text-gray-800 text-center font-semibold">
       <div className="min-h-[150px] flex items-center justify-center flex-wrap gap-2 bg-blue-300 p-4 border-2 border-black rounded shadow my-4">
@@ -86,6 +86,23 @@ export const Account = () => {
         >
           deposit
           <BiCoinStack className="mb-[-4px] ml-2" size={20} />
+        </Link>
+      </div>
+
+      <div className="min-h-[150px] my-4 flex items-center justify-center flex-wrap gap-2 bg-blue-300 p-4 border-2 border-black rounded shadow">
+        <Link
+          to={`/account/in/${account._id}`}
+          className="basis-full md:basis-[45%] flex justify-center items-center p-4 bg-gray-500 text-white rounded shadow hover:underline"
+        >
+          Incoming Transactions
+          <RiRefund2Line className="mb-[-4px] ml-2" size={20} />
+        </Link>
+        <Link
+          to={`/account/out/${account._id}`}
+          className="basis-full md:basis-[45%] flex justify-center items-center p-4 bg-green-900 text-white rounded shadow hover:underline"
+        >
+          Outgoing Transactions
+          <RiFundsBoxFill className="mb-[-4px] ml-2" size={20} />
         </Link>
       </div>
     </div>

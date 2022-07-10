@@ -22,6 +22,8 @@ import { NotificationOverView } from "./components/profile/NotificationOverView"
 import { Notification } from "./components/profile/Notification";
 import { ChooseAccount } from "./components/account/ChooseAccount";
 import { Account } from "./components/account/Account";
+import { IncomingTransactions } from "./components/account/IncomingTransactions";
+import { OutgoingTransactions } from "./components/account/OutgoingTransactions";
 
 function App() {
   //Detect user
@@ -58,6 +60,16 @@ function App() {
           <Route exact path="/notifications/:id" element={<Notification />} />
           <Route exact path="/choose-account" element={<ChooseAccount />} />
           <Route exact path="/account/:id" element={<Account />} />
+          <Route
+            exact
+            path="/account/in/:id"
+            element={<IncomingTransactions />}
+          />
+          <Route
+            exact
+            path="/account/out/:id"
+            element={<OutgoingTransactions />}
+          />
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
       )}
