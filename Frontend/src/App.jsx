@@ -24,6 +24,7 @@ import { ChooseAccount } from "./components/account/ChooseAccount";
 import { Account } from "./components/account/Account";
 import { IncomingTransactions } from "./components/account/IncomingTransactions";
 import { OutgoingTransactions } from "./components/account/OutgoingTransactions";
+import { PaymentMethods } from "./components/payment/PaymentMethods";
 
 function App() {
   //Detect user
@@ -69,6 +70,11 @@ function App() {
             exact
             path="/account/out/:id"
             element={<OutgoingTransactions />}
+          />
+          <Route
+            exact
+            path="/account/withdraw/:id"
+            element={<PaymentMethods />}
           />
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
