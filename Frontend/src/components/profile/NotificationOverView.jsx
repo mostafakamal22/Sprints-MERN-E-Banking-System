@@ -40,36 +40,39 @@ export const NotificationOverView = () => {
         {/* display all notifications */}
         {notifications &&
           notifications.length > 0 &&
-          notifications.map((notification) => (
-            <div
-              className={`mt-2 px-4 sm:px-6 py-4  rounded-lg shadow w-full select-none
+          notifications
+            .slice(0)
+            .reverse()
+            .map((notification) => (
+              <div
+                className={`mt-2 px-4 sm:px-6 py-4  rounded-lg shadow w-full select-none
               hover:bg-gray-500 
                 ${notification.isSeen && "bg-white"}
                 ${!notification.isSeen && "bg-gray-300"}
               `}
-              key={notification._id}
-            >
-              <Link
-                to={`/notifications/${notification._id}`}
-                className=" inline-flex items-center justify-between w-full"
+                key={notification._id}
               >
-                <div className="inline-flex items-center">
-                  <img
-                    src="https://cdn-icons-png.flaticon.com/512/893/893257.png"
-                    alt="Messages Icon"
-                    className="w-6 h-6 mr-3"
-                  ></img>
-                  <h3 className="font-bold text-base text-gray-800">
-                    {notification.title}
-                  </h3>
-                </div>
-                <p className="text-xs font-semibold text-blue-900">
-                  {moment(notification.createdAt).fromNow()}
-                </p>
-              </Link>
-              <p className="mt-1 text-sm">You have a new notification</p>
-            </div>
-          ))}
+                <Link
+                  to={`/notifications/${notification._id}`}
+                  className=" inline-flex items-center justify-between w-full"
+                >
+                  <div className="inline-flex items-center">
+                    <img
+                      src="https://cdn-icons-png.flaticon.com/512/893/893257.png"
+                      alt="Messages Icon"
+                      className="w-6 h-6 mr-3"
+                    ></img>
+                    <h3 className="font-bold text-base text-gray-800">
+                      {notification.title}
+                    </h3>
+                  </div>
+                  <p className="text-xs font-semibold text-blue-900">
+                    {moment(notification.createdAt).fromNow()}
+                  </p>
+                </Link>
+                <p className="mt-1 text-sm">You have a new notification</p>
+              </div>
+            ))}
       </div>
     </div>
   );
