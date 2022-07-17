@@ -21,12 +21,21 @@ const {
 const {
   sendNotification,
 } = require("../middlewares/notificationMiddleware/sendNotificationMiddleware");
+const {
+  checkBalance,
+} = require("../middlewares/accountMiddlewares/checkBalance");
 
 router.route("/").get(authAdminProtect, getAccountRequests);
 
 router
   .route("/create")
-  .post(authUserProtect, checkPassword, createAccountRequest, sendNotification);
+  .post(
+    authUserProtect,
+    checkPassword,
+    checkBalance,
+    createAccountRequest,
+    sendNotification
+  );
 
 router
   .route("/:id")

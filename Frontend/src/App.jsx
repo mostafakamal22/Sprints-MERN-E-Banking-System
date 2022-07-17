@@ -27,6 +27,7 @@ import { OutgoingTransactions } from "./components/account/OutgoingTransactions"
 import { Withdraw } from "./components/account/Withdraw";
 import { Deposit } from "./components/account/Deposit";
 import { Transfer } from "./components/account/Transfer";
+import { AccountRequest } from "./components/forms/AccountRequest";
 
 function App() {
   //Detect user
@@ -62,6 +63,7 @@ function App() {
           />
           <Route exact path="/notifications/:id" element={<Notification />} />
           <Route exact path="/choose-account" element={<ChooseAccount />} />
+          <Route exact path="/account-request" element={<AccountRequest />} />
           <Route exact path="/account/:id" element={<Account />} />
           <Route
             exact

@@ -34,9 +34,26 @@ export default function Home() {
       <button className="bg-red-800 text-white" onClick={handleLogout}>
         Logout
       </button>
-      {user && <Link to={`/profile/${user.id}`}>Go to profile</Link>}
-      {user && <Link to={`/notifications`}>See Notification</Link>}
-      {user && <Link to={`/choose-account`}>Go to Account</Link>}
+      {user && (
+        <Link className="block" to={`/profile/${user.id}`}>
+          Go to profile
+        </Link>
+      )}
+      {user && (
+        <Link className="block" to={`/notifications`}>
+          See Notification
+        </Link>
+      )}
+      {user && (
+        <Link className="block" to={`/choose-account`}>
+          Go to Account
+        </Link>
+      )}
+      {user && (
+        <Link className="block" to={`/account-request`}>
+          Request Account
+        </Link>
+      )}
     </div>
   );
 }
