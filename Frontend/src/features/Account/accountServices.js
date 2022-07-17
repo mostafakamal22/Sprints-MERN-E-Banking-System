@@ -16,8 +16,8 @@ const getAccount = async (payload) => {
 
 //Transfer Balance
 const transfer = async (payload) => {
-  const res = await axios.delete(
-    API_URL + `${payload.from}/` + payload.to,
+  const res = await axios.put(
+    API_URL + "/transfer/" + `${payload.from}/` + payload.to,
     payload,
     {
       headers: {

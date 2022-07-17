@@ -64,9 +64,9 @@ const transfer = async (req, res, next) => {
 
     //update both users' accounts with new tranfer values
     // 1- balance
-    sendingAccount.balance -= balanceTransfered;
+    sendingAccount.balance -= +balanceTransfered;
     sendingAccount.markModified("balance");
-    receivingAccount.balance += balanceTransfered;
+    receivingAccount.balance += +balanceTransfered;
     receivingAccount.markModified("balance");
     // 2- transfer log >> out (sending user)
     sendingAccount.out.push({
@@ -139,7 +139,7 @@ const withdraw = async (req, res) => {
     const account = await Account.findById(req.params.id);
 
     //update  user's balance with new deposit value
-    account.balance -= withdrawAmount;
+    account.balance -= +withdrawAmount;
     account.markModified("balance");
 
     //Save Deposit operation

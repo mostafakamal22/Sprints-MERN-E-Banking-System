@@ -63,7 +63,7 @@ export const Account = () => {
 
         <div className="basis-full md:basis-[45%] text-center">
           <Link
-            to={`/account/tranfer/${account._id}`}
+            to={`/account/transfer/${account._id}`}
             className="flex justify-center items-center p-4 bg-blue-900 text-white rounded shadow hover:underline"
           >
             Transfer

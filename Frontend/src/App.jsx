@@ -26,6 +26,7 @@ import { IncomingTransactions } from "./components/account/IncomingTransactions"
 import { OutgoingTransactions } from "./components/account/OutgoingTransactions";
 import { Withdraw } from "./components/account/Withdraw";
 import { Deposit } from "./components/account/Deposit";
+import { Transfer } from "./components/account/Transfer";
 
 function App() {
   //Detect user
@@ -74,6 +75,7 @@ function App() {
           />
           <Route exact path="/account/withdraw/:id" element={<Withdraw />} />
           <Route exact path="/account/deposit/:id" element={<Deposit />} />
+          <Route exact path="/account/transfer/:id" element={<Transfer />} />
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
       )}
