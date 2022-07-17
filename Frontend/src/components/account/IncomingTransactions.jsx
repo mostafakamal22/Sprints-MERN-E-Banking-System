@@ -18,31 +18,34 @@ export const IncomingTransactions = () => {
         {/* incase of there are transactions log */}
         {incoming &&
           incoming.length !== 0 &&
-          incoming.map((transaction) => (
-            <li
-              key={transaction._id}
-              className="min-h-[150px] my-4 flex flex-col gap-4 items-center justify-center flex-wrap  bg-blue-300 p-4 border-2 border-black rounded shadow"
-            >
-              <p>
-                Transaction Date:-
-                <span className="px-2  text-orange-600 underline underline-offset-2">
-                  {moment(transaction.createdAt).fromNow()}
-                </span>
-              </p>
-              <p>
-                Transaction From:-
-                <span className="px-2 text-blue-800 underline underline-offset-2">
-                  {transaction.from}
-                </span>
-              </p>
-              <p>
-                Transaction Amount:-
-                <span className="mx-2 p-2 text-white bg-green-500 rounded shadow">
-                  {transaction.balance_transfered}
-                </span>
-              </p>
-            </li>
-          ))}
+          incoming
+            .slice(0)
+            .reverse()
+            .map((transaction) => (
+              <li
+                key={transaction._id}
+                className="min-h-[150px] my-4 flex flex-col gap-4 items-center justify-center flex-wrap  bg-blue-300 p-4 border-2 border-black rounded shadow"
+              >
+                <p>
+                  Transaction Date:-
+                  <span className="px-2  text-orange-600 underline underline-offset-2">
+                    {moment(transaction.createdAt).fromNow()}
+                  </span>
+                </p>
+                <p>
+                  Transaction From:-
+                  <span className="px-2 text-blue-800 underline underline-offset-2">
+                    {transaction.from}
+                  </span>
+                </p>
+                <p>
+                  Transaction Amount:-
+                  <span className="mx-2 p-2 text-white bg-green-500 rounded shadow">
+                    {transaction.balance_transfered}
+                  </span>
+                </p>
+              </li>
+            ))}
 
         {/* incase of no transactions log */}
         {!incoming ||
