@@ -7,21 +7,15 @@ export default function ProfilePage() {
   const { info } = useSelector((state) => state.userData);
 
   return (
-    <div className="bg-gray-200 mx-auto py-10 px-5">
-      <div className="md:flex no-wrap md:-mx-2 ">
-        <div className="w-full max-w-[992px] mx-auto">
-          {/*profile summery */}
-          <ProfileSummery info={info} />
+    <div className="flex justify-center items-center">
+      <div className="w-full bg-gray-200 px-6 py-12 max-w-[992px] m-4 md:m-10 rounded shadow">
+        {/*profile summery */}
+        <ProfileSummery info={info} />
 
-          <div className="my-10"></div>
+        <div className="my-10"></div>
 
-          {/* Profile Info section */}
-          <ProfileInfo info={info} />
-
-          <div className="my-10"></div>
-
-          {/* Accounts section */}
-        </div>
+        {/* Profile Info section */}
+        <ProfileInfo info={info} />
       </div>
     </div>
   );
