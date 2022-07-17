@@ -83,7 +83,7 @@ export default function UpdateUser() {
   };
 
   return (
-    <div className="block p-6 m-10 rounded-lg shadow-lg bg-white max-w-3xl">
+    <div className="max-w-3xl p-6 m-10 rounded-lg shadow-lg bg-white">
       <h2 className="text-xl text-center px-2 py-4 my-4 rounded shadow bg-gray-200 border-b-2 border-blue-600">
         Update Your Info
       </h2>

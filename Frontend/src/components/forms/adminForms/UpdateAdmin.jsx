@@ -5,6 +5,7 @@ import {
   resetAdminAuthStatus,
   updateAdmin,
 } from "../../../features/Admin/Auth/adminAuthSlice";
+import { UseResetStatus } from "../../../hooks/UseResetStatus";
 import FormButton from "../../shared/FormButton";
 import MessagesContainer from "../../shared/MessagesContainer";
 
@@ -37,12 +38,16 @@ export default function UpdateAdmin() {
     }
   }, [isError, message, msg, isSuccess]);
 
-  //seperate clean up for status msg (reset status only on unmount)
-  useEffect(() => {
+  //clean up for admin status msg (on mount , unmount)
+  UseResetStatus(() => {
+    dispatch(resetAdminAuthStatus());
+  });
+
+  UseResetStatus(() => {
     return () => {
       dispatch(resetAdminAuthStatus());
     };
-  }, []);
+  });
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -65,39 +70,27 @@ export default function UpdateAdmin() {
   };
 
   return (
-    <div className="block p-6 m-10 rounded-lg shadow-lg bg-white max-w-[990px]">
+    <div className="max-w-3xl p-6 m-10 rounded-lg shadow-lg bg-white">
+      <h2 className="text-xl text-center px-2 py-4 my-4 rounded shadow bg-gray-200 border-b-2 border-blue-600">
+        Update Your Info
+      </h2>
       <form onSubmit={handleSubmit}>
         <div className="form-group mb-6">
           <label
             htmlFor="email"
-            className="form-label inline-block mb-2 text-gray-700"
+            className="w-full inline-block mb-4 p-2 text-gray-800 border-b-2 border-blue-600 rounded shadow bg-blue-200"
           >
             Email address
           </label>
           <input
             type="email"
             name="email"
-            className="form-control
-          block
-          w-full
-          px-3
-          py-1.5
-          text-base
-          font-normal
-          text-gray-700
-          bg-white bg-clip-padding
-          border border-solid border-gray-300
-          rounded
-          transition
-          ease-in-out
-          m-0
-          focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+            className="block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
             id="login-email"
             defaultValue={email}
             onChange={(e) =>
               setFormInputs({ ...formInputs, email: e.target.value })
             }
-            aria-describedby="emailHelp"
             placeholder="Enter your email"
             required
           />
@@ -106,32 +99,18 @@ export default function UpdateAdmin() {
         <div className="form-group mb-6">
           <label
             htmlFor="oldPassword"
-            className="form-label inline-block mb-2 text-gray-700"
+            className="w-full inline-block mb-4 p-2 text-gray-800 border-b-2 border-blue-600 rounded shadow bg-blue-200"
           >
             Old Password
-            <br />
-            <span className="text-blue-700">
-              - if you <span className="underline font-bold">DO NOT</span> want
-              to change password, just type it for all password field.
-            </span>
           </label>
+          <span className="block text-blue-700 mb-2">
+            - if you <span className="underline font-bold">DO NOT</span> want to
+            change password, just type it for all password field.
+          </span>
           <input
             type="password"
             name="oldPassword"
-            className="form-control block
-          w-full
-          px-3
-          py-1.5
-          text-base
-          font-normal
-          text-gray-700
-          bg-white bg-clip-padding
-          border border-solid border-gray-300
-          rounded
-          transition
-          ease-in-out
-          m-0
-          focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+            className="block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
             defaultValue={oldPassword}
             onChange={(e) =>
               setFormInputs({ ...formInputs, oldPassword: e.target.value })
@@ -144,27 +123,14 @@ export default function UpdateAdmin() {
         <div className="form-group mb-6">
           <label
             htmlFor="password"
-            className="form-label inline-block mb-2 text-gray-700"
+            className="w-full inline-block mb-4 p-2 text-gray-800 border-b-2 border-blue-600 rounded shadow bg-blue-200"
           >
             New Password
           </label>
           <input
             type="password"
             name="password"
-            className="form-control block
-          w-full
-          px-3
-          py-1.5
-          text-base
-          font-normal
-          text-gray-700
-          bg-white bg-clip-padding
-          border border-solid border-gray-300
-          rounded
-          transition
-          ease-in-out
-          m-0
-          focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+            className="block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
             defaultValue={password}
             onChange={(e) =>
               setFormInputs({ ...formInputs, password: e.target.value })
@@ -177,27 +143,14 @@ export default function UpdateAdmin() {
         <div className="form-group mb-6">
           <label
             htmlFor="repeatedPassword"
-            className="form-label inline-block mb-2 text-gray-700"
+            className="w-full inline-block mb-4 p-2 text-gray-800 border-b-2 border-blue-600 rounded shadow bg-blue-200"
           >
             Repeat New Password
           </label>
           <input
             type="password"
             name="repeatedPassword"
-            className="form-control block
-          w-full
-          px-3
-          py-1.5
-          text-base
-          font-normal
-          text-gray-700
-          bg-white bg-clip-padding
-          border border-solid border-gray-300
-          rounded
-          transition
-          ease-in-out
-          m-0
-          focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+            className="block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
             defaultValue={repeatedPassword}
             onChange={(e) =>
               setFormInputs({
