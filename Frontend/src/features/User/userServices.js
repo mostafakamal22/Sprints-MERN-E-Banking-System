@@ -2,6 +2,8 @@ import axios from "axios";
 
 const API_URL = "http://localhost:5000/api/users/";
 
+const API_URL_REQUEST = "http://localhost:5000/api/request/create";
+
 //Get User
 const getUser = async (userData) => {
   const res = await axios.get(API_URL + userData.id, {
@@ -28,6 +30,19 @@ const updateUser = async (userData) => {
   return data;
 };
 
+//Create Account Request
+const accountRequest = async (userData) => {
+  const res = await axios.post(API_URL_REQUEST, userData, {
+    headers: {
+      authorization: `Bearer ${userData.token}`,
+    },
+  });
+
+  const data = res.data;
+
+  return data;
+};
+
 //User Logout
 const userLogout = () => {
   return;
@@ -37,6 +52,7 @@ const userServices = {
   getUser,
   updateUser,
   userLogout,
+  accountRequest,
 };
 
 export default userServices;
