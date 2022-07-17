@@ -7,6 +7,7 @@ import {
   resetUsersStatus,
   updateUserStatus,
 } from "../../features/Admin/UsersActions/usersSlice";
+import { UseResetStatus } from "../../hooks/UseResetStatus";
 import FormButton from "../shared/FormButton";
 import { MainSpinner } from "../shared/MainSpinner";
 import MessagesContainer from "../shared/MessagesContainer";
@@ -81,27 +82,28 @@ export const UsersListControl = ({ usersList }) => {
     }
   }, [isError, message, isSuccess, msg]);
 
-  //clean up usersList status
-  useEffect(() => {
+  //clean up for usersList status (on mount , unmount)
+  UseResetStatus(() => {
+    dispatch(resetUsersStatus());
+  });
+
+  UseResetStatus(() => {
     return () => {
       dispatch(resetUsersStatus());
     };
-  }, []);
+  });
 
   return (
-    <div className="bg-white p-5">
-      <h3 className="text-lg font-bold text-blue-900 my-5">
-        {" "}
-        Users List ({filteredUsers && filteredUsers.length}){" "}
+    <div className="max-w-6xl px-5 py-10 mx-4 md:mx-15 bg-white">
+      <h3 className="text-lg font-bold text-gray-900 my-5">
+        Users List ({filteredUsers && filteredUsers.length})
       </h3>
 
       {/*search users with name*/}
-      <div className="flex justify-center items-center flex-wrap md:flex-nowrap gap-4 mb-6 p-4 bg-blue-400 rounded-md">
+      <div className="flex justify-center items-center flex-wrap md:flex-nowrap gap-4 mb-6 p-4 bg-blue-200 rounded-md">
         <label
           htmlFor="searchQuery"
-          className="block w-full
-          md:w-auto text-black
-          "
+          className="block w-full md:w-auto text-black"
         >
           Search Users By Name:-
         </label>
@@ -109,21 +111,7 @@ export const UsersListControl = ({ usersList }) => {
         <input
           type="text"
           name="searchQuery"
-          className="
-          block
-          w-full
-          md:w-auto
-          px-3
-          py-1.5
-          text-base
-          font-normal
-          text-gray-700
-          bg-white bg-clip-padding
-          border border-solid border-gray-500
-          rounded
-          transition
-          ease-in-out
-          m-0
+          className="block w-full md:w-auto px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-500 rounded transition ease-in-out m-0
           focus:text-gray-700 focus:bg-white focus:border-black focus:shadow-md focus:outline-none"
           placeholder="search admin"
           defaultValue={searchQuery}
@@ -136,71 +124,126 @@ export const UsersListControl = ({ usersList }) => {
         <MessagesContainer msg={msg} isSuccess={isSuccess} isError={isError} />
       )}
 
-      <ul className="flex flex-col justify-center">
-        <li className="flex justify-between items-center flex-wrap text-black border p-2">
-          <span>User Name</span>
-          <span>User Email</span>
-          <span>User Status</span>
-          <span>No. Of Accounts</span>
-          <span>Remove User</span>
-          <span>Update Status</span>
-        </li>
+      <div className="overflow-x-auto relative shadow-md sm:rounded-lg">
+        <table className="w-full text-sm text-left text-gray-500 border-y-4 border-blue-600 rounded">
+          <thead className="text-xs text-gray-700 uppercase bg-gray-50">
+            <tr>
+              <th scope="col" className="py-3 px-6 text-center border-x-2">
+                User Name
+              </th>
+              <th scope="col" className="py-3 px-6 text-center border-x-2">
+                User Email
+              </th>
+              <th scope="col" className="py-3 px-6 text-center border-x-2">
+                User Status
+              </th>
+              <th scope="col" className="py-3 px-6 text-center border-x-2">
+                No. Of Accounts
+              </th>
 
-        {/* Show spinner when Loading State is true */}
-        {isLoading && <MainSpinner />}
+              <th scope="col" className="py-3 px-6 text-center border-x-2">
+                Remove User
+              </th>
 
-        {/* if there no search query >>> just display adminsList which == filteredAdmins */}
-        {filteredUsers &&
-          !isLoading &&
-          filteredUsers.map((user) => (
-            <li
-              key={user._id}
-              className="flex justify-between items-center flex-wrap border p-1"
-            >
-              {/*user Name*/}
-              <span> {user.user_name} </span>
+              <th scope="col" className="py-3 px-6 text-center border-x-2">
+                Update Status
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            {/* if there no search query >>> just display usersList === filteredUsers  */}
+            {filteredUsers &&
+              !isLoading &&
+              filteredUsers.map((user, index) => (
+                <tr
+                  key={user._id}
+                  className={`${
+                    index % 2 === 0 ? "bg-white" : "bg-gray-100"
+                  } border-b `}
+                >
+                  {/*user Name*/}
+                  <th
+                    scope="row"
+                    className="py-4 px-6 font-medium text-gray-900 whitespace-nowrap  border-x-2 text-center"
+                  >
+                    {user.user_name}
+                  </th>
 
-              {/*user Email*/}
-              <span className="underline"> {user.email} </span>
+                  {/*user Email*/}
+                  <th
+                    scope="row"
+                    className="py-4 px-6 font-medium text-gray-900 whitespace-nowrap underline  border-x-2 text-center"
+                  >
+                    {user.email}
+                  </th>
 
-              {/*User Status*/}
-              <span
-                className={`
-                  text-white p-1 rounded ${
-                    user.user_status === 0 && "bg-green-600"
-                  }
-                  ${user.user_status === 1 && "bg-gray-600"}
-                  ${user.user_status === 2 && "bg-yellow-600"}
-                `}
-              >
-                {user.user_status === 0 && "active"}
-                {user.user_status === 1 && "unactive"}
-                {user.user_status === 2 && "suspended"}
-              </span>
+                  {/*User Status*/}
+                  <th
+                    scope="row"
+                    className="py-4 px-6 font-medium text-gray-900 whitespace-nowrap border-x-2 text-center "
+                  >
+                    <span
+                      className={`flex justify-center items-center w-4 h-4 p-9 mx-auto
+                    text-white rounded-[50%] shadow-sm ${
+                      user.user_status === 0 && "bg-green-600"
+                    }
+                    ${user.user_status === 1 && "bg-gray-600"}
+                    ${user.user_status === 2 && "bg-yellow-600"}`}
+                    >
+                      {user.user_status === 0 && "Active"}
+                      {user.user_status === 1 && "Unactive"}
+                      {user.user_status === 2 && "Suspended"}
+                    </span>
+                  </th>
 
-              {/*User No. Of Accounts*/}
-              <span className="flex justify-center items-center w-[30px] h-[30px] rounded-full bg-blue-600 text-white ">
-                {" "}
-                {user.no_of_account}{" "}
-              </span>
+                  {/*User No. Of Accounts*/}
+                  <th
+                    scope="row"
+                    className="py-4 px-6 font-medium text-gray-900 whitespace-nowrap  border-x-2 text-center"
+                  >
+                    <span
+                      className="flex justify-center items-center w-4 h-4 p-6 mx-auto
+                    text-white rounded-[50%] shadow-sm bg-blue-600"
+                    >
+                      {user.no_of_account}
+                    </span>
+                  </th>
 
-              {/* Remove User */}
-              <form onSubmit={(event) => handleRemoving(event, user._id)}>
-                <FormButton text={{ default: "Remove" }} />
-              </form>
+                  {/* Remove User */}
+                  <th
+                    scope="row"
+                    className="py-4 px-6 font-medium text-gray-900 whitespace-nowrap  border-x-2 text-center"
+                  >
+                    <form onSubmit={(event) => handleRemoving(event, user._id)}>
+                      <FormButton text={{ default: "Remove" }} />
+                    </form>
+                  </th>
 
-              {/* Update User Status */}
-              <UpdateUserStatus user={user} handleUpdating={handleUpdating} />
-            </li>
-          ))}
+                  {/* Update User Status */}
+                  <th
+                    scope="row"
+                    className="py-4 px-6 font-medium text-gray-900 whitespace-nowrap  border-x-2 text-center"
+                  >
+                    <UpdateUserStatus
+                      user={user}
+                      handleUpdating={handleUpdating}
+                    />
+                  </th>
+                </tr>
+              ))}
+          </tbody>
+        </table>
+      </div>
 
-        {/* if there is search query no user matches >>> just display msg  */}
-        {searchQuery && filteredUsers.length === 0 && !isLoading && (
-          <li className="bg-red-500 text-white my-4 py-4 px-2 rounded">
-            There No Search Result!
-          </li>
-        )}
-      </ul>
+      {/* Show spinner when Loading State is true */}
+      {isLoading && <MainSpinner />}
+
+      {/* if there is search query no user matches >>> just display msg  */}
+      {searchQuery && filteredUsers.length === 0 && !isLoading && (
+        <div className="bg-red-500 text-white my-4 py-4 px-2 rounded">
+          There No Search Result!
+        </div>
+      )}
     </div>
   );
 };

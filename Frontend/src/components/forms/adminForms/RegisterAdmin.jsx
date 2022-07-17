@@ -4,6 +4,7 @@ import {
   adminRegister,
   resetOwnerStatus,
 } from "../../../features/Admin/Owener/ownerSlice";
+import { UseResetStatus } from "../../../hooks/UseResetStatus";
 import FormButton from "../../shared/FormButton";
 import MessagesContainer from "../../shared/MessagesContainer";
 
@@ -37,12 +38,16 @@ export const RegisterAdmin = () => {
     }
   }, [isError, message, isSuccess, msg]);
 
-  //clean up status
-  useEffect(() => {
+  //clean up for owner status (on mount , unmount)
+  UseResetStatus(() => {
+    dispatch(resetOwnerStatus());
+  });
+
+  UseResetStatus(() => {
     return () => {
       dispatch(resetOwnerStatus());
     };
-  }, []);
+  });
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -66,14 +71,14 @@ export const RegisterAdmin = () => {
   };
 
   return (
-    <div className="block p-6 rounded-lg shadow-lg bg-white max-w-md mx-auto">
+    <div className="p-6 rounded shadow bg-white max-w-2xl mx-auto">
       <form onSubmit={handleSubmit}>
         <div className="form-group mb-6">
           <label
             htmlFor="name"
-            className="form-label inline-block mb-2 text-gray-700"
+            className="w-full inline-block mb-4 p-2 text-gray-800 border-b-2 border-blue-600 rounded shadow bg-blue-200"
           >
-            Admin name
+            New Admin Admin name
           </label>
           <input
             type="name"
@@ -105,28 +110,14 @@ export const RegisterAdmin = () => {
         <div className="form-group mb-6">
           <label
             htmlFor="email"
-            className="form-label inline-block mb-2 text-gray-700"
+            className="w-full inline-block mb-4 p-2 text-gray-800 border-b-2 border-blue-600 rounded shadow bg-blue-200"
           >
             New Admin Email address
           </label>
           <input
             type="email"
             name="email"
-            className="form-control
-            block
-            w-full
-            px-3
-            py-1.5
-            text-base
-            font-normal
-            text-gray-700
-            bg-white bg-clip-padding
-            border border-solid border-gray-300
-            rounded
-            transition
-            ease-in-out
-            m-0
-            focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+            className="block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
             defaultValue={email}
             onChange={(e) =>
               setFormInputs({ ...formInputs, email: e.target.value })
@@ -140,27 +131,14 @@ export const RegisterAdmin = () => {
         <div className="form-group mb-6">
           <label
             htmlFor="password"
-            className="form-label inline-block mb-2 text-gray-700"
+            className="w-full inline-block mb-4 p-2 text-gray-800 border-b-2 border-blue-600 rounded shadow bg-blue-200"
           >
-            Password
+            New Admin Password
           </label>
           <input
             type="password"
             name="password"
-            className="form-control block
-            w-full
-            px-3
-            py-1.5
-            text-base
-            font-normal
-            text-gray-700
-            bg-white bg-clip-padding
-            border border-solid border-gray-300
-            rounded
-            transition
-            ease-in-out
-            m-0
-            focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+            className="block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
             id="login-Password"
             defaultValue={password}
             onChange={(e) =>
@@ -174,27 +152,14 @@ export const RegisterAdmin = () => {
         <div className="form-group mb-6">
           <label
             htmlFor="repeated-password"
-            className="form-label inline-block mb-2 text-gray-700"
+            className="w-full inline-block mb-4 p-2 text-gray-800 border-b-2 border-blue-600 rounded shadow bg-blue-200"
           >
             Repeat Password
           </label>
           <input
             type="password"
             name="repeated-password"
-            className="form-control block
-            w-full
-            px-3
-            py-1.5
-            text-base
-            font-normal
-            text-gray-700
-            bg-white bg-clip-padding
-            border border-solid border-gray-300
-            rounded
-            transition
-            ease-in-out
-            m-0
-            focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+            className="block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
             id="login-Password"
             defaultValue={repeatedPassword}
             onChange={(e) =>
@@ -207,14 +172,15 @@ export const RegisterAdmin = () => {
 
         <div className="form-group mb-6">
           <label
-            htmlFor="repeated-password"
-            className="form-label inline-block mb-2 mx-2 text-gray-700"
+            htmlFor="role"
+            className="w-full inline-block mb-4 p-2 text-gray-800 border-b-2 border-blue-600 rounded shadow bg-blue-200"
           >
             Choose Admin Role
           </label>
 
           <select
-            className="my-2 p-2 rounded"
+            name="role"
+            className="my-2 p-2 rounded bg-blue-600 text-white"
             defaultValue={role}
             onChange={(e) =>
               setFormInputs({ ...formInputs, role: e.target.value })
