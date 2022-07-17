@@ -2,6 +2,7 @@ import React from "react";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { resetUserStatus, updateUser } from "../../features/User/userSlice";
+import { UseResetStatus } from "../../hooks/UseResetStatus";
 import FormButton from "../shared/FormButton";
 import MessagesContainer from "../shared/MessagesContainer";
 
@@ -47,12 +48,16 @@ export default function UpdateUser() {
     }
   }, [isError, message, msg, isSuccess]);
 
-  //seperate clean up for status msg (reset status only on unmount)
-  useEffect(() => {
+  //clean up for user status msg (on mount , unmount)
+  UseResetStatus(() => {
+    dispatch(resetUserStatus());
+  });
+
+  UseResetStatus(() => {
     return () => {
       dispatch(resetUserStatus());
     };
-  }, []);
+  });
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -78,72 +83,45 @@ export default function UpdateUser() {
   };
 
   return (
-    <div className="block p-6 m-10 rounded-lg shadow-lg bg-white max-w-[990px]">
+    <div className="block p-6 m-10 rounded-lg shadow-lg bg-white max-w-3xl">
+      <h2 className="text-xl text-center px-2 py-4 my-4 rounded shadow bg-gray-200 border-b-2 border-blue-600">
+        Update Your Info
+      </h2>
       <form onSubmit={handleSubmit}>
-        <div className="form-group mb-6">
+        <div className="mb-6">
           <label
             htmlFor="email"
-            className="form-label inline-block mb-2 text-gray-700"
+            className="w-full inline-block mb-4 p-2 text-gray-800 border-b-2 border-blue-600 rounded shadow bg-blue-200"
           >
             Email address
           </label>
           <input
             type="email"
             name="email"
-            className="form-control
-        block
-        w-full
-        px-3
-        py-1.5
-        text-base
-        font-normal
-        text-gray-700
-        bg-white bg-clip-padding
-        border border-solid border-gray-300
-        rounded
-        transition
-        ease-in-out
-        m-0
-        focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-            id="login-email"
+            className="block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
             defaultValue={email}
             onChange={(e) =>
               setFromInputs({ ...fromInputs, email: e.target.value })
             }
-            aria-describedby="emailHelp"
             placeholder="Enter your email"
             required
           />
         </div>
-        <div className="form-group mb-6">
+        <div className="mb-6">
           <label
             htmlFor="oldPassword"
-            className="form-label inline-block mb-2 text-gray-700"
+            className="w-full inline-block mb-2 p-2 text-gray-800 border-b-2 border-blue-600 rounded shadow bg-blue-200"
           >
             Old Password
-            <br />
-            <span className="text-blue-700">
-              - if you <span className="underline font-bold">DO NOT</span> want
-              to change password, just type it for all password field.
-            </span>
           </label>
+          <span className="block text-blue-700 mb-2">
+            - if you <span className="underline font-bold">DO NOT</span> want to
+            change password, just type it for all password field.
+          </span>
           <input
             type="password"
             name="oldPassword"
-            className="form-control block
-        w-full
-        px-3
-        py-1.5
-        text-base
-        font-normal
-        text-gray-700
-        bg-white bg-clip-padding
-        border border-solid border-gray-300
-        rounded
-        transition
-        ease-in-out
-        m-0
-        focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+            className="block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
             defaultValue={oldPassword}
             onChange={(e) =>
               setFromInputs({ ...fromInputs, oldPassword: e.target.value })
@@ -153,30 +131,17 @@ export default function UpdateUser() {
           />
         </div>
 
-        <div className="form-group mb-6">
+        <div className="mb-6">
           <label
             htmlFor="password"
-            className="form-label inline-block mb-2 text-gray-700"
+            className="w-full inline-block mb-4 p-2 text-gray-800 border-b-2 border-blue-600 rounded shadow bg-blue-200"
           >
             New Password
           </label>
           <input
             type="password"
             name="password"
-            className="form-control block
-        w-full
-        px-3
-        py-1.5
-        text-base
-        font-normal
-        text-gray-700
-        bg-white bg-clip-padding
-        border border-solid border-gray-300
-        rounded
-        transition
-        ease-in-out
-        m-0
-        focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+            className="block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
             defaultValue={password}
             onChange={(e) =>
               setFromInputs({ ...fromInputs, password: e.target.value })
@@ -185,30 +150,17 @@ export default function UpdateUser() {
             required
           />
         </div>
-        <div className="form-group mb-6">
+        <div className="mb-6">
           <label
             htmlFor="repeatedPassword"
-            className="form-label inline-block mb-2 text-gray-700"
+            className="w-full inline-block mb-4 p-2 text-gray-800 border-b-2 border-blue-600 rounded shadow bg-blue-200"
           >
             Repeat New Password
           </label>
           <input
             type="password"
             name="repeatedPassword"
-            className="form-control block
-        w-full
-        px-3
-        py-1.5
-        text-base
-        font-normal
-        text-gray-700
-        bg-white bg-clip-padding
-        border border-solid border-gray-300
-        rounded
-        transition
-        ease-in-out
-        m-0
-        focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+            className="block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
             defaultValue={repeatedPassword}
             onChange={(e) =>
               setFromInputs({
@@ -220,30 +172,17 @@ export default function UpdateUser() {
             required
           />
         </div>
-        <div className="form-group mb-6">
+        <div className="mb-6">
           <label
             htmlFor="phone"
-            className="form-label inline-block mb-2 text-gray-700"
+            className="w-full inline-block mb-4 p-2 text-gray-800 border-b-2 border-blue-600 rounded shadow bg-blue-200"
           >
             Phone
           </label>
           <input
             type="text"
             name="phone"
-            className="form-control block
-        w-full
-        px-3
-        py-1.5
-        text-base
-        font-normal
-        text-gray-700
-        bg-white bg-clip-padding
-        border border-solid border-gray-300
-        rounded
-        transition
-        ease-in-out
-        m-0
-        focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+            className="block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
             defaultValue={"0" + phone}
             onChange={(e) =>
               setFromInputs({
@@ -255,30 +194,17 @@ export default function UpdateUser() {
             required
           />
         </div>
-        <div className="form-group mb-6">
+        <div className="mb-6">
           <label
             htmlFor="address"
-            className="form-label inline-block mb-2 text-gray-700"
+            className="w-full inline-block mb-4 p-2 text-gray-800 border-b-2 border-blue-600 rounded shadow bg-blue-200"
           >
             Full Address
           </label>
           <input
             type="text"
             name="address"
-            className="form-control block
-        w-full
-        px-3
-        py-1.5
-        text-base
-        font-normal
-        text-gray-700
-        bg-white bg-clip-padding
-        border border-solid border-gray-300
-        rounded
-        transition
-        ease-in-out
-        m-0
-        focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+            className="block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
             defaultValue={address}
             onChange={(e) =>
               setFromInputs({
@@ -290,30 +216,17 @@ export default function UpdateUser() {
             required
           />
         </div>
-        <div className="form-group mb-6">
+        <div className="mb-6">
           <label
             htmlFor="postal"
-            className="form-label inline-block mb-2 text-gray-700"
+            className="w-full inline-block mb-4 p-2 text-gray-800 border-b-2 border-blue-600 rounded shadow bg-blue-200"
           >
             Post/Zip Code
           </label>
           <input
             type="text"
             name="postal"
-            className="form-control block
-        w-full
-        px-3
-        py-1.5
-        text-base
-        font-normal
-        text-gray-700
-        bg-white bg-clip-padding
-        border border-solid border-gray-300
-        rounded
-        transition
-        ease-in-out
-        m-0
-        focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+            className="block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
             defaultValue={postal}
             onChange={(e) =>
               setFromInputs({
