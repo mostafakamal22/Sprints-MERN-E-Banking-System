@@ -65,11 +65,13 @@ export const Deposit = () => {
 
   return (
     <div className="block p-6 rounded shadow-lg bg-gray-200 max-w-2xl mx-auto">
-      <h2 className="text-xl text-center my-3"> Deposit Money </h2>
+      <h2 className="text-xl text-center px-2 py-4 my-4 rounded shadow bg-white">
+        Deposit Money
+      </h2>
       <form onSubmit={handleSubmit}>
-        <div className="flex justify-center items-center flex-wrap gap-4 my-4 rounded shadow bg-white p-5">
+        <div className="flex justify-center items-center flex-wrap gap-4 px-5 py-10 my-4 rounded shadow bg-white">
           <label
-            className="basis-full sm:basis-1/3 text-md  my-2 sm:my-0 mx-2 p-2 sm:border-r-2 border-blue-600"
+            className="basis-full sm:basis-[50%] text-md  my-2 sm:my-0 mx-2 p-2 sm:border-r-2 rounded shadow bg-blue-200 border-blue-600"
             htmlFor="depositAmount"
           >
             Enter Deposit Amount
@@ -86,7 +88,7 @@ export const Deposit = () => {
           />
 
           <label
-            className="basis-full sm:basis-1/3 text-md my-2 sm:my-0 mx-2 p-2 sm:border-r-2 border-blue-600"
+            className="basis-full sm:basis-[50%] text-md  my-2 sm:my-0 mx-2 p-2 sm:border-r-2 rounded shadow bg-blue-200 border-blue-600"
             htmlFor="password"
           >
             Type your Password

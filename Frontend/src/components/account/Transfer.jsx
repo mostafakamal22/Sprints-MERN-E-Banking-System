@@ -68,18 +68,21 @@ export const Transfer = () => {
 
   return (
     <div className="block p-6 rounded shadow-lg bg-gray-200 max-w-2xl mx-auto">
-      <h2 className="text-xl text-center my-3"> Transfer Money </h2>
+      <h2 className="text-xl text-center px-2 py-4 my-4 rounded shadow bg-white">
+        {" "}
+        Transfer Money{" "}
+      </h2>
       <form onSubmit={handleSubmit}>
-        <div className="flex justify-center items-center flex-wrap gap-4 my-4 rounded shadow bg-white p-5">
+        <div className="flex justify-center items-center flex-wrap gap-4 px-5 py-10 my-4 rounded shadow bg-white">
           <label
-            className="basis-full sm:basis-1/3 text-md  my-2 sm:my-0 mx-2 p-2 sm:border-r-2 border-blue-600"
+            className="basis-full sm:basis-[50%] text-md  my-2 sm:my-0 mx-2 p-2 sm:border-r-2 rounded shadow bg-blue-200 border-blue-600"
             htmlFor="balanceTransfered"
           >
             Enter Transfer Amount
           </label>
 
           <input
-            className="basis-full  sm:basis-1/3  px-3 py-1.5 mx-4 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out  focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+            className="basis-full  sm:basis-[15%]  px-3 py-1.5 mx-4 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out  focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
             type="number"
             name="balanceTransfered"
             defaultValue={balanceTransfered}
@@ -89,14 +92,14 @@ export const Transfer = () => {
           />
 
           <label
-            className="basis-full sm:basis-1/3 text-md  my-2 sm:my-0 mx-2 p-2 sm:border-r-2 border-blue-600"
+            className="basis-full sm:basis-1/2 text-md  my-2 sm:my-0 mx-2 p-2 sm:border-r-2 rounded shadow bg-blue-200  border-blue-600"
             htmlFor="receivingId"
           >
             Enter Receiving Account Id
           </label>
 
           <input
-            className="basis-full  sm:basis-1/3  px-3 py-1.5 mx-4 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out  focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+            className="basis-full  sm:basis-[15%]  px-3 py-1.5 mx-4 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out  focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
             type="text"
             name="balanceTransfered"
             defaultValue={receivingId}
@@ -105,14 +108,14 @@ export const Transfer = () => {
           />
 
           <label
-            className="basis-full sm:basis-1/3 text-md my-2 sm:my-0 mx-2 p-2 sm:border-r-2 border-blue-600"
+            className="basis-full sm:basis-1/2 text-md my-2 sm:my-0 mx-2 p-2 sm:border-r-2 rounded shadow bg-blue-200  border-blue-600"
             htmlFor="password"
           >
             Type your Password
           </label>
 
           <input
-            className="basis-full  sm:basis-1/3  px-3 py-1.5 mx-4 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out  focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+            className="basis-full  sm:basis-[15%]  px-3 py-1.5 mx-4 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out  focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
             type="password"
             name="password"
             defaultValue={password}
