@@ -8,13 +8,13 @@ const paymentMethods = [
   { id: "vodafoneCash", title: "Vodafone Cash" },
 ];
 
-export const PaymentMethods = () => {
+export const PaymentMethods = ({ title }) => {
   //state for payment methods
   const [method, setMethod] = useState(paymentMethods[0].title);
   return (
-    <div className="my-4 bg-white border-t border-gray-200 p-10">
+    <div className="my-4 rounded shadow bg-white p-10">
       {/* Heading */}
-      <h2 className="text-2xl font-medium text-gray-900">Payment</h2>
+      <h3 className="text-lg font-medium text-gray-900">{title}</h3>
 
       {/* Choose Method */}
       <fieldset className="mt-4">
@@ -30,6 +30,7 @@ export const PaymentMethods = () => {
                 }
                 defaultChecked={paymentMethodIdx === 0}
                 className="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-200"
+                required
               />
 
               <label

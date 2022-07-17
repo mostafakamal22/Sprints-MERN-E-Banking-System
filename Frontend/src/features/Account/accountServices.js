@@ -48,7 +48,7 @@ const deposit = async (payload) => {
 
 //Withdraw
 const withdraw = async (payload) => {
-  const res = await axios.post(
+  const res = await axios.put(
     API_URL + "withdraw/" + payload.accountId,
     payload,
     {

@@ -15,6 +15,7 @@ export const VodafoneCash = () => {
             type="text"
             name="wallet-number"
             className="block w-full p-1  border border-gray-300 rounded shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+            required
           />
         </div>
       </div>
@@ -31,6 +32,7 @@ export const VodafoneCash = () => {
             type="text"
             name="pin"
             className="block w-full p-1  border border-gray-300 rounded shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+            required
           />
         </div>
       </div>
@@ -47,6 +49,7 @@ export const VodafoneCash = () => {
             type="text"
             name="otp"
             className="block w-full p-1  border border-gray-300 rounded shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+            required
           />
         </div>
       </div>

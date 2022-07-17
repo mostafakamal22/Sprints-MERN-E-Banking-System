@@ -16,6 +16,7 @@ export const CreditCard = () => {
             name="card-number"
             autoComplete="cc-number"
             className="block w-full p-1  border border-gray-300 rounded shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+            required
           />
         </div>
       </div>
@@ -33,6 +34,7 @@ export const CreditCard = () => {
             name="name-on-card"
             autoComplete="cc-name"
             className="block w-full p-1  border border-gray-300 rounded shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+            required
           />
         </div>
       </div>
@@ -50,6 +52,7 @@ export const CreditCard = () => {
             name="expiration-date"
             autoComplete="cc-exp"
             className="block w-full p-1  border border-gray-300 rounded shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+            required
           />
         </div>
       </div>
@@ -67,6 +70,7 @@ export const CreditCard = () => {
             name="cvc"
             autoComplete="csc"
             className="block w-full p-1  border border-gray-300 rounded shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+            required
           />
         </div>
       </div>

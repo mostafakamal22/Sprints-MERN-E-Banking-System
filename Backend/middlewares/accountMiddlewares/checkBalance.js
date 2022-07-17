@@ -6,6 +6,11 @@ const checkBalance = async (req, res, next) => {
   let requestedBalance;
   let accountId;
 
+  //check for zero balance transfred/withdrawn
+  if (req.body.withdrawAmount === 0 || req.body.balanceTransfered === 0) {
+    return res.status(400).send("Please Provide Balance More than 0!");
+  }
+
   //check for empty body request
   if (!req.body.withdrawAmount && !req.body.balanceTransfered) {
     return res.status(400).send("empty body request");
