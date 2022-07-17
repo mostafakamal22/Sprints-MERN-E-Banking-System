@@ -5,6 +5,7 @@ import {
   deposit,
   resetAccountStatus,
 } from "../../features/Account/AccountSlice";
+import { UseResetStatus } from "../../hooks/UseResetStatus";
 import { PaymentMethods } from "../payment/PaymentMethods";
 import FormButton from "../shared/FormButton";
 import MessagesContainer from "../shared/MessagesContainer";
@@ -38,12 +39,16 @@ export const Deposit = () => {
     }
   }, [isError, isSuccess, message, account, msg]);
 
-  //clean up status
-  useEffect(() => {
+  //clean up status (when mount and unmount)
+  UseResetStatus(() => {
+    dispatch(resetAccountStatus());
+  });
+
+  UseResetStatus(() => {
     return () => {
       dispatch(resetAccountStatus());
     };
-  }, []);
+  });
 
   //get account id
   const accountId = useLocation().pathname.split("/").at(-1);

@@ -1,9 +1,10 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { resetAccountStatus } from "../features/Account/AccountSlice";
 import { logout, resetAuthStatus } from "../features/Auth/authSlice";
 import { resetUserStatus, userLogout } from "../features/User/userSlice";
+import { UseResetStatus } from "../hooks/UseResetStatus";
 
 export default function Home() {
   const naviagte = useNavigate();
@@ -11,12 +12,12 @@ export default function Home() {
   const { user } = useSelector((state) => state.userAuth);
 
   //clean up user status on unmount
-  useEffect(() => {
+  UseResetStatus(() => {
     return () => {
       dispatch(resetUserStatus());
       dispatch(resetAuthStatus());
     };
-  }, []);
+  });
 
   //logout function
   const handleLogout = () => {
