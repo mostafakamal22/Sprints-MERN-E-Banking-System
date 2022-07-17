@@ -2,16 +2,16 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
 import {
+  deposit,
   resetAccountStatus,
-  withdraw,
 } from "../../features/Account/AccountSlice";
 import { PaymentMethods } from "../payment/PaymentMethods";
 import FormButton from "../shared/FormButton";
 import MessagesContainer from "../shared/MessagesContainer";
 
-export const Withdraw = () => {
+export const Deposit = () => {
   //state for withdraw balance
-  const [withdrawAmount, setWithdrawAmount] = useState(0);
+  const [depositAmount, setDepositAmount] = useState(0);
 
   //state for user password
   const [password, setPassword] = useState("");
@@ -32,7 +32,9 @@ export const Withdraw = () => {
     }
 
     if (isSuccess) {
-      setMsg(`You Have Withdrawn ${withdrawAmount}L.E Successfully!`);
+      setMsg(
+        `You Have Deposited ${depositAmount}L.E into your Account Successfully!`
+      );
     }
   }, [isError, isSuccess, message, account, msg]);
 
@@ -53,32 +55,32 @@ export const Withdraw = () => {
 
     const withdrawData = {
       accountId,
-      withdrawAmount,
+      depositAmount,
       token: user.token,
       oldPassword: password,
       id: user.id,
     };
-    dispatch(withdraw(withdrawData));
+    dispatch(deposit(withdrawData));
   };
 
   return (
     <div className="block p-6 rounded shadow-lg bg-gray-200 max-w-2xl mx-auto">
-      <h2 className="text-xl text-center my-3"> Withdraw Money </h2>
+      <h2 className="text-xl text-center my-3"> Deposit Money </h2>
       <form onSubmit={handleSubmit}>
         <div className="flex justify-center items-center flex-wrap gap-4 my-4 rounded shadow bg-white p-5">
           <label
             className="basis-full sm:basis-1/3 text-md  my-2 sm:my-0 mx-2 p-2 sm:border-r-2 border-blue-600"
-            htmlFor="withdrawAmount"
+            htmlFor="depositAmount"
           >
-            Enter Withdraw Amount
+            Enter Deposit Amount
           </label>
 
           <input
             className="basis-full  sm:basis-1/3  px-3 py-1.5 mx-4 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out  focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
             type="number"
-            name="withdrawAmount"
-            defaultValue={withdrawAmount}
-            onChange={(e) => setWithdrawAmount(e.target.value)}
+            name="depositAmount"
+            defaultValue={depositAmount}
+            onChange={(e) => setDepositAmount(e.target.value)}
             min="0"
             required
           />
@@ -100,7 +102,7 @@ export const Withdraw = () => {
           />
         </div>
 
-        <PaymentMethods title="Withdraw Methods" />
+        <PaymentMethods title="Deposit Methods" />
 
         {/*Request Status and Errors*/}
         {(isError || isSuccess) && (
@@ -113,7 +115,7 @@ export const Withdraw = () => {
 
         {/*form button */}
         <FormButton
-          text={{ default: "Withdraw", loading: "Processing" }}
+          text={{ default: "Deposit", loading: "Processing" }}
           isLoading={isLoading}
         />
       </form>

@@ -111,7 +111,7 @@ const deposit = async (req, res) => {
     const account = await Account.findById(req.params.id);
 
     //update  user's balance with new deposit value
-    account.balance += depositAmount;
+    account.balance += +depositAmount;
     account.markModified("balance");
 
     //Save Deposit operation

@@ -47,7 +47,9 @@ router
     sendNotification
   );
 
-router.route("/deposit/:id").put(authUserProtect, checkPassword, deposit);
+router
+  .route("/deposit/:id")
+  .put(authUserProtect, checkPassword, checkBalance, deposit);
 
 router
   .route("/withdraw/:id")

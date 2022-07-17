@@ -32,7 +32,7 @@ const transfer = async (payload) => {
 
 //Deposit
 const deposit = async (payload) => {
-  const res = await axios.post(
+  const res = await axios.put(
     API_URL + "deposit/" + payload.accountId,
     payload,
     {
