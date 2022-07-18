@@ -164,12 +164,17 @@ const deleteAdmin = async (req, res) => {
 //@route  >>>> put /api/admins/updaterole/:id
 //@Access >>>> private(Owner Only)
 const updateAdminRole = async (req, res) => {
+  //check if new role is actually the old role
+  if (req.body.newRole === req.body.oldRole) {
+    return res.status(400).send("Please Specify New Role For That Admin");
+  }
+
   try {
     //get admin wanted to update
     const admin = await Admin.findById(req.params.id);
     //update user with new role
-    admin.role = admin.role === "owner" ? "admin" : "owner";
-    admin.markModified("email");
+    admin.role = req.body.newRole;
+    admin.markModified("role");
 
     //get updated admin info & send it back
     const updatedAdmin = await admin.save();

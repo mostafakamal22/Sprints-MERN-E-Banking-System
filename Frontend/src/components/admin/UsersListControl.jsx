@@ -62,17 +62,18 @@ export const UsersListControl = ({ usersList }) => {
   };
 
   // handle updating user status
-  const handleUpdating = (e, UpdatedUserID, newStatus) => {
+  const handleUpdating = (e, UpdatedUserID, oldStatus, newStatus) => {
     e.preventDefault();
 
     //get admin token
     const token = info.token;
 
-    //payload (admin token + id of the user to update)
+    //payload (admin token + id of the user to update + user status changes)
     const userData = {
       id: UpdatedUserID,
       token,
       newStatus,
+      oldStatus,
     };
 
     dispatch(updateUserStatus(userData));

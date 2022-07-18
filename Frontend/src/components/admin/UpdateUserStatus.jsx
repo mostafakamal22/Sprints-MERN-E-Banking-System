@@ -10,7 +10,9 @@ export const UpdateUserStatus = ({ user, handleUpdating }) => {
   return (
     <form
       className="flex flex-col justify-center items-center mx-auto"
-      onSubmit={(event) => handleUpdating(event, user._id, userStatus)}
+      onSubmit={(event) =>
+        handleUpdating(event, user._id, user.user_status, userStatus)
+      }
     >
       <select
         className="my-2 p-2 rounded"

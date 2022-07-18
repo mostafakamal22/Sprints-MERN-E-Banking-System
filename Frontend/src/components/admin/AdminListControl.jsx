@@ -12,6 +12,7 @@ import FormButton from "../shared/FormButton";
 import { MainSpinner } from "../shared/MainSpinner";
 import MessagesContainer from "../shared/MessagesContainer";
 import { FcBusinessman, FcPodiumWithSpeaker } from "react-icons/fc";
+import { UpdateAdminRole } from "./UpdateAdminRole";
 
 const AdminListControl = ({ adminsList }) => {
   const { info } = useSelector((state) => state.adminAuth);
@@ -58,15 +59,17 @@ const AdminListControl = ({ adminsList }) => {
   };
 
   // handle updating admin role
-  const handleUpdating = (e, UpdatedAdminID) => {
+  const handleUpdating = (e, UpdatedAdminID, oldRole, newRole) => {
     e.preventDefault();
 
     //get owner token
     const token = info.token;
 
-    //payload (owner token + id of the admin to update)
+    //payload (owner token + id of the admin to update + role change)
     const adminData = {
       id: UpdatedAdminID,
+      newRole,
+      oldRole,
       token,
     };
 
@@ -203,27 +206,10 @@ const AdminListControl = ({ adminsList }) => {
                     scope="row"
                     className="py-4 px-6 font-medium text-gray-900 whitespace-nowrap  border-x-2 text-center"
                   >
-                    <form
-                      className="flex flex-col justify-center items-center"
-                      onSubmit={(event) => handleUpdating(event, admin._id)}
-                    >
-                      <select
-                        className="my-2 p-2 rounded"
-                        defaultValue={admin.role}
-                      >
-                        <option defaultValue={"owner"}>owner</option>
-                        <option defaultValue={"admin"}>admin</option>
-                      </select>
-                      <FormButton
-                        text={{ default: "Update Role" }}
-                        icon={
-                          <RiExchangeFill
-                            className="mb-[-2px] ml-1"
-                            size={25}
-                          />
-                        }
-                      />
-                    </form>
+                    <UpdateAdminRole
+                      admin={admin}
+                      handleUpdating={handleUpdating}
+                    />
                   </th>
                 </tr>
               ))}

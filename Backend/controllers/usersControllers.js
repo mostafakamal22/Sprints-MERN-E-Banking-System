@@ -201,6 +201,10 @@ const deleteUser = async (req, res) => {
 //@route  >>>> put /api/users/:id/updatestatus
 //@Access >>>> private(for admins only)
 const updateUserStatus = async (req, res) => {
+  //check if new status is actually the old status
+  if (req.body.newStatus === req.body.oldStatus) {
+    return res.status(400).send("Please Specify New Status For That User");
+  }
   try {
     //get user
     const user = await User.findById(req.params.id);
