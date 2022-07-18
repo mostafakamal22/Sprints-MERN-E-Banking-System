@@ -51,6 +51,20 @@ export const accountRequest = createAsyncThunk(
   }
 );
 
+//Notification Update
+export const notificationUpdate = createAsyncThunk(
+  "user/notificationUpdate",
+  async (payload, thunkAPI) => {
+    try {
+      return await userServices.notificationUpdate(payload);
+    } catch (error) {
+      const message = error.response.data;
+
+      return thunkAPI.rejectWithValue(message);
+    }
+  }
+);
+
 //User Logout
 export const userLogout = createAsyncThunk("user/logout", async () => {
   userServices.userLogout();
@@ -122,6 +136,25 @@ export const userSlice = createSlice({
         state.info = action.payload;
       })
       .addCase(accountRequest.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.isSuccess = false;
+        state.message = action.payload;
+      })
+      .addCase(notificationUpdate.pending, (state) => {
+        state.isLoading = true;
+        state.isError = false;
+        state.isSuccess = false;
+        state.message = "";
+      })
+      .addCase(notificationUpdate.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isError = false;
+        state.isSuccess = true;
+        state.message = "";
+        state.info = action.payload;
+      })
+      .addCase(notificationUpdate.rejected, (state, action) => {
         state.isLoading = false;
         state.isError = true;
         state.isSuccess = false;

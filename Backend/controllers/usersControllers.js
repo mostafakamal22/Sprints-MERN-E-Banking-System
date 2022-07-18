@@ -103,7 +103,7 @@ const userLogin = async (req, res) => {
   }
 };
 
-//@desc   >>>> UPDATE User
+//@desc   >>>> UPDATE User info
 //@route  >>>> PUT /api/users/:id
 //@Access >>>> private(for User only)
 const updateUser = async (req, res) => {
@@ -141,6 +141,45 @@ const updateUser = async (req, res) => {
     });
   } catch (error) {
     if (error.message.match(/(email|password|name|postal|phone|addresee)/gi))
+      return res.status(400).send(error.message);
+    res.status(500).send("Ooops!! Something Went Wrong, Try again...");
+  }
+};
+
+//@desc   >>>> Notification isSeen update
+//@route  >>>> PUT /api/users/notifications/:id
+//@Access >>>> private(for User only)
+const notificationUpdate = async (req, res) => {
+  try {
+    //get user
+    const user = req.user;
+    //update notification status
+    user.notifications = user.notifications.map((notification) => {
+      if (notification.id === req.params.id) {
+        return { ...notification, isSeen: true };
+      }
+      return notification;
+    });
+    user.markModified("notifications");
+
+    //get updated user info & send it back
+    const updatedUser = await user.save();
+
+    res.status(200).json({
+      name: updatedUser.user_name,
+      email: updatedUser.email,
+      address: updatedUser.full_addresse,
+      id: updatedUser.id,
+      accountsCount: updatedUser.no_of_account,
+      createdAt: updatedUser.createdAt,
+      userStatus: updatedUser.user_status,
+      postal: updatedUser.zip_code,
+      phone: updatedUser.phone,
+      accounts: updatedUser.accounts,
+      notifications: updatedUser.notifications,
+    });
+  } catch (error) {
+    if (error.message.match(/(notification)/gi))
       return res.status(400).send(error.message);
     res.status(500).send("Ooops!! Something Went Wrong, Try again...");
   }
@@ -194,4 +233,5 @@ module.exports = {
   updateUser,
   deleteUser,
   updateUserStatus,
+  notificationUpdate,
 };

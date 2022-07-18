@@ -1,22 +1,43 @@
 import React from "react";
 import { BiArrowBack } from "react-icons/bi";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import moment from "moment";
+import { notificationUpdate } from "../../features/User/userSlice";
+import { FcHighPriority, FcIdea, FcOk } from "react-icons/fc";
 
 export const NotificationOverView = () => {
+  const dispatch = useDispatch();
+
   //Get Notifications from state
   const notifications = useSelector(
     (state) => state.userData.info.notifications
   );
 
+  //Get user data
+  const { user } = useSelector((state) => state.userAuth);
+
+  const handleClick = (notification) => {
+    //check if notification is already been seen
+    if (notification.isSeen) return;
+
+    //if not seen then dispatch notification update
+    const payload = {
+      notificationId: notification._id,
+      token: user.token,
+    };
+
+    dispatch(notificationUpdate(payload));
+  };
+
   return (
-    <div className="h-screen grid place-items-center my-8">
-      <div className="h-full overflow-y-auto lg:w-1/2 sm:w-3/5 w-11/12 bg-gray-100  rounded-xl mx-auto border px-4 py-6  sm:p-10 shadow-sm">
+    <div className="h-screen max-w-xl w-full  mx-20 md:mx-10  grid place-items-center my-8">
+      <div className="h-full w-full overflow-y-auto  bg-gray-100  rounded-xl  px-4 py-6  sm:p-10 shadow-sm">
         {/* Heading */}
-        <div className="inline-flex items-center justify-between w-full mb-4">
-          <h3 className="font-bold text-xl sm:text-2xl text-gray-800">
-            Notifications
+        <div className="flex items-center justify-between w-full mb-4">
+          <h3 className="flex justify-center items-center font-bold text-xl sm:text-2xl text-gray-800">
+            <span>Notifications</span>
+            <FcIdea className="ml-1" size={45} />
           </h3>
           <Link
             to={"/"}
@@ -53,6 +74,7 @@ export const NotificationOverView = () => {
                 key={notification._id}
               >
                 <Link
+                  onClick={() => handleClick(notification)}
                   to={`/notifications/${notification._id}`}
                   className=" inline-flex items-center justify-between w-full"
                 >
@@ -70,7 +92,20 @@ export const NotificationOverView = () => {
                     {moment(notification.createdAt).fromNow()}
                   </p>
                 </Link>
-                <p className="mt-1 text-sm">You have a new notification</p>
+                <p className="flex mt-1 text-sm">
+                  {!notification.isSeen && (
+                    <>
+                      <span>You have a new notification</span>
+                      <FcHighPriority className="ml-1" size={20} />
+                    </>
+                  )}
+
+                  {notification.isSeen && (
+                    <>
+                      <FcOk className="ml-auto" size={20} />
+                    </>
+                  )}
+                </p>
               </div>
             ))}
       </div>

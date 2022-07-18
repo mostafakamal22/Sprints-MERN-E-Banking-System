@@ -43,6 +43,23 @@ const accountRequest = async (userData) => {
   return data;
 };
 
+//Notification Update
+const notificationUpdate = async (payload) => {
+  const res = await axios.put(
+    API_URL + "notifications/" + payload.notificationId,
+    payload,
+    {
+      headers: {
+        authorization: `Bearer ${payload.token}`,
+      },
+    }
+  );
+
+  const data = res.data;
+
+  return data;
+};
+
 //User Logout
 const userLogout = () => {
   return;
@@ -53,6 +70,7 @@ const userServices = {
   updateUser,
   userLogout,
   accountRequest,
+  notificationUpdate,
 };
 
 export default userServices;
