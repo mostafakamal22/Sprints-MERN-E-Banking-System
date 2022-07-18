@@ -1,5 +1,5 @@
 import React from "react";
-import { AiOutlineUser } from "react-icons/ai";
+import { FcBusinessContact } from "react-icons/fc";
 import { RiArrowRightLine } from "react-icons/ri";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
@@ -9,8 +9,8 @@ export default function AdminProfile() {
   return (
     <div className="max-w-[990px] mx-auto bg-white rounded p-3 py-10">
       <h2 className="flex items-center text-gray-800 mb-4 text-xl font-bold px-2 py-4 my-4 rounded shadow bg-gray-100 border-b-2 border-blue-600">
-        <span className="flex justify-center items-center p-2 mr-2 rounded-full shadow-sm bg-blue-200">
-          <AiOutlineUser size={35} />
+        <span className="flex justify-center items-center p-2 mr-2 rounded-full shadow-sm bg-blue-100">
+          <FcBusinessContact size={50} />
         </span>
         {info.name}
       </h2>

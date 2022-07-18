@@ -72,7 +72,7 @@ export default function UpdateAdmin() {
 
   return (
     <div className="max-w-3xl p-6 m-10 rounded-lg shadow-lg bg-white">
-      <h2 className="flex justify-center items-center text-xl text-center px-2 py-4 my-4 rounded shadow bg-gray-200 border-b-2 border-blue-600">
+      <h2 className="flex justify-center items-center text-xl text-center px-2 py-4 my-4 rounded shadow bg-gray-200 border-b-4 border-blue-600">
         <span>Update Your Info</span>
         <FcSurvey className="ml-1" size={45} />
       </h2>
