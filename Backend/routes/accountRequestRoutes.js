@@ -24,6 +24,9 @@ const {
 const {
   checkBalance,
 } = require("../middlewares/accountMiddlewares/checkBalance");
+const {
+  checkUserStatus,
+} = require("../middlewares/userMiddleware/checkUserStatus");
 
 router.route("/").get(authAdminProtect, getAccountRequests);
 
@@ -31,6 +34,7 @@ router
   .route("/create")
   .post(
     authUserProtect,
+    checkUserStatus,
     checkPassword,
     checkBalance,
     createAccountRequest,

@@ -28,18 +28,22 @@ const {
 const {
   authAdminProtect,
 } = require("../middlewares/adminMiddlewares/authAdminsMiddleware");
+const {
+  checkUserStatus,
+} = require("../middlewares/userMiddleware/checkUserStatus");
 
 router.route("/create").post(authAdminProtect, createAccount, sendNotification);
 
 router
   .route("/:id")
-  .get(authUserProtect, getAccount)
-  .delete(authUserProtect, checkPassword, deleteAccount);
+  .get(authUserProtect, checkUserStatus, getAccount)
+  .delete(authUserProtect, checkUserStatus, checkPassword, deleteAccount);
 
 router
   .route("/transfer/:from_id/:to_id")
   .put(
     authUserProtect,
+    checkUserStatus,
     checkPassword,
     checkAccount,
     checkBalance,
@@ -49,10 +53,10 @@ router
 
 router
   .route("/deposit/:id")
-  .put(authUserProtect, checkPassword, checkBalance, deposit);
+  .put(authUserProtect, checkUserStatus, checkPassword, checkBalance, deposit);
 
 router
   .route("/withdraw/:id")
-  .put(authUserProtect, checkPassword, checkBalance, withdraw);
+  .put(authUserProtect, checkUserStatus, checkPassword, checkBalance, withdraw);
 
 module.exports = router;

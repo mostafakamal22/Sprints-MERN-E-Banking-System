@@ -22,6 +22,9 @@ const {
   updateUserStatus,
   notificationUpdate,
 } = require("../controllers/usersControllers");
+const {
+  checkUserStatus,
+} = require("../middlewares/userMiddleware/checkUserStatus");
 
 router
   .route("/")
@@ -31,13 +34,21 @@ router
 router
   .route("/:id")
   .get(authUserProtect, getOneUser)
-  .put(checkPassword, validatePassword, authUserProtect, updateUser)
+  .put(
+    authUserProtect,
+    checkUserStatus,
+    checkPassword,
+    validatePassword,
+    updateUser
+  )
   .delete(authAdminProtect, deleteUser);
 
 router.route("/login").post(userLogin);
 
 router.route("/:id/updatestatus").put(authAdminProtect, updateUserStatus);
 
-router.route("/notifications/:id").put(authUserProtect, notificationUpdate);
+router
+  .route("/notifications/:id")
+  .put(authUserProtect, checkUserStatus, notificationUpdate);
 
 module.exports = router;
