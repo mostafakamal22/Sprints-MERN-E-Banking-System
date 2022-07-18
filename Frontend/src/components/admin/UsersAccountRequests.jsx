@@ -9,6 +9,7 @@ import { UseResetStatus } from "../../hooks/UseResetStatus";
 import FormButton from "../shared/FormButton";
 import { MainSpinner } from "../shared/MainSpinner";
 import MessagesContainer from "../shared/MessagesContainer";
+import { FcApprove, FcDisapprove } from "react-icons/fc";
 
 const UsersAccountRequests = ({ accountRequestsList }) => {
   const { info } = useSelector((state) => state.adminAuth);
@@ -122,8 +123,8 @@ const UsersAccountRequests = ({ accountRequestsList }) => {
       )}
 
       <div className="overflow-x-auto relative shadow-md sm:rounded-lg">
-        <table className="w-full text-sm text-left text-gray-500 border-y-4 border-blue-600 rounded">
-          <thead className="text-xs text-gray-700 uppercase bg-gray-50">
+        <table className="w-full text-left text-gray-500 border-y-4 border-blue-600 rounded">
+          <thead className="text-gray-900 uppercase bg-gray-300">
             <tr>
               <th scope="col" className="py-3 px-6 text-center border-x-2">
                 User Id
@@ -186,7 +187,11 @@ const UsersAccountRequests = ({ accountRequestsList }) => {
                     <form
                       onSubmit={(event) => handleDecline(event, request._id)}
                     >
-                      <FormButton text={{ default: "Decline" }} />
+                      <FormButton
+                        text={{ default: "Decline" }}
+                        bgColor={["bg-red-600", "bg-red-700", "bg-red-800"]}
+                        icon={<FcDisapprove size={27} />}
+                      />
                     </form>
                   </th>
 
@@ -206,7 +211,10 @@ const UsersAccountRequests = ({ accountRequestsList }) => {
                         )
                       }
                     >
-                      <FormButton text={{ default: "Approve" }} />
+                      <FormButton
+                        text={{ default: "Approve" }}
+                        icon={<FcApprove size={27} />}
+                      />
                     </form>
                   </th>
                 </tr>

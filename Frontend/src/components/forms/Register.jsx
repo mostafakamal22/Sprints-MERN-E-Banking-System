@@ -1,9 +1,12 @@
 import React from "react";
 import { useEffect } from "react";
 import { useState } from "react";
+import { FcLightAtTheEndOfTunnel } from "react-icons/fc";
+import { TiUserAdd } from "react-icons/ti";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { register, resetAuthStatus } from "../../features/Auth/authSlice";
+import { UseResetStatus } from "../../hooks/UseResetStatus";
 import FormButton from "../shared/FormButton";
 import MessagesContainer from "../shared/MessagesContainer";
 
@@ -56,12 +59,12 @@ export default function Register() {
     }
   }, [user, isError, isSuccess, message]);
 
-  //clean up status
-  useEffect(() => {
+  //clean up  status (on unmount)
+  UseResetStatus(() => {
     return () => {
       dispatch(resetAuthStatus());
     };
-  }, []);
+  });
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -87,26 +90,29 @@ export default function Register() {
 
   return (
     <form
-      className="max-w-[650px] p-10 pb-5 mx-auto border bg-slate-100 border-blue-800 rounded-md"
+      className="max-w-xl p-10 px-12 mx-auto bg-white rounded-md"
       onSubmit={handleSubmit}
     >
+      <h2 className="flex justify-center items-center text-xl font-bold text-center px-2 py-4 my-6 rounded shadow bg-gray-200 border-b-2 border-blue-600">
+        <FcLightAtTheEndOfTunnel className="mr-1" size={45} />
+        <span>E-Bank Register</span>
+      </h2>
       <div className="grid xl:grid-cols-2 xl:gap-6">
         <div className="relative z-0 w-full mb-6 group">
           <input
             type="text"
             name="first_name"
-            id="first_name"
             defaultValue={firstName}
             onChange={(e) =>
               setFormInputs({ ...formInputs, firstName: e.target.value })
             }
-            className="block py-2.5 px-0 w-full text-sm text-blue-900 font-bold bg-transparent border-0 border-b-2 border-gray-600 appearance-none  focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+            className="block py-2.5 px-0 w-full text-sm text-green-600 font-bold bg-transparent border-0 border-b-2 border-gray-600 appearance-none  focus:outline-none focus:ring-0 focus:border-blue-600 peer"
             placeholder=" "
             required
           />
           <label
             htmlFor="first_name"
-            className="peer-focus:font-medium absolute text-sm text-dark font-semibold  duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
+            className="peer-focus:font-medium absolute text-sm text-dark font-semibold  duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600  peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
           >
             First name
           </label>
@@ -115,18 +121,17 @@ export default function Register() {
           <input
             type="text"
             name="last_name"
-            id="last_name"
             defaultValue={lastName}
             onChange={(e) =>
               setFormInputs({ ...formInputs, lastName: e.target.value })
             }
-            className="block py-2.5 px-0 w-full text-sm text-blue-900 font-bold bg-transparent border-0 border-b-2 border-gray-600 appearance-none  focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+            className="block py-2.5 px-0 w-full text-sm text-green-600 font-bold bg-transparent border-0 border-b-2 border-gray-600 appearance-none  focus:outline-none focus:ring-0 focus:border-blue-600 peer"
             placeholder=" "
             required
           />
           <label
             htmlFor="last_name"
-            className="peer-focus:font-medium absolute text-sm text-dark font-semibold  duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
+            className="peer-focus:font-medium absolute text-sm text-dark font-semibold  duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600  peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
           >
             Last name
           </label>
@@ -140,13 +145,13 @@ export default function Register() {
           onChange={(e) =>
             setFormInputs({ ...formInputs, email: e.target.value })
           }
-          className="block py-2.5 px-0 w-full text-sm text-blue-900 font-bold bg-transparent border-0 border-b-2 border-gray-600 appearance-none  focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+          className="block py-2.5 px-0 w-full text-sm text-green-600 font-bold bg-transparent border-0 border-b-2 border-gray-600 appearance-none  focus:outline-none focus:ring-0 focus:border-blue-600 peer"
           placeholder=" "
           required
         />
         <label
           htmlFor="email"
-          className="peer-focus:font-medium absolute text-sm text-dark font-semibold  duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
+          className="peer-focus:font-medium absolute text-sm text-dark font-semibold  duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600  peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
         >
           Email address
         </label>
@@ -159,13 +164,13 @@ export default function Register() {
           onChange={(e) =>
             setFormInputs({ ...formInputs, address: e.target.value })
           }
-          className="block py-2.5 px-0 w-full text-sm text-blue-900 font-bold bg-transparent border-0 border-b-2 border-gray-600 appearance-none  focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+          className="block py-2.5 px-0 w-full text-sm text-green-600 font-bold bg-transparent border-0 border-b-2 border-gray-600 appearance-none  focus:outline-none focus:ring-0 focus:border-blue-600 peer"
           placeholder=" "
           required
         />
         <label
           htmlFor="address"
-          className="peer-focus:font-medium absolute text-sm text-dark font-semibold  duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
+          className="peer-focus:font-medium absolute text-sm text-dark font-semibold  duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600  peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
         >
           Full Address
         </label>
@@ -174,18 +179,17 @@ export default function Register() {
         <input
           type="password"
           name="password"
-          id="password"
           defaultValue={password}
           onChange={(e) =>
             setFormInputs({ ...formInputs, password: e.target.value })
           }
-          className="block py-2.5 px-0 w-full text-sm text-blue-900 font-bold bg-transparent border-0 border-b-2 border-gray-600 appearance-none  focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+          className="block py-2.5 px-0 w-full text-sm text-green-600 font-bold bg-transparent border-0 border-b-2 border-gray-600 appearance-none  focus:outline-none focus:ring-0 focus:border-blue-600 peer"
           placeholder=" "
           required
         />
         <label
           htmlFor="password"
-          className="peer-focus:font-medium absolute text-sm text-dark font-semibold  duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
+          className="peer-focus:font-medium absolute text-sm text-dark font-semibold  duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600  peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
         >
           Password
         </label>
@@ -194,18 +198,17 @@ export default function Register() {
         <input
           type="password"
           name="repeat_password"
-          id="repeat_password"
           defaultValue={repeatPassword}
           onChange={(e) =>
             setFormInputs({ ...formInputs, repeatPassword: e.target.value })
           }
-          className="block py-2.5 px-0 w-full text-sm text-blue-900 font-bold bg-transparent border-0 border-b-2 border-gray-600 appearance-none  focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+          className="block py-2.5 px-0 w-full text-sm text-green-600 font-bold bg-transparent border-0 border-b-2 border-gray-600 appearance-none  focus:outline-none focus:ring-0 focus:border-blue-600 peer"
           placeholder=" "
           required
         />
         <label
           htmlFor="repeat_password"
-          className="peer-focus:font-medium absolute text-sm text-dark font-semibold  duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
+          className="peer-focus:font-medium absolute text-sm text-dark font-semibold  duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600  peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
         >
           Confirm password
         </label>
@@ -216,18 +219,17 @@ export default function Register() {
           <input
             type="tel"
             name="phone"
-            id="phone"
             defaultValue={phone}
             onChange={(e) =>
               setFormInputs({ ...formInputs, phone: e.target.value })
             }
-            className="block py-2.5 px-0 w-full text-sm text-blue-900 font-bold bg-transparent border-0 border-b-2 border-gray-600 appearance-none  focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+            className="block py-2.5 px-0 w-full text-sm text-green-600 font-bold bg-transparent border-0 border-b-2 border-gray-600 appearance-none  focus:outline-none focus:ring-0 focus:border-blue-600 peer"
             placeholder=" "
             required
           />
           <label
             htmlFor="phone"
-            className="peer-focus:font-medium absolute text-sm text-dark font-semibold  duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
+            className="peer-focus:font-medium absolute text-sm text-dark font-semibold  duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600  peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
           >
             Phone Number Ex:(01008878980)
           </label>
@@ -236,19 +238,18 @@ export default function Register() {
           <input
             type="text"
             name="postal"
-            id="postal"
             defaultValue={postCode}
             onChange={(e) =>
               setFormInputs({ ...formInputs, postCode: e.target.value })
             }
-            className="block py-2.5 px-0 w-full text-sm text-blue-900 font-bold bg-transparent border-0 border-b-2 border-gray-600 appearance-none  focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+            className="block py-2.5 px-0 w-full text-sm text-green-600 font-bold bg-transparent border-0 border-b-2 border-gray-600 appearance-none  focus:outline-none focus:ring-0 focus:border-blue-600 peer"
             placeholder=" "
             required
           />
 
           <label
             htmlFor="postal"
-            className="peer-focus:font-medium absolute text-sm text-dark font-semibold  duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
+            className="peer-focus:font-medium absolute text-sm text-dark font-semibold  duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600  peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
           >
             Postal Code (Ex. 12345)
           </label>
@@ -264,6 +265,7 @@ export default function Register() {
       <FormButton
         text={{ loading: "Processing", default: "Register" }}
         isLoading={isLoading}
+        icon={<TiUserAdd className="mb-[-2px] ml-1" size={27} />}
       />
     </form>
   );

@@ -1,5 +1,6 @@
 import React from "react";
 import { useState } from "react";
+import { RiExchangeFill } from "react-icons/ri";
 import FormButton from "../shared/FormButton";
 
 export const UpdateUserStatus = ({ user, handleUpdating }) => {
@@ -8,7 +9,7 @@ export const UpdateUserStatus = ({ user, handleUpdating }) => {
 
   return (
     <form
-      className="flex flex-col justify-center items-center"
+      className="flex flex-col justify-center items-center mx-auto"
       onSubmit={(event) => handleUpdating(event, user._id, userStatus)}
     >
       <select
@@ -34,7 +35,10 @@ export const UpdateUserStatus = ({ user, handleUpdating }) => {
         <option defaultValue={"unactive"}>unactive</option>
         <option defaultValue={"suspended"}>suspended</option>
       </select>
-      <FormButton text={{ default: "Update Status" }} />
+      <FormButton
+        text={{ default: "Update Status" }}
+        icon={<RiExchangeFill className="mb-[-2px] ml-1" size={25} />}
+      />
     </form>
   );
 };

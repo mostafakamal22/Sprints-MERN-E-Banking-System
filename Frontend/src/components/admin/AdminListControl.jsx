@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from "react";
+import { TiDelete } from "react-icons/ti";
+import { RiExchangeFill } from "react-icons/ri";
 import { useDispatch, useSelector } from "react-redux";
 import {
   deleteAdmin,
@@ -9,6 +11,7 @@ import { UseResetStatus } from "../../hooks/UseResetStatus";
 import FormButton from "../shared/FormButton";
 import { MainSpinner } from "../shared/MainSpinner";
 import MessagesContainer from "../shared/MessagesContainer";
+import { FcBusinessman, FcPodiumWithSpeaker } from "react-icons/fc";
 
 const AdminListControl = ({ adminsList }) => {
   const { info } = useSelector((state) => state.adminAuth);
@@ -123,8 +126,8 @@ const AdminListControl = ({ adminsList }) => {
       )}
 
       <div className="overflow-x-auto relative shadow-md sm:rounded-lg">
-        <table className="w-full text-sm text-left text-gray-500 border-y-4 border-blue-600 rounded">
-          <thead className="text-xs text-gray-700 uppercase bg-gray-50">
+        <table className="w-full text-left text-gray-500 border-y-4 border-blue-600 rounded">
+          <thead className="text-gray-900 uppercase bg-gray-300">
             <tr>
               <th scope="col" className="py-3 px-6 text-center border-x-2">
                 Admin Name
@@ -151,7 +154,7 @@ const AdminListControl = ({ adminsList }) => {
                     index % 2 === 0 ? "bg-white" : "bg-gray-100"
                   } border-b `}
                 >
-                  {/*Admin Role*/}
+                  {/*Admin Name*/}
                   <th
                     scope="row"
                     className="py-4 px-6 font-medium text-gray-900 whitespace-nowrap  border-x-2 text-center"
@@ -164,7 +167,19 @@ const AdminListControl = ({ adminsList }) => {
                     scope="row"
                     className="py-4 px-6 font-medium text-gray-900 whitespace-nowrap  border-x-2 text-center"
                   >
-                    {admin.role}
+                    <span
+                      className={`flex justify-center items-center w-full p-2  mx-auto rounded ${
+                        admin.role === "owner" ? "bg-green-200" : "bg-blue-200"
+                      }`}
+                    >
+                      <span>{admin.role}</span>
+                      {admin.role === "owner" && (
+                        <FcPodiumWithSpeaker className="ml-1" size={27} />
+                      )}
+                      {admin.role === "admin" && (
+                        <FcBusinessman className="ml-1" size={27} />
+                      )}
+                    </span>
                   </th>
 
                   {/* Remove Admin */}
@@ -175,7 +190,11 @@ const AdminListControl = ({ adminsList }) => {
                     <form
                       onSubmit={(event) => handleRemoving(event, admin._id)}
                     >
-                      <FormButton text={{ default: "Remove" }} />
+                      <FormButton
+                        text={{ default: "Remove" }}
+                        bgColor={["bg-red-600", "bg-red-700", "bg-red-800"]}
+                        icon={<TiDelete className="mb-[-2px]" size={25} />}
+                      />
                     </form>
                   </th>
 
@@ -195,7 +214,15 @@ const AdminListControl = ({ adminsList }) => {
                         <option defaultValue={"owner"}>owner</option>
                         <option defaultValue={"admin"}>admin</option>
                       </select>
-                      <FormButton text={{ default: "Update Role" }} />
+                      <FormButton
+                        text={{ default: "Update Role" }}
+                        icon={
+                          <RiExchangeFill
+                            className="mb-[-2px] ml-1"
+                            size={25}
+                          />
+                        }
+                      />
                     </form>
                   </th>
                 </tr>

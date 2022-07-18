@@ -12,6 +12,12 @@ import FormButton from "../shared/FormButton";
 import { MainSpinner } from "../shared/MainSpinner";
 import MessagesContainer from "../shared/MessagesContainer";
 import { UpdateUserStatus } from "./UpdateUserStatus";
+import { TiDelete } from "react-icons/ti";
+import {
+  FcHighPriority,
+  FcLowPriority,
+  FcMediumPriority,
+} from "react-icons/fc";
 
 export const UsersListControl = ({ usersList }) => {
   const { info } = useSelector((state) => state.adminAuth);
@@ -125,8 +131,8 @@ export const UsersListControl = ({ usersList }) => {
       )}
 
       <div className="overflow-x-auto relative shadow-md sm:rounded-lg">
-        <table className="w-full text-sm text-left text-gray-500 border-y-4 border-blue-600 rounded">
-          <thead className="text-xs text-gray-700 uppercase bg-gray-50">
+        <table className="w-full  text-left text-gray-500 border-y-4 border-blue-600 rounded">
+          <thead className="text-gray-900 uppercase bg-gray-300">
             <tr>
               <th scope="col" className="py-3 px-6 text-center border-x-2">
                 User Name
@@ -180,19 +186,34 @@ export const UsersListControl = ({ usersList }) => {
                   {/*User Status*/}
                   <th
                     scope="row"
-                    className="py-4 px-6 font-medium text-gray-900 whitespace-nowrap border-x-2 text-center "
+                    className="py-4 px-6 font-medium text-gray-900  border-x-2 text-center "
                   >
                     <span
-                      className={`flex justify-center items-center w-4 h-4 p-9 mx-auto
-                    text-white rounded-[50%] shadow-sm ${
-                      user.user_status === 0 && "bg-green-600"
-                    }
-                    ${user.user_status === 1 && "bg-gray-600"}
-                    ${user.user_status === 2 && "bg-yellow-600"}`}
+                      className={`flex justify-center items-center w-full p-2  mx-auto rounded
+                     shadow ${user.user_status === 0 && "bg-green-100"}
+                    ${user.user_status === 1 && "bg-gray-100"}
+                    ${user.user_status === 2 && "bg-yellow-100"}`}
                     >
-                      {user.user_status === 0 && "Active"}
-                      {user.user_status === 1 && "Unactive"}
-                      {user.user_status === 2 && "Suspended"}
+                      {user.user_status === 0 && (
+                        <>
+                          <span>Active</span>
+                          <FcLowPriority className="ml-1" size={27} />
+                        </>
+                      )}
+
+                      {user.user_status === 1 && (
+                        <>
+                          <span>Unactive</span>
+                          <FcMediumPriority className="ml-1" size={27} />
+                        </>
+                      )}
+
+                      {user.user_status === 2 && (
+                        <>
+                          <span>Suspended</span>
+                          <FcHighPriority className="ml-1" size={27} />
+                        </>
+                      )}
                     </span>
                   </th>
 
@@ -215,7 +236,11 @@ export const UsersListControl = ({ usersList }) => {
                     className="py-4 px-6 font-medium text-gray-900 whitespace-nowrap  border-x-2 text-center"
                   >
                     <form onSubmit={(event) => handleRemoving(event, user._id)}>
-                      <FormButton text={{ default: "Remove" }} />
+                      <FormButton
+                        text={{ default: "Remove" }}
+                        bgColor={["bg-red-600", "bg-red-700", "bg-red-800"]}
+                        icon={<TiDelete className="mb-[-2px]" size={25} />}
+                      />
                     </form>
                   </th>
 

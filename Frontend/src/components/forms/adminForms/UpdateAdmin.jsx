@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useEffect } from "react";
+import { FcApproval, FcSurvey } from "react-icons/fc";
 import { useDispatch, useSelector } from "react-redux";
 import {
   resetAdminAuthStatus,
@@ -71,8 +72,9 @@ export default function UpdateAdmin() {
 
   return (
     <div className="max-w-3xl p-6 m-10 rounded-lg shadow-lg bg-white">
-      <h2 className="text-xl text-center px-2 py-4 my-4 rounded shadow bg-gray-200 border-b-2 border-blue-600">
-        Update Your Info
+      <h2 className="flex justify-center items-center text-xl text-center px-2 py-4 my-4 rounded shadow bg-gray-200 border-b-2 border-blue-600">
+        <span>Update Your Info</span>
+        <FcSurvey className="ml-1" size={45} />
       </h2>
       <form onSubmit={handleSubmit}>
         <div className="form-group mb-6">
@@ -175,6 +177,7 @@ export default function UpdateAdmin() {
         <FormButton
           text={{ loading: "Updating", default: "Update" }}
           isLoading={isLoading}
+          icon={<FcApproval className="ml-1" size={27} />}
         />
       </form>
     </div>

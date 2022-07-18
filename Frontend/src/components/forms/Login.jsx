@@ -1,8 +1,11 @@
 import React from "react";
 import { useState, useEffect } from "react";
+import { FcLightAtTheEndOfTunnel } from "react-icons/fc";
+import { RiLoginCircleFill } from "react-icons/ri";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { login, resetAuthStatus } from "../../features/Auth/authSlice";
+import { UseResetStatus } from "../../hooks/UseResetStatus";
 import FormButton from "../shared/FormButton";
 import MessagesContainer from "../shared/MessagesContainer";
 
@@ -34,12 +37,12 @@ export default function Login() {
     }
   }, [isError, message, user, msg]);
 
-  //clean up status
-  useEffect(() => {
+  //clean up  status (on unmount)
+  UseResetStatus(() => {
     return () => {
       dispatch(resetAuthStatus());
     };
-  }, []);
+  });
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -54,73 +57,47 @@ export default function Login() {
   };
 
   return (
-    <div className="block p-6 rounded-lg shadow-lg bg-white max-w-sm mx-auto">
+    <div className="block p-6 rounded-lg shadow-lg bg-white max-w-md mx-auto">
+      <h2 className="flex justify-center items-center text-xl font-bold text-center px-2 py-4 my-4 rounded shadow bg-gray-200 border-b-2 border-blue-600">
+        <FcLightAtTheEndOfTunnel className="mr-1" size={45} />
+        <span>E-Bank Login</span>
+      </h2>
       <form onSubmit={handleSubmit}>
-        <div className="form-group mb-6">
+        <div className="mb-6">
           <label
-            htmlFor="exampleInputEmail2"
-            className="form-label inline-block mb-2 text-gray-700"
+            htmlFor="email"
+            className="w-full inline-block mb-4 p-2 text-gray-800 border-b-2 border-blue-600 rounded shadow bg-blue-200"
           >
             Email address
           </label>
           <input
             type="email"
             name="email"
-            className="form-control
-        block
-        w-full
-        px-3
-        py-1.5
-        text-base
-        font-normal
-        text-gray-700
-        bg-white bg-clip-padding
-        border border-solid border-gray-300
-        rounded
-        transition
-        ease-in-out
-        m-0
-        focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-            id="login-email"
+            className="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
             defaultValue={email}
             onChange={(e) =>
               setFormInputs({ ...formInputs, email: e.target.value })
             }
-            aria-describedby="emailHelp"
-            placeholder="Enter your email"
+            placeholder="Enter your Email"
             required
           />
         </div>
-        <div className="form-group mb-6">
+        <div className="mb-6">
           <label
-            htmlFor="exampleInputPassword2"
-            className="form-label inline-block mb-2 text-gray-700"
+            htmlFor="password"
+            className="w-full inline-block mb-4 p-2 text-gray-800 border-b-2 border-blue-600 rounded shadow bg-blue-200"
           >
             Password
           </label>
           <input
             type="password"
             name="password"
-            className="form-control block
-        w-full
-        px-3
-        py-1.5
-        text-base
-        font-normal
-        text-gray-700
-        bg-white bg-clip-padding
-        border border-solid border-gray-300
-        rounded
-        transition
-        ease-in-out
-        m-0
-        focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-            id="login-Password"
+            className="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
             defaultValue={password}
             onChange={(e) =>
               setFormInputs({ ...formInputs, password: e.target.value })
             }
-            placeholder="Password"
+            placeholder="Enter Your Password"
             required
           />
         </div>
@@ -146,6 +123,7 @@ export default function Login() {
         <FormButton
           text={{ loading: "Processing", default: "Login" }}
           isLoading={isLoading}
+          icon={<RiLoginCircleFill className="mb-[-2px] ml-1" size={27} />}
         />
 
         {/*Redirect for Register */}

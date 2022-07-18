@@ -7,6 +7,7 @@ import {
 import { UseResetStatus } from "../../../hooks/UseResetStatus";
 import FormButton from "../../shared/FormButton";
 import MessagesContainer from "../../shared/MessagesContainer";
+import { FcPlus } from "react-icons/fc";
 
 export const RegisterAdmin = () => {
   const dispatch = useDispatch();
@@ -72,6 +73,7 @@ export const RegisterAdmin = () => {
 
   return (
     <div className="p-6 rounded shadow bg-white max-w-2xl mx-auto">
+      <h3 className="text-lg font-bold text-gray-900 my-5">Add New Admin</h3>
       <form onSubmit={handleSubmit}>
         <div className="form-group mb-6">
           <label
@@ -83,21 +85,7 @@ export const RegisterAdmin = () => {
           <input
             type="name"
             name="name"
-            className="form-control
-            block
-            w-full
-            px-3
-            py-1.5
-            text-base
-            font-normal
-            text-gray-700
-            bg-white bg-clip-padding
-            border border-solid border-gray-300
-            rounded
-            transition
-            ease-in-out
-            m-0
-            focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+            className="block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
             defaultValue={name}
             onChange={(e) =>
               setFormInputs({ ...formInputs, name: e.target.value })
@@ -180,7 +168,7 @@ export const RegisterAdmin = () => {
 
           <select
             name="role"
-            className="my-2 p-2 rounded bg-blue-600 text-white"
+            className="my-2 p-2 rounded bg-slate-900 text-white"
             defaultValue={role}
             onChange={(e) =>
               setFormInputs({ ...formInputs, role: e.target.value })
@@ -204,6 +192,7 @@ export const RegisterAdmin = () => {
         <FormButton
           text={{ loading: "Processing", default: "Add Admin" }}
           isLoading={isLoading}
+          icon={<FcPlus className="my-auto ml-1" size={27} />}
         />
       </form>
     </div>
