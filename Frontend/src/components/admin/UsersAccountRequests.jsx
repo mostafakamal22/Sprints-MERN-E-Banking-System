@@ -9,7 +9,7 @@ import { UseResetStatus } from "../../hooks/UseResetStatus";
 import FormButton from "../shared/FormButton";
 import { MainSpinner } from "../shared/MainSpinner";
 import MessagesContainer from "../shared/MessagesContainer";
-import { FcApprove, FcDisapprove } from "react-icons/fc";
+import { FcApprove, FcDisapprove, FcSearch } from "react-icons/fc";
 
 const UsersAccountRequests = ({ accountRequestsList }) => {
   const { info } = useSelector((state) => state.adminAuth);
@@ -91,19 +91,19 @@ const UsersAccountRequests = ({ accountRequestsList }) => {
   });
 
   return (
-    <div className="max-w-6xl px-5 py-10 mx-4 md:mx-15 bg-white">
-      <h3 className="text-lg font-bold text-gray-900 my-5">
+    <div className="max-w-5xl w-full p-6 bg-slate-50 rounded shadow-lg shadow-black/30">
+      <h3 className="text-2xl text-center font-bold text-gray-900 my-5">
         Users Account Requests List (
         {filteredRequests && filteredRequests.length})
       </h3>
 
       {/*search admins with name*/}
-      <div className="flex justify-center items-center flex-wrap md:flex-nowrap gap-4 mb-6 p-4 bg-blue-200 rounded-md">
+      <div className="flex justify-center items-center flex-wrap md:flex-nowrap gap-4 mb-6 p-4 bg-blue-200 rounded-md border-b-4 border-blue-800">
         <label
           htmlFor="searchQuery"
-          className="block w-full md:w-auto text-black"
+          className="flex items-center w-full md:w-auto text-black font-bold"
         >
-          Search Requests By id:-
+          <FcSearch size={40} /> <span>Search Requests By id:- </span>
         </label>
 
         <input
@@ -122,24 +122,24 @@ const UsersAccountRequests = ({ accountRequestsList }) => {
         <MessagesContainer msg={msg} isSuccess={isSuccess} isError={isError} />
       )}
 
-      <div className="overflow-x-auto relative shadow-md sm:rounded-lg">
-        <table className="w-full text-left text-gray-500 border-y-4 border-blue-600 rounded">
+      <div className="overflow-x-auto relative shadow-md sm:rounded-lg my-10">
+        <table className="w-full text-sm font-bold text-gray-500 border-y-4 border-blue-800 rounded">
           <thead className="text-gray-900 uppercase bg-gray-300">
             <tr>
-              <th scope="col" className="py-3 px-6 text-center border-x-2">
+              <th scope="col" className="py-3 px-3 text-center border-x-2">
                 User Id
               </th>
-              <th scope="col" className="py-3 px-6 text-center border-x-2">
+              <th scope="col" className="py-3 px-3 text-center border-x-2">
                 Request Id
               </th>
-              <th scope="col" className="py-3 px-6 text-center border-x-2">
+              <th scope="col" className="py-3 px-3 text-center border-x-2">
                 Initial Balance
               </th>
-              <th scope="col" className="py-3 px-6 text-center border-x-2">
+              <th scope="col" className="py-3 px-3 text-center border-x-2">
                 Decline Request
               </th>
 
-              <th scope="col" className="py-3 px-6 text-center border-x-2">
+              <th scope="col" className="py-3 px-3 text-center border-x-2">
                 Approve Request
               </th>
             </tr>
@@ -158,7 +158,7 @@ const UsersAccountRequests = ({ accountRequestsList }) => {
                   {/*User Id*/}
                   <th
                     scope="row"
-                    className="py-4 px-6 font-medium text-gray-900 whitespace-nowrap  border-x-2 text-center"
+                    className="p-2 text-gray-900 whitespace-nowrap  border-x-2 text-center"
                   >
                     {request.client_id}
                   </th>
@@ -166,7 +166,7 @@ const UsersAccountRequests = ({ accountRequestsList }) => {
                   {/*request Id*/}
                   <th
                     scope="row"
-                    className="py-4 px-6 font-medium text-gray-900 whitespace-nowrap  border-x-2 text-center"
+                    className="p-2 text-gray-900 whitespace-nowrap  border-x-2 text-center"
                   >
                     {request._id}
                   </th>
@@ -174,7 +174,7 @@ const UsersAccountRequests = ({ accountRequestsList }) => {
                   {/*request Initial Balance*/}
                   <th
                     scope="row"
-                    className="py-4 px-6 font-medium text-gray-900 whitespace-nowrap  border-x-2 text-center"
+                    className="p-2 text-gray-900 whitespace-nowrap  border-x-2 text-center"
                   >
                     {request.initial_balance}
                   </th>
@@ -182,7 +182,7 @@ const UsersAccountRequests = ({ accountRequestsList }) => {
                   {/* Decline request */}
                   <th
                     scope="row"
-                    className="py-4 px-6 font-medium text-gray-900 whitespace-nowrap  border-x-2 text-center"
+                    className="p-2 text-gray-900 whitespace-nowrap  border-x-2 text-center"
                   >
                     <form
                       onSubmit={(event) => handleDecline(event, request._id)}
@@ -198,7 +198,7 @@ const UsersAccountRequests = ({ accountRequestsList }) => {
                   {/* approve request */}
                   <th
                     scope="row"
-                    className="py-4 px-6 font-medium text-gray-900 whitespace-nowrap  border-x-2 text-center"
+                    className="p-2 text-gray-900 whitespace-nowrap  border-x-2 text-center"
                   >
                     <form
                       className="flex flex-col justify-center items-center"
@@ -228,7 +228,7 @@ const UsersAccountRequests = ({ accountRequestsList }) => {
 
       {/* if there is search query no request matches >>> just display msg  */}
       {searchQuery && filteredRequests.length === 0 && !isLoading && (
-        <div className="bg-red-500 text-white my-4 py-4 px-2 rounded">
+        <div className="bg-red-200 text-gray-800 text-center font-bold my-4 py-4 px-2 border-l-4 border-red-600 rounded">
           There No Search Result!
         </div>
       )}

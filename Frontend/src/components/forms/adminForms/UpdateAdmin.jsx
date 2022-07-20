@@ -1,12 +1,9 @@
 import React, { useState } from "react";
 import { useEffect } from "react";
-import { FcApproval, FcSurvey } from "react-icons/fc";
+import { AiFillSlackCircle } from "react-icons/ai";
+import { FcDoughnutChart, FcInfo } from "react-icons/fc";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  resetAdminAuthStatus,
-  updateAdmin,
-} from "../../../features/Admin/Auth/adminAuthSlice";
-import { UseResetStatus } from "../../../hooks/UseResetStatus";
+import { updateAdmin } from "../../../features/Admin/Auth/adminAuthSlice";
 import FormButton from "../../shared/FormButton";
 import MessagesContainer from "../../shared/MessagesContainer";
 
@@ -39,17 +36,6 @@ export default function UpdateAdmin() {
     }
   }, [isError, message, msg, isSuccess]);
 
-  //clean up for admin status (on mount , unmount)
-  UseResetStatus(() => {
-    dispatch(resetAdminAuthStatus());
-  });
-
-  UseResetStatus(() => {
-    return () => {
-      dispatch(resetAdminAuthStatus());
-    };
-  });
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     //set msg to none first
@@ -71,23 +57,23 @@ export default function UpdateAdmin() {
   };
 
   return (
-    <div className="max-w-3xl p-6 m-10 rounded-lg shadow-lg bg-white">
-      <h2 className="flex justify-center items-center text-xl text-center px-2 py-4 my-4 rounded shadow bg-gray-200 border-b-4 border-blue-600">
+    <div className="max-w-4xl w-full p-6 bg-slate-50 rounded shadow-lg shadow-black/30 ">
+      <h3 className="flex justify-center items-center text-2xl italic font-bold text-center px-2 py-4 mb-10 rounded shadow bg-blue-200 border-b-4 border-blue-800">
+        <FcDoughnutChart className="ml-1" size={50} />
         <span>Update Your Info</span>
-        <FcSurvey className="ml-1" size={45} />
-      </h2>
+      </h3>
       <form onSubmit={handleSubmit}>
         <div className="form-group mb-6">
           <label
             htmlFor="email"
-            className="w-full inline-block mb-4 p-2 text-gray-800 border-b-2 border-blue-600 rounded shadow bg-blue-200"
+            className="w-full inline-block font-semibold mb-4 p-2 text-gray-800 border-b-4 border-blue-800 rounded shadow bg-blue-200"
           >
             Email address
           </label>
           <input
             type="email"
             name="email"
-            className="block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+            className="block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-800 focus:outline-none"
             defaultValue={email}
             onChange={(e) =>
               setFormInputs({ ...formInputs, email: e.target.value })
@@ -100,18 +86,19 @@ export default function UpdateAdmin() {
         <div className="form-group mb-6">
           <label
             htmlFor="oldPassword"
-            className="w-full inline-block mb-4 p-2 text-gray-800 border-b-2 border-blue-600 rounded shadow bg-blue-200"
+            className="w-full inline-block font-semibold mb-4 p-2 text-gray-800 border-b-4 border-blue-800 rounded shadow bg-blue-200"
           >
             Old Password
           </label>
-          <span className="block text-blue-700 mb-2">
-            - if you <span className="underline font-bold">DO NOT</span> want to
-            change password, just type it for all password field.
+          <span className="flex items-center text-blue-700 mb-2 font-medium">
+            <FcInfo className="mr-1" size={27} />
+            if you <span className="underline font-bold mx-1">DO NOT</span> want
+            to change password, just type it for all password field.
           </span>
           <input
             type="password"
             name="oldPassword"
-            className="block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+            className="block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-800 focus:outline-none"
             defaultValue={oldPassword}
             onChange={(e) =>
               setFormInputs({ ...formInputs, oldPassword: e.target.value })
@@ -124,14 +111,14 @@ export default function UpdateAdmin() {
         <div className="form-group mb-6">
           <label
             htmlFor="password"
-            className="w-full inline-block mb-4 p-2 text-gray-800 border-b-2 border-blue-600 rounded shadow bg-blue-200"
+            className="w-full inline-block font-semibold mb-4 p-2 text-gray-800 border-b-4 border-blue-800 rounded shadow bg-blue-200"
           >
             New Password
           </label>
           <input
             type="password"
             name="password"
-            className="block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+            className="block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-800 focus:outline-none"
             defaultValue={password}
             onChange={(e) =>
               setFormInputs({ ...formInputs, password: e.target.value })
@@ -144,14 +131,14 @@ export default function UpdateAdmin() {
         <div className="form-group mb-6">
           <label
             htmlFor="repeatedPassword"
-            className="w-full inline-block mb-4 p-2 text-gray-800 border-b-2 border-blue-600 rounded shadow bg-blue-200"
+            className="w-full inline-block font-semibold mb-4 p-2 text-gray-800 border-b-4 border-blue-800 rounded shadow bg-blue-200"
           >
             Repeat New Password
           </label>
           <input
             type="password"
             name="repeatedPassword"
-            className="block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+            className="block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-800 focus:outline-none"
             defaultValue={repeatedPassword}
             onChange={(e) =>
               setFormInputs({
@@ -177,7 +164,7 @@ export default function UpdateAdmin() {
         <FormButton
           text={{ loading: "Updating", default: "Update" }}
           isLoading={isLoading}
-          icon={<FcApproval className="ml-1" size={27} />}
+          icon={<AiFillSlackCircle className="ml-1" size={25} />}
         />
       </form>
     </div>

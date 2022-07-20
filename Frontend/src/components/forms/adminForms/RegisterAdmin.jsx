@@ -8,6 +8,7 @@ import { UseResetStatus } from "../../../hooks/UseResetStatus";
 import FormButton from "../../shared/FormButton";
 import MessagesContainer from "../../shared/MessagesContainer";
 import { FcPlus } from "react-icons/fc";
+import { AiFillPlusCircle } from "react-icons/ai";
 
 export const RegisterAdmin = () => {
   const dispatch = useDispatch();
@@ -72,20 +73,23 @@ export const RegisterAdmin = () => {
   };
 
   return (
-    <div className="p-6 rounded shadow bg-white max-w-2xl mx-auto">
-      <h3 className="text-lg font-bold text-gray-900 my-5">Add New Admin</h3>
+    <div className="max-w-5xl w-full p-6 bg-slate-50 rounded shadow-lg shadow-black/30">
+      <h3 className="flex items-center justify-center text-2xl text-center font-bold px-2 py-4 mb-10 rounded shadow bg-blue-200 border-b-4 border-blue-800 text-gray-900">
+        <FcPlus className="mr-2" size={50} />
+        <span>Add New Admin</span>
+      </h3>
       <form onSubmit={handleSubmit}>
-        <div className="form-group mb-6">
+        <div className="mb-6">
           <label
             htmlFor="name"
-            className="w-full inline-block mb-4 p-2 text-gray-800 border-b-2 border-blue-600 rounded shadow bg-blue-200"
+            className="w-full inline-block font-semibold mb-4 p-2 text-gray-800 border-b-4 border-blue-800 rounded shadow bg-blue-200"
           >
-            New Admin Admin name
+            New Admin Name
           </label>
           <input
             type="name"
             name="name"
-            className="block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+            className="block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-800 focus:outline-none"
             defaultValue={name}
             onChange={(e) =>
               setFormInputs({ ...formInputs, name: e.target.value })
@@ -95,17 +99,17 @@ export const RegisterAdmin = () => {
           />
         </div>
 
-        <div className="form-group mb-6">
+        <div className="mb-6">
           <label
             htmlFor="email"
-            className="w-full inline-block mb-4 p-2 text-gray-800 border-b-2 border-blue-600 rounded shadow bg-blue-200"
+            className="w-full inline-block font-semibold mb-4 p-2 text-gray-800 border-b-4 border-blue-800 rounded shadow bg-blue-200"
           >
             New Admin Email address
           </label>
           <input
             type="email"
             name="email"
-            className="block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+            className="block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-800 focus:outline-none"
             defaultValue={email}
             onChange={(e) =>
               setFormInputs({ ...formInputs, email: e.target.value })
@@ -116,17 +120,17 @@ export const RegisterAdmin = () => {
           />
         </div>
 
-        <div className="form-group mb-6">
+        <div className="mb-6">
           <label
             htmlFor="password"
-            className="w-full inline-block mb-4 p-2 text-gray-800 border-b-2 border-blue-600 rounded shadow bg-blue-200"
+            className="w-full inline-block font-semibold mb-4 p-2 text-gray-800 border-b-4 border-blue-800 rounded shadow bg-blue-200"
           >
             New Admin Password
           </label>
           <input
             type="password"
             name="password"
-            className="block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+            className="block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-800 focus:outline-none"
             id="login-Password"
             defaultValue={password}
             onChange={(e) =>
@@ -137,17 +141,17 @@ export const RegisterAdmin = () => {
           />
         </div>
 
-        <div className="form-group mb-6">
+        <div className="mb-6">
           <label
             htmlFor="repeated-password"
-            className="w-full inline-block mb-4 p-2 text-gray-800 border-b-2 border-blue-600 rounded shadow bg-blue-200"
+            className="w-full inline-block font-semibold mb-4 p-2 text-gray-800 border-b-4 border-blue-800 rounded shadow bg-blue-200"
           >
             Repeat Password
           </label>
           <input
             type="password"
             name="repeated-password"
-            className="block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+            className="block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-800 focus:outline-none"
             id="login-Password"
             defaultValue={repeatedPassword}
             onChange={(e) =>
@@ -158,17 +162,17 @@ export const RegisterAdmin = () => {
           />
         </div>
 
-        <div className="form-group mb-6">
+        <div className="mb-6 text-center">
           <label
             htmlFor="role"
-            className="w-full inline-block mb-4 p-2 text-gray-800 border-b-2 border-blue-600 rounded shadow bg-blue-200"
+            className="w-full inline-block font-semibold mb-4 p-2 text-gray-800 text-left border-b-4 border-blue-800 rounded shadow bg-blue-200"
           >
             Choose Admin Role
           </label>
 
           <select
             name="role"
-            className="my-2 p-2 rounded bg-slate-900 text-white"
+            className="my-2 mx-auto p-2 rounded bg-slate-900 text-white  font-bold"
             defaultValue={role}
             onChange={(e) =>
               setFormInputs({ ...formInputs, role: e.target.value })
@@ -192,7 +196,7 @@ export const RegisterAdmin = () => {
         <FormButton
           text={{ loading: "Processing", default: "Add Admin" }}
           isLoading={isLoading}
-          icon={<FcPlus className="my-auto ml-1" size={27} />}
+          icon={<AiFillPlusCircle className="my-auto ml-1" size={25} />}
         />
       </form>
     </div>

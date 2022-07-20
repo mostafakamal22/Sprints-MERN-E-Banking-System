@@ -17,6 +17,7 @@ import {
   FcHighPriority,
   FcLowPriority,
   FcMediumPriority,
+  FcSearch,
 } from "react-icons/fc";
 
 export const UsersListControl = ({ usersList }) => {
@@ -101,18 +102,18 @@ export const UsersListControl = ({ usersList }) => {
   });
 
   return (
-    <div className="max-w-6xl px-5 py-10 mx-4 md:mx-15 bg-white">
-      <h3 className="text-lg font-bold text-gray-900 my-5">
+    <div className="max-w-5xl w-full p-6 bg-slate-50 rounded shadow-lg shadow-black/30">
+      <h3 className="text-2xl text-center font-bold text-gray-900 my-5">
         Users List ({filteredUsers && filteredUsers.length})
       </h3>
 
       {/*search users with name*/}
-      <div className="flex justify-center items-center flex-wrap md:flex-nowrap gap-4 mb-6 p-4 bg-blue-200 rounded-md">
+      <div className="flex justify-center items-center flex-wrap md:flex-nowrap gap-4 mb-6 p-4 bg-blue-200 rounded-md border-b-4 border-blue-800">
         <label
           htmlFor="searchQuery"
-          className="block w-full md:w-auto text-black"
+          className="flex items-center w-full md:w-auto text-black font-bold"
         >
-          Search Users By Name:-
+          <FcSearch size={40} /> <span>Search Users By Name:-</span>
         </label>
 
         <input
@@ -131,28 +132,28 @@ export const UsersListControl = ({ usersList }) => {
         <MessagesContainer msg={msg} isSuccess={isSuccess} isError={isError} />
       )}
 
-      <div className="overflow-x-auto relative shadow-md sm:rounded-lg">
-        <table className="w-full  text-left text-gray-500 border-y-4 border-blue-600 rounded">
+      <div className="overflow-x-auto relative shadow-md sm:rounded-lg my-10">
+        <table className="w-full text-sm font-bold text-gray-500 border-y-4 border-blue-800 rounded">
           <thead className="text-gray-900 uppercase bg-gray-300">
             <tr>
-              <th scope="col" className="py-3 px-6 text-center border-x-2">
+              <th scope="col" className="py-3 px-3 text-center border-x-2">
                 User Name
               </th>
-              <th scope="col" className="py-3 px-6 text-center border-x-2">
+              <th scope="col" className="py-3 px-3 text-center border-x-2">
                 User Email
               </th>
-              <th scope="col" className="py-3 px-6 text-center border-x-2">
+              <th scope="col" className="py-3 px-3 text-center border-x-2">
                 User Status
               </th>
-              <th scope="col" className="py-3 px-6 text-center border-x-2">
+              <th scope="col" className="py-3 px-3 text-center border-x-2">
                 No. Of Accounts
               </th>
 
-              <th scope="col" className="py-3 px-6 text-center border-x-2">
+              <th scope="col" className="py-3 px-3 text-center border-x-2">
                 Remove User
               </th>
 
-              <th scope="col" className="py-3 px-6 text-center border-x-2">
+              <th scope="col" className="py-3 px-3 text-center border-x-2">
                 Update Status
               </th>
             </tr>
@@ -171,7 +172,7 @@ export const UsersListControl = ({ usersList }) => {
                   {/*user Name*/}
                   <th
                     scope="row"
-                    className="py-4 px-6 font-medium text-gray-900 whitespace-nowrap  border-x-2 text-center"
+                    className="p-2  text-gray-900 whitespace-nowrap  border-x-2 text-center"
                   >
                     {user.user_name}
                   </th>
@@ -179,7 +180,7 @@ export const UsersListControl = ({ usersList }) => {
                   {/*user Email*/}
                   <th
                     scope="row"
-                    className="py-4 px-6 font-medium text-gray-900 whitespace-nowrap underline  border-x-2 text-center"
+                    className="p-2  text-gray-900 whitespace-nowrap underline  border-x-2 text-center"
                   >
                     {user.email}
                   </th>
@@ -187,7 +188,7 @@ export const UsersListControl = ({ usersList }) => {
                   {/*User Status*/}
                   <th
                     scope="row"
-                    className="py-4 px-6 font-medium text-gray-900  border-x-2 text-center "
+                    className="p-2  text-gray-900  border-x-2 text-center "
                   >
                     <span
                       className={`flex justify-center items-center w-full p-2  mx-auto rounded
@@ -221,10 +222,10 @@ export const UsersListControl = ({ usersList }) => {
                   {/*User No. Of Accounts*/}
                   <th
                     scope="row"
-                    className="py-4 px-6 font-medium text-gray-900 whitespace-nowrap  border-x-2 text-center"
+                    className="p-2  text-gray-900 whitespace-nowrap  border-x-2 text-center"
                   >
                     <span
-                      className="flex justify-center items-center w-4 h-4 p-6 mx-auto
+                      className="flex justify-center items-center w-3 h-3 p-3 mx-auto
                     text-white rounded-[50%] shadow-sm bg-blue-600"
                     >
                       {user.no_of_account}
@@ -234,7 +235,7 @@ export const UsersListControl = ({ usersList }) => {
                   {/* Remove User */}
                   <th
                     scope="row"
-                    className="py-4 px-6 font-medium text-gray-900 whitespace-nowrap  border-x-2 text-center"
+                    className="p-2 text-gray-900 whitespace-nowrap  border-x-2 text-center"
                   >
                     <form onSubmit={(event) => handleRemoving(event, user._id)}>
                       <FormButton
@@ -248,7 +249,7 @@ export const UsersListControl = ({ usersList }) => {
                   {/* Update User Status */}
                   <th
                     scope="row"
-                    className="py-4 px-6 font-medium text-gray-900 whitespace-nowrap  border-x-2 text-center"
+                    className="p-2  text-gray-900 whitespace-nowrap  border-x-2 text-center"
                   >
                     <UpdateUserStatus
                       user={user}
@@ -266,7 +267,7 @@ export const UsersListControl = ({ usersList }) => {
 
       {/* if there is search query no user matches >>> just display msg  */}
       {searchQuery && filteredUsers.length === 0 && !isLoading && (
-        <div className="bg-red-500 text-white my-4 py-4 px-2 rounded">
+        <div className="bg-red-200 text-gray-800 text-center font-bold my-4 py-4 px-2 border-l-4 border-red-600 rounded">
           There No Search Result!
         </div>
       )}

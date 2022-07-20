@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { TiDelete } from "react-icons/ti";
-import { RiExchangeFill } from "react-icons/ri";
 import { useDispatch, useSelector } from "react-redux";
 import {
   deleteAdmin,
@@ -11,7 +10,7 @@ import { UseResetStatus } from "../../hooks/UseResetStatus";
 import FormButton from "../shared/FormButton";
 import { MainSpinner } from "../shared/MainSpinner";
 import MessagesContainer from "../shared/MessagesContainer";
-import { FcBusinessman, FcPodiumWithSpeaker } from "react-icons/fc";
+import { FcBusinessman, FcPodiumWithSpeaker, FcSearch } from "react-icons/fc";
 import { UpdateAdminRole } from "./UpdateAdminRole";
 
 const AdminListControl = ({ adminsList }) => {
@@ -98,18 +97,18 @@ const AdminListControl = ({ adminsList }) => {
   });
 
   return (
-    <div className="max-w-6xl px-5 py-10 mx-4 md:mx-15 bg-white ">
-      <h3 className="text-lg font-bold text-gray-900 my-5">
+    <div className="max-w-5xl w-full p-6 bg-slate-50 rounded shadow-lg shadow-black/30">
+      <h3 className="text-2xl text-center font-bold text-gray-900 my-5">
         Admins List ({filteredAdmins && filteredAdmins.length})
       </h3>
 
       {/*search admins with name*/}
-      <div className="flex justify-center items-center flex-wrap md:flex-nowrap gap-4 mb-6 p-4 bg-blue-200 rounded-md">
+      <div className="flex justify-center items-center flex-wrap md:flex-nowrap gap-4 mb-6 p-4 bg-blue-200 rounded-md border-b-4 border-blue-800">
         <label
           htmlFor="searchQuery"
-          className="block w-full md:w-auto text-black"
+          className="flex items-center w-full md:w-auto text-black font-bold"
         >
-          Search Admin By Name:-
+          <FcSearch size={40} /> <span>Search Admin By Name:-</span>
         </label>
 
         <input
@@ -128,20 +127,20 @@ const AdminListControl = ({ adminsList }) => {
         <MessagesContainer msg={msg} isSuccess={isSuccess} isError={isError} />
       )}
 
-      <div className="overflow-x-auto relative shadow-md sm:rounded-lg">
-        <table className="w-full text-left text-gray-500 border-y-4 border-blue-600 rounded">
+      <div className="overflow-x-auto relative shadow-md sm:rounded-lg my-10">
+        <table className="w-full text-sm font-bold text-gray-500 border-y-4 border-blue-800 rounded">
           <thead className="text-gray-900 uppercase bg-gray-300">
             <tr>
-              <th scope="col" className="py-3 px-6 text-center border-x-2">
+              <th scope="col" className="py-3 px-3 text-center border-x-2">
                 Admin Name
               </th>
-              <th scope="col" className="py-3 px-6 text-center border-x-2">
+              <th scope="col" className="py-3 px-3 text-center border-x-2">
                 Admin Role
               </th>
-              <th scope="col" className="py-3 px-6 text-center border-x-2">
+              <th scope="col" className="py-3 px-3 text-center border-x-2">
                 Remove Admin
               </th>
-              <th scope="col" className="py-3 px-6 text-center border-x-2">
+              <th scope="col" className="py-3 px-3 text-center border-x-2">
                 Update Role
               </th>
             </tr>
@@ -160,7 +159,7 @@ const AdminListControl = ({ adminsList }) => {
                   {/*Admin Name*/}
                   <th
                     scope="row"
-                    className="py-4 px-6 font-medium text-gray-900 whitespace-nowrap  border-x-2 text-center"
+                    className="p-2 text-gray-900 whitespace-nowrap  border-x-2 text-center"
                   >
                     {admin.admin_name}
                   </th>
@@ -168,7 +167,7 @@ const AdminListControl = ({ adminsList }) => {
                   {/*Admin Role*/}
                   <th
                     scope="row"
-                    className="py-4 px-6 font-medium text-gray-900 whitespace-nowrap  border-x-2 text-center"
+                    className="p-2 text-gray-900 whitespace-nowrap  border-x-2 text-center"
                   >
                     <span
                       className={`flex justify-center items-center w-full p-2  mx-auto rounded ${
@@ -188,7 +187,7 @@ const AdminListControl = ({ adminsList }) => {
                   {/* Remove Admin */}
                   <th
                     scope="row"
-                    className="py-4 px-6 font-medium text-gray-900 whitespace-nowrap  border-x-2 text-center"
+                    className="p-2 text-gray-900 whitespace-nowrap  border-x-2 text-center"
                   >
                     <form
                       onSubmit={(event) => handleRemoving(event, admin._id)}
@@ -204,7 +203,7 @@ const AdminListControl = ({ adminsList }) => {
                   {/* Update Admin Role */}
                   <th
                     scope="row"
-                    className="py-4 px-6 font-medium text-gray-900 whitespace-nowrap  border-x-2 text-center"
+                    className="p-2 text-gray-900 whitespace-nowrap  border-x-2 text-center"
                   >
                     <UpdateAdminRole
                       admin={admin}
@@ -222,7 +221,7 @@ const AdminListControl = ({ adminsList }) => {
 
       {/* if there is search query no admin matches >>> just display msg  */}
       {searchQuery && filteredAdmins.length === 0 && !isLoading && (
-        <div className="bg-red-500 text-white my-4 py-4 px-2 rounded">
+        <div className="bg-red-200 text-gray-800 text-center font-bold my-4 py-4 px-2 border-l-4 border-red-600 rounded">
           There No Search Result!
         </div>
       )}

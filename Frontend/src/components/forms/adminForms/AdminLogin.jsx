@@ -4,12 +4,9 @@ import { FcPrivacy } from "react-icons/fc";
 import { RiLoginCircleFill } from "react-icons/ri";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import {
-  adminLogin,
-  resetAdminAuthStatus,
-} from "../../../features/Admin/Auth/adminAuthSlice";
-import { UseResetStatus } from "../../../hooks/UseResetStatus";
+import { adminLogin } from "../../../features/Admin/Auth/adminAuthSlice";
 import FormButton from "../../shared/FormButton";
+import { Logo } from "../../shared/Logo";
 import MessagesContainer from "../../shared/MessagesContainer";
 
 export default function AdminLogin() {
@@ -40,13 +37,6 @@ export default function AdminLogin() {
     }
   }, [isError, message, info, msg]);
 
-  //clean up  status (on unmount)
-  UseResetStatus(() => {
-    return () => {
-      dispatch(resetAdminAuthStatus());
-    };
-  });
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     //set msg to none first
@@ -60,23 +50,24 @@ export default function AdminLogin() {
   };
 
   return (
-    <div className="block p-6 rounded-lg shadow-lg bg-white max-w-md mx-auto">
-      <h2 className="flex justify-center items-center text-xl font-bold text-center px-2 py-4 my-4 rounded shadow bg-gray-200 border-b-2 border-blue-600">
+    <div className="block p-6 rounded shadow-lg shadow-black/20 bg-slate-50 max-w-md w-full mx-auto">
+      <Logo />
+      <h3 className="flex justify-center items-center text-2xl text-blue-800 font-bold text-center p-2 my-4 rounded shadow bg-blue-200 border-x-4 border-blue-800 select-none">
+        <FcPrivacy size={45} />
         <span>Admins Login</span>
-        <FcPrivacy className="ml-1" size={45} />
-      </h2>
-      <form onSubmit={handleSubmit}>
+      </h3>
+      <form className="mt-10" onSubmit={handleSubmit}>
         <div className="mb-6">
           <label
             htmlFor="email"
-            className="w-full inline-block mb-4 p-2 text-gray-800 border-b-2 border-blue-600 rounded shadow bg-blue-200"
+            className="w-full inline-block font-semibold mb-4 p-2 text-gray-800 border-b-4 border-blue-800 rounded shadow bg-blue-200"
           >
             Email address
           </label>
           <input
             type="email"
             name="email"
-            className="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+            className="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-800 focus:outline-none"
             defaultValue={email}
             onChange={(e) =>
               setFormInputs({ ...formInputs, email: e.target.value })
@@ -88,14 +79,14 @@ export default function AdminLogin() {
         <div className="mb-6">
           <label
             htmlFor="password"
-            className="w-full inline-block mb-4 p-2 text-gray-800 border-b-2 border-blue-600 rounded shadow bg-blue-200"
+            className="w-full inline-block font-semibold mb-4 p-2 text-gray-800 border-b-4 border-blue-800 rounded shadow bg-blue-200"
           >
             Password
           </label>
           <input
             type="password"
             name="password"
-            className="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+            className="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-800 focus:outline-none"
             defaultValue={password}
             onChange={(e) =>
               setFormInputs({ ...formInputs, password: e.target.value })

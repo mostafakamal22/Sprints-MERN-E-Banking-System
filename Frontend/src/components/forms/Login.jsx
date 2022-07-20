@@ -1,12 +1,12 @@
 import React from "react";
 import { useState, useEffect } from "react";
-import { FcLightAtTheEndOfTunnel } from "react-icons/fc";
+import { FcCurrencyExchange } from "react-icons/fc";
 import { RiLoginCircleFill } from "react-icons/ri";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-import { login, resetAuthStatus } from "../../features/Auth/authSlice";
-import { UseResetStatus } from "../../hooks/UseResetStatus";
+import { login } from "../../features/Auth/authSlice";
 import FormButton from "../shared/FormButton";
+import { Logo } from "../shared/Logo";
 import MessagesContainer from "../shared/MessagesContainer";
 
 export default function Login() {
@@ -37,13 +37,6 @@ export default function Login() {
     }
   }, [isError, message, user, msg]);
 
-  //clean up  status (on unmount)
-  UseResetStatus(() => {
-    return () => {
-      dispatch(resetAuthStatus());
-    };
-  });
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     //set msg to none first
@@ -57,16 +50,17 @@ export default function Login() {
   };
 
   return (
-    <div className="block p-6 rounded-lg shadow-lg bg-white max-w-md mx-auto">
-      <h2 className="flex justify-center items-center text-xl font-bold text-center px-2 py-4 my-4 rounded shadow bg-gray-200 border-b-2 border-blue-600">
-        <FcLightAtTheEndOfTunnel className="mr-1" size={45} />
-        <span>E-Bank Login</span>
-      </h2>
-      <form onSubmit={handleSubmit}>
+    <div className="block p-6 rounded shadow-lg shadow-black/20 bg-slate-50 max-w-md w-full mx-auto">
+      <Logo />
+      <h3 className="flex justify-center items-center text-2xl text-blue-800 font-bold text-center p-2 my-4 rounded shadow bg-blue-200 border-x-4 border-blue-800 select-none">
+        <FcCurrencyExchange className="mr-1" size={45} />
+        <span>Login</span>
+      </h3>
+      <form className="mt-10" onSubmit={handleSubmit}>
         <div className="mb-6">
           <label
             htmlFor="email"
-            className="w-full inline-block mb-4 p-2 text-gray-800 border-b-2 border-blue-600 rounded shadow bg-blue-200"
+            className="w-full inline-block font-semibold mb-4 p-2 text-gray-800 border-b-4 border-blue-800 rounded shadow bg-blue-200"
           >
             Email address
           </label>
@@ -85,14 +79,14 @@ export default function Login() {
         <div className="mb-6">
           <label
             htmlFor="password"
-            className="w-full inline-block mb-4 p-2 text-gray-800 border-b-2 border-blue-600 rounded shadow bg-blue-200"
+            className="w-full inline-block font-semibold mb-4 p-2 text-gray-800 border-b-4 border-blue-800 rounded shadow bg-blue-200"
           >
             Password
           </label>
           <input
             type="password"
             name="password"
-            className="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+            className="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-800 focus:outline-none"
             defaultValue={password}
             onChange={(e) =>
               setFormInputs({ ...formInputs, password: e.target.value })
