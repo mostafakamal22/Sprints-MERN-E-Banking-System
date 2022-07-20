@@ -17,7 +17,7 @@ const createAccount = async (req, res, next) => {
     };
     next();
   } catch (error) {
-    if (error.message.match(/(Blanace|id)/gi)) {
+    if (error.message.match(/(Balance|Account|id)/gi)) {
       return res.status(400).send(error.message);
     }
     res.status(500).send("Ooops!! Something Went Wrong, Try again...");
@@ -91,7 +91,7 @@ const transfer = async (req, res, next) => {
     };
     next();
   } catch (error) {
-    if (error.message.match(/(transfer|id)/gi))
+    if (error.message.match(/(transfer|id|Balance|Account)/gi))
       return res.status(400).send(error.message);
     res.status(500).send("Ooops!! Something Went Wrong, Try again...");
   }
@@ -114,12 +114,18 @@ const deposit = async (req, res) => {
     account.balance += +depositAmount;
     account.markModified("balance");
 
+    //update user's withdraw logs with new deposit log
+    account.deposit_logs.push({
+      depositted_amount: +depositAmount,
+    });
+    account.markModified("deposit_logs");
+
     //Save Deposit operation
     const updatedAccount = await account.save();
 
     res.status(200).json(updatedAccount);
   } catch (error) {
-    if (error.message.match(/(Blanace)/gi))
+    if (error.message.match(/(Balance|Account)/gi))
       return res.status(400).send(error.message);
     res.status(500).send("Ooops!! Something Went Wrong, Try again...");
   }
@@ -138,16 +144,22 @@ const withdraw = async (req, res) => {
     //get account
     const account = await Account.findById(req.params.id);
 
-    //update  user's balance with new deposit value
+    //update user's balance with new withdrawl value
     account.balance -= +withdrawAmount;
     account.markModified("balance");
+
+    //update user's withdraw logs with new withdrawl log
+    account.withdraw_logs.push({
+      withdrawed_amount: +withdrawAmount,
+    });
+    account.markModified("withdraw_logs");
 
     //Save Deposit operation
     const updatedAccount = await account.save();
 
     res.status(200).json(updatedAccount);
   } catch (error) {
-    if (error.message.match(/(Blanace)/gi))
+    if (error.message.match(/(Balance|Account)/gi))
       return res.status(400).send(error.message);
     res.status(500).send("Ooops!! Something Went Wrong, Try again...");
   }
