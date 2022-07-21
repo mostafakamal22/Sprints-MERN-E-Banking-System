@@ -1,20 +1,17 @@
 import "./App.css";
 import Register from "./components/forms/Register";
-import Home from "./components/Home";
 import {
   BrowserRouter as Router,
   Routes,
   Route,
   Navigate,
 } from "react-router-dom";
-import ProfilePage from "./views/ProfilePage";
+import ProfilePage from "./views/user/ProfilePage";
 import AdminProfilePage from "./views/admin/ProfilePage";
 import NotFoundPage from "./views/NotFound";
-import UpdateUser from "./components/forms/UpdateUser";
 import UseDetectUser from "./features/Hooks/DetectUser";
 import UseDetectAdmin from "./features/Hooks/DetectAdmin";
 import AdminDashboard from "./views/admin/AdminDashboardPage";
-import { NotificationOverView } from "./components/profile/NotificationOverView";
 import { Notification } from "./components/profile/Notification";
 import { ChooseAccount } from "./components/account/ChooseAccount";
 import { Account } from "./components/account/Account";
@@ -23,10 +20,13 @@ import { OutgoingTransactions } from "./components/account/OutgoingTransactions"
 import { Withdraw } from "./components/account/Withdraw";
 import { Deposit } from "./components/account/Deposit";
 import { Transfer } from "./components/account/Transfer";
-import { AccountRequest } from "./components/forms/AccountRequest";
 import UpdateAdminProfile from "./views/admin/UpdateProfilePage";
 import { AdminLoginPage } from "./views/admin/AdminLoginPage";
 import { UserLoginPage } from "./views/user/UserLoginPage";
+import { HomePage } from "./views/user/HomePage";
+import { AccountRequestPage } from "./views/user/AccountRequestPage";
+import { NotificationsPage } from "./views/user/NotificationsPage";
+import { UpdateProfilePage } from "./views/user/UpdateProfilePage";
 
 function App() {
   //Detect user
@@ -50,19 +50,23 @@ function App() {
       {/* Users Routes */}
       {user && !admin && (
         <Routes>
-          <Route index element={<Home />} />
+          <Route index element={<HomePage />} />
           <Route exact path="/register" element={<Navigate to={"/"} />} />
           <Route exact path="/login" element={<Navigate to={"/"} />} />
           <Route exact path="/profile/:id" element={<ProfilePage />} />
-          <Route exact path="/profile/:id/update" element={<UpdateUser />} />
           <Route
             exact
-            path="/notifications"
-            element={<NotificationOverView />}
+            path="/profile/:id/update"
+            element={<UpdateProfilePage />}
           />
+          <Route exact path="/notifications" element={<NotificationsPage />} />
           <Route exact path="/notifications/:id" element={<Notification />} />
           <Route exact path="/choose-account" element={<ChooseAccount />} />
-          <Route exact path="/account-request" element={<AccountRequest />} />
+          <Route
+            exact
+            path="/account-request"
+            element={<AccountRequestPage />}
+          />
           <Route exact path="/account/:id" element={<Account />} />
           <Route
             exact

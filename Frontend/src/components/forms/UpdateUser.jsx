@@ -1,5 +1,7 @@
 import React from "react";
 import { useState, useEffect } from "react";
+import { AiFillSlackCircle } from "react-icons/ai";
+import { FcDoughnutChart, FcInfo } from "react-icons/fc";
 import { useDispatch, useSelector } from "react-redux";
 import { resetUserStatus, updateUser } from "../../features/User/userSlice";
 import { UseResetStatus } from "../../hooks/UseResetStatus";
@@ -83,15 +85,16 @@ export default function UpdateUser() {
   };
 
   return (
-    <div className="max-w-3xl p-6 m-10 rounded-lg shadow-lg bg-white">
-      <h2 className="text-xl text-center px-2 py-4 my-4 rounded shadow bg-gray-200 border-b-2 border-blue-600">
+    <div className="max-w-4xl w-full p-6 bg-slate-50 rounded shadow-lg shadow-black/30">
+      <h3 className="flex justify-center items-center text-2xl italic font-bold text-center px-2 py-4 mb-10 rounded shadow bg-blue-200 border-b-4 border-blue-800">
+        <FcDoughnutChart className="ml-1" size={50} />
         Update Your Info
-      </h2>
+      </h3>
       <form onSubmit={handleSubmit}>
         <div className="mb-6">
           <label
             htmlFor="email"
-            className="w-full inline-block mb-4 p-2 text-gray-800 border-b-2 border-blue-600 rounded shadow bg-blue-200"
+            className="w-full inline-block font-semibold mb-4 p-2 text-gray-800 border-b-4 border-blue-800 rounded shadow bg-blue-200"
           >
             Email address
           </label>
@@ -110,13 +113,16 @@ export default function UpdateUser() {
         <div className="mb-6">
           <label
             htmlFor="oldPassword"
-            className="w-full inline-block mb-2 p-2 text-gray-800 border-b-2 border-blue-600 rounded shadow bg-blue-200"
+            className="w-full inline-block font-semibold mb-4 p-2 text-gray-800 border-b-4 border-blue-800 rounded shadow bg-blue-200"
           >
             Old Password
           </label>
-          <span className="block text-blue-700 mb-2">
-            - if you <span className="underline font-bold">DO NOT</span> want to
-            change password, just type it for all password field.
+          <span className="flex items-center text-blue-700 mb-2 font-medium">
+            <span className="flex flex-wrap">
+              <FcInfo className="mr-1" size={27} />
+              If you DO NOT want to change password, just type it for all
+              password field.
+            </span>
           </span>
           <input
             type="password"
@@ -134,7 +140,7 @@ export default function UpdateUser() {
         <div className="mb-6">
           <label
             htmlFor="password"
-            className="w-full inline-block mb-4 p-2 text-gray-800 border-b-2 border-blue-600 rounded shadow bg-blue-200"
+            className="w-full inline-block font-semibold mb-4 p-2 text-gray-800 border-b-4 border-blue-800 rounded shadow bg-blue-200"
           >
             New Password
           </label>
@@ -153,7 +159,7 @@ export default function UpdateUser() {
         <div className="mb-6">
           <label
             htmlFor="repeatedPassword"
-            className="w-full inline-block mb-4 p-2 text-gray-800 border-b-2 border-blue-600 rounded shadow bg-blue-200"
+            className="w-full inline-block font-semibold mb-4 p-2 text-gray-800 border-b-4 border-blue-800 rounded shadow bg-blue-200"
           >
             Repeat New Password
           </label>
@@ -175,7 +181,7 @@ export default function UpdateUser() {
         <div className="mb-6">
           <label
             htmlFor="phone"
-            className="w-full inline-block mb-4 p-2 text-gray-800 border-b-2 border-blue-600 rounded shadow bg-blue-200"
+            className="w-full inline-block font-semibold mb-4 p-2 text-gray-800 border-b-4 border-blue-800 rounded shadow bg-blue-200"
           >
             Phone
           </label>
@@ -197,7 +203,7 @@ export default function UpdateUser() {
         <div className="mb-6">
           <label
             htmlFor="address"
-            className="w-full inline-block mb-4 p-2 text-gray-800 border-b-2 border-blue-600 rounded shadow bg-blue-200"
+            className="w-full inline-block font-semibold mb-4 p-2 text-gray-800 border-b-4 border-blue-800 rounded shadow bg-blue-200"
           >
             Full Address
           </label>
@@ -219,7 +225,7 @@ export default function UpdateUser() {
         <div className="mb-6">
           <label
             htmlFor="postal"
-            className="w-full inline-block mb-4 p-2 text-gray-800 border-b-2 border-blue-600 rounded shadow bg-blue-200"
+            className="w-full inline-block font-semibold mb-4 p-2 text-gray-800 border-b-4 border-blue-800 rounded shadow bg-blue-200"
           >
             Post/Zip Code
           </label>
@@ -252,6 +258,7 @@ export default function UpdateUser() {
         <FormButton
           text={{ loading: "Updating", default: "Update" }}
           isLoading={isLoading}
+          icon={<AiFillSlackCircle className="ml-1" size={25} />}
         />
       </form>
     </div>

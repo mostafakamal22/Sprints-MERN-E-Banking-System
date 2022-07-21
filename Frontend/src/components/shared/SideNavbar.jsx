@@ -1,81 +1,12 @@
 import React from "react";
 import { BiMenu } from "react-icons/bi";
-import { BsFilePersonFill, BsGridFill } from "react-icons/bs";
 import { TiDelete } from "react-icons/ti";
-import { AiFillHeart, AiFillSetting } from "react-icons/ai";
-import { Link, useMatch } from "react-router-dom";
-import { RiLogoutBoxRFill } from "react-icons/ri";
+import { AiFillHeart } from "react-icons/ai";
 import { Logo } from "./Logo";
-import { useDispatch } from "react-redux";
-import { adminsLogout } from "../../features/Admin/UsersActions/usersSlice";
-import { ownerLogout } from "../../features/Admin/Owener/ownerSlice";
-import { adminLogout } from "../../features/Admin/Auth/adminAuthSlice";
-import { adminsLogoutRequets } from "../../features/Admin/AccountRequests/accountRequestsSlice";
+import { UserNavLinks } from "../helpers/UserNavLinks";
+import { AdminNavLinks } from "../helpers/AdminNavLinks";
 
-export const SideNavbar = ({ admin }) => {
-  const dispatch = useDispatch();
-
-  const adminNavData = [
-    {
-      title: "Dashboard",
-      icon: BsGridFill,
-      to: "/",
-    },
-    {
-      title: "Profile",
-      icon: BsFilePersonFill,
-      to: `/admins/profile/${admin.id}`,
-    },
-    {
-      title: "Setting",
-      icon: AiFillSetting,
-      to: `/admins/profile/${admin.id}/update`,
-    },
-    {
-      title: "Logout",
-      icon: RiLogoutBoxRFill,
-      handleLogout: () => {
-        dispatch(adminsLogout());
-        dispatch(ownerLogout());
-        dispatch(adminLogout());
-        dispatch(adminsLogoutRequets());
-      },
-    },
-  ];
-
-  const adminNavLinks = adminNavData.map((link) => (
-    <li
-      key={link.title}
-      className="flex w-full justify-between items-center mb-6 select-none"
-    >
-      {link.title === "Logout" ? (
-        <button
-          onClick={link.handleLogout}
-          className="w-full flex items-center p-2 border-r-4 border-red-600 rounded shadow bg-red-200"
-        >
-          <link.icon className="text-red-800" size={23} />
-          <span className="text-sm  ml-2 font-semibold text-red-800 hover:text-red-700 hover:underline">
-            {link.title}
-          </span>
-        </button>
-      ) : (
-        <Link
-          to={link.to}
-          className="w-full flex items-center p-2 border-r-4 border-blue-800 rounded shadow bg-blue-200"
-        >
-          <link.icon className="text-blue-800" size={22} />
-          <span
-            className={`${
-              useMatch(link.to) && "underline font-bold"
-            } text-sm  ml-2 font-semibold text-blue-800 hover:text-blue-700 hover:underline`}
-          >
-            {link.title}
-          </span>
-        </Link>
-      )}
-    </li>
-  ));
-
+export const SideNavbar = ({ admin = null, user = null }) => {
   //toggle sidebar
   const sidebarHandler = () => {
     //get navbar
@@ -113,17 +44,15 @@ export const SideNavbar = ({ admin }) => {
             <AiFillHeart className="mr-1" size={22} />
             <span className="w-full">
               {`Welcome, `}
-              {admin.name.split(" ")[0]}
+              {admin && admin.name.split(" ")[0]}
+              {user && user.name.split(" ")[0]}
             </span>
           </div>
 
           {/* Links */}
           <ul className="mt-12">
-            {adminNavLinks}
-
-            {/* <div className="py-1 px-3 bg-gray-700 rounded text-gray-500 flex items-center justify-center text-xs">
-                5
-              </div> */}
+            {admin && <AdminNavLinks admin={admin} />}
+            {user && <UserNavLinks user={user} />}
           </ul>
         </div>
       </div>
@@ -154,13 +83,15 @@ export const SideNavbar = ({ admin }) => {
             <AiFillHeart className="mr-1" size={22} />
             <span className="w-full">
               {`Welcome, `}
-              {admin.name.split(" ")[0]}
+              {admin && admin.name.split(" ")[0]}
+              {user && user.name.split(" ")[0]}
             </span>
           </div>
 
           {/* Links */}
           <ul className="mt-12">
-            {adminNavLinks}
+            {admin && <AdminNavLinks admin={admin} />}
+            {user && <UserNavLinks user={user} />}
 
             {/* <div className="py-1 px-3 bg-gray-700 rounded text-gray-500 flex items-center justify-center text-xs">
       5

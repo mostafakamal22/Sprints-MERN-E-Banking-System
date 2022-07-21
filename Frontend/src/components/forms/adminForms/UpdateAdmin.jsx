@@ -63,7 +63,7 @@ export default function UpdateAdmin() {
         <span>Update Your Info</span>
       </h3>
       <form onSubmit={handleSubmit}>
-        <div className="form-group mb-6">
+        <div className="mb-6">
           <label
             htmlFor="email"
             className="w-full inline-block font-semibold mb-4 p-2 text-gray-800 border-b-4 border-blue-800 rounded shadow bg-blue-200"
@@ -83,7 +83,7 @@ export default function UpdateAdmin() {
           />
         </div>
 
-        <div className="form-group mb-6">
+        <div className="mb-6">
           <label
             htmlFor="oldPassword"
             className="w-full inline-block font-semibold mb-4 p-2 text-gray-800 border-b-4 border-blue-800 rounded shadow bg-blue-200"
@@ -91,9 +91,11 @@ export default function UpdateAdmin() {
             Old Password
           </label>
           <span className="flex items-center text-blue-700 mb-2 font-medium">
-            <FcInfo className="mr-1" size={27} />
-            if you <span className="underline font-bold mx-1">DO NOT</span> want
-            to change password, just type it for all password field.
+            <span className="flex flex-wrap">
+              <FcInfo className="mr-1" size={27} />
+              If you DO NOT want to change password, just type it for all
+              password field.
+            </span>
           </span>
           <input
             type="password"
@@ -108,7 +110,7 @@ export default function UpdateAdmin() {
           />
         </div>
 
-        <div className="form-group mb-6">
+        <div className="mb-6">
           <label
             htmlFor="password"
             className="w-full inline-block font-semibold mb-4 p-2 text-gray-800 border-b-4 border-blue-800 rounded shadow bg-blue-200"
@@ -128,7 +130,7 @@ export default function UpdateAdmin() {
           />
         </div>
 
-        <div className="form-group mb-6">
+        <div className="mb-6">
           <label
             htmlFor="repeatedPassword"
             className="w-full inline-block font-semibold mb-4 p-2 text-gray-800 border-b-4 border-blue-800 rounded shadow bg-blue-200"

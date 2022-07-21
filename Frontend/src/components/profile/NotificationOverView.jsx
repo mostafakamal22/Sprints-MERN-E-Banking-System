@@ -31,29 +31,20 @@ export const NotificationOverView = () => {
   };
 
   return (
-    <div className="h-screen max-w-xl w-full  mx-20 md:mx-10  grid place-items-center my-8">
-      <div className="h-full w-full overflow-y-auto  bg-gray-100  rounded-xl  px-4 py-6  sm:p-10 shadow-sm">
+    <div className="max-w-5xl w-full p-6 bg-slate-50 rounded shadow-lg shadow-black/30">
+      <div className="h-full w-full  px-4 py-6  sm:p-10 ">
         {/* Heading */}
-        <div className="flex items-center justify-between w-full mb-4">
-          <h3 className="flex justify-center items-center font-bold text-xl sm:text-2xl text-gray-800">
-            <span>Notifications</span>
-            <FcIdea className="ml-1" size={45} />
-          </h3>
-          <Link
-            to={"/"}
-            className="inline-flex font-bold text-xs sm:text-sm bg-white px-2 sm:px-3 py-2 text-blue-500 items-center rounded
-         shadow  focus:outline-none hover:bg-blue-500 hover:text-white
-          "
-          >
-            <BiArrowBack className="mb-[-1px] mr-1 font-bold" size={15} />
-            Go Back
-          </Link>
-        </div>
+
+        <h3 className="flex justify-center items-center text-xl text-center font-bold px-2 py-4 mb-10 bg-blue-200 border-b-4 border-blue-800 rounded shadow">
+          <FcIdea className="mr-1" size={50} />
+
+          <span>Notifications</span>
+        </h3>
 
         {/* If there no notifications */}
         {!notifications ||
           (notifications.length === 0 && (
-            <div className="mt-2 px-6 py-4 bg-blue-200 font-semibold rounded-lg shadow w-full select-none">
+            <div className="mt-2 px-6 py-4 bg-blue-200 font-semibold border-b-4 border-blue-800 rounded-lg shadow w-full select-none">
               You Do not Have Any Notifications!
             </div>
           ))}

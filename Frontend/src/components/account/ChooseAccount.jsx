@@ -1,48 +1,27 @@
 import React from "react";
 import { BiRightArrowAlt } from "react-icons/bi";
-import { useSelector } from "react-redux";
-import { Link } from "react-router-dom";
 
-export const ChooseAccount = () => {
-  //Get Accounts from state
-  const accounts = useSelector((state) => state.userData.info.accounts);
-
+export const ChooseAccount = ({ account, accounts, setPreferedAccount }) => {
   return (
-    <div className="flex flex-col min-h-[200px] p-4 md:p-10 m-4 md:m-10 shadow bg-gray-200 rounded text-gray-800 text-center font-bold">
-      {/* if there is no accounts */}
-      {(!accounts || accounts.length === 0) && (
-        <div className="p-5 bg-yellow-300 rounded shadow">
-          <p className="my-4">You Do not Have Any Accounts Yet!</p>
-          <p>
-            <span>Request Account</span>
-            <Link
-              className="ml-2 underline text-gray-500 hover:text-blue-800"
-              to={"/request-account"}
-            >
-              <span>From Here</span>
-              <BiRightArrowAlt className="inline-block ml-auto" size={20} />
-            </Link>
-          </p>
-        </div>
-      )}
-
-      {/* display accounts */}
+    <div className="w-full flex justify-between items-center flex-col  lg:flex-row gap-2 lg:gap-0 p-3  text-white text-center font-semibold bg-blue-500 border-r-4 border-blue-800 rounded shadow">
       {accounts && accounts.length > 0 && (
-        <div>
-          <h3 className="text-lg  bg-blue-200 p-4 rounded shadow">
+        <>
+          <p className="w-full lg:w-auto bg-slate-900  px-4 py-2 rounded-md">
             Choose Account
-          </h3>
-          {accounts.map((account) => (
-            <Link
-              className="block w-full flex justify-center items-center my-5 p-4 rounded shadow bg-blue-500 hover:text-white hover:underline hover:bg-blue-600"
-              key={account}
-              to={`/account/${account}`}
-            >
-              <span>{account}</span>
-              <BiRightArrowAlt className="inline-block ml-auto" size={20} />
-            </Link>
-          ))}
-        </div>
+          </p>
+          <select
+            defaultValue={accounts.indexOf(account._id) + 1}
+            onChange={(e) => setPreferedAccount(e.target.value - 1)}
+            className="w-full lg:w-auto bg-white text-gray-800 text-center  px-4 py-2 rounded-md"
+          >
+            {accounts.map((account, index) => (
+              <option key={account} defaultValue={index}>
+                <span>{index + 1}</span>
+                <BiRightArrowAlt className="inline-block ml-auto" size={20} />
+              </option>
+            ))}
+          </select>
+        </>
       )}
     </div>
   );

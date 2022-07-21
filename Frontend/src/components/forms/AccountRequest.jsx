@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from "react";
+import { FcElectroDevices } from "react-icons/fc";
+import { RiSendPlaneFill } from "react-icons/ri";
 import { useDispatch, useSelector } from "react-redux";
 import { accountRequest, resetUserStatus } from "../../features/User/userSlice";
 import { UseResetStatus } from "../../hooks/UseResetStatus";
@@ -59,21 +61,22 @@ export const AccountRequest = () => {
   };
 
   return (
-    <div className="block p-6 rounded shadow-lg bg-gray-200 max-w-2xl mx-auto">
-      <h2 className="text-xl text-center px-2 py-4 my-4 rounded shadow bg-white">
-        Send An Account Request
-      </h2>
+    <div className="max-w-5xl w-full p-6 bg-slate-50 rounded shadow-lg shadow-black/30">
+      <h3 className="flex justify-center items-center text-xl text-center font-bold px-2 py-4 mb-10 bg-blue-200 border-b-4 border-blue-800 rounded shadow ">
+        <FcElectroDevices className="mr-1" size={50} />
+        <span>Send An Account Request</span>
+      </h3>
       <form onSubmit={handleSubmit}>
-        <div className="flex justify-center items-center flex-wrap gap-4 px-5 py-10 my-4 rounded shadow bg-white">
+        <div className="flex justify-center items-center font-semibold flex-wrap gap-4 px-5 py-10  ">
           <label
-            className="basis-full sm:basis-[50%] text-md  my-2 sm:my-0 mx-2 p-2 sm:border-r-2 rounded shadow bg-blue-200 border-blue-600"
+            className="basis-full sm:basis-[50%] text-md  my-2 sm:my-0 mx-2 p-2 sm:border-r-4 rounded shadow bg-blue-200 border-blue-800"
             htmlFor="intitialBalance"
           >
             Enter Initial Balance
           </label>
 
           <input
-            className="basis-full  sm:basis-1/3  px-3 py-1.5 mx-4 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out  focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+            className="basis-full  sm:basis-1/3  px-3 py-1.5 mx-4 text-base font-normal text-gray-700 bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out  focus:text-gray-700 focus:bg-white focus:border-blue-800 focus:outline-none"
             type="number"
             name="intitialBalance"
             defaultValue={intitialBalance}
@@ -83,14 +86,14 @@ export const AccountRequest = () => {
           />
 
           <label
-            className="basis-full sm:basis-[50%] text-md  my-2 sm:my-0 mx-2 p-2 sm:border-r-2 rounded shadow bg-blue-200 border-blue-600"
+            className="basis-full sm:basis-[50%] text-md  my-2 sm:my-0 mx-2 p-2 sm:border-r-4 rounded shadow bg-blue-200 border-blue-800"
             htmlFor="password"
           >
             Type your Password
           </label>
 
           <input
-            className="basis-full  sm:basis-1/3  px-3 py-1.5 mx-4 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out  focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+            className="basis-full  sm:basis-1/3  px-3 py-1.5 mx-4 text-base font-normal text-gray-700  bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out  focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
             type="password"
             name="password"
             defaultValue={password}
@@ -114,6 +117,7 @@ export const AccountRequest = () => {
         <FormButton
           text={{ default: "Send Request", loading: "Processing" }}
           isLoading={isLoading}
+          icon={<RiSendPlaneFill className="ml-1" size={25} />}
         />
       </form>
     </div>

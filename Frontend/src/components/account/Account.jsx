@@ -1,110 +1,54 @@
 import React from "react";
-import { useEffect } from "react";
-import { BiCoinStack, BiMoney, BiTransfer } from "react-icons/bi";
-import { RiFundsBoxFill, RiRefund2Line } from "react-icons/ri";
-import { useDispatch, useSelector } from "react-redux";
-import { Link, useLocation } from "react-router-dom";
-import { getAccount } from "../../features/Account/AccountSlice";
+import { FcHome } from "react-icons/fc";
+import { useSelector } from "react-redux";
 import { MainSpinner } from "../shared/MainSpinner";
 import MessagesContainer from "../shared/MessagesContainer";
+import { AccountDetails } from "./AccountDetails";
+import { ChooseAccount } from "./ChooseAccount";
+import { NoAccountYet } from "./NoAccountYet";
 
-export const Account = () => {
-  const dispatch = useDispatch();
-
-  //Get account id from location pathname
-  const accountId = useLocation().pathname.split("/").at(-1);
-
-  //Get user data
-  const { user } = useSelector((state) => state.userAuth);
-
-  useEffect(() => {
-    const payload = {
-      token: user.token,
-      accountId,
-    };
-    dispatch(getAccount(payload));
-  }, [accountId, user]);
-
-  //Get account data
-  const { account, isLoading, isError, message } = useSelector(
+export const Account = ({ setPreferedAccount }) => {
+  const { info } = useSelector((state) => state.userData);
+  const { account, isError, isLoading, message } = useSelector(
     (state) => state.userAccount
   );
 
-  //Show Loading Spinner
-  if (isLoading) {
-    return <MainSpinner />;
-  }
+  //No Account yet
+  if (!account || info.accounts.length === 0) return <NoAccountYet />;
 
-  //Show Error Container
-  if (isError) {
+  if (isLoading)
     return (
-      <div className="flex flex-col justify-center bg-gray-200 min-h-[350px] p-4 md:p-10 m-4 md:m-10 rounded shadow">
-        <MessagesContainer isError={isError} msg={message} />
-        <Link
-          className="self-end my-2 p-2 rounded shadow bg-blue-600 text-white hover:underline"
-          to={"/"}
-        >
-          Go Home
-        </Link>
+      isLoading && (
+        <div className="max-w-5xl w-full p-6 bg-slate-50 rounded shadow-lg shadow-black/30">
+          <MainSpinner />
+        </div>
+      )
+    );
+
+  if (isError)
+    return (
+      <div className="max-w-5xl w-full p-6 bg-slate-50 rounded shadow-lg shadow-black/30">
+        <MessagesContainer msg={message} isError={isError} />
       </div>
     );
-  }
 
-  return (
-    <div className="flex flex-col min-h-[200px] p-4 md:p-10 m-4 md:m-10 shadow bg-gray-200 rounded text-gray-800 text-center font-semibold">
-      <div className="min-h-[150px] flex items-center justify-center flex-wrap gap-2 bg-blue-300 p-4 border-2 border-black rounded shadow my-4">
-        <div className="text-lg basis-full md:basis-[45%] self-start">
-          <p className="text-lg mb-3">Account balance</p>
-          <div className="bg-green-500 text-white p-2 rounded-md">
-            {account.balance} <span className="text-sm font-thin italic"></span>
-            L.E
-          </div>
-        </div>
+  if (account && !isLoading)
+    return (
+      <div className="max-w-5xl w-full p-4 bg-slate-50 rounded shadow-lg shadow-black/30">
+        <h2 className="flex justify-center items-center text-2xl my-5 px-6 py-3 text-center font-bold bg-blue-200 text-blue-900 border-x-4 border-blue-800 rounded shadow">
+          <FcHome className="mr-1" size={45} />
+          <span>Home</span>
+        </h2>
 
-        <div className="basis-full md:basis-[45%] text-center">
-          <Link
-            to={`/account/transfer/${account._id}`}
-            className="flex justify-center items-center p-4 bg-blue-900 text-white rounded shadow hover:underline"
-          >
-            Transfer
-            <BiTransfer className="mb-[-5px] ml-2" size={20} />
-          </Link>
-        </div>
+        {/* Choose Account */}
+        <ChooseAccount
+          account={account}
+          accounts={info.accounts}
+          setPreferedAccount={setPreferedAccount}
+        />
+
+        {/* Account Details accounts */}
+        <AccountDetails account={account} />
       </div>
-
-      <div className="min-h-[150px] flex items-center justify-center flex-wrap gap-2 bg-blue-300 p-4 border-2 border-black rounded shadow">
-        <Link
-          to={`/account/withdraw/${account._id}`}
-          className="basis-full md:basis-[45%] flex justify-center items-center p-4 bg-gray-500 text-white rounded shadow hover:underline"
-        >
-          Withdrawal
-          <BiMoney className="mb-[-4px] ml-2" size={20} />
-        </Link>
-        <Link
-          to={`/account/deposit/${account._id}`}
-          className="basis-full md:basis-[45%] flex justify-center items-center p-4 bg-green-900 text-white rounded shadow hover:underline"
-        >
-          deposit
-          <BiCoinStack className="mb-[-4px] ml-2" size={20} />
-        </Link>
-      </div>
-
-      <div className="min-h-[150px] my-4 flex items-center justify-center flex-wrap gap-2 bg-blue-300 p-4 border-2 border-black rounded shadow">
-        <Link
-          to={`/account/in/${account._id}`}
-          className="basis-full md:basis-[45%] flex justify-center items-center p-4 bg-gray-500 text-white rounded shadow hover:underline"
-        >
-          Incoming Transactions
-          <RiRefund2Line className="mb-[-4px] ml-2" size={20} />
-        </Link>
-        <Link
-          to={`/account/out/${account._id}`}
-          className="basis-full md:basis-[45%] flex justify-center items-center p-4 bg-green-900 text-white rounded shadow hover:underline"
-        >
-          Outgoing Transactions
-          <RiFundsBoxFill className="mb-[-4px] ml-2" size={20} />
-        </Link>
-      </div>
-    </div>
-  );
+    );
 };
