@@ -34,7 +34,7 @@ export const SideNavbar = ({ admin = null, user = null }) => {
       {/* Sidebar starts */}
 
       {/* Tablet/desktop Sidebar*/}
-      <div className="w-64 absolute sm:relative bg-slate-50 shadow-lg flex-col justify-between hidden md:flex ">
+      <div className="w-64 absolute sm:relative bg-slate-50 shadow-lg flex-col justify-between hidden lg:flex ">
         <div className="px-8 py-8 sticky top-0">
           {/* Logo */}
           <Logo />
@@ -59,7 +59,7 @@ export const SideNavbar = ({ admin = null, user = null }) => {
 
       {/*Mobile Sidebar */}
       <div
-        className="w-64 h-screen z-40 fixed bg-slate-50 shadow-lg md:h-full flex-col justify-between md:hidden  transition duration-150 ease-in-out translate-x-[-260px]"
+        className="w-64 h-screen z-40 fixed bg-slate-50 shadow-lg md:h-full flex-col justify-between lg:hidden  transition duration-150 ease-in-out translate-x-[-260px]"
         id="mobile-nav"
       >
         <div

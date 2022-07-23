@@ -67,11 +67,11 @@ export default function AdminDashboard() {
   });
 
   return (
-    <div className="min-h-screen  flex flex-no-wrap">
+    <div className="min-h-screen  flex flex-nowrap">
       {/* admin dashboard side navabr */}
       <SideNavbar admin={info} />
 
-      <div className="w-full h-full flex justify-center items-center">
+      <div className="overflow-x-auto w-full h-full flex justify-center items-center">
         <div className="w-full flex justify-center items-center flex-col gap-6 p-10 md:px-20 md:py-10">
           {/* admin dashboard navabr */}
           <DashboardNavbar activeTab={activeTab} setActiveTab={setActiveTab} />
