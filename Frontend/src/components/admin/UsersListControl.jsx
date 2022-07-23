@@ -95,8 +95,8 @@ export const UsersListControl = ({ usersList }) => {
       setMsg(message);
     }
 
-    if (isSuccess) {
-      setMsg("Success!");
+    if (isSuccess && message) {
+      setMsg(message);
     }
   }, [isError, message, isSuccess, msg]);
 
@@ -246,7 +246,7 @@ export const UsersListControl = ({ usersList }) => {
       )}
 
       {/*Request Status and Errors*/}
-      {(isError || isSuccess) && (
+      {(isError || (isSuccess && message)) && (
         <MessagesContainer msg={msg} isSuccess={isSuccess} isError={isError} />
       )}
 

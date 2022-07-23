@@ -88,8 +88,8 @@ const AdminListControl = ({ adminsList }) => {
       setMsg(message);
     }
 
-    if (isSuccess) {
-      setMsg("Success!");
+    if (isSuccess && message) {
+      setMsg(message);
     }
   }, [isError, message, isSuccess, msg]);
 

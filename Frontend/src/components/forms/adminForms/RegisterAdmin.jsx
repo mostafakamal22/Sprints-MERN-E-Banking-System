@@ -35,8 +35,8 @@ export const RegisterAdmin = () => {
       setFormInputs({ ...formInputs, msg: message });
     }
 
-    if (isSuccess) {
-      setFormInputs({ ...formInputs, msg: "Admin Created Succesfully" });
+    if (isSuccess && message) {
+      setFormInputs({ ...formInputs, msg: message });
     }
   }, [isError, message, isSuccess, msg]);
 

@@ -102,7 +102,7 @@ export const accountRequestsSlice = createSlice({
         state.isLoading = false;
         state.isSuccess = true;
         state.isError = false;
-        state.message = "";
+        state.message = "Request Declined Successfully!";
         state.accountRequestsList = state.accountRequestsList.filter(
           (request) => request._id !== action.payload.id
         );
@@ -123,7 +123,7 @@ export const accountRequestsSlice = createSlice({
         state.isLoading = false;
         state.isSuccess = true;
         state.isError = false;
-        state.message = "";
+        state.message = "Request Approved Successfully!";
         state.accountRequestsList = state.accountRequestsList.filter(
           (request) => request._id !== action.payload.id
         );

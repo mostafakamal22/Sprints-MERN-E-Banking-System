@@ -99,7 +99,7 @@ export const usersSlice = createSlice({
         state.isLoading = false;
         state.isSuccess = true;
         state.isError = false;
-        state.message = "";
+        state.message = "User Deleted Successfully!";
         state.usersList = state.usersList.filter(
           (user) => user._id !== action.payload.id
         );
@@ -120,7 +120,7 @@ export const usersSlice = createSlice({
         state.isLoading = false;
         state.isSuccess = true;
         state.isError = false;
-        state.message = "";
+        state.message = "User's Status Updated Successfully!";
         state.usersList = state.usersList.map((user) => {
           if (user._id === action.payload._id) {
             return action.payload;

@@ -85,8 +85,8 @@ const UsersAccountRequests = ({ accountRequestsList }) => {
       setMsg(message);
     }
 
-    if (isSuccess) {
-      setMsg("Success!");
+    if (isSuccess && message) {
+      setMsg(message);
     }
   }, [isError, message, isSuccess, msg]);
 
