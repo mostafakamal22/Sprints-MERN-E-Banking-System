@@ -11,7 +11,6 @@ import NotFoundPage from "./views/NotFound";
 import UseDetectUser from "./features/Hooks/DetectUser";
 import UseDetectAdmin from "./features/Hooks/DetectAdmin";
 import AdminDashboard from "./views/admin/AdminDashboardPage";
-import { Notification } from "./components/profile/Notification";
 import { ChooseAccount } from "./components/account/ChooseAccount";
 import { Account } from "./components/account/Account";
 import { IncomingTransactions } from "./components/account/IncomingTransactions";
@@ -27,6 +26,7 @@ import { AccountRequestPage } from "./views/user/AccountRequestPage";
 import { NotificationsPage } from "./views/user/NotificationsPage";
 import { UpdateProfilePage } from "./views/user/UpdateProfilePage";
 import { RegisterPage } from "./views/guest/RegisterPage";
+import { NotificationPage } from "./views/user/NotificationPage";
 
 function App() {
   //Detect user
@@ -60,7 +60,11 @@ function App() {
             element={<UpdateProfilePage />}
           />
           <Route exact path="/notifications" element={<NotificationsPage />} />
-          <Route exact path="/notifications/:id" element={<Notification />} />
+          <Route
+            exact
+            path="/notifications/:id"
+            element={<NotificationPage />}
+          />
           <Route exact path="/choose-account" element={<ChooseAccount />} />
           <Route
             exact

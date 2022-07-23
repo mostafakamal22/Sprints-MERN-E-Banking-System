@@ -8,7 +8,7 @@ const TableFooter = ({ range, setPage, page, slice }) => {
   }, [slice, page, setPage]);
   return (
     <nav className="mx-auto my-5 text-center">
-      <ul class="inline-flex items-center flex-wrap -space-x-px">
+      <ul className="inline-flex items-center flex-wrap -space-x-px">
         {range.map((el, index) => (
           <li key={index} onClick={() => setPage(el)}>
             <button
