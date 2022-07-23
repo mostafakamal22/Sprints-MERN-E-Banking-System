@@ -40,7 +40,12 @@ export const HomePage = () => {
     };
   });
 
-  if (isLoading) return <MainSpinner />;
+  if (isLoading)
+    return (
+      <div className="max-w-5xl w-full min-h-screen mx-auto my-10 p-6 bg-slate-50 rounded shadow-lg shadow-black/30">
+        <MainSpinner />
+      </div>
+    );
 
   return (
     <div className="min-h-screen  flex flex-no-wrap">

@@ -12,9 +12,9 @@ export const PaymentMethods = ({ title }) => {
   //state for payment methods
   const [method, setMethod] = useState(paymentMethods[0].title);
   return (
-    <div className="my-4 rounded shadow bg-white p-10">
+    <div className="my-10 rounded shadow bg-white p-10">
       {/* Heading */}
-      <h3 className="text-lg font-medium text-gray-900">{title}</h3>
+      <h3 className="text-lg font-bold text-gray-900">{title}</h3>
 
       {/* Choose Method */}
       <fieldset className="mt-4">
@@ -43,6 +43,10 @@ export const PaymentMethods = ({ title }) => {
           ))}
         </div>
       </fieldset>
+
+      <p className="text-xs font-bold my-2 underline text-blue-500">
+        *All Payments Methods Are FAKE Just Type Any Values.
+      </p>
 
       {/* Methods inputs Details */}
       {method === paymentMethods[0].title && <CreditCard />}

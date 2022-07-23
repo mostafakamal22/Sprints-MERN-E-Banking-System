@@ -11,6 +11,7 @@ export const MainSpinner = ({
       className="flex justify-center items-center"
     >
       <BeatLoader
+        className="m-auto"
         color={"rgb(30, 79, 217)"}
         loading={isLoading}
         size={spinnerSize}

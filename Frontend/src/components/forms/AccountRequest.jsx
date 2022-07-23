@@ -67,7 +67,7 @@ export const AccountRequest = () => {
         <span>Send An Account Request</span>
       </h3>
       <form onSubmit={handleSubmit}>
-        <div className="flex justify-center items-center font-semibold flex-wrap gap-4 px-5 py-10  ">
+        <div className="flex justify-center items-center font-semibold flex-wrap gap-4 px-5 py-5  ">
           <label
             className="basis-full sm:basis-[50%] text-md  my-2 sm:my-0 mx-2 p-2 sm:border-r-4 rounded shadow bg-blue-200 border-blue-800"
             htmlFor="intitialBalance"
