@@ -1,5 +1,4 @@
 import "./App.css";
-import Register from "./components/forms/Register";
 import {
   BrowserRouter as Router,
   Routes,
@@ -27,6 +26,7 @@ import { HomePage } from "./views/user/HomePage";
 import { AccountRequestPage } from "./views/user/AccountRequestPage";
 import { NotificationsPage } from "./views/user/NotificationsPage";
 import { UpdateProfilePage } from "./views/user/UpdateProfilePage";
+import { RegisterPage } from "./views/guest/RegisterPage";
 
 function App() {
   //Detect user
@@ -40,7 +40,7 @@ function App() {
       {!user && !admin && (
         <Routes>
           <Route index element={<UserLoginPage />} />
-          <Route exact path="/register" element={<Register />} />
+          <Route exact path="/register" element={<RegisterPage />} />
           <Route exact path="/admins/login" element={<AdminLoginPage />} />
           <Route exact path="/login" element={<UserLoginPage />} />
           <Route path="*" element={<NotFoundPage />} />

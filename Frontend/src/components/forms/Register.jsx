@@ -1,14 +1,15 @@
 import React from "react";
 import { useEffect } from "react";
 import { useState } from "react";
-import { FcLightAtTheEndOfTunnel } from "react-icons/fc";
+import { FcCurrencyExchange } from "react-icons/fc";
 import { TiUserAdd } from "react-icons/ti";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { register, resetAuthStatus } from "../../features/Auth/authSlice";
-import { UseResetStatus } from "../../hooks/UseResetStatus";
+import { register } from "../../features/Auth/authSlice";
 import FormButton from "../shared/FormButton";
+import { Logo } from "../shared/Logo";
 import MessagesContainer from "../shared/MessagesContainer";
+import { ReactComponent as RegisterImg } from "../../assets/imgs/E-BANK-Register.svg";
 
 export default function Register() {
   const [formInputs, setFormInputs] = useState({
@@ -59,13 +60,6 @@ export default function Register() {
     }
   }, [user, isError, isSuccess, message]);
 
-  //clean up  status (on unmount)
-  UseResetStatus(() => {
-    return () => {
-      dispatch(resetAuthStatus());
-    };
-  });
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     //set error msg to none first
@@ -89,16 +83,23 @@ export default function Register() {
   };
 
   return (
-    <form
-      className="max-w-xl p-10 px-12 mx-auto bg-white rounded-md"
-      onSubmit={handleSubmit}
-    >
-      <h2 className="flex justify-center items-center text-xl font-bold text-center px-2 py-4 my-6 rounded shadow bg-gray-200 border-b-2 border-blue-600">
-        <FcLightAtTheEndOfTunnel className="mr-1" size={45} />
-        <span>E-Bank Register</span>
-      </h2>
-      <div className="grid xl:grid-cols-2 xl:gap-6">
-        <div className="relative z-0 w-full mb-6 group">
+    <div className="block p-6 rounded shadow-lg shadow-black/20 bg-slate-50 w-full mx-auto">
+      <Logo />
+      <h3 className="flex justify-center items-center text-2xl text-blue-800 font-bold text-center p-2 my-4 rounded shadow bg-blue-200 border-x-4 border-blue-800 select-none">
+        <FcCurrencyExchange className="mr-1" size={45} />
+        <span>Register</span>
+      </h3>
+
+      <RegisterImg className="max-h-60 w-full my-10 p-6 bg-blue-200 mx-auto border-x-4 border-blue-800 shadow rounded md:hidden" />
+
+      <form className="mt-10" onSubmit={handleSubmit}>
+        <div className="relative z-0 w-full mb-6">
+          <label
+            htmlFor="first_name"
+            className="w-full inline-block font-semibold mb-4 p-2 text-gray-800 border-b-4 border-blue-800 rounded shadow bg-blue-200"
+          >
+            First name
+          </label>
           <input
             type="text"
             name="first_name"
@@ -106,18 +107,19 @@ export default function Register() {
             onChange={(e) =>
               setFormInputs({ ...formInputs, firstName: e.target.value })
             }
-            className="block py-2.5 px-0 w-full text-sm text-green-600 font-bold bg-transparent border-0 border-b-2 border-gray-600 appearance-none  focus:outline-none focus:ring-0 focus:border-blue-600 peer"
-            placeholder=" "
+            className="block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+            placeholder="Type Your First Name"
             required
           />
-          <label
-            htmlFor="first_name"
-            className="peer-focus:font-medium absolute text-sm text-dark font-semibold  duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600  peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
-          >
-            First name
-          </label>
         </div>
-        <div className="relative z-0 w-full mb-6 group">
+        <div className="relative z-0 w-full mb-6">
+          <label
+            htmlFor="last_name"
+            className="w-full inline-block font-semibold mb-4 p-2 text-gray-800 border-b-4 border-blue-800 rounded shadow bg-blue-200"
+          >
+            Last name
+          </label>
+
           <input
             type="text"
             name="last_name"
@@ -125,97 +127,101 @@ export default function Register() {
             onChange={(e) =>
               setFormInputs({ ...formInputs, lastName: e.target.value })
             }
-            className="block py-2.5 px-0 w-full text-sm text-green-600 font-bold bg-transparent border-0 border-b-2 border-gray-600 appearance-none  focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+            className="block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
             placeholder=" "
             required
           />
-          <label
-            htmlFor="last_name"
-            className="peer-focus:font-medium absolute text-sm text-dark font-semibold  duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600  peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
-          >
-            Last name
-          </label>
         </div>
-      </div>
-      <div className="relative z-0 w-full mb-6 group">
-        <input
-          type="email"
-          name="email"
-          defaultValue={email}
-          onChange={(e) =>
-            setFormInputs({ ...formInputs, email: e.target.value })
-          }
-          className="block py-2.5 px-0 w-full text-sm text-green-600 font-bold bg-transparent border-0 border-b-2 border-gray-600 appearance-none  focus:outline-none focus:ring-0 focus:border-blue-600 peer"
-          placeholder=" "
-          required
-        />
-        <label
-          htmlFor="email"
-          className="peer-focus:font-medium absolute text-sm text-dark font-semibold  duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600  peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
-        >
-          Email address
-        </label>
-      </div>
-      <div className="relative z-0 w-full mb-6 group">
-        <input
-          type="text"
-          name="address"
-          defaultValue={address}
-          onChange={(e) =>
-            setFormInputs({ ...formInputs, address: e.target.value })
-          }
-          className="block py-2.5 px-0 w-full text-sm text-green-600 font-bold bg-transparent border-0 border-b-2 border-gray-600 appearance-none  focus:outline-none focus:ring-0 focus:border-blue-600 peer"
-          placeholder=" "
-          required
-        />
-        <label
-          htmlFor="address"
-          className="peer-focus:font-medium absolute text-sm text-dark font-semibold  duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600  peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
-        >
-          Full Address
-        </label>
-      </div>
-      <div className="relative z-0 w-full mb-6 group">
-        <input
-          type="password"
-          name="password"
-          defaultValue={password}
-          onChange={(e) =>
-            setFormInputs({ ...formInputs, password: e.target.value })
-          }
-          className="block py-2.5 px-0 w-full text-sm text-green-600 font-bold bg-transparent border-0 border-b-2 border-gray-600 appearance-none  focus:outline-none focus:ring-0 focus:border-blue-600 peer"
-          placeholder=" "
-          required
-        />
-        <label
-          htmlFor="password"
-          className="peer-focus:font-medium absolute text-sm text-dark font-semibold  duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600  peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
-        >
-          Password
-        </label>
-      </div>
-      <div className="relative z-0 w-full mb-6 group">
-        <input
-          type="password"
-          name="repeat_password"
-          defaultValue={repeatPassword}
-          onChange={(e) =>
-            setFormInputs({ ...formInputs, repeatPassword: e.target.value })
-          }
-          className="block py-2.5 px-0 w-full text-sm text-green-600 font-bold bg-transparent border-0 border-b-2 border-gray-600 appearance-none  focus:outline-none focus:ring-0 focus:border-blue-600 peer"
-          placeholder=" "
-          required
-        />
-        <label
-          htmlFor="repeat_password"
-          className="peer-focus:font-medium absolute text-sm text-dark font-semibold  duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600  peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
-        >
-          Confirm password
-        </label>
-      </div>
 
-      <div className="grid xl:grid-cols-2 xl:gap-6">
-        <div className="relative z-0 w-full mb-6 group">
+        <div className="relative z-0 w-full mb-6">
+          <label
+            htmlFor="email"
+            className="w-full inline-block font-semibold mb-4 p-2 text-gray-800 border-b-4 border-blue-800 rounded shadow bg-blue-200"
+          >
+            Email address
+          </label>
+
+          <input
+            type="email"
+            name="email"
+            defaultValue={email}
+            onChange={(e) =>
+              setFormInputs({ ...formInputs, email: e.target.value })
+            }
+            className="block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+            placeholder=" "
+            required
+          />
+        </div>
+        <div className="relative z-0 w-full mb-6">
+          <label
+            htmlFor="address"
+            className="w-full inline-block font-semibold mb-4 p-2 text-gray-800 border-b-4 border-blue-800 rounded shadow bg-blue-200"
+          >
+            Full Address
+          </label>
+
+          <input
+            type="text"
+            name="address"
+            defaultValue={address}
+            onChange={(e) =>
+              setFormInputs({ ...formInputs, address: e.target.value })
+            }
+            className="block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+            placeholder=" "
+            required
+          />
+        </div>
+        <div className="relative z-0 w-full mb-6">
+          <label
+            htmlFor="password"
+            className="w-full inline-block font-semibold mb-4 p-2 text-gray-800 border-b-4 border-blue-800 rounded shadow bg-blue-200"
+          >
+            Password
+          </label>
+
+          <input
+            type="password"
+            name="password"
+            defaultValue={password}
+            onChange={(e) =>
+              setFormInputs({ ...formInputs, password: e.target.value })
+            }
+            className="block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+            placeholder=" "
+            required
+          />
+        </div>
+        <div className="relative z-0 w-full mb-6">
+          <label
+            htmlFor="repeat_password"
+            className="w-full inline-block font-semibold mb-4 p-2 text-gray-800 border-b-4 border-blue-800 rounded shadow bg-blue-200"
+          >
+            Confirm password
+          </label>
+
+          <input
+            type="password"
+            name="repeat_password"
+            defaultValue={repeatPassword}
+            onChange={(e) =>
+              setFormInputs({ ...formInputs, repeatPassword: e.target.value })
+            }
+            className="block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+            placeholder=" "
+            required
+          />
+        </div>
+
+        <div className="relative z-0 w-full mb-6">
+          <label
+            htmlFor="phone"
+            className="w-full inline-block font-semibold mb-4 p-2 text-gray-800 border-b-4 border-blue-800 rounded shadow bg-blue-200"
+          >
+            Phone Number Ex:(01008878980)
+          </label>
+
           <input
             type="tel"
             name="phone"
@@ -223,18 +229,19 @@ export default function Register() {
             onChange={(e) =>
               setFormInputs({ ...formInputs, phone: e.target.value })
             }
-            className="block py-2.5 px-0 w-full text-sm text-green-600 font-bold bg-transparent border-0 border-b-2 border-gray-600 appearance-none  focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+            className="block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
             placeholder=" "
             required
           />
-          <label
-            htmlFor="phone"
-            className="peer-focus:font-medium absolute text-sm text-dark font-semibold  duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600  peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
-          >
-            Phone Number Ex:(01008878980)
-          </label>
         </div>
-        <div className="relative z-0 w-full mb-6 group">
+        <div className="relative z-0 w-full mb-6">
+          <label
+            htmlFor="postal"
+            className="w-full inline-block font-semibold mb-4 p-2 text-gray-800 border-b-4 border-blue-800 rounded shadow bg-blue-200"
+          >
+            Postal Code (Ex. 12345)
+          </label>
+
           <input
             type="text"
             name="postal"
@@ -242,31 +249,28 @@ export default function Register() {
             onChange={(e) =>
               setFormInputs({ ...formInputs, postCode: e.target.value })
             }
-            className="block py-2.5 px-0 w-full text-sm text-green-600 font-bold bg-transparent border-0 border-b-2 border-gray-600 appearance-none  focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+            className="block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
             placeholder=" "
             required
           />
-
-          <label
-            htmlFor="postal"
-            className="peer-focus:font-medium absolute text-sm text-dark font-semibold  duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600  peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
-          >
-            Postal Code (Ex. 12345)
-          </label>
         </div>
-      </div>
 
-      {/*Request Status and Errors*/}
-      {(isError || isSuccess) && (
-        <MessagesContainer msg={msg} isSuccess={isSuccess} isError={isError} />
-      )}
+        {/*Request Status and Errors*/}
+        {(isError || isSuccess) && (
+          <MessagesContainer
+            msg={msg}
+            isSuccess={isSuccess}
+            isError={isError}
+          />
+        )}
 
-      {/*form button */}
-      <FormButton
-        text={{ loading: "Processing", default: "Register" }}
-        isLoading={isLoading}
-        icon={<TiUserAdd className="mb-[-2px] ml-1" size={27} />}
-      />
-    </form>
+        {/*form button */}
+        <FormButton
+          text={{ loading: "Processing", default: "Register" }}
+          isLoading={isLoading}
+          icon={<TiUserAdd className="mb-[-2px] ml-1" size={27} />}
+        />
+      </form>
+    </div>
   );
 }

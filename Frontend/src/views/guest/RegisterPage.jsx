@@ -1,0 +1,25 @@
+import React from "react";
+import { useDispatch } from "react-redux";
+import { resetAuthStatus } from "../../features/Auth/authSlice";
+import { UseResetStatus } from "../../hooks/UseResetStatus";
+import Register from "../../components/forms/Register";
+
+export const RegisterPage = () => {
+  const dispatch = useDispatch();
+
+  //clean up  status (on mount, unmount)
+  UseResetStatus(() => {
+    dispatch(resetAuthStatus());
+  });
+  UseResetStatus(() => {
+    return () => {
+      dispatch(resetAuthStatus());
+    };
+  });
+
+  return (
+    <div className="min-h-screen max-w-5xl w-full mx-auto flex justify-center  items-center flex-col lg:flex-row gap-4 p-4 md:p-10">
+      <Register className="w-full" />
+    </div>
+  );
+};
