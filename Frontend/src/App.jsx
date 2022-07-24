@@ -11,8 +11,6 @@ import NotFoundPage from "./views/NotFound";
 import UseDetectUser from "./features/Hooks/DetectUser";
 import UseDetectAdmin from "./features/Hooks/DetectAdmin";
 import AdminDashboard from "./views/admin/AdminDashboardPage";
-import { ChooseAccount } from "./components/account/ChooseAccount";
-import { Account } from "./components/account/Account";
 import UpdateAdminProfile from "./views/admin/UpdateProfilePage";
 import { AdminLoginPage } from "./views/admin/AdminLoginPage";
 import { UserLoginPage } from "./views/user/UserLoginPage";
@@ -66,6 +64,11 @@ function App() {
             exact
             path="/notifications/:id"
             element={<NotificationPage />}
+          />
+          <Route
+            exact
+            path="/account-request"
+            element={<AccountRequestPage />}
           />
           <Route
             exact

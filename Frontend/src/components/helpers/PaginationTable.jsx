@@ -1,7 +1,7 @@
 import React from "react";
 import { useState } from "react";
 import useTable from "../../hooks/useTable";
-import TableFooter from "./TableFooter";
+import Pagination from "./Pagination";
 
 export const PaginationTable = ({
   tableHeader,
@@ -20,7 +20,7 @@ export const PaginationTable = ({
         <tbody>{slice.map((item, index) => tableRow(item, index))}</tbody>
       </table>
 
-      <TableFooter range={range} slice={slice} setPage={setPage} page={page} />
+      <Pagination range={range} slice={slice} setPage={setPage} page={page} />
     </div>
   );
 };

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import useTable from "../../hooks/useTable";
-import TableFooter from "./TableFooter";
+import Pagination from "./Pagination";
 
 export const PaginationDepositList = ({
   depositLogs,
@@ -14,7 +14,7 @@ export const PaginationDepositList = ({
       <ul className="basis-full flex flex-col p-4 md:p-10 text-xs md:text-base text-gray-800 font-bold">
         {slice.map((item) => depositLog(item))}
       </ul>
-      <TableFooter range={range} slice={slice} setPage={setPage} page={page} />
+      <Pagination range={range} slice={slice} setPage={setPage} page={page} />
     </div>
   );
 };

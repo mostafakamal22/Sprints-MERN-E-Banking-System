@@ -78,10 +78,9 @@ hover:bg-gray-500
   };
 
   return (
-    <div className="max-w-5xl w-full min-h-screen p-6 bg-slate-50 rounded shadow-lg shadow-black/30">
-      <div className="h-full w-full  px-4 py-6  sm:p-10 ">
+    <div className="max-w-5xl w-full min-h-screen p-2 bg-slate-50 rounded shadow-lg shadow-black/30">
+      <div className="h-full w-full  px-2 py-6  sm:p-10 ">
         {/* Heading */}
-
         <h3 className="flex justify-center items-center text-2xl text-center font-bold px-2 py-4 mb-10 bg-blue-200 border-b-4 border-blue-800 rounded shadow">
           <FcIdea className="mr-1" size={50} />
           <span>Notifications</span>
