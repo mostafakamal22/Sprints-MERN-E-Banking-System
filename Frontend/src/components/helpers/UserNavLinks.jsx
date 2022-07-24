@@ -46,37 +46,37 @@ export const UserNavLinks = ({ user }) => {
     {
       title: "Deposit",
       icon: FaCoins,
-      to: account && `/account/deposit/${account._id}`,
+      to: account ? `/account/deposit/${account._id}` : "",
     },
     {
       title: "Withdraw",
       icon: FaMoneyBillWaveAlt,
-      to: account && `/account/withdraw/${account._id}`,
+      to: account ? `/account/withdraw/${account._id}` : "",
     },
     {
       title: "Transfer",
       icon: IoSend,
-      to: account && `/account/transfer/${account._id}`,
+      to: account ? `/account/transfer/${account._id}` : "",
     },
     {
       title: "OutGoing Balance",
       icon: RiFundsBoxFill,
-      to: account && `/account/out/${account._id}`,
+      to: account ? `/account/out/${account._id}` : "",
     },
     {
       title: "Incoming Balance",
       icon: RiRefund2Line,
-      to: account && `/account/in/${account._id}`,
+      to: account ? `/account/in/${account._id}` : "",
     },
     {
       title: "Deposit Logs",
       icon: BiCoinStack,
-      to: `/account/deposit-logs/${account._id}`,
+      to: account ? `/account/deposit-logs/${account._id}` : "",
     },
     {
       title: "Withdraw Logs",
       icon: BiMoney,
-      to: `/account/withdraw-logs/${account._id}`,
+      to: account ? `/account/withdraw-logs/${account._id}` : "",
     },
     {
       title: "Setting",
@@ -135,7 +135,7 @@ export const UserNavLinks = ({ user }) => {
               <link.icon className="text-blue-800" size={22} />
               <span
                 className={`${
-                  useMatch(link.to) && "underline font-bold"
+                  account && useMatch(link.to) && "underline font-bold"
                 } text-sm  ml-2 font-semibold text-blue-800 hover:text-blue-700 hover:underline`}
               >
                 {link.title}

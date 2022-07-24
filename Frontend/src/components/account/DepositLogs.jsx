@@ -41,10 +41,12 @@ export const DepositLogs = () => {
   //Incase Of No Deposit Logs
   if (!depositLogs || depositLogs.length === 0)
     return (
-      <div className="min-h-[150px] my-4 flex items-center justify-center flex-wrap gap-2 bg-blue-300 p-4 border-2 border-black rounded shadow ">
-        <p className="text-gray-800 bg-yellow-200 p-4 rounded-lg shadow">
-          There is no Deposit Logs yet!
-        </p>
+      <div className="max-w-5xl w-full p-6 bg-slate-50 rounded shadow-lg shadow-black/30">
+        <div className="min-h-[150px] my-4 flex flex-col gap-4 items-center justify-center flex-wrap  bg-yellow-100 p-4 border-x-4 border-yellow-800 rounded shadow">
+          <p className="text-gray-800 text-xl p-4 font-bold">
+            There is no Deposit Logs yet!
+          </p>
+        </div>
       </div>
     );
 

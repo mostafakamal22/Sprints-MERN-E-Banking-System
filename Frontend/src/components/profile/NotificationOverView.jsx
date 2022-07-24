@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import moment from "moment";
 import { notificationUpdate } from "../../features/User/userSlice";
-import { FcHighPriority, FcIdea, FcOk } from "react-icons/fc";
+import { FcHighPriority, FcIdea, FcNoIdea, FcOk } from "react-icons/fc";
 import { PaginationNotificationsList } from "../helpers/PaginationNotificationsList";
 
 export const NotificationOverView = () => {
@@ -89,8 +89,11 @@ hover:bg-gray-500
         {/* If there no notifications */}
         {!notifications ||
           (notifications.length === 0 && (
-            <div className="mt-2 px-6 py-4 bg-blue-200 font-semibold border-b-4 border-blue-800 rounded-lg shadow w-full select-none">
-              You Do not Have Any Notifications!
+            <div className="min-h-[150px] my-4 flex flex-col gap-4 items-center justify-center flex-wrap  bg-yellow-100 p-4 border-x-4 border-yellow-800 rounded shadow">
+              <FcNoIdea size={50} />
+              <p className="text-gray-800 text-xl p-4 font-bold">
+                You Do Not Have Any Notifications!
+              </p>
             </div>
           ))}
 

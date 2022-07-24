@@ -20,12 +20,12 @@ import { DashboardNavbar } from "../../components/admin/DashboardNavbar";
 import UsersAccountRequests from "../../components/admin/UsersAccountRequests";
 import { UsersListControl } from "../../components/admin/UsersListControl";
 import { UseResetStatus } from "../../hooks/UseResetStatus";
+import { MainSpinner } from "../../components/shared/MainSpinner";
 
 export default function AdminDashboard() {
   const [activeTab, setActiveTab] = useState("usersList");
   const dispatch = useDispatch();
   const { info } = useSelector((state) => state.adminAuth);
-
   //Get (Users & Admins and AccountRequests) Lists
   useEffect(() => {
     //Get admins list only if owner logged in
@@ -41,7 +41,7 @@ export default function AdminDashboard() {
   }, [info]);
 
   //users list
-  const { usersList } = useSelector((state) => state.usersData);
+  const { usersList, isLoading } = useSelector((state) => state.usersData);
 
   //admins list
   const { adminsList } = useSelector((state) => state.ownerData);
@@ -66,35 +66,46 @@ export default function AdminDashboard() {
     };
   });
 
-  return (
-    <div className="min-h-screen  flex flex-nowrap">
-      {/* admin dashboard side navabr */}
-      <SideNavbar admin={info} />
+  if (isLoading && !usersList)
+    return (
+      <div className="max-w-5xl w-full p-6 bg-slate-50 rounded shadow-lg shadow-black/30">
+        <MainSpinner />
+      </div>
+    );
 
-      <div className="overflow-x-auto w-full h-full flex justify-center items-center">
-        <div className="w-full flex justify-center items-center flex-col gap-6 p-10 md:px-20 md:py-10">
-          {/* admin dashboard navabr */}
-          <DashboardNavbar activeTab={activeTab} setActiveTab={setActiveTab} />
+  if (usersList)
+    return (
+      <div className="min-h-screen  flex flex-nowrap">
+        {/* admin dashboard side navabr */}
+        <SideNavbar admin={info} />
 
-          {/* Add New Admin panel */}
-          {activeTab === "addAdmin" && <RegisterAdmin />}
+        <div className="overflow-x-auto w-full h-full flex justify-center items-center">
+          <div className="w-full flex justify-center items-center flex-col gap-6 p-10 md:px-20 md:py-10">
+            {/* admin dashboard navabr */}
+            <DashboardNavbar
+              activeTab={activeTab}
+              setActiveTab={setActiveTab}
+            />
 
-          {/* admins control panel */}
-          {activeTab === "adminsList" && (
-            <AdminListControl adminsList={adminsList} />
-          )}
+            {/* Add New Admin panel */}
+            {activeTab === "addAdmin" && <RegisterAdmin />}
 
-          {/* users control panel */}
-          {activeTab === "usersList" && (
-            <UsersListControl usersList={usersList} />
-          )}
+            {/* admins control panel */}
+            {activeTab === "adminsList" && (
+              <AdminListControl adminsList={adminsList} />
+            )}
 
-          {/* users Account Request*/}
-          {activeTab === "usersRequests" && (
-            <UsersAccountRequests accountRequestsList={accountRequestsList} />
-          )}
+            {/* users control panel */}
+            {activeTab === "usersList" && (
+              <UsersListControl usersList={usersList} />
+            )}
+
+            {/* users Account Request*/}
+            {activeTab === "usersRequests" && (
+              <UsersAccountRequests accountRequestsList={accountRequestsList} />
+            )}
+          </div>
         </div>
       </div>
-    </div>
-  );
+    );
 }

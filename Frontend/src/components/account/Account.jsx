@@ -13,9 +13,6 @@ export const Account = ({ setPreferedAccount }) => {
     (state) => state.userAccount
   );
 
-  //No Account yet
-  if (!account || info.accounts.length === 0) return <NoAccountYet />;
-
   if (isLoading)
     return (
       isLoading && (
@@ -31,6 +28,9 @@ export const Account = ({ setPreferedAccount }) => {
         <MessagesContainer msg={message} isError={isError} />
       </div>
     );
+
+  //No Account yet
+  if (!account || !info?.accounts?.length) return <NoAccountYet />;
 
   if (account && !isLoading)
     return (
