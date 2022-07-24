@@ -1,25 +1,24 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import UpdateUser from "../../components/forms/UpdateUser";
+import { Withdraw } from "../../components/account/Withdraw";
 import { SideNavbar } from "../../components/shared/SideNavbar";
-import { resetUserStatus } from "../../features/User/userSlice";
+import { resetAccountStatus } from "../../features/Account/AccountSlice";
 import { UseResetStatus } from "../../hooks/UseResetStatus";
 
-export const UpdateProfilePage = () => {
+export const WithdrawPage = () => {
   const dispatch = useDispatch();
-  const { info } = useSelector((state) => state.userData);
+  const info = useSelector((state) => state.userData.info);
 
-  //clean up for user status msg (on mount , unmount)
+  //clean up status (when mount and unmount)
   UseResetStatus(() => {
-    dispatch(resetUserStatus());
+    dispatch(resetAccountStatus());
   });
 
   UseResetStatus(() => {
     return () => {
-      dispatch(resetUserStatus());
+      dispatch(resetAccountStatus());
     };
   });
-
   return (
     <div className="min-h-screen  flex flex-no-wrap">
       {/* side navabr */}
@@ -27,7 +26,7 @@ export const UpdateProfilePage = () => {
 
       <div className="w-full h-full flex justify-center items-center">
         <div className="w-full flex justify-center items-center flex-col gap-6 p-4 md:px-20 md:py-10">
-          <UpdateUser />
+          <Withdraw />
         </div>
       </div>
     </div>

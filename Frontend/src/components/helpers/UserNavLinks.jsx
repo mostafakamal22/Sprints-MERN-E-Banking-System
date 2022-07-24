@@ -10,7 +10,7 @@ import {
   RiLogoutBoxRFill,
   RiRefund2Line,
 } from "react-icons/ri";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link, useMatch, useNavigate } from "react-router-dom";
 import { resetAccountStatus } from "../../features/Account/AccountSlice";
 import { logout, resetAuthStatus } from "../../features/Auth/authSlice";
@@ -19,6 +19,7 @@ import { resetUserStatus, userLogout } from "../../features/User/userSlice";
 export const UserNavLinks = ({ user }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const { account } = useSelector((state) => state.userAccount);
 
   //user navbar data
   const userNavData = [
@@ -45,22 +46,22 @@ export const UserNavLinks = ({ user }) => {
     {
       title: "Deposit",
       icon: FaCoins,
-      to: `/notifications`,
+      to: account && `/account/deposit/${account._id}`,
     },
     {
       title: "Withdraw",
       icon: FaMoneyBillWaveAlt,
-      to: `/notifications`,
+      to: account && `/account/withdraw/${account._id}`,
     },
     {
       title: "Transfer",
       icon: IoSend,
-      to: `/notifications`,
+      to: account && `/account/transfer/${account._id}`,
     },
     {
       title: "OutGoing Balance",
       icon: RiFundsBoxFill,
-      to: `/notifications`,
+      to: account && `/account/out/${account._id}`,
     },
     {
       title: "Incoming Balance",
@@ -70,7 +71,7 @@ export const UserNavLinks = ({ user }) => {
     {
       title: "Deposit Logs",
       icon: BiCoinStack,
-      to: `/notifications`,
+      to: `/account/deposit/:id`,
     },
     {
       title: "Withdraw Logs",

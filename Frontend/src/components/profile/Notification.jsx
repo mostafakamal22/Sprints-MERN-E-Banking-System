@@ -1,13 +1,11 @@
 import React from "react";
-import { BiArrowBack, BiLeftArrowAlt, BiRightArrowAlt } from "react-icons/bi";
+import { BiArrowBack, BiLeftArrowAlt } from "react-icons/bi";
 import { useSelector } from "react-redux";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import moment from "moment";
-import { useEffect } from "react";
-import { FcCancel, FcExpired, FcIdea } from "react-icons/fc";
+import { FcCancel, FcIdea } from "react-icons/fc";
 
 export const Notification = () => {
-  const navigate = useNavigate();
   const location = useLocation();
   //get notification id from pathname
   const notificationId = location.pathname.split("/").at(-1);
@@ -22,7 +20,7 @@ export const Notification = () => {
 
   if (!notification)
     return (
-      <div className="max-w-5xl w-full p-6 bg-slate-50  rounded shadow-lg shadow-black/30">
+      <div className="max-w-5xl min-h-screen w-full p-6 bg-slate-50  rounded shadow-lg shadow-black/30">
         <div className="flex flex-col gap-4">
           <FcCancel size={150} className="mx-auto" />
 
@@ -44,7 +42,7 @@ shadow transition-all ease-in-out duration-300"
     );
 
   return (
-    <div className="max-w-5xl w-full p-6 bg-slate-50 rounded shadow-lg shadow-black/30">
+    <div className="max-w-5xl min-h-screen w-full p-10 bg-slate-50 rounded shadow-lg shadow-black/30">
       {/* Heading */}
       <div className="flex items-center w-full mb-10">
         <FcIdea className="mr-1" size={50} />

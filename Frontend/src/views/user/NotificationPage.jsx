@@ -1,11 +1,24 @@
 import React from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Notification } from "../../components/profile/Notification";
 import { SideNavbar } from "../../components/shared/SideNavbar";
+import { resetUserStatus } from "../../features/User/userSlice";
+import { UseResetStatus } from "../../hooks/UseResetStatus";
 
 export const NotificationPage = () => {
+  const dispatch = useDispatch();
   const { info } = useSelector((state) => state.userData);
 
+  //clean up status (when mount and unmount)
+  UseResetStatus(() => {
+    dispatch(resetUserStatus());
+  });
+
+  UseResetStatus(() => {
+    return () => {
+      dispatch(resetUserStatus());
+    };
+  });
   return (
     <div className="min-h-screen  flex flex-no-wrap">
       {/* side navabr */}

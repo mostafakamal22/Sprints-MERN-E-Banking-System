@@ -1,10 +1,24 @@
 import React from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { AccountRequest } from "../../components/forms/AccountRequest";
 import { SideNavbar } from "../../components/shared/SideNavbar";
+import { resetUserStatus } from "../../features/User/userSlice";
+import { UseResetStatus } from "../../hooks/UseResetStatus";
 
 export const AccountRequestPage = () => {
+  const dispatch = useDispatch();
   const { info } = useSelector((state) => state.userData);
+
+  //clean up status (when mount and unmount)
+  UseResetStatus(() => {
+    dispatch(resetUserStatus());
+  });
+
+  UseResetStatus(() => {
+    return () => {
+      dispatch(resetUserStatus());
+    };
+  });
 
   return (
     <div className="min-h-screen  flex flex-no-wrap">

@@ -50,17 +50,6 @@ export default function UpdateUser() {
     }
   }, [isError, message, msg, isSuccess]);
 
-  //clean up for user status msg (on mount , unmount)
-  UseResetStatus(() => {
-    dispatch(resetUserStatus());
-  });
-
-  UseResetStatus(() => {
-    return () => {
-      dispatch(resetUserStatus());
-    };
-  });
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     //set msg to none first

@@ -14,10 +14,6 @@ import AdminDashboard from "./views/admin/AdminDashboardPage";
 import { ChooseAccount } from "./components/account/ChooseAccount";
 import { Account } from "./components/account/Account";
 import { IncomingTransactions } from "./components/account/IncomingTransactions";
-import { OutgoingTransactions } from "./components/account/OutgoingTransactions";
-import { Withdraw } from "./components/account/Withdraw";
-import { Deposit } from "./components/account/Deposit";
-import { Transfer } from "./components/account/Transfer";
 import UpdateAdminProfile from "./views/admin/UpdateProfilePage";
 import { AdminLoginPage } from "./views/admin/AdminLoginPage";
 import { UserLoginPage } from "./views/user/UserLoginPage";
@@ -27,6 +23,10 @@ import { NotificationsPage } from "./views/user/NotificationsPage";
 import { UpdateProfilePage } from "./views/user/UpdateProfilePage";
 import { RegisterPage } from "./views/guest/RegisterPage";
 import { NotificationPage } from "./views/user/NotificationPage";
+import { DepositPage } from "./views/user/DepositPage";
+import { WithdrawPage } from "./views/user/WithdrawPage";
+import { TransferPage } from "./views/user/TransferPage";
+import { OutgoingTransactionsPage } from "./views/user/OutgoingTransactionsPage";
 
 function App() {
   //Detect user
@@ -80,11 +80,19 @@ function App() {
           <Route
             exact
             path="/account/out/:id"
-            element={<OutgoingTransactions />}
+            element={<OutgoingTransactionsPage />}
           />
-          <Route exact path="/account/withdraw/:id" element={<Withdraw />} />
-          <Route exact path="/account/deposit/:id" element={<Deposit />} />
-          <Route exact path="/account/transfer/:id" element={<Transfer />} />
+          <Route
+            exact
+            path="/account/withdraw/:id"
+            element={<WithdrawPage />}
+          />
+          <Route exact path="/account/deposit/:id" element={<DepositPage />} />
+          <Route
+            exact
+            path="/account/transfer/:id"
+            element={<TransferPage />}
+          />
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
       )}

@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from "react";
+import { FcShipped } from "react-icons/fc";
+import { RiFileTransferFill } from "react-icons/ri";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
 import {
@@ -41,17 +43,6 @@ export const Transfer = () => {
     }
   }, [isError, isSuccess, message, account, msg]);
 
-  //clean up status (when mount and unmount)
-  UseResetStatus(() => {
-    dispatch(resetAccountStatus());
-  });
-
-  UseResetStatus(() => {
-    return () => {
-      dispatch(resetAccountStatus());
-    };
-  });
-
   //get account id
   const accountId = useLocation().pathname.split("/").at(-1);
 
@@ -72,22 +63,22 @@ export const Transfer = () => {
   };
 
   return (
-    <div className="block p-6 rounded shadow-lg bg-gray-200 max-w-2xl mx-auto">
-      <h2 className="text-xl text-center px-2 py-4 my-4 rounded shadow bg-white">
-        {" "}
-        Transfer Money{" "}
-      </h2>
+    <div className="max-w-5xl w-full p-6 bg-slate-50 rounded shadow-lg shadow-black/30">
+      <h3 className="flex justify-center items-center text-2xl text-center font-bold px-2 py-4 mb-10 bg-blue-200 border-b-4 border-blue-800 rounded shadow ">
+        <FcShipped className="mr-1" size={50} />
+        Transfer Money
+      </h3>
       <form onSubmit={handleSubmit}>
-        <div className="flex justify-center items-center flex-wrap gap-4 px-5 py-10 my-4 rounded shadow bg-white">
+        <div className="flex justify-center items-center font-semibold flex-wrap gap-4 px-5 py-5">
           <label
-            className="basis-full sm:basis-[50%] text-md  my-2 sm:my-0 mx-2 p-2 sm:border-r-2 rounded shadow bg-blue-200 border-blue-600"
+            className="basis-full sm:basis-[50%] text-md  my-2 sm:my-0 mx-2 p-2 sm:border-r-4 rounded shadow bg-blue-200 border-blue-800"
             htmlFor="balanceTransfered"
           >
             Enter Transfer Amount
           </label>
 
           <input
-            className="basis-full  sm:basis-[15%]  px-3 py-1.5 mx-4 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out  focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+            className="basis-full  sm:basis-1/3  px-3 py-1.5 mx-4 text-base font-normal text-gray-700 bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out  focus:text-gray-700 focus:bg-white focus:border-blue-800 focus:outline-none"
             type="number"
             name="balanceTransfered"
             defaultValue={balanceTransfered}
@@ -97,14 +88,14 @@ export const Transfer = () => {
           />
 
           <label
-            className="basis-full sm:basis-1/2 text-md  my-2 sm:my-0 mx-2 p-2 sm:border-r-2 rounded shadow bg-blue-200  border-blue-600"
+            className="basis-full sm:basis-[50%] text-md  my-2 sm:my-0 mx-2 p-2 sm:border-r-4 rounded shadow bg-blue-200 border-blue-800"
             htmlFor="receivingId"
           >
             Enter Receiving Account Id
           </label>
 
           <input
-            className="basis-full  sm:basis-[15%]  px-3 py-1.5 mx-4 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out  focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+            className="basis-full  sm:basis-1/3  px-3 py-1.5 mx-4 text-base font-normal text-gray-700 bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out  focus:text-gray-700 focus:bg-white focus:border-blue-800 focus:outline-none"
             type="text"
             name="balanceTransfered"
             defaultValue={receivingId}
@@ -113,14 +104,14 @@ export const Transfer = () => {
           />
 
           <label
-            className="basis-full sm:basis-1/2 text-md my-2 sm:my-0 mx-2 p-2 sm:border-r-2 rounded shadow bg-blue-200  border-blue-600"
+            className="basis-full sm:basis-[50%] text-md  my-2 sm:my-0 mx-2 p-2 sm:border-r-4 rounded shadow bg-blue-200 border-blue-800"
             htmlFor="password"
           >
             Type your Password
           </label>
 
           <input
-            className="basis-full  sm:basis-[15%]  px-3 py-1.5 mx-4 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out  focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+            className="basis-full  sm:basis-1/3  px-3 py-1.5 mx-4 text-base font-normal text-gray-700 bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out  focus:text-gray-700 focus:bg-white focus:border-blue-800 focus:outline-none"
             type="password"
             name="password"
             defaultValue={password}
@@ -142,6 +133,7 @@ export const Transfer = () => {
         <FormButton
           text={{ default: "Transfer", loading: "Processing" }}
           isLoading={isLoading}
+          icon={<RiFileTransferFill className="ml-1" size={25} />}
         />
       </form>
     </div>

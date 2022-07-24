@@ -3,7 +3,6 @@ import { FcElectroDevices } from "react-icons/fc";
 import { RiSendPlaneFill } from "react-icons/ri";
 import { useDispatch, useSelector } from "react-redux";
 import { accountRequest, resetUserStatus } from "../../features/User/userSlice";
-import { UseResetStatus } from "../../hooks/UseResetStatus";
 import { PaymentMethods } from "../payment/PaymentMethods";
 import FormButton from "../shared/FormButton";
 import MessagesContainer from "../shared/MessagesContainer";
@@ -35,17 +34,6 @@ export const AccountRequest = () => {
     }
   }, [isError, isSuccess, message, info, msg]);
 
-  //clean up status (when mount and unmount)
-  UseResetStatus(() => {
-    dispatch(resetUserStatus());
-  });
-
-  UseResetStatus(() => {
-    return () => {
-      dispatch(resetUserStatus());
-    };
-  });
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     //set msg to none first
@@ -67,7 +55,7 @@ export const AccountRequest = () => {
         <span>Send An Account Request</span>
       </h3>
       <form onSubmit={handleSubmit}>
-        <div className="flex justify-center items-center font-semibold flex-wrap gap-4 px-5 py-5  ">
+        <div className="flex justify-center items-center font-semibold flex-wrap gap-4 px-5 py-5">
           <label
             className="basis-full sm:basis-[50%] text-md  my-2 sm:my-0 mx-2 p-2 sm:border-r-4 rounded shadow bg-blue-200 border-blue-800"
             htmlFor="intitialBalance"
