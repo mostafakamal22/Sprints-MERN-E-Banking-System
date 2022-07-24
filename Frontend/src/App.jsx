@@ -13,7 +13,6 @@ import UseDetectAdmin from "./features/Hooks/DetectAdmin";
 import AdminDashboard from "./views/admin/AdminDashboardPage";
 import { ChooseAccount } from "./components/account/ChooseAccount";
 import { Account } from "./components/account/Account";
-import { IncomingTransactions } from "./components/account/IncomingTransactions";
 import UpdateAdminProfile from "./views/admin/UpdateProfilePage";
 import { AdminLoginPage } from "./views/admin/AdminLoginPage";
 import { UserLoginPage } from "./views/user/UserLoginPage";
@@ -27,6 +26,9 @@ import { DepositPage } from "./views/user/DepositPage";
 import { WithdrawPage } from "./views/user/WithdrawPage";
 import { TransferPage } from "./views/user/TransferPage";
 import { OutgoingTransactionsPage } from "./views/user/OutgoingTransactionsPage";
+import { IncomingTransactionsPage } from "./views/user/IncomingTransactionsPage";
+import { DepositLogsPage } from "./views/user/DepositLogsPage";
+import { WithdrawLogsPage } from "./views/user/WithdrawLogsPage";
 
 function App() {
   //Detect user
@@ -65,17 +67,10 @@ function App() {
             path="/notifications/:id"
             element={<NotificationPage />}
           />
-          <Route exact path="/choose-account" element={<ChooseAccount />} />
-          <Route
-            exact
-            path="/account-request"
-            element={<AccountRequestPage />}
-          />
-          <Route exact path="/account/:id" element={<Account />} />
           <Route
             exact
             path="/account/in/:id"
-            element={<IncomingTransactions />}
+            element={<IncomingTransactionsPage />}
           />
           <Route
             exact
@@ -92,6 +87,16 @@ function App() {
             exact
             path="/account/transfer/:id"
             element={<TransferPage />}
+          />
+          <Route
+            exact
+            path="/account/deposit-logs/:id"
+            element={<DepositLogsPage />}
+          />
+          <Route
+            exact
+            path="/account/withdraw-logs/:id"
+            element={<WithdrawLogsPage />}
           />
           <Route path="*" element={<NotFoundPage />} />
         </Routes>

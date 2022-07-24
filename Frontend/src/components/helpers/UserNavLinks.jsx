@@ -66,17 +66,17 @@ export const UserNavLinks = ({ user }) => {
     {
       title: "Incoming Balance",
       icon: RiRefund2Line,
-      to: `/notifications`,
+      to: account && `/account/in/${account._id}`,
     },
     {
       title: "Deposit Logs",
       icon: BiCoinStack,
-      to: `/account/deposit/:id`,
+      to: `/account/deposit-logs/${account._id}`,
     },
     {
       title: "Withdraw Logs",
       icon: BiMoney,
-      to: `/notifications`,
+      to: `/account/withdraw-logs/${account._id}`,
     },
     {
       title: "Setting",

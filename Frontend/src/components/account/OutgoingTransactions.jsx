@@ -1,6 +1,6 @@
 import moment from "moment";
 import React from "react";
-import { FcPaid } from "react-icons/fc";
+import { FcShipped } from "react-icons/fc";
 import { useSelector } from "react-redux";
 import { PaginationOutgoingList } from "../helpers/PaginationOutgoingList";
 
@@ -53,7 +53,7 @@ export const OutgoingTransactions = () => {
   return (
     <div className="max-w-5xl w-full p-6 bg-slate-50 rounded shadow-lg shadow-black/30">
       <h3 className="flex justify-center items-center text-2xl text-center font-bold px-2 py-4 mb-10 bg-blue-200 border-b-4 border-blue-800 rounded shadow ">
-        <FcPaid className="mr-1" size={50} />
+        <FcShipped className="mr-1" size={50} />
         Outgoing Transactions
       </h3>
 

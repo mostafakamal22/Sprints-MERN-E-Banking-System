@@ -1,13 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { FcShipped } from "react-icons/fc";
+import { FcPaid } from "react-icons/fc";
 import { RiFileTransferFill } from "react-icons/ri";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
-import {
-  resetAccountStatus,
-  transfer,
-} from "../../features/Account/AccountSlice";
-import { UseResetStatus } from "../../hooks/UseResetStatus";
+import { transfer } from "../../features/Account/AccountSlice";
 import FormButton from "../shared/FormButton";
 import MessagesContainer from "../shared/MessagesContainer";
 
@@ -65,7 +61,7 @@ export const Transfer = () => {
   return (
     <div className="max-w-5xl w-full p-6 bg-slate-50 rounded shadow-lg shadow-black/30">
       <h3 className="flex justify-center items-center text-2xl text-center font-bold px-2 py-4 mb-10 bg-blue-200 border-b-4 border-blue-800 rounded shadow ">
-        <FcShipped className="mr-1" size={50} />
+        <FcPaid className="mr-1" size={50} />
         Transfer Money
       </h3>
       <form onSubmit={handleSubmit}>
