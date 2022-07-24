@@ -33,7 +33,10 @@ export const OutgoingTransactions = () => {
         <p className="w-full text-left md:text-center my-2">
           Transaction Amount:-
           <span className="mx-2 p-2 text-white bg-green-500 rounded shadow">
-            {transaction.balance_transfered} L.E
+            {new Intl.NumberFormat("ar-EG", {
+              style: "currency",
+              currency: "EGP",
+            }).format(transaction.balance_transfered)}
           </span>
         </p>
       </li>

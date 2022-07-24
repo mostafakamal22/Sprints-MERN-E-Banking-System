@@ -28,7 +28,10 @@ export const WithdrawLogs = () => {
         <p className="w-full text-left md:text-center my-2">
           Withdraw Amount:-
           <span className="mx-2 p-2 text-white bg-green-500 rounded shadow">
-            {log.withdrawed_amount} L.E
+            {new Intl.NumberFormat("ar-EG", {
+              style: "currency",
+              currency: "EGP",
+            }).format(log.withdrawed_amount)}
           </span>
         </p>
       </li>

@@ -115,18 +115,21 @@ shadow transition-all ease-in-out duration-300"
           </p>
         )}
 
-        {/*Case:- Approved Notificaton*/}
+        {/*Case:- New Transfer Balance Notificaton*/}
         {notification.data && notification.type === "transfered-in" && (
           <>
             {console.log(notification.message.split("!"))}
             <p className="mt-1 text-sm font-semibold">
               New Balance Transfered:-
               <span className="underline underline-offset-2 text-blue-900 ml-1">
-                {notification.data[0].transfered_Amount} L.E
+                {new Intl.NumberFormat("ar-EG", {
+                  style: "currency",
+                  currency: "EGP",
+                }).format(notification.data[0].transfered_Amount)}
               </span>
             </p>
             <p className="mt-1 text-sm font-semibold">
-              From:-
+              From Account ID:-
               <span className="underline underline-offset-2 text-blue-900  ml-1">
                 {notification.data[0].from}
               </span>
@@ -134,13 +137,16 @@ shadow transition-all ease-in-out duration-300"
           </>
         )}
 
-        {/*Case:- Declined Notificaton*/}
+        {/*Case:- Declined Account Request Notificaton*/}
         {notification.data && notification.type === "declined" && (
           <>
             <p className="mt-1 text-sm font-semibold">
               Your Initial Balance Was:-
               <span className="underline underline-offset-2 text-blue-900 ml-1">
-                {notification.data[0].initial_balance} L.E
+                {new Intl.NumberFormat("ar-EG", {
+                  style: "currency",
+                  currency: "EGP",
+                }).format(notification.data[0].initial_balance)}
               </span>
             </p>
             <p className="mt-1 text-sm font-semibold">
@@ -148,7 +154,7 @@ shadow transition-all ease-in-out duration-300"
               <span className="underline underline-offset-2 text-blue-900 ml-1">
                 <Link
                   state={notification.data[0].initial_balance}
-                  to="/retreive"
+                  to="/retreive-balance"
                 >
                   From Here
                 </Link>

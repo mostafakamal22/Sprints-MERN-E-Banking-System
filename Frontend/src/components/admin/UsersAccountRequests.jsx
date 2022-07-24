@@ -132,7 +132,10 @@ const UsersAccountRequests = ({ accountRequestsList }) => {
           scope="row"
           className="p-2 text-gray-900 whitespace-nowrap  border-x-2 text-center"
         >
-          {request.initial_balance}
+          {new Intl.NumberFormat("ar-EG", {
+            style: "currency",
+            currency: "EGP",
+          }).format(request.initial_balance)}
         </th>
 
         {/* Decline request */}

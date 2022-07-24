@@ -33,7 +33,10 @@ export const AccountDetails = ({ account }) => {
           Balance
         </p>
         <span className="w-full lg:w-auto bg-violet-900  px-4 py-2 rounded-md">
-          {account.balance} L.E
+          {new Intl.NumberFormat("ar-EG", {
+            style: "currency",
+            currency: "EGP",
+          }).format(account.balance)}
         </span>
       </div>
 
@@ -43,12 +46,19 @@ export const AccountDetails = ({ account }) => {
         </p>
         <span className="w-full lg:w-auto bg-violet-900  px-4 py-2 rounded-md">
           {account.out.length > 0
-            ? account.out.reduce(
-                (totalAmount, log) => (totalAmount += log.balance_transfered),
-                0
+            ? new Intl.NumberFormat("ar-EG", {
+                style: "currency",
+                currency: "EGP",
+              }).format(
+                account.out.reduce(
+                  (totalAmount, log) => (totalAmount += log.balance_transfered),
+                  0
+                )
               )
-            : 0}{" "}
-          L.E
+            : new Intl.NumberFormat("ar-EG", {
+                style: "currency",
+                currency: "EGP",
+              }).format(0)}
         </span>
       </div>
 
@@ -58,12 +68,19 @@ export const AccountDetails = ({ account }) => {
         </p>
         <span className="w-full lg:w-auto bg-violet-900  px-4 py-2 rounded-md">
           {account.in.length > 0
-            ? account.in.reduce(
-                (totalAmount, log) => (totalAmount += log.balance_transfered),
-                0
+            ? new Intl.NumberFormat("ar-EG", {
+                style: "currency",
+                currency: "EGP",
+              }).format(
+                account.in.reduce(
+                  (totalAmount, log) => (totalAmount += log.balance_transfered),
+                  0
+                )
               )
-            : 0}{" "}
-          L.E
+            : new Intl.NumberFormat("ar-EG", {
+                style: "currency",
+                currency: "EGP",
+              }).format(0)}
         </span>
       </div>
 
@@ -73,12 +90,19 @@ export const AccountDetails = ({ account }) => {
         </p>
         <span className="w-full lg:w-auto bg-violet-900  px-4 py-2 rounded-md">
           {account.deposit_logs.length > 0
-            ? account.deposit_logs.reduce(
-                (totalAmount, log) => (totalAmount += log.depositted_amount),
-                0
+            ? new Intl.NumberFormat("ar-EG", {
+                style: "currency",
+                currency: "EGP",
+              }).format(
+                account.deposit_logs.reduce(
+                  (totalAmount, log) => (totalAmount += log.depositted_amount),
+                  0
+                )
               )
-            : 0}{" "}
-          L.E
+            : new Intl.NumberFormat("ar-EG", {
+                style: "currency",
+                currency: "EGP",
+              }).format(0)}
         </span>
       </div>
 
@@ -88,12 +112,19 @@ export const AccountDetails = ({ account }) => {
         </p>
         <span className="w-full lg:w-auto bg-violet-900  px-4 py-2 rounded-md">
           {account.withdraw_logs.length > 0
-            ? account.withdraw_logs.reduce(
-                (totalAmount, log) => (totalAmount += log.withdrawed_amount),
-                0
+            ? new Intl.NumberFormat("ar-EG", {
+                style: "currency",
+                currency: "EGP",
+              }).format(
+                account.withdraw_logs.reduce(
+                  (totalAmount, log) => (totalAmount += log.withdrawed_amount),
+                  0
+                )
               )
-            : 0}{" "}
-          L.E
+            : new Intl.NumberFormat("ar-EG", {
+                style: "currency",
+                currency: "EGP",
+              }).format(0)}
         </span>
       </div>
     </div>

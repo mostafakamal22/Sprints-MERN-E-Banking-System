@@ -28,7 +28,10 @@ export const DepositLogs = () => {
         <p className="w-full text-left md:text-center my-2">
           Deposit Amount:-
           <span className="mx-2 p-2 text-white bg-green-500 rounded shadow">
-            {log.depositted_amount} L.E
+            {new Intl.NumberFormat("ar-EG", {
+              style: "currency",
+              currency: "EGP",
+            }).format(log.depositted_amount)}
           </span>
         </p>
       </li>
