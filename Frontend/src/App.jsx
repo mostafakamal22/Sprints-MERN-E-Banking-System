@@ -27,6 +27,7 @@ import { OutgoingTransactionsPage } from "./views/user/OutgoingTransactionsPage"
 import { IncomingTransactionsPage } from "./views/user/IncomingTransactionsPage";
 import { DepositLogsPage } from "./views/user/DepositLogsPage";
 import { WithdrawLogsPage } from "./views/user/WithdrawLogsPage";
+import { ContactPage } from "./views/user/ContactPage";
 
 function App() {
   //Detect user
@@ -101,6 +102,7 @@ function App() {
             path="/account/withdraw-logs/:id"
             element={<WithdrawLogsPage />}
           />
+          <Route exact path="/contact" element={<ContactPage />} />
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
       )}

@@ -4,7 +4,11 @@ import { BiCoinStack, BiMoney } from "react-icons/bi";
 import { BsFilePersonFill, BsGridFill } from "react-icons/bs";
 import { FaCoins, FaMoneyBillWaveAlt } from "react-icons/fa";
 import { IoSend } from "react-icons/io5";
-import { MdCircleNotifications, MdRequestPage } from "react-icons/md";
+import {
+  MdCircleNotifications,
+  MdContactSupport,
+  MdRequestPage,
+} from "react-icons/md";
 import {
   RiFundsBoxFill,
   RiLogoutBoxRFill,
@@ -82,6 +86,11 @@ export const UserNavLinks = ({ user }) => {
       title: "Setting",
       icon: AiFillSetting,
       to: `/profile/${user.id}/update`,
+    },
+    {
+      title: "Contact Support",
+      icon: MdContactSupport,
+      to: "/contact",
     },
     {
       title: "Logout",
