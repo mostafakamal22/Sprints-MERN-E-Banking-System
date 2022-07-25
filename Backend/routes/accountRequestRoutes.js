@@ -27,6 +27,9 @@ const {
 const {
   checkUserStatus,
 } = require("../middlewares/userMiddleware/checkUserStatus");
+const {
+  checkExistingAccountRequest,
+} = require("../middlewares/accountRequestMiddlewares/CheckExistingAccountRequest");
 
 router.route("/").get(authAdminProtect, getAccountRequests);
 
@@ -37,6 +40,7 @@ router
     checkUserStatus,
     checkPassword,
     checkBalance,
+    checkExistingAccountRequest,
     createAccountRequest,
     sendNotification
   );
