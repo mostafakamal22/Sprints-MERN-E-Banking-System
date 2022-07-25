@@ -35,7 +35,11 @@ export const SideNavbar = ({ admin = null, user = null }) => {
 
       {/* Tablet/desktop Sidebar*/}
       <div className="w-64 absolute sm:relative bg-slate-50 shadow-lg flex-col justify-between hidden lg:flex ">
-        <div className="px-8 py-8 sticky top-0">
+        <div
+          className={`${
+            user && "h-screen overflow-y-auto"
+          } px-8 py-8 sticky top-0`}
+        >
           {/* Logo */}
           <Logo />
 
@@ -74,7 +78,11 @@ export const SideNavbar = ({ admin = null, user = null }) => {
             size={40}
           />
         </div>
-        <div className="px-8 py-8 sticky top-0">
+        <div
+          className={`${
+            user && "h-screen overflow-y-auto"
+          } px-8 py-8 sticky top-0`}
+        >
           {/* Logo */}
           <Logo />
 
