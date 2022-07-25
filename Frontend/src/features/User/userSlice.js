@@ -113,7 +113,7 @@ export const userSlice = createSlice({
         state.isLoading = false;
         state.isError = false;
         state.isSuccess = true;
-        state.message = "";
+        state.message = "Your Profile Has Been Updated Successfully!";
         state.info = action.payload;
       })
       .addCase(updateUser.rejected, (state, action) => {

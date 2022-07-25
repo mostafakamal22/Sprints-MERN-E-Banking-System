@@ -125,7 +125,7 @@ export const adminAuthSlice = createSlice({
         state.isLoading = false;
         state.isSuccess = true;
         state.isError = false;
-        state.message = "";
+        state.message = "Your Profile Has Been Updated Successfully!";
         state.info = {
           ...state.info,
           email: action.payload.email,

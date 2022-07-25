@@ -3,7 +3,7 @@ import { AiFillSetting } from "react-icons/ai";
 import { BsFilePersonFill, BsGridFill } from "react-icons/bs";
 import { RiLogoutBoxRFill } from "react-icons/ri";
 import { useDispatch } from "react-redux";
-import { Link, useMatch, useNavigate } from "react-router-dom";
+import { Link, useMatch } from "react-router-dom";
 import { adminsLogoutRequets } from "../../features/Admin/AccountRequests/accountRequestsSlice";
 import { adminLogout } from "../../features/Admin/Auth/adminAuthSlice";
 import { ownerLogout } from "../../features/Admin/Owener/ownerSlice";
@@ -11,7 +11,6 @@ import { adminsLogout } from "../../features/Admin/UsersActions/usersSlice";
 
 export const AdminNavLinks = ({ admin }) => {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
 
   //admin navbar Data
   const adminNavData = [
