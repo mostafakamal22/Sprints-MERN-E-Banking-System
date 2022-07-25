@@ -113,7 +113,7 @@ export const ownerSlice = createSlice({
         state.isLoading = false;
         state.isSuccess = true;
         state.isError = false;
-        state.message = "Deleted Successfully!";
+        state.message = "Admin Has Been Deleted Successfully!";
         state.adminsList = state.adminsList.filter(
           (admin) => admin._id !== action.payload.id
         );
@@ -134,7 +134,7 @@ export const ownerSlice = createSlice({
         state.isLoading = false;
         state.isSuccess = true;
         state.isError = false;
-        state.message = "Updated Successfully!";
+        state.message = "Admin Role Has Been Updated Successfully!";
         state.adminsList = state.adminsList.map((admin) => {
           if (admin._id === action.payload._id) {
             return action.payload;

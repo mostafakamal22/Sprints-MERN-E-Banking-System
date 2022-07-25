@@ -219,7 +219,7 @@ const UsersAccountRequests = ({ accountRequestsList }) => {
       )}
 
       {/*Request Status and Errors*/}
-      {(isError || isSuccess) && (
+      {(isError || isSuccess) && msg && (
         <MessagesContainer msg={msg} isSuccess={isSuccess} isError={isError} />
       )}
 

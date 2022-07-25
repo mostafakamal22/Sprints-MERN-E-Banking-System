@@ -19,12 +19,12 @@ export const UserLoginPage = () => {
   });
 
   return (
-    <div className="min-h-screen max-w-6xl w-full mx-auto flex justify-center items-center flex-col lg:flex-row gap-4 p-4 md:p-10">
-      <Login className="lg:basis-[40%]" />
+    <div className="min-h-screen max-w-7xl w-full mx-auto flex items-center flex-col lg:flex-row gap-4 p-4 md:p-10">
+      <Login />
 
-      <div className="basis-[60%] self-stretch hidden lg:flex justify-center items-center flex-col p-6 bg-slate-50/60 rounded-lg shadow">
+      <div className="w-[70%] self-stretch hidden lg:flex justify-center items-center flex-col p-6 bg-slate-50/60 rounded-lg shadow">
         <h2 className="w-full p-4 text-center text-2xl font-bold text-teal-600 italic bg-white border-y-4 border-blue-800 rounded shadow">
-          EveryThing You Need Is <span className=" text-blue-800">E</span> Now.
+          Everything You Need Is <span className=" text-blue-800">E</span> Now.
         </h2>
         <LoginImg className="max-w-md self-stretch h-full mx-auto" />
       </div>

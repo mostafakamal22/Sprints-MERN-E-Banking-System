@@ -16,26 +16,12 @@ export const UpdateUserStatus = ({ user, handleUpdating }) => {
     >
       <select
         className="my-2 p-2 rounded"
-        defaultValue={
-          userStatus === 0
-            ? "active"
-            : userStatus === 1
-            ? "unactive"
-            : "suspended"
-        }
-        onChange={(e) => {
-          const numValue =
-            e.target.value === "active"
-              ? 0
-              : e.target.value === "unactive"
-              ? 1
-              : 2;
-          setUserStatus(numValue);
-        }}
+        value={userStatus}
+        onChange={(e) => setUserStatus(e.target.value)}
       >
-        <option defaultValue={"active"}>active</option>
-        <option defaultValue={"unactive"}>unactive</option>
-        <option defaultValue={"suspended"}>suspended</option>
+        <option value={0}>active</option>
+        <option value={1}>unactive</option>
+        <option value={2}>suspended</option>
       </select>
       <FormButton
         text={{ default: "Update Status" }}

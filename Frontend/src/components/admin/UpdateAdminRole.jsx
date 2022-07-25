@@ -16,13 +16,11 @@ export const UpdateAdminRole = ({ admin, handleUpdating }) => {
     >
       <select
         className="my-2 p-2 rounded"
-        defaultValue={adminRole}
-        onChange={(e) => {
-          setAdminRole(e.target.value);
-        }}
+        value={adminRole}
+        onChange={(e) => setAdminRole(e.target.value)}
       >
-        <option defaultValue={"owner"}>owner</option>
-        <option defaultValue={"admin"}>admin</option>
+        <option value={"owner"}>owner</option>
+        <option value={"admin"}>admin</option>
       </select>
       <FormButton
         text={{ default: "Update Role" }}

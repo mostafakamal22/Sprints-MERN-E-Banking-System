@@ -184,7 +184,7 @@ export const RegisterAdmin = () => {
         </div>
 
         {/*Request Status and Errors*/}
-        {(isError || isSuccess) && (
+        {(isError || isSuccess) && msg && (
           <MessagesContainer
             msg={msg}
             isSuccess={isSuccess}
