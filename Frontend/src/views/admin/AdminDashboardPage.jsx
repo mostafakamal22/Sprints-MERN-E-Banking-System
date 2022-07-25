@@ -41,7 +41,7 @@ export default function AdminDashboard() {
   }, [info]);
 
   //users list
-  const { usersList, isLoading } = useSelector((state) => state.usersData);
+  const { usersList } = useSelector((state) => state.usersData);
 
   //admins list
   const { adminsList } = useSelector((state) => state.ownerData);
@@ -66,10 +66,14 @@ export default function AdminDashboard() {
     };
   });
 
-  if (isLoading && !usersList)
+  if (!usersList)
     return (
-      <div className="max-w-5xl w-full p-6 bg-slate-50 rounded shadow-lg shadow-black/30">
-        <MainSpinner />
+      <div className="mx-5 h-min-screen">
+        <div className="max-w-5xl w-full h-full flex justify-center items-center mx-auto my-10 p-6 bg-slate-50 rounded shadow-lg shadow-black/30">
+          <div className="flex justify-center items-center">
+            <MainSpinner />
+          </div>
+        </div>
       </div>
     );
 

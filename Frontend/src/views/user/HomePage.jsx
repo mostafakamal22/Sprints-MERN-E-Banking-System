@@ -42,8 +42,12 @@ export const HomePage = () => {
 
   if (isLoading)
     return (
-      <div className="max-w-5xl w-full min-h-screen mx-auto my-10 p-6 bg-slate-50 rounded shadow-lg shadow-black/30">
-        <MainSpinner />
+      <div className="mx-5 h-min-screen">
+        <div className="max-w-5xl w-full h-full flex justify-center items-center mx-auto my-10 p-6 bg-slate-50 rounded shadow-lg shadow-black/30">
+          <div className="flex justify-center items-center">
+            <MainSpinner />
+          </div>
+        </div>
       </div>
     );
 

@@ -1,5 +1,4 @@
 import React from "react";
-import { BiRightArrowAlt } from "react-icons/bi";
 
 export const ChooseAccount = ({ account, accounts, setPreferedAccount }) => {
   return (
@@ -10,14 +9,13 @@ export const ChooseAccount = ({ account, accounts, setPreferedAccount }) => {
             Choose Account
           </p>
           <select
-            defaultValue={accounts.indexOf(account._id) + 1}
+            value={accounts.indexOf(account._id) + 1}
             onChange={(e) => setPreferedAccount(e.target.value - 1)}
             className="w-full lg:w-auto bg-white text-gray-800 text-center  px-4 py-2 rounded-md"
           >
             {accounts.map((account, index) => (
-              <option key={account} defaultValue={index}>
-                <span>{index + 1}</span>
-                <BiRightArrowAlt className="inline-block ml-auto" size={20} />
+              <option key={account} value={index + 1}>
+                {index + 1}
               </option>
             ))}
           </select>
