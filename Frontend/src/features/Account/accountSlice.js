@@ -67,7 +67,7 @@ export const withdraw = createAsyncThunk(
 );
 
 //Logout
-export const accountLogout = createAsyncThunk("user/logout", async () => {
+export const accountLogout = createAsyncThunk("account/logout", async () => {
   accountServices.accountLogout();
 });
 

@@ -29,16 +29,17 @@ const persistConfig = {
 const appReducer = combineReducers({
   userAuth: authReducer,
   userData: userReducer,
+  userAccount: accountReducer,
   adminAuth: adminAuthReducer,
   ownerData: ownerReducer,
   usersData: usersReducer,
   accountRequests: accountRequestsReducer,
-  userAccount: accountReducer,
 });
 
 //All Logout actions
 const logoutActions = [
   "user/logout",
+  "account/logout",
   "auth/logout",
   "auth/admin/logout",
   "owner/logout",

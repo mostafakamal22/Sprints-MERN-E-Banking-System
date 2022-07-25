@@ -34,7 +34,6 @@ export const AdminNavLinks = ({ admin }) => {
       title: "Logout",
       icon: RiLogoutBoxRFill,
       handleLogout: () => {
-        navigate("/");
         dispatch(adminsLogout());
         dispatch(ownerLogout());
         dispatch(adminLogout());

@@ -4,6 +4,8 @@ import {
   Routes,
   Route,
   Navigate,
+  matchPath,
+  useMatch,
 } from "react-router-dom";
 import ProfilePage from "./views/user/ProfilePage";
 import AdminProfilePage from "./views/admin/ProfilePage";
@@ -34,6 +36,24 @@ function App() {
   const user = UseDetectUser();
   //Detect admin
   const admin = UseDetectAdmin();
+  //User And Admin Paths
+  const paths = [
+    "/profile/:id",
+    "/profile",
+    "/notifications",
+    "/notifications/:id",
+    "/account-request",
+    "/account/in/:id",
+    "/account/out/:id",
+    "/account/withdraw/:id",
+    "/account/transfer/:id",
+    "/account/deposit/:id",
+    "/account/deposit-logs/:id",
+    "/account/withdraw-logs/:id",
+    "/contact",
+    "/admins/profile/:id",
+    "/admins/profile/:id/update",
+  ];
 
   return (
     <Router>
@@ -44,6 +64,14 @@ function App() {
           <Route exact path="/register" element={<RegisterPage />} />
           <Route exact path="/admins/login" element={<AdminLoginPage />} />
           <Route exact path="/login" element={<UserLoginPage />} />
+          {paths.map((stringPath) => (
+            <Route
+              key={"Hone"}
+              exact
+              path={stringPath}
+              element={<Navigate to={"/"} />}
+            />
+          ))}
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
       )}

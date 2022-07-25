@@ -16,7 +16,10 @@ import {
 } from "react-icons/ri";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useMatch, useNavigate } from "react-router-dom";
-import { resetAccountStatus } from "../../features/Account/AccountSlice";
+import {
+  accountLogout,
+  resetAccountStatus,
+} from "../../features/Account/accountSlice";
 import { logout, resetAuthStatus } from "../../features/Auth/authSlice";
 import { resetUserStatus, userLogout } from "../../features/User/userSlice";
 
@@ -95,8 +98,8 @@ export const UserNavLinks = ({ user }) => {
     {
       title: "Logout",
       icon: RiLogoutBoxRFill,
-      handleLogout: () => {
-        navigate("/");
+      handleLogout: function () {
+        dispatch(accountLogout());
         dispatch(logout());
         dispatch(userLogout());
         dispatch(resetUserStatus());
