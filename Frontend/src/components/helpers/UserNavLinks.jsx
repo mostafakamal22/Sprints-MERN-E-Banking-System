@@ -145,9 +145,9 @@ export const UserNavLinks = ({ user }) => {
             >
               <link.icon className="text-blue-800" size={22} />
               <span
-                className={`${
-                  useMatch(link.to) && "underline font-bold"
-                } text-sm  ml-2 font-semibold text-blue-800 hover:text-blue-700 hover:underline`}
+                className={`text-sm ml-2 text-blue-800 hover:text-blue-700 hover:underline ${
+                  useMatch(link.to) ? "underline font-bold" : "font-semibold"
+                }`}
               >
                 {link.title}
               </span>

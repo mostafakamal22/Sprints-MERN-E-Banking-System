@@ -4,8 +4,6 @@ import {
   Routes,
   Route,
   Navigate,
-  matchPath,
-  useMatch,
 } from "react-router-dom";
 import ProfilePage from "./views/user/ProfilePage";
 import AdminProfilePage from "./views/admin/ProfilePage";
@@ -30,16 +28,23 @@ import { IncomingTransactionsPage } from "./views/user/IncomingTransactionsPage"
 import { DepositLogsPage } from "./views/user/DepositLogsPage";
 import { WithdrawLogsPage } from "./views/user/WithdrawLogsPage";
 import { ContactPage } from "./views/user/ContactPage";
+import { useSelector } from "react-redux";
+import { UnactiveSuspendedUserPage } from "./views/user/UnactiveSuspendedUserPage";
+import { MainSpinner } from "./components/shared/MainSpinner";
 
 function App() {
   //Detect user
   const user = UseDetectUser();
   //Detect admin
   const admin = UseDetectAdmin();
+
+  const { info, isLoading } = useSelector((state) => state.userData);
+
   //User And Admin Paths
   const paths = [
-    "/profile/:id",
     "/profile",
+    "/profile/:id",
+    "/profile/:id/update",
     "/notifications",
     "/notifications/:id",
     "/account-request",
@@ -55,6 +60,18 @@ function App() {
     "/admins/profile/:id/update",
   ];
 
+  //Loading Spinner After Login Waiting Until UserData if Fetched.
+  if (!info && !admin && isLoading)
+    return (
+      <div className="mx-5 h-min-screen">
+        <div className="max-w-5xl w-full h-full flex justify-center items-center mx-auto my-10 p-6 bg-slate-50 rounded shadow-lg shadow-black/30">
+          <div className="flex justify-center items-center">
+            <MainSpinner />
+          </div>
+        </div>
+      </div>
+    );
+
   return (
     <Router>
       {/* Guest Routes */}
@@ -66,7 +83,7 @@ function App() {
           <Route exact path="/login" element={<UserLoginPage />} />
           {paths.map((stringPath) => (
             <Route
-              key={"Hone"}
+              key={"Home"}
               exact
               path={stringPath}
               element={<Navigate to={"/"} />}
@@ -76,8 +93,8 @@ function App() {
         </Routes>
       )}
 
-      {/* Users Routes */}
-      {user && !admin && (
+      {/*Active Users Routes */}
+      {user && info?.userStatus === 0 && !admin && (
         <Routes>
           <Route index element={<HomePage />} />
           <Route exact path="/register" element={<Navigate to={"/"} />} />
@@ -130,6 +147,15 @@ function App() {
             path="/account/withdraw-logs/:id"
             element={<WithdrawLogsPage />}
           />
+          <Route exact path="/contact" element={<ContactPage />} />
+          <Route path="*" element={<NotFoundPage />} />
+        </Routes>
+      )}
+
+      {/*Unactive-Suspended Users Routes */}
+      {user && info?.userStatus !== 0 && !admin && (
+        <Routes>
+          <Route index element={<UnactiveSuspendedUserPage />} />
           <Route exact path="/contact" element={<ContactPage />} />
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
