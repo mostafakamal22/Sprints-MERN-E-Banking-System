@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { updateUser } from "../../features/User/userSlice";
 import FormButton from "../shared/FormButton";
 import MessagesContainer from "../shared/MessagesContainer";
+import { InputsValidator } from "./helpers/InputsValidator";
 
 export default function UpdateUser() {
   const dispatch = useDispatch();
@@ -167,6 +168,10 @@ export default function UpdateUser() {
               required
             />
           </div>
+
+          {/* password validator */}
+          <InputsValidator passwordInput={password} />
+
           <div className="mb-6">
             <label
               htmlFor="phone"

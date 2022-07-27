@@ -10,6 +10,7 @@ import FormButton from "../shared/FormButton";
 import { Logo } from "../shared/Logo";
 import MessagesContainer from "../shared/MessagesContainer";
 import { ReactComponent as RegisterImg } from "../../assets/imgs/E-BANK-Register.svg";
+import { InputsValidator } from "./helpers/InputsValidator";
 
 export default function Register() {
   const [formInputs, setFormInputs] = useState({
@@ -133,6 +134,9 @@ export default function Register() {
           />
         </div>
 
+        {/* name validator */}
+        <InputsValidator nameInput={`${firstName} ${lastName}`} />
+
         <div className="relative z-0 w-full mb-6">
           <label
             htmlFor="email"
@@ -153,6 +157,7 @@ export default function Register() {
             required
           />
         </div>
+
         <div className="relative z-0 w-full mb-6">
           <label
             htmlFor="address"
@@ -214,6 +219,9 @@ export default function Register() {
           />
         </div>
 
+        {/* password validator */}
+        <InputsValidator passwordInput={password} />
+
         <div className="relative z-0 w-full mb-6">
           <label
             htmlFor="phone"
@@ -234,6 +242,7 @@ export default function Register() {
             required
           />
         </div>
+
         <div className="relative z-0 w-full mb-6">
           <label
             htmlFor="postal"

@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { updateAdmin } from "../../../features/Admin/Auth/adminAuthSlice";
 import FormButton from "../../shared/FormButton";
 import MessagesContainer from "../../shared/MessagesContainer";
+import { InputsValidator } from "../helpers/InputsValidator";
 
 export default function UpdateAdmin() {
   const dispatch = useDispatch();
@@ -153,6 +154,9 @@ export default function UpdateAdmin() {
               required
             />
           </div>
+
+          {/* password validator */}
+          <InputsValidator passwordInput={password} />
 
           {/*Request Status and Errors*/}
           {(isError || isSuccess) && msg && (

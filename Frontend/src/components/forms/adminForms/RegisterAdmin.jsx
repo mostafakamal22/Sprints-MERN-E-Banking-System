@@ -9,6 +9,7 @@ import FormButton from "../../shared/FormButton";
 import MessagesContainer from "../../shared/MessagesContainer";
 import { FcPlus } from "react-icons/fc";
 import { AiFillPlusCircle } from "react-icons/ai";
+import { InputsValidator } from "../helpers/InputsValidator";
 
 export const RegisterAdmin = () => {
   const dispatch = useDispatch();
@@ -99,6 +100,9 @@ export const RegisterAdmin = () => {
           />
         </div>
 
+        {/* name validator */}
+        <InputsValidator nameInput={name} />
+
         <div className="mb-6">
           <label
             htmlFor="email"
@@ -161,6 +165,9 @@ export const RegisterAdmin = () => {
             required
           />
         </div>
+
+        {/* password validator */}
+        <InputsValidator passwordInput={password} />
 
         <div className="mb-6 text-center">
           <label
