@@ -23,7 +23,7 @@ export const InputsValidator = ({ nameInput = null, passwordInput = null }) => {
       <div
         className={`${
           validateName(nameInput) ? "text-green-600" : "text-red-600"
-        } text-sm font-semibold px-2 my-4`}
+        } text-xs md:text-sm font-semibold px-2 my-4`}
       >
         <p>Name Must:-</p>
         <p>* Be 10 characters or more long.</p>
@@ -40,7 +40,7 @@ export const InputsValidator = ({ nameInput = null, passwordInput = null }) => {
       <div
         className={`${
           validatePassword(passwordInput) ? "text-green-600" : "text-red-600"
-        } text-sm font-semibold px-2 my-4`}
+        } text-xs md:text-sm font-semibold px-2 my-4`}
       >
         <p>Password Must:-</p>
         <p>* Be 8 characters or longer.</p>

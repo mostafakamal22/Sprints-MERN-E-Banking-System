@@ -1,7 +1,18 @@
 import React from "react";
-import { RiArrowRightLine } from "react-icons/ri";
+import { AiFillHome } from "react-icons/ai";
+import { BsInfoCircleFill } from "react-icons/bs";
+import { AiFillSetting } from "react-icons/ai";
+import { MdOutlineSecurity, MdReviews } from "react-icons/md";
 import { Link } from "react-router-dom";
 import { Logo } from "../../../shared/Logo";
+
+const navIcons = [
+  <AiFillHome size={17} className=" mr-1" />,
+  <BsInfoCircleFill size={17} className=" mr-1" />,
+  <MdReviews size={17} className="mr-1" />,
+  <AiFillSetting size={17} className="mr-1" />,
+  <MdOutlineSecurity size={17} className="mr-1" />,
+];
 
 export default function Footer() {
   return (
@@ -11,7 +22,7 @@ export default function Footer() {
           <div className="flex flex-col justify-between gap-4 lg:justify-self-start lg:col-span-3">
             <div className="flex justify-center items-center flex-col gap-4">
               <Logo />
-              <p className="text-base !font-sans font-semibold text-green-500">
+              <p className="text-base !font-sans font-semibold text-teal-500">
                 E-Bank is everything you need now!
               </p>
             </div>
@@ -46,35 +57,40 @@ export default function Footer() {
             </div>
           </div>
 
-          <div className="grid grid-cols-1 gap-2 py-1 lg:grid-rows-3 text-white text-sm lg:text-left lg:justify-self-start lg:col-span-5 lg:gap-x-24 lg:grid-flow-col-dense">
+          <div className="grid grid-cols-1 gap-2 py-1 lg:grid-rows-3 lg:ml-4 text-white text-sm lg:text-left lg:justify-self-start lg:col-span-5 lg:gap-x-24 lg:grid-flow-col-dense">
             <a
-              className="hover:text-blue-400 hover:underline hover:underline-offset-4"
+              className="flex items-center hover:text-blue-400 focus:text-blue-400"
               href="#Home"
             >
+              {navIcons[0]}
               Home
             </a>
             <a
-              className="hover:text-blue-400 hover:underline hover:underline-offset-4"
+              className="flex  items-center hover:text-blue-400 focus:text-blue-400"
               href="#About"
             >
+              {navIcons[1]}
               Why E-Bank
             </a>
             <a
-              className="hover:text-blue-400 hover:underline hover:underline-offset-4"
+              className="flex  items-center hover:text-blue-400 focus:text-blue-400"
               href="#Reviews"
             >
+              {navIcons[2]}
               Reviews
             </a>
             <a
-              className="hover:text-blue-400 hover:underline hover:underline-offset-4"
+              className="flex  items-center hover:text-blue-400 focus:text-blue-400"
               href="#0"
             >
+              {navIcons[3]}
               Support
             </a>
             <a
-              className="hover:text-blue-400 hover:underline hover:underline-offset-4"
+              className="flex  items-center hover:text-blue-400 focus:text-blue-400"
               href="#0"
             >
+              {navIcons[4]}
               Privacy Policy
             </a>
           </div>

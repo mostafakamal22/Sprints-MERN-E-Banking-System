@@ -1,5 +1,4 @@
 import React from "react";
-import { RiArrowRightLine } from "react-icons/ri";
 import { Link } from "react-router-dom";
 
 export default function Hero() {

@@ -1,15 +1,20 @@
 import React from "react";
 import { useEffect } from "react";
 import { useState } from "react";
-import { AiFillCloseCircle } from "react-icons/ai";
-import { FaRegistered } from "react-icons/fa";
+import { AiFillCloseCircle, AiFillHome } from "react-icons/ai";
+import { BsInfoCircleFill } from "react-icons/bs";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { IoLogIn } from "react-icons/io5";
-import { RiArrowRightLine } from "react-icons/ri";
+import { MdReviews } from "react-icons/md";
 import { Link } from "react-router-dom";
 import { Logo } from "../../../shared/Logo";
 
 const navItems = ["Home", "About", "Reviews"];
+const navIcons = [
+  <AiFillHome size={25} className="mb-1 mr-1" />,
+  <BsInfoCircleFill size={25} className="mb-1 mr-1" />,
+  <MdReviews size={25} className="mr-1" />,
+];
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -46,12 +51,13 @@ export default function Navbar() {
           </div>
 
           <div className="hidden lg:flex justify-center items-center gap-4 px-4 text-lg text-slate-800">
-            {navItems.map((navItem) => (
+            {navItems.map((navItem, index) => (
               <a
                 key={navItem}
-                className="p-3 !font-sans font-bold rounded-lg hover:text-white hover:bg-slate-800"
+                className="flex justify-center items-center p-3 !font-sans font-bold rounded-lg hover:text-white hover:bg-slate-800"
                 href={`#${navItem}`}
               >
+                {navIcons[index]}
                 {navItem}
               </a>
             ))}
@@ -102,12 +108,13 @@ export default function Navbar() {
               className={`${isOpen ? "block" : "hidden"} text-rose-700`}
             />
           </button>
-          {navItems.map((navItem) => (
+          {navItems.map((navItem, index) => (
             <a
               key={navItem}
-              className="py-2 font-semibold bg-blue-200 border-x-4 border-blue-800 hover:underline hover:font-bold"
+              className="flex justify-center items-center gap-[1px] py-2 !font-sans font-semibold bg-blue-200 border-x-4 border-blue-800 hover:underline focus:underline hover:text-slate-800 focus:text-slate-800"
               href={`#${navItem}`}
             >
+              {navIcons[index]}
               {navItem}
             </a>
           ))}

@@ -33,7 +33,7 @@ const motivationItems = [
 
 export default function Motivation() {
   return (
-    <section id="About" className="py-40 bg-[#0f172a]">
+    <section id="About" className="py-20 md:py-40 bg-[#0f172a]">
       <div className="max-w-[1800px] w-full mx-auto flex flex-col justify-center items-center gap-10 px-4 sm:px-10 md:px-12  text-center lg:text-left">
         <div className="grid lg:grid-cols-2 mb-12 lg:mb-16">
           <div className="col-span-1">

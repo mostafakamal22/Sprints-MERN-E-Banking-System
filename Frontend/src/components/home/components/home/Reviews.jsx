@@ -1,11 +1,13 @@
 import React from "react";
-import { RiArrowRightLine } from "react-icons/ri";
 import { Link } from "react-router-dom";
 import robertPhoto from "../../../../assets/imgs/robert-brown.png";
 
 export default function Reviews() {
   return (
-    <section id="Reviews" className="relative overflow-hidden py-40 bg-white">
+    <section
+      id="Reviews"
+      className="relative overflow-hidden py-20 md:py-40 bg-white"
+    >
       {/* Illustration behind content */}
       <div
         className="absolute left-1/2 transform -translate-x-1/2 bottom-0 pointer-events-none -mb-32"

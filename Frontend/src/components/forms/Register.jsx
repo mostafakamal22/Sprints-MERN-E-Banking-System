@@ -9,7 +9,6 @@ import { register } from "../../features/Auth/authSlice";
 import FormButton from "../shared/FormButton";
 import { Logo } from "../shared/Logo";
 import MessagesContainer from "../shared/MessagesContainer";
-import { ReactComponent as RegisterImg } from "../../assets/imgs/E-BANK-Register.svg";
 import { InputsValidator } from "./helpers/InputsValidator";
 
 export default function Register() {
@@ -90,8 +89,6 @@ export default function Register() {
         <FcCurrencyExchange className="mr-1" size={45} />
         <span>Register</span>
       </h3>
-
-      <RegisterImg className="max-h-60 w-full my-10 p-6 bg-blue-200 mx-auto border-x-4 border-blue-800 shadow rounded md:hidden" />
 
       <form className="mt-10" onSubmit={handleSubmit}>
         <div className="relative z-0 w-full mb-6">
