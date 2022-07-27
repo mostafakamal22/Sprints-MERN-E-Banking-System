@@ -134,11 +134,10 @@ export default function Reviews() {
             <div className="flex justify-center items-center my-5">
               <Link
                 to="/register"
-                className="flex justify-center items-center font-bold text-xl bg-blue-800 text-white hover:bg-white focus:bg-white  px-6 py-3  hover:text-blue-800 focus:text-blue-800 border-2 hover:border-blue-800  focus:border-blue-800  rounded-lg
-         shadow transition-all ease-in-out duration-300"
+                className="flex justify-center items-center font-bold text-xl bg-teal-800 text-white hover:bg-white focus:bg-white  px-8 py-4  hover:text-blue-800 focus:text-blue-800 border-2  border-teal-800 hover:border-blue-800  focus:border-blue-800  rounded-lg
+                shadow transition-all ease-in-out duration-300"
               >
                 <span>Register</span>
-                <RiArrowRightLine className="-mb-2 ml-1" size={17} />
               </Link>
             </div>
           </div>

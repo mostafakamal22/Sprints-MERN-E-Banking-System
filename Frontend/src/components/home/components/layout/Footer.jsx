@@ -11,7 +11,7 @@ export default function Footer() {
           <div className="flex flex-col justify-between gap-4 lg:justify-self-start lg:col-span-3">
             <div className="flex justify-center items-center flex-col gap-4">
               <Logo />
-              <p className="text-base text-green-500">
+              <p className="text-base !font-sans font-semibold text-green-500">
                 E-Bank is everything you need now!
               </p>
             </div>
@@ -47,19 +47,34 @@ export default function Footer() {
           </div>
 
           <div className="grid grid-cols-1 gap-2 py-1 lg:grid-rows-3 text-white text-sm lg:text-left lg:justify-self-start lg:col-span-5 lg:gap-x-24 lg:grid-flow-col-dense">
-            <a className="hover:text-green-400" href="#Home">
+            <a
+              className="hover:text-blue-400 hover:underline hover:underline-offset-4"
+              href="#Home"
+            >
               Home
             </a>
-            <a className="hover:text-green-400" href="#About">
+            <a
+              className="hover:text-blue-400 hover:underline hover:underline-offset-4"
+              href="#About"
+            >
               Why E-Bank
             </a>
-            <a className="hover:text-green-400" href="#Reviews">
+            <a
+              className="hover:text-blue-400 hover:underline hover:underline-offset-4"
+              href="#Reviews"
+            >
               Reviews
             </a>
-            <a className="hover:text-green-400" href="#0">
+            <a
+              className="hover:text-blue-400 hover:underline hover:underline-offset-4"
+              href="#0"
+            >
               Support
             </a>
-            <a className="hover:text-green-400" href="#0">
+            <a
+              className="hover:text-blue-400 hover:underline hover:underline-offset-4"
+              href="#0"
+            >
               Privacy Policy
             </a>
           </div>
@@ -67,14 +82,13 @@ export default function Footer() {
           <div className="flex flex-col gap-4 justify-between items-center lg:items-end lg:justify-self-end lg:col-span-4">
             <Link
               to="/register"
-              className="flex justify-center items-center font-bold text-xl bg-blue-800 text-white hover:bg-white focus:bg-white  px-6 py-3  hover:text-blue-800 focus:text-blue-800 border-2 hover:border-blue-800  focus:border-blue-800  rounded-lg
-         shadow transition-all ease-in-out duration-300"
+              className="flex justify-center items-center font-bold text-xl bg-teal-800 text-white hover:bg-white focus:bg-white  px-8 py-4  hover:text-blue-800 focus:text-blue-800 border-2  border-slate-50 hover:border-blue-800  focus:border-blue-800  rounded-lg
+              shadow transition-all ease-in-out duration-300"
             >
               <span>Register</span>
-              <RiArrowRightLine className="-mb-2 ml-1" size={17} />
             </Link>
 
-            <p className="text-neutral-grayish-blue text-sm">
+            <p className="text-slate-100 text-sm">
               All Rights Reserved ©E-Bank 2022
             </p>
           </div>

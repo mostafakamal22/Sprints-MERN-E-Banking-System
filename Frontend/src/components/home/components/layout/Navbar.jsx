@@ -2,6 +2,7 @@ import React from "react";
 import { useEffect } from "react";
 import { useState } from "react";
 import { AiFillCloseCircle } from "react-icons/ai";
+import { FaRegistered } from "react-icons/fa";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { IoLogIn } from "react-icons/io5";
 import { RiArrowRightLine } from "react-icons/ri";
@@ -44,11 +45,11 @@ export default function Navbar() {
             <Logo bg={false} textSize="text-lg md:text-2xl lg:text-3xl" />
           </div>
 
-          <div className="hidden lg:flex justify-center items-center gap-4 px-4 text-lg text-blue-900">
+          <div className="hidden lg:flex justify-center items-center gap-4 px-4 text-lg text-slate-800">
             {navItems.map((navItem) => (
               <a
                 key={navItem}
-                className="p-3 font-bold rounded-lg hover:text-white hover:bg-slate-900"
+                className="p-3 !font-sans font-bold rounded-lg hover:text-white hover:bg-slate-800"
                 href={`#${navItem}`}
               >
                 {navItem}
@@ -59,11 +60,10 @@ export default function Navbar() {
           <div className="hidden lg:flex justify-end items-center gap-4">
             <Link
               to="/register"
-              className="inline-flex font-bold text-xs sm:text-sm bg-blue-800 text-white hover:bg-white px-2 sm:px-3 py-2 hover:text-blue-800 border-2 hover:border-blue-800 items-center rounded-lg
+              className="inline-flex font-bold text-xs sm:text-sm bg-teal-800 text-white hover:bg-white px-2 sm:px-3 py-2 hover:text-blue-800 border-2 hover:border-blue-800 items-center rounded-lg
          shadow transition-all ease-in-out duration-300"
             >
               Register
-              <RiArrowRightLine className="mb-[-4px]" size={15} />
             </Link>
             <Link
               to="/login"
@@ -83,10 +83,6 @@ export default function Navbar() {
               size={30}
               className={`${isOpen && "hidden"}  text-slate-900`}
             />
-            <AiFillCloseCircle
-              size={35}
-              className={`${isOpen ? "block" : "hidden"} text-slate-900`}
-            />
           </button>
         </nav>
       </div>
@@ -97,6 +93,15 @@ export default function Navbar() {
      ${isOpen ? "block" : "hidden"}`}
       >
         <div className="bg-white text-blue-900  flex flex-col gap-4 text-center  my-[77px] p-4 shadow rounded">
+          <button
+            onClick={() => setIsOpen(!isOpen)}
+            className="lg:hidden focus:outline-none ml-auto"
+          >
+            <AiFillCloseCircle
+              size={35}
+              className={`${isOpen ? "block" : "hidden"} text-rose-700`}
+            />
+          </button>
           {navItems.map((navItem) => (
             <a
               key={navItem}
@@ -109,15 +114,14 @@ export default function Navbar() {
           <div className="flex justify-center items-center gap-4">
             <Link
               to="/register"
-              className="inline-flex font-bold text-xs sm:text-sm bg-blue-800 text-white hover:bg-white px-2 sm:px-3 py-2 hover:text-blue-800 border-2 hover:border-blue-800 items-center rounded-lg
+              className="inline-flex font-bold text-xs sm:text-sm bg-teal-800 text-white hover:bg-white px-4 py-2 hover:text-blue-800 border-2  border-teal-800 hover:border-blue-800 items-center rounded-lg
          shadow transition-all ease-in-out duration-300"
             >
               Register
-              <RiArrowRightLine className="mb-[-4px]" size={15} />
             </Link>
             <Link
               to="/login"
-              className="inline-flex font-bold text-xs sm:text-sm bg-blue-800 text-white hover:bg-white px-2 sm:px-3 py-2 hover:text-blue-800 border-2 hover:border-blue-800 items-center rounded-lg
+              className="inline-flex font-bold text-xs sm:text-sm bg-blue-800 text-white hover:bg-white px-4  py-2 hover:text-blue-800 border-2 border-blue-800 hover:border-blue-800 items-center rounded-lg
          shadow transition-all ease-in-out duration-300"
             >
               Login

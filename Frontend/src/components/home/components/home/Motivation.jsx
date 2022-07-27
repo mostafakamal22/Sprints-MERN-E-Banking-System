@@ -37,7 +37,7 @@ export default function Motivation() {
       <div className="max-w-[1800px] w-full mx-auto flex flex-col justify-center items-center gap-10 px-4 sm:px-10 md:px-12  text-center lg:text-left">
         <div className="grid lg:grid-cols-2 mb-12 lg:mb-16">
           <div className="col-span-1">
-            <h2 className="text-3xl !font-sans lg:text-4xl text-green-500 pb-5 drop-shadow-md">
+            <h2 className="text-3xl !font-sans lg:text-4xl text-green-600 pb-5 drop-shadow-md">
               Why choose E-Bank?
             </h2>
             <p className="text-white !font-sans text-sm lg:text-base leading-5">
@@ -53,7 +53,7 @@ export default function Motivation() {
                 <item.icon />
               </div>
 
-              <h2 className="text-lg text-green-500 py-4 lg:pt-9 lg:pb-6 lg:text-xl lg:font-bold">
+              <h2 className="text-lg text-green-600 py-4 lg:pt-9 lg:pb-6 lg:text-xl lg:font-bold">
                 {item.title}
               </h2>
               <p className="text-white !font-sans text-sm font-light lg:text-base leading-5">
