@@ -128,7 +128,7 @@ export default function Register() {
               setFormInputs({ ...formInputs, lastName: e.target.value })
             }
             className="block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-            placeholder=" "
+            placeholder="Type Your Last Name"
             required
           />
         </div>
@@ -149,7 +149,7 @@ export default function Register() {
               setFormInputs({ ...formInputs, email: e.target.value })
             }
             className="block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-            placeholder=" "
+            placeholder="Type Your Email Address"
             required
           />
         </div>
@@ -169,7 +169,7 @@ export default function Register() {
               setFormInputs({ ...formInputs, address: e.target.value })
             }
             className="block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-            placeholder=" "
+            placeholder="Type Your Home Address"
             required
           />
         </div>
@@ -189,7 +189,7 @@ export default function Register() {
               setFormInputs({ ...formInputs, password: e.target.value })
             }
             className="block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-            placeholder=" "
+            placeholder="Type A Strong Password"
             required
           />
         </div>
@@ -209,7 +209,7 @@ export default function Register() {
               setFormInputs({ ...formInputs, repeatPassword: e.target.value })
             }
             className="block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-            placeholder=" "
+            placeholder="Repeat Password"
             required
           />
         </div>
@@ -219,7 +219,7 @@ export default function Register() {
             htmlFor="phone"
             className="w-full inline-block font-semibold mb-4 p-2 text-gray-800 border-b-4 border-blue-800 rounded shadow bg-blue-200"
           >
-            Phone Number Ex:(01008878980)
+            Phone Number Ex:-(01008878980)
           </label>
 
           <input
@@ -230,7 +230,7 @@ export default function Register() {
               setFormInputs({ ...formInputs, phone: e.target.value })
             }
             className="block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-            placeholder=" "
+            placeholder="Type Your Mobile Number"
             required
           />
         </div>
@@ -239,7 +239,7 @@ export default function Register() {
             htmlFor="postal"
             className="w-full inline-block font-semibold mb-4 p-2 text-gray-800 border-b-4 border-blue-800 rounded shadow bg-blue-200"
           >
-            Postal Code (Ex. 12345)
+            Postal Code Ex:-(12345)
           </label>
 
           <input
@@ -250,7 +250,7 @@ export default function Register() {
               setFormInputs({ ...formInputs, postCode: e.target.value })
             }
             className="block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-            placeholder=" "
+            placeholder="Type Your Postal Code"
             required
           />
         </div>
