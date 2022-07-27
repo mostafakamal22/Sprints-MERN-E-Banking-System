@@ -2,6 +2,7 @@ const User = require("../../models/userModel");
 const bycrpt = require("bcryptjs");
 
 //Validate Password before Hashing it
+//@useCase:- when guest/user register/update an account.
 const validatePassword = (req, res, next) => {
   //check for empty request first
   if (Object.keys(req.body).length === 0) {
@@ -27,8 +28,8 @@ const validatePassword = (req, res, next) => {
   return next();
 };
 
-//check password that comes from request is the password that being saved into database
-//@usedCase:- when user updating his info
+//check password that comes from request is the password that being saved into database.
+//@useCase:- when user updating his info.
 const checkPassword = async (req, res, next) => {
   try {
     //get user

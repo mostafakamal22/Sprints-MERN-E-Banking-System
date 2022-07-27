@@ -1,8 +1,8 @@
 const Account = require("../../models/accountModel");
 
 //check account balance is above requested (transfer or withdraw or deposit) money
-//@usedCase:- when user updating his account balance (tranfer or withdraw or deposit)
-//@usedCase:- when user create account with initital balance.
+//@useCase:- when user updating his account balance (tranfer or withdraw or deposit)
+//@useCase:- when user create account with initital balance.
 const checkBalance = async (req, res, next) => {
   let requestedBalance;
   let accountId;

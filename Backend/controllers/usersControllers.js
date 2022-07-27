@@ -37,7 +37,7 @@ const getOneUser = async (req, res) => {
       notifications: user.notifications,
     });
   } catch (error) {
-    if (!user) return res.status(404).send("user Not Found!");
+    if (!user) return res.status(404).send("User Not Found!");
     res.status(500).send("Ooops!! Something Went Wrong, Try again...");
   }
 };

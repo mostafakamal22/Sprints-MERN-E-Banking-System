@@ -1,5 +1,5 @@
 //check user's status (active, unactive, suspended).
-//@usedCase:- for All requests user wiil make after login.
+//@useCase:- for All requests user wiil make after login.
 const checkUserStatus = (req, res, next) => {
   //Get user
   const user = req.user;
@@ -14,10 +14,8 @@ const checkUserStatus = (req, res, next) => {
         }!, For more information Contact our Support Team.`
       );
   }
-
   //Okay User status is active
   //Go to next middleware
-
   next();
 };
 

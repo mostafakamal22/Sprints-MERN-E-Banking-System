@@ -1,7 +1,8 @@
 const Admin = require("../../models/adminModel");
 const bycrpt = require("bcryptjs");
 
-//Validate Password before Hashing it
+//Validate Password before Hashing it.
+//@useCase:- when admin registers/updates an admin account.
 const validatePassword = (req, res, next) => {
   //check for empty request first
   if (Object.keys(req.body).length === 0)
@@ -28,7 +29,7 @@ const validatePassword = (req, res, next) => {
 };
 
 //check password that comes from request is the password that being saved into database
-//@usedCase:- when admin updating his info
+//@useCase:- when admin updating his info
 const checkPassword = async (req, res, next) => {
   try {
     //get admin

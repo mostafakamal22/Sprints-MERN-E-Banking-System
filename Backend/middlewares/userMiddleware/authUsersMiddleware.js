@@ -20,6 +20,7 @@ const authUserProtect = async (req, res, next) => {
       if (!user) {
         return res.status(401).send("Not Authorized with invalid token");
       }
+      //pass user object to next middleware
       req.user = await User.findById(decoded.id);
       next();
     } catch (error) {

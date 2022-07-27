@@ -1,4 +1,5 @@
-//check admin role (Owner or admin)
+//check admin role (Owner or admin).
+//@UseCase:- when an admin make request, and only owners are allowed to make that request.
 const checkRole = async (req, res, next) => {
   //check for invalid user token
   if (!req.admin.role) {

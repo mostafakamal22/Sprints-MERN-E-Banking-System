@@ -3,7 +3,6 @@ const AccountRequest = require("../models/accountRequestModel");
 //@desc   >>>> Create Account Request
 //@route  >>>> POST /api/request/create
 //@Access >>>> Private (user only)
-
 const createAccountRequest = async (req, res, next) => {
   try {
     const accountRequest = await AccountRequest.create({

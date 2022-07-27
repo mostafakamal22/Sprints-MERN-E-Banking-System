@@ -20,6 +20,7 @@ const authAdminProtect = async (req, res, next) => {
       if (!admin) {
         return res.status(401).send("Not Authorized with invalid token");
       }
+      //pass admin object to next middleware
       req.admin = await Admin.findById(decoded.id);
       next();
     } catch (error) {

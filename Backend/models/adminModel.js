@@ -52,7 +52,7 @@ const adminSchema = new mongoose.Schema(
   }
 );
 
-//handle duplicate 'Key' error when 'SAVING' a User
+//handle duplicate 'Key' error when 'SAVING' an Admin
 adminSchema.post("save", function (error, doc, next) {
   if (error.name === "MongoServerError" && error.code === 11000) {
     let dupKeys = Object.keys(error.keyPattern);
@@ -62,7 +62,7 @@ adminSchema.post("save", function (error, doc, next) {
   }
 });
 
-//handle duplicate 'Key' error when 'UPDATING' a Admin
+//handle duplicate 'Key' error when 'UPDATING' an Admin
 adminSchema.post("updateOne", function (error, doc, next) {
   if (error.name === "MongoServerError" && error.code === 11000) {
     let dupKeys = Object.keys(error.keyPattern);
