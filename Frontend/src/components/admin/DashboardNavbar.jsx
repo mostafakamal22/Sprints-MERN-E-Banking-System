@@ -40,8 +40,10 @@ export const DashboardNavbar = ({ activeTab, setActiveTab }) => {
           {navTabs.map((tab, index) => (
             <li
               key={index}
-              className={`flex justify-center items-center font-bold select-none cursor-pointer  hover:text-blue-700 hover:underline ${
-                activeTab === tab.stateName && "underline underline-offset-2"
+              className={`flex justify-center items-center select-none cursor-pointer  hover:text-blue-700 hover:underline ${
+                activeTab === tab.stateName
+                  ? " font-bold underline underline-offset-2"
+                  : " font-semibold"
               }
               ${
                 info.role !== "owner" &&

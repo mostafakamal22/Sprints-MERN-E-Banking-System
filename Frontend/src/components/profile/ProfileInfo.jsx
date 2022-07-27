@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 export default function ProfileInfo({ info }) {
   return (
     <div className="p-3 py-8">
-      <h3 className="flex items-center  text-gray-800 mb-10 text-xl text-center font-bold px-2 py-4 my-4 rounded shadow bg-blue-100 border-b-4 border-blue-800">
+      <h3 className="flex items-center  text-gray-800 mb-10 text-xl text-center font-bold px-2 py-4 my-4 rounded shadow bg-blue-200 border-b-4 border-blue-800">
         <FcKindle className="mr-1" size={50} />
         Client Informations
       </h3>

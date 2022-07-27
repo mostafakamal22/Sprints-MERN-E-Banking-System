@@ -31,6 +31,7 @@ import { ContactPage } from "./views/user/ContactPage";
 import { useSelector } from "react-redux";
 import { UnactiveSuspendedUserPage } from "./views/user/UnactiveSuspendedUserPage";
 import { MainSpinner } from "./components/shared/MainSpinner";
+import { Index } from "./components/home";
 
 function App() {
   //Detect user
@@ -77,7 +78,7 @@ function App() {
       {/* Guest Routes */}
       {!user && !admin && (
         <Routes>
-          <Route index element={<UserLoginPage />} />
+          <Route index element={<Index />} />
           <Route exact path="/register" element={<RegisterPage />} />
           <Route exact path="/admins/login" element={<AdminLoginPage />} />
           <Route exact path="/login" element={<UserLoginPage />} />
@@ -156,6 +157,8 @@ function App() {
       {user && info?.userStatus !== 0 && !admin && (
         <Routes>
           <Route index element={<UnactiveSuspendedUserPage />} />
+          <Route exact path="/register" element={<Navigate to={"/"} />} />
+          <Route exact path="/login" element={<Navigate to={"/"} />} />
           <Route exact path="/contact" element={<ContactPage />} />
           <Route path="*" element={<NotFoundPage />} />
         </Routes>

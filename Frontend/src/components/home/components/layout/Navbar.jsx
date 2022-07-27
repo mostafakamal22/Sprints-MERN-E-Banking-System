@@ -1,0 +1,131 @@
+import React from "react";
+import { useEffect } from "react";
+import { useState } from "react";
+import { AiFillCloseCircle } from "react-icons/ai";
+import { GiHamburgerMenu } from "react-icons/gi";
+import { IoLogIn } from "react-icons/io5";
+import { RiArrowRightLine } from "react-icons/ri";
+import { Link } from "react-router-dom";
+import { Logo } from "../../../shared/Logo";
+
+const navItems = ["Home", "About", "Reviews"];
+
+export default function Navbar() {
+  const [isOpen, setIsOpen] = useState(false);
+  //navbar scroll when active state
+  const [navbar, setNavbar] = useState(false);
+
+  //navbar scroll changeBackground function
+  const changeBackground = () => {
+    if (window.scrollY > 0) {
+      setNavbar(true);
+    } else {
+      setNavbar(false);
+    }
+  };
+
+  useEffect(() => {
+    window.addEventListener("scroll", changeBackground);
+
+    return () => {
+      window.removeEventListener("scroll", changeBackground);
+    };
+  }, [changeBackground]);
+
+  return (
+    <>
+      <div
+        className={`${
+          navbar ? "bg-slate-50 shadow-lg " : " bg-transparent "
+        }  fixed z-50 top-0 w-full transform transition-all duration-300 ease-in-out`}
+      >
+        <nav className="max-w-[1800px] w-full mx-auto px-4 sm:px-10 md:px-12 py-2 md:py-4 flex justify-between items-center z-20">
+          <div className="max-w-[200px]">
+            <Logo bg={false} textSize="text-lg md:text-2xl lg:text-3xl" />
+          </div>
+
+          <div className="hidden lg:flex justify-center items-center gap-4 px-4 text-lg text-blue-900">
+            {navItems.map((navItem) => (
+              <a
+                key={navItem}
+                className="p-3 font-bold rounded-lg hover:text-white hover:bg-slate-900"
+                href={`#${navItem}`}
+              >
+                {navItem}
+              </a>
+            ))}
+          </div>
+
+          <div className="hidden lg:flex justify-end items-center gap-4">
+            <Link
+              to="/register"
+              className="inline-flex font-bold text-xs sm:text-sm bg-blue-800 text-white hover:bg-white px-2 sm:px-3 py-2 hover:text-blue-800 border-2 hover:border-blue-800 items-center rounded-lg
+         shadow transition-all ease-in-out duration-300"
+            >
+              Register
+              <RiArrowRightLine className="mb-[-4px]" size={15} />
+            </Link>
+            <Link
+              to="/login"
+              className="inline-flex font-bold text-xs sm:text-sm bg-blue-800 text-white hover:bg-white px-2 sm:px-3 py-2 hover:text-blue-800 border-2 hover:border-blue-800 items-center rounded-lg
+         shadow transition-all ease-in-out duration-300"
+            >
+              Login
+              <IoLogIn size={20} />
+            </Link>
+          </div>
+
+          <button
+            onClick={() => setIsOpen(!isOpen)}
+            className="lg:hidden focus:outline-none"
+          >
+            <GiHamburgerMenu
+              size={30}
+              className={`${isOpen && "hidden"}  text-slate-900`}
+            />
+            <AiFillCloseCircle
+              size={35}
+              className={`${isOpen ? "block" : "hidden"} text-slate-900`}
+            />
+          </button>
+        </nav>
+      </div>
+
+      {/* Modal */}
+      <div
+        className={`fixed inset-0 z-30 bg-slate-700 bg-opacity-50 
+     ${isOpen ? "block" : "hidden"}`}
+      >
+        <div className="bg-white text-blue-900  flex flex-col gap-4 text-center  my-[77px] p-4 shadow rounded">
+          {navItems.map((navItem) => (
+            <a
+              key={navItem}
+              className="py-2 font-semibold bg-blue-200 border-x-4 border-blue-800 hover:underline hover:font-bold"
+              href={`#${navItem}`}
+            >
+              {navItem}
+            </a>
+          ))}
+          <div className="flex justify-center items-center gap-4">
+            <Link
+              to="/register"
+              className="inline-flex font-bold text-xs sm:text-sm bg-blue-800 text-white hover:bg-white px-2 sm:px-3 py-2 hover:text-blue-800 border-2 hover:border-blue-800 items-center rounded-lg
+         shadow transition-all ease-in-out duration-300"
+            >
+              Register
+              <RiArrowRightLine className="mb-[-4px]" size={15} />
+            </Link>
+            <Link
+              to="/login"
+              className="inline-flex font-bold text-xs sm:text-sm bg-blue-800 text-white hover:bg-white px-2 sm:px-3 py-2 hover:text-blue-800 border-2 hover:border-blue-800 items-center rounded-lg
+         shadow transition-all ease-in-out duration-300"
+            >
+              Login
+              <IoLogIn size={20} />
+            </Link>
+          </div>
+        </div>
+      </div>
+    </>
+  );
+}
