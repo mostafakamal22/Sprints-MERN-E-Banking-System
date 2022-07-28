@@ -1,5 +1,5 @@
 require("dotenv").config();
-
+const path = require("path");
 const express = require("express");
 const cors = require("cors");
 
@@ -31,6 +31,17 @@ app.use("/api/account", accountRoute);
 //account requests Router
 const accountRequestRoute = require("./routes/accountRequestRoutes");
 app.use("/api/request", accountRequestRoute);
+
+//serve Frontend
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static(path.join(__dirname, "../Frontend/build")));
+
+  app.get("*", (req, res) =>
+    res.sendFile(
+      path.resolve(__dirname, "../", "Frontend", "build", "index.html")
+    )
+  );
+}
 
 app.listen(process.env.PORT, () => {
   console.log("server is running");
