@@ -17,7 +17,7 @@ const persistConfig = {
   //encrypting state being stored in localstorage
   transforms: [
     encryptTransform({
-      secretKey: "my-super-secret-key",
+      secretKey: "sprintsBankingSystemUsingREDUXPERSIST",
       onError: function (error) {
         // Handle the error.
         console.log(error);
