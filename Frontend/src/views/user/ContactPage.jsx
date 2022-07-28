@@ -1,6 +1,6 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import { Contact } from "../../components/forms/Contact";
+import { Contact } from "../../components/forms/userForms/Contact";
 import { SideNavbar } from "../../components/shared/SideNavbar";
 
 export const ContactPage = () => {

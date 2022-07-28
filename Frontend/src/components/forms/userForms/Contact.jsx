@@ -1,7 +1,7 @@
 import React from "react";
 import { FcServices } from "react-icons/fc";
 import { RiMessageFill } from "react-icons/ri";
-import FormButton from "../shared/FormButton";
+import FormButton from "../../shared/FormButton";
 
 export const Contact = () => {
   return (

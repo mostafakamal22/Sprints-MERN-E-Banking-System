@@ -4,7 +4,7 @@ import {
   ApproveAccountRequest,
   declineAccountRequest,
   resetAccountRequestsStatus,
-} from "../../features/Admin/AccountRequests/accountRequestsSlice";
+} from "../../state/features/Admin/AccountRequests/accountRequestsSlice";
 import { UseResetStatus } from "../../hooks/UseResetStatus";
 import FormButton from "../shared/FormButton";
 import { MainSpinner } from "../shared/MainSpinner";

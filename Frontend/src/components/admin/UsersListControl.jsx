@@ -6,7 +6,7 @@ import {
   deleteUser,
   resetUsersStatus,
   updateUserStatus,
-} from "../../features/Admin/UsersActions/usersSlice";
+} from "../../state/features/Admin/UsersActions/usersSlice";
 import { UseResetStatus } from "../../hooks/UseResetStatus";
 import FormButton from "../shared/FormButton";
 import { MainSpinner } from "../shared/MainSpinner";

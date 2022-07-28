@@ -1,8 +1,8 @@
 import React from "react";
 import { useDispatch } from "react-redux";
-import { resetAuthStatus } from "../../features/Auth/authSlice";
+import { resetAuthStatus } from "../../state/features/User/Auth/authSlice";
 import { UseResetStatus } from "../../hooks/UseResetStatus";
-import Register from "../../components/forms/Register";
+import Register from "../../components/forms/userForms/Register";
 
 export const RegisterPage = () => {
   const dispatch = useDispatch();

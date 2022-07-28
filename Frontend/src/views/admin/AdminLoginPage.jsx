@@ -1,7 +1,7 @@
 import React from "react";
 import { useDispatch } from "react-redux";
 import AdminLogin from "../../components/forms/adminForms/AdminLogin";
-import { resetAdminAuthStatus } from "../../features/Admin/Auth/adminAuthSlice";
+import { resetAdminAuthStatus } from "../../state/features/Admin/Auth/adminAuthSlice";
 import { UseResetStatus } from "../../hooks/UseResetStatus";
 
 export const AdminLoginPage = () => {

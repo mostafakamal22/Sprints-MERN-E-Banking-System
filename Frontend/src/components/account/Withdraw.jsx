@@ -3,7 +3,7 @@ import { FcMoneyTransfer } from "react-icons/fc";
 import { RiMoneyPoundCircleFill } from "react-icons/ri";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
-import { withdraw } from "../../features/Account/AccountSlice";
+import { withdraw } from "../../state/features/Account/AccountSlice";
 import { PaymentMethods } from "../payment/PaymentMethods";
 import FormButton from "../shared/FormButton";
 import MessagesContainer from "../shared/MessagesContainer";

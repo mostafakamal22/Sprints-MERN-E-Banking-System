@@ -6,9 +6,9 @@ import { SideNavbar } from "../../components/shared/SideNavbar";
 import {
   getAccount,
   resetAccountStatus,
-} from "../../features/Account/AccountSlice";
-import { resetAuthStatus } from "../../features/Auth/authSlice";
-import { resetUserStatus } from "../../features/User/userSlice";
+} from "../../state/features/Account/AccountSlice";
+import { resetAuthStatus } from "../../state/features/User/Auth/authSlice";
+import { resetUserStatus } from "../../state/features/User/UserData/userSlice";
 import { UseResetStatus } from "../../hooks/UseResetStatus";
 
 export const HomePage = () => {

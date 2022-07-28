@@ -1,8 +1,8 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { AccountRequest } from "../../components/forms/AccountRequest";
+import { AccountRequest } from "../../components/forms/userForms/AccountRequest";
 import { SideNavbar } from "../../components/shared/SideNavbar";
-import { resetUserStatus } from "../../features/User/userSlice";
+import { resetUserStatus } from "../../state/features/User/UserData/userSlice";
 import { UseResetStatus } from "../../hooks/UseResetStatus";
 
 export const AccountRequestPage = () => {

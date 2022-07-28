@@ -5,7 +5,7 @@ import {
   deleteAdmin,
   resetOwnerStatus,
   updateAdminRole,
-} from "../../features/Admin/Owener/ownerSlice";
+} from "../../state/features/Admin/Owener/ownerSlice";
 import { UseResetStatus } from "../../hooks/UseResetStatus";
 import FormButton from "../shared/FormButton";
 import { MainSpinner } from "../shared/MainSpinner";

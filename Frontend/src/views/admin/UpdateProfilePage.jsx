@@ -2,10 +2,10 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import UpdateAdmin from "../../components/forms/adminForms/UpdateAdmin";
 import { SideNavbar } from "../../components/shared/SideNavbar";
-import { resetAccountRequestsStatus } from "../../features/Admin/AccountRequests/accountRequestsSlice";
-import { resetAdminAuthStatus } from "../../features/Admin/Auth/adminAuthSlice";
-import { resetOwnerStatus } from "../../features/Admin/Owener/ownerSlice";
-import { resetUsersStatus } from "../../features/Admin/UsersActions/usersSlice";
+import { resetAccountRequestsStatus } from "../../state/features/Admin/AccountRequests/accountRequestsSlice";
+import { resetAdminAuthStatus } from "../../state/features/Admin/Auth/adminAuthSlice";
+import { resetOwnerStatus } from "../../state/features/Admin/Owener/ownerSlice";
+import { resetUsersStatus } from "../../state/features/Admin/UsersActions/usersSlice";
 import { UseResetStatus } from "../../hooks/UseResetStatus";
 
 const UpdateAdminProfile = () => {

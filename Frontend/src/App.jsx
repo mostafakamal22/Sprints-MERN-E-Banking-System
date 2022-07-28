@@ -1,4 +1,3 @@
-import "./App.css";
 import {
   BrowserRouter as Router,
   Routes,
@@ -8,8 +7,8 @@ import {
 import ProfilePage from "./views/user/ProfilePage";
 import AdminProfilePage from "./views/admin/ProfilePage";
 import NotFoundPage from "./views/NotFound";
-import UseDetectUser from "./features/Hooks/DetectUser";
-import UseDetectAdmin from "./features/Hooks/DetectAdmin";
+import UseDetectUser from "./state/features/Hooks/DetectUser";
+import UseDetectAdmin from "./state/features/Hooks/DetectAdmin";
 import AdminDashboard from "./views/admin/AdminDashboardPage";
 import UpdateAdminProfile from "./views/admin/UpdateProfilePage";
 import { AdminLoginPage } from "./views/admin/AdminLoginPage";

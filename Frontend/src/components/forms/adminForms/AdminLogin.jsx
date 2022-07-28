@@ -4,7 +4,7 @@ import { FcPrivacy } from "react-icons/fc";
 import { RiLoginCircleFill } from "react-icons/ri";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { adminLogin } from "../../../features/Admin/Auth/adminAuthSlice";
+import { adminLogin } from "../../../state/features/Admin/Auth/adminAuthSlice";
 import FormButton from "../../shared/FormButton";
 import { Logo } from "../../shared/Logo";
 import MessagesContainer from "../../shared/MessagesContainer";

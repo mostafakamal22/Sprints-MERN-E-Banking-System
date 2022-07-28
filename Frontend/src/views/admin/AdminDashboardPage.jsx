@@ -3,16 +3,16 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   getAllAccountRequests,
   resetAccountRequestsStatus,
-} from "../../features/Admin/AccountRequests/accountRequestsSlice";
-import { resetAdminAuthStatus } from "../../features/Admin/Auth/adminAuthSlice";
+} from "../../state/features/Admin/AccountRequests/accountRequestsSlice";
+import { resetAdminAuthStatus } from "../../state/features/Admin/Auth/adminAuthSlice";
 import {
   getAllAdmins,
   resetOwnerStatus,
-} from "../../features/Admin/Owener/ownerSlice";
+} from "../../state/features/Admin/Owener/ownerSlice";
 import {
   getAllUsers,
   resetUsersStatus,
-} from "../../features/Admin/UsersActions/usersSlice";
+} from "../../state/features/Admin/UsersActions/usersSlice";
 import { RegisterAdmin } from "../../components/forms/adminForms/RegisterAdmin";
 import { SideNavbar } from "../../components/shared/SideNavbar";
 import AdminListControl from "../../components/admin/AdminListControl";

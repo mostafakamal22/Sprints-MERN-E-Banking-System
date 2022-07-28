@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   adminRegister,
   resetOwnerStatus,
-} from "../../../features/Admin/Owener/ownerSlice";
+} from "../../../state/features/Admin/Owener/ownerSlice";
 import { UseResetStatus } from "../../../hooks/UseResetStatus";
 import FormButton from "../../shared/FormButton";
 import MessagesContainer from "../../shared/MessagesContainer";

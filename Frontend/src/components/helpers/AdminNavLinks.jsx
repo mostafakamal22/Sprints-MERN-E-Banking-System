@@ -4,10 +4,10 @@ import { BsFilePersonFill, BsGridFill } from "react-icons/bs";
 import { RiLogoutBoxRFill } from "react-icons/ri";
 import { useDispatch } from "react-redux";
 import { Link, useMatch } from "react-router-dom";
-import { adminsLogoutRequets } from "../../features/Admin/AccountRequests/accountRequestsSlice";
-import { adminLogout } from "../../features/Admin/Auth/adminAuthSlice";
-import { ownerLogout } from "../../features/Admin/Owener/ownerSlice";
-import { adminsLogout } from "../../features/Admin/UsersActions/usersSlice";
+import { adminsLogoutRequets } from "../../state/features/Admin/AccountRequests/accountRequestsSlice";
+import { adminLogout } from "../../state/features/Admin/Auth/adminAuthSlice";
+import { ownerLogout } from "../../state/features/Admin/Owener/ownerSlice";
+import { adminsLogout } from "../../state/features/Admin/UsersActions/usersSlice";
 
 export const AdminNavLinks = ({ admin }) => {
   const dispatch = useDispatch();

@@ -3,7 +3,7 @@ import { useEffect } from "react";
 import { AiFillSlackCircle } from "react-icons/ai";
 import { FcDoughnutChart, FcInfo } from "react-icons/fc";
 import { useDispatch, useSelector } from "react-redux";
-import { updateAdmin } from "../../../features/Admin/Auth/adminAuthSlice";
+import { updateAdmin } from "../../../state/features/Admin/Auth/adminAuthSlice";
 import FormButton from "../../shared/FormButton";
 import MessagesContainer from "../../shared/MessagesContainer";
 import { InputsValidator } from "../helpers/InputsValidator";

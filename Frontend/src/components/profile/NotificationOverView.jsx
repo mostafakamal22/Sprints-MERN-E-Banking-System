@@ -2,7 +2,7 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import moment from "moment";
-import { notificationUpdate } from "../../features/User/userSlice";
+import { notificationUpdate } from "../../state/features/User/UserData/userSlice";
 import { FcHighPriority, FcIdea, FcNoIdea, FcOk } from "react-icons/fc";
 import { PaginationNotificationsList } from "../helpers/PaginationNotificationsList";
 

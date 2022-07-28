@@ -2,7 +2,7 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Transfer } from "../../components/account/Transfer";
 import { SideNavbar } from "../../components/shared/SideNavbar";
-import { resetAccountStatus } from "../../features/Account/AccountSlice";
+import { resetAccountStatus } from "../../state/features/Account/AccountSlice";
 import { UseResetStatus } from "../../hooks/UseResetStatus";
 
 export const TransferPage = () => {

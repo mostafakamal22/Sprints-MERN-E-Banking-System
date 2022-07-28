@@ -3,10 +3,10 @@ import { useState, useEffect } from "react";
 import { AiFillSlackCircle } from "react-icons/ai";
 import { FcDoughnutChart, FcInfo } from "react-icons/fc";
 import { useDispatch, useSelector } from "react-redux";
-import { updateUser } from "../../features/User/userSlice";
-import FormButton from "../shared/FormButton";
-import MessagesContainer from "../shared/MessagesContainer";
-import { InputsValidator } from "./helpers/InputsValidator";
+import { updateUser } from "../../../state/features/User/UserData/userSlice";
+import FormButton from "../../shared/FormButton";
+import MessagesContainer from "../../shared/MessagesContainer";
+import { InputsValidator } from "../helpers/InputsValidator";
 
 export default function UpdateUser() {
   const dispatch = useDispatch();

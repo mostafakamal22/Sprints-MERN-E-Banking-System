@@ -19,9 +19,15 @@ import { Link, useMatch } from "react-router-dom";
 import {
   accountLogout,
   resetAccountStatus,
-} from "../../features/Account/accountSlice";
-import { logout, resetAuthStatus } from "../../features/Auth/authSlice";
-import { resetUserStatus, userLogout } from "../../features/User/userSlice";
+} from "../../state/features/Account/accountSlice";
+import {
+  logout,
+  resetAuthStatus,
+} from "../../state/features/User/Auth/authSlice";
+import {
+  resetUserStatus,
+  userLogout,
+} from "../../state/features/User/UserData/userSlice";
 
 export const UserNavLinks = ({ user }) => {
   const dispatch = useDispatch();

@@ -5,11 +5,11 @@ import { FcCurrencyExchange } from "react-icons/fc";
 import { TiUserAdd } from "react-icons/ti";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { register } from "../../features/Auth/authSlice";
-import FormButton from "../shared/FormButton";
-import { Logo } from "../shared/Logo";
-import MessagesContainer from "../shared/MessagesContainer";
-import { InputsValidator } from "./helpers/InputsValidator";
+import { register } from "../../../state/features/User/Auth/authSlice";
+import FormButton from "../../shared/FormButton";
+import { Logo } from "../../shared/Logo";
+import MessagesContainer from "../../shared/MessagesContainer";
+import { InputsValidator } from "../helpers/InputsValidator";
 
 export default function Register() {
   const [formInputs, setFormInputs] = useState({

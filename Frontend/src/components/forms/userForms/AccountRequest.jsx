@@ -2,10 +2,10 @@ import React, { useState, useEffect } from "react";
 import { FcElectroDevices } from "react-icons/fc";
 import { RiSendPlaneFill } from "react-icons/ri";
 import { useDispatch, useSelector } from "react-redux";
-import { accountRequest, resetUserStatus } from "../../features/User/userSlice";
-import { PaymentMethods } from "../payment/PaymentMethods";
-import FormButton from "../shared/FormButton";
-import MessagesContainer from "../shared/MessagesContainer";
+import { accountRequest } from "../../../state/features/User/UserData/userSlice";
+import { PaymentMethods } from "../../payment/PaymentMethods";
+import FormButton from "../../shared/FormButton";
+import MessagesContainer from "../../shared/MessagesContainer";
 
 export const AccountRequest = () => {
   //state for initial balance
