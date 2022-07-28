@@ -238,7 +238,7 @@ export const UsersListControl = ({ usersList }) => {
             name="searchQuery"
             className="block w-full md:w-auto px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-500 rounded transition ease-in-out m-0
           focus:text-gray-700 focus:bg-white focus:border-black focus:shadow-md focus:outline-none"
-            placeholder="search admin"
+            placeholder="search user"
             defaultValue={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
           />

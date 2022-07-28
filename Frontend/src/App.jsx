@@ -32,6 +32,7 @@ import { useSelector } from "react-redux";
 import { UnactiveSuspendedUserPage } from "./views/user/UnactiveSuspendedUserPage";
 import { MainSpinner } from "./components/shared/MainSpinner";
 import { Index } from "./components/home";
+import { RetrieveBalancePage } from "./views/user/RetrieveBalancePage";
 
 function App() {
   //Detect user
@@ -147,6 +148,11 @@ function App() {
             exact
             path="/account/withdraw-logs/:id"
             element={<WithdrawLogsPage />}
+          />
+          <Route
+            exact
+            path="/retrieve-balance"
+            element={<RetrieveBalancePage />}
           />
           <Route exact path="/contact" element={<ContactPage />} />
           <Route path="*" element={<NotFoundPage />} />

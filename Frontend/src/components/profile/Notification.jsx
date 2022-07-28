@@ -154,7 +154,7 @@ shadow transition-all ease-in-out duration-300"
               <span className="underline underline-offset-2 text-blue-900 ml-1">
                 <Link
                   state={notification.data[0].initial_balance}
-                  to="/retreive-balance"
+                  to="/retrieve-balance"
                 >
                   From Here
                 </Link>
