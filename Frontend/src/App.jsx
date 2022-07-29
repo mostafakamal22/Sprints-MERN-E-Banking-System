@@ -30,7 +30,7 @@ import { ContactPage } from "./views/user/ContactPage";
 import { useSelector } from "react-redux";
 import { UnactiveSuspendedUserPage } from "./views/user/UnactiveSuspendedUserPage";
 import { MainSpinner } from "./components/shared/MainSpinner";
-import { Index } from "./components/home";
+import { Index } from "./components/home/Index";
 import { RetrieveBalancePage } from "./views/user/RetrieveBalancePage";
 
 function App() {
