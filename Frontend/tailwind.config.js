@@ -9,8 +9,8 @@ module.exports = {
       },
 
       backgroundImage: () => ({
-        "header-desktop": "url('./src/assets/imgs/bg-intro-desktop.svg')",
-        "header-mobile": "url('./src/assets/imgs/bg-intro-mobile.svg')",
+        "header-desktop": "url('/src/assets/imgs/bg-intro-desktop.svg')",
+        "header-mobile": "url('/src/assets/imgs/bg-intro-mobile.svg')",
       }),
       backgroundSize: {
         "custom-mobile-header-size": "100% 50%",
