@@ -1,8 +1,14 @@
 import axios from "axios";
 
-const API_URL = "http://localhost:5000/api/users/";
+const API_URL =
+  process.env.NODE_ENV === "production"
+    ? "https://e-bank-mern-app.herokuapp.com/api/users/"
+    : "http://localhost:5000/api/users/";
 
-const API_URL_REQUEST = "http://localhost:5000/api/request/create";
+const API_URL_REQUEST =
+  process.env.NODE_ENV === "production"
+    ? "https://e-bank-mern-app.herokuapp.com/api/request/create"
+    : "http://localhost:5000/api/request/create";
 
 //Get User
 const getUser = async (userData) => {

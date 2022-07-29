@@ -1,6 +1,9 @@
 import axios from "axios";
 
-const API_URL = "http://localhost:5000/api/account/";
+const API_URL =
+  process.env.NODE_ENV === "production"
+    ? "https://e-bank-mern-app.herokuapp.com/api/account/"
+    : "http://localhost:5000/api/account/";
 
 //Get Account
 const getAccount = async (payload) => {
