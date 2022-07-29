@@ -14,7 +14,7 @@ app.use(express.json());
 
 // // //cors
 // const { corsProOptions } = require("./config/corsConfig");
-app.use(cors());
+app.use(cors({ origin: "*" }));
 
 //users Router
 const usersRoute = require("./routes/usersRoutes");
