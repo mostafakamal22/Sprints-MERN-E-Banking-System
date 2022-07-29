@@ -34,7 +34,7 @@ app.use("/api/request", accountRequestRoute);
 
 //serve Frontend
 if (process.env.NODE_ENV === "production") {
-  app.use(express.static(path.join(__dirname, "Frontend/dist")));
+  app.use(express.static(path.join(__dirname, "../Frontend/dist")));
 
   app.get("*", (req, res) =>
     res.sendFile(
