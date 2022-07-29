@@ -3,7 +3,7 @@ import { FcPaid } from "react-icons/fc";
 import { RiFileTransferFill } from "react-icons/ri";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
-import { transfer } from "../../state/features/Account/AccountSlice";
+import { transfer } from "../../state/features/Account/accountSlice";
 import FormButton from "../shared/FormButton";
 import MessagesContainer from "../shared/MessagesContainer";
 

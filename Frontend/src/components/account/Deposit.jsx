@@ -3,7 +3,7 @@ import { FcDonate } from "react-icons/fc";
 import { HiReceiptRefund } from "react-icons/hi";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
-import { deposit } from "../../state/features/Account/AccountSlice";
+import { deposit } from "../../state/features/Account/accountSlice";
 import { PaymentMethods } from "../payment/PaymentMethods";
 import FormButton from "../shared/FormButton";
 import MessagesContainer from "../shared/MessagesContainer";
