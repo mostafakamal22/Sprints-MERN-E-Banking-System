@@ -12,9 +12,9 @@ connectToMongoose();
 //middlewares
 app.use(express.json());
 
-// //cors
+// // //cors
 // const { corsProOptions } = require("./config/corsConfig");
-// app.use(cors(corsProOptions));
+app.use(cors());
 
 //users Router
 const usersRoute = require("./routes/usersRoutes");
