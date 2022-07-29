@@ -6,7 +6,7 @@ import { SideNavbar } from "../../components/shared/SideNavbar";
 import {
   getAccount,
   resetAccountStatus,
-} from "../../state/features/Account/AccountSlice";
+} from "../../state/features/Account/accountSlice";
 import { resetAuthStatus } from "../../state/features/User/Auth/authSlice";
 import { resetUserStatus } from "../../state/features/User/UserData/userSlice";
 import { UseResetStatus } from "../../hooks/UseResetStatus";
