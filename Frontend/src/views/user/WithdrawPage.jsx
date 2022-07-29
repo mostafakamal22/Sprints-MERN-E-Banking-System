@@ -2,7 +2,7 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Withdraw } from "../../components/account/Withdraw";
 import { SideNavbar } from "../../components/shared/SideNavbar";
-import { resetAccountStatus } from "../../state/features/Account/AccountSlice";
+import { resetAccountStatus } from "../../state/features/Account/accountSlice";
 import { UseResetStatus } from "../../hooks/UseResetStatus";
 
 export const WithdrawPage = () => {
