@@ -41,8 +41,10 @@ if (process.env.NODE_ENV === "production") {
       path.resolve(__dirname, "../", "Frontend", "build", "index.html")
     )
   );
+} else {
+  app.get("*", (req, res) => res.send("hi no production"));
 }
 
-app.listen(process.env.PORT, () => {
+app.listen(process.env.PORT || 5000, () => {
   console.log("server is running");
 });
