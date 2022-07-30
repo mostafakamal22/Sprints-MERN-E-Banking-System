@@ -10,11 +10,16 @@ const { connectToMongoose } = require("./config/db");
 connectToMongoose();
 
 //middlewares
+//express json parser middleware
 app.use(express.json());
 
-// //cors
+//cors middleware
 const { corsProOptions } = require("./config/corsConfig");
 app.use(cors(corsProOptions));
+
+// Apply the rate limiting middleware to API calls only
+const apiLimiter = require("./middlewares/rateLimitMiddleware/rateLimitMiddleware");
+app.use("/api", apiLimiter);
 
 //users Router
 const usersRoute = require("./routes/usersRoutes");
@@ -41,8 +46,6 @@ if (process.env.NODE_ENV === "production") {
       path.resolve(__dirname, "../", "Frontend", "dist", "index.html")
     )
   );
-} else {
-  app.get("*", (req, res) => res.send("hi no production"));
 }
 
 app.listen(process.env.PORT || 5000, () => {
