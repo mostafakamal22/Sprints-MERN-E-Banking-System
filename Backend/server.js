@@ -18,7 +18,9 @@ const { corsProOptions } = require("./config/corsConfig");
 app.use(cors(corsProOptions));
 
 // Apply the rate limiting middleware to API calls only
-const apiLimiter = require("./middlewares/rateLimitMiddleware/rateLimitMiddleware");
+const {
+  apiLimiter,
+} = require("./middlewares/rateLimitMiddleware/rateLimitMiddleware");
 app.use("/api", apiLimiter);
 
 //users Router
