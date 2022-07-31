@@ -92,9 +92,9 @@ export default function UpdateAdmin() {
             >
               Old Password
             </label>
-            <span className="flex items-center text-blue-700 mb-2 font-medium">
-              <span className="flex flex-wrap">
-                <FcInfo className="mr-1" size={27} />
+            <span className="flex items-center flex-col md:flex-row gap-2 text-sm md:text-base  text-blue-700 mb-2 font-medium">
+              <FcInfo size={27} />
+              <span>
                 If you DO NOT want to change password, just type it for all
                 password field.
               </span>

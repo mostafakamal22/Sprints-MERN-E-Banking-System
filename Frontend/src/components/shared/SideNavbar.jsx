@@ -100,10 +100,6 @@ export const SideNavbar = ({ admin = null, user = null }) => {
           <ul className="mt-12">
             {admin && <AdminNavLinks admin={admin} />}
             {user && <UserNavLinks user={user} />}
-
-            {/* <div className="py-1 px-3 bg-gray-700 rounded text-gray-500 flex items-center justify-center text-xs">
-      5
-    </div> */}
           </ul>
         </div>
       </div>

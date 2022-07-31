@@ -18,14 +18,8 @@ export default function MessagesContainer({ msg, isSuccess, isError }) {
       ${hideMsg && "hidden"}
       ${isSuccess && "bg-green-200 border-green-800"} 
       ${isError && "bg-red-200 border-red-800"}
-      relative flex justify-center items-center min-h-[20px] text-center text-lg text-black font-medium my-2 px-2 py-4   border-l-4 rounded-md shadow-md`}
+      relative flex flex-col md:flex-row justify-center items-center gap-2 min-h-[20px] text-center text-sm md:text-base lg:text-lg text-black font-medium my-2 px-2 py-4 border-l-4 rounded-md shadow-md`}
     >
-      {/* isSuccess Icon */}
-      {isSuccess && <FcOk className="mr-1" size={40} />}
-
-      {/* isError Icon */}
-      {isError && <FcCancel size={40} />}
-
       {/* Close Message btn */}
       <button
         type="button"
@@ -40,15 +34,20 @@ export default function MessagesContainer({ msg, isSuccess, isError }) {
         />
       </button>
 
-      <span>
-        {isError && (
-          <>
-            <span className="mr-2">Error!</span>
-            <span>{msg}</span>
-          </>
-        )}
-        {isSuccess && msg}
-      </span>
+      {/* isSuccess Icon */}
+      {isSuccess && <FcOk size={40} />}
+
+      {/* isError Icon */}
+      {isError && <FcCancel size={40} />}
+
+      {isError && (
+        <div>
+          <span className="mr-2">Error!</span>
+          <span>{msg}</span>
+        </div>
+      )}
+
+      {isSuccess && msg}
     </div>
   );
 }
