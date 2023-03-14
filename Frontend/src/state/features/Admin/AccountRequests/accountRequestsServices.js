@@ -2,7 +2,7 @@ import axios from "axios";
 
 const API_URL =
   process.env.NODE_ENV === "production"
-    ? "https://e-bank-mern-app.herokuapp.com/api/request/"
+    ? "https://ebank-2t3r.onrender.com/api/request/"
     : "http://localhost:5000/api/request/";
 
 const CREATE_ACCOUNT_API_URL =

@@ -10,7 +10,7 @@
   "dependencies": {
     "@reduxjs/toolkit": "^1.8.2",
     "axios": "^0.27.2",
-    "jsonwebtoken": "^8.5.1",
+    "jsonwebtoken": "^9.0.0",
     "moment": "^2.29.3",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
