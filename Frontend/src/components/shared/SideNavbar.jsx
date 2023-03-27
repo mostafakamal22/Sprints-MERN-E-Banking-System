@@ -16,12 +16,12 @@ export const SideNavbar = ({ admin = null, user = null }) => {
     //get close btn
     const showBtn = document.getElementById("openSideBar");
 
-    if (sidebar.classList.contains("translate-x-[-260px]")) {
+    if (sidebar.classList.contains("-translate-x-full")) {
       //show navbar
-      sidebar.classList.replace("translate-x-[-260px]", "translate-x-0");
+      sidebar.classList.replace("-translate-x-full", "translate-x-0");
     } else {
       //hide navbar
-      sidebar.classList.replace("translate-x-0", "translate-x-[-260px]");
+      sidebar.classList.replace("translate-x-0", "-translate-x-full");
     }
 
     //change btns
@@ -38,7 +38,7 @@ export const SideNavbar = ({ admin = null, user = null }) => {
         <div
           className={`${
             user && "h-screen overflow-y-auto"
-          } px-8 py-8 sticky top-0`}
+          } px-8 py-8 sticky top-0 scrollbar-thin scrollbar-track-transparent scrollbar-thumb-blue-400`}
         >
           {/* Logo */}
           <Logo />
@@ -63,7 +63,7 @@ export const SideNavbar = ({ admin = null, user = null }) => {
 
       {/*Mobile Sidebar */}
       <div
-        className="w-64 h-screen z-40 fixed bg-slate-50 shadow-lg md:h-full flex-col justify-between lg:hidden  transition duration-150 ease-in-out translate-x-[-260px]"
+        className="w-64 h-screen z-40 fixed bg-slate-50 shadow-lg md:h-full flex-col justify-between lg:hidden  transition duration-150 ease-in-out -translate-x-full"
         id="mobile-nav"
       >
         <div
@@ -81,7 +81,7 @@ export const SideNavbar = ({ admin = null, user = null }) => {
         <div
           className={`${
             user && "h-screen overflow-y-auto"
-          } px-8 py-8 sticky top-0`}
+          } px-8 py-8 sticky top-0 scrollbar-thin scrollbar-track-transparent scrollbar-thumb-blue-400`}
         >
           {/* Logo */}
           <Logo />
