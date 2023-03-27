@@ -4,7 +4,7 @@ import UpdateAdmin from "../../components/forms/adminForms/UpdateAdmin";
 import { SideNavbar } from "../../components/shared/SideNavbar";
 import { resetAccountRequestsStatus } from "../../state/features/Admin/AccountRequests/accountRequestsSlice";
 import { resetAdminAuthStatus } from "../../state/features/Admin/Auth/adminAuthSlice";
-import { resetOwnerStatus } from "../../state/features/Admin/Owener/ownerSlice";
+import { resetOwnerStatus } from "../../state/features/Admin/Owner/ownerSlice";
 import { resetUsersStatus } from "../../state/features/Admin/UsersActions/usersSlice";
 import { UseResetStatus } from "../../hooks/UseResetStatus";
 

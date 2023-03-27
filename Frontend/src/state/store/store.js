@@ -6,7 +6,7 @@ import { persistReducer, persistStore } from "redux-persist";
 import { encryptTransform } from "redux-persist-transform-encrypt";
 import thunk from "redux-thunk";
 import adminAuthReducer from "../features/Admin/Auth/adminAuthSlice";
-import ownerReducer from "../features/Admin/Owener/ownerSlice";
+import ownerReducer from "../features/Admin/Owner/ownerSlice";
 import usersReducer from "../features/Admin/UsersActions/usersSlice";
 import accountRequestsReducer from "../features/Admin/AccountRequests/accountRequestsSlice";
 import accountReducer from "../features/Account/accountSlice";

@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
-import ownerServices from "./owenerServices";
+import ownerServices from "./ownerServices";
 
 const initialState = {
   adminsList: null,

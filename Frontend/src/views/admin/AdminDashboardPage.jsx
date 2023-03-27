@@ -8,7 +8,7 @@ import { resetAdminAuthStatus } from "../../state/features/Admin/Auth/adminAuthS
 import {
   getAllAdmins,
   resetOwnerStatus,
-} from "../../state/features/Admin/Owener/ownerSlice";
+} from "../../state/features/Admin/Owner/ownerSlice";
 import {
   getAllUsers,
   resetUsersStatus,

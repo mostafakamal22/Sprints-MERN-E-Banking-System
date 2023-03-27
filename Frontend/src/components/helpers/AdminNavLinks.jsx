@@ -6,7 +6,7 @@ import { useDispatch } from "react-redux";
 import { Link, useMatch } from "react-router-dom";
 import { adminsLogoutRequets } from "../../state/features/Admin/AccountRequests/accountRequestsSlice";
 import { adminLogout } from "../../state/features/Admin/Auth/adminAuthSlice";
-import { ownerLogout } from "../../state/features/Admin/Owener/ownerSlice";
+import { ownerLogout } from "../../state/features/Admin/Owner/ownerSlice";
 import { adminsLogout } from "../../state/features/Admin/UsersActions/usersSlice";
 
 export const AdminNavLinks = ({ admin }) => {
