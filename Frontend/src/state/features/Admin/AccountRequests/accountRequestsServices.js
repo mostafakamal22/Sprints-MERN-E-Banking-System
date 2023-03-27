@@ -7,7 +7,7 @@ const API_URL =
 
 const CREATE_ACCOUNT_API_URL =
   process.env.NODE_ENV === "production"
-    ? "https://e-bank-mern-app.herokuapp.com/api/account/create"
+    ? "https://ebank-2t3r.onrender.com/api/account/create"
     : "http://localhost:5000/api/account/create";
 
 //Get All Account Requests
