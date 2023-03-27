@@ -7,7 +7,6 @@ const app = express();
 
 //connect to mongodb
 const { connectToMongoose } = require("./config/db");
-connectToMongoose();
 
 //middlewares
 //express json parser middleware
@@ -50,6 +49,12 @@ if (process.env.NODE_ENV === "production") {
   );
 }
 
-app.listen(process.env.PORT || 5000, () => {
-  console.log("server is running");
-});
+connectToMongoose()
+  .then(() => {
+    app.listen(process.env.PORT || 5000, () => {
+      console.log("server is running");
+    });
+  })
+  .catch((err) => {
+    console.log(err);
+  });
