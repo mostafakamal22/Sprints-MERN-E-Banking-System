@@ -24,6 +24,10 @@ export const SideNavbar = ({ admin = null, user = null }) => {
       ) {
         //hide navbar
         sidebar.classList.replace("translate-x-0", "-translate-x-full");
+
+        //change btns
+        closeBtn.classList.toggle("hidden");
+        showBtn.classList.toggle("hidden");
       }
     };
 
@@ -85,7 +89,7 @@ export const SideNavbar = ({ admin = null, user = null }) => {
 
       {/*Mobile Sidebar */}
       <div
-        className="w-64 h-screen z-40 fixed bg-slate-50 shadow-lg md:h-full flex-col justify-between lg:hidden  transition duration-150 ease-in-out -translate-x-full"
+        className="w-64 h-screen z-40 fixed bg-slate-50 shadow-lg md:h-full flex-col justify-between lg:hidden  transition-all duration-300  ease-in-out -translate-x-full"
         id="mobile-nav"
       >
         <div
