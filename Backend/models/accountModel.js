@@ -11,7 +11,7 @@ const transferedInSchema = new mongoose.Schema(
     balance_transfered: {
       type: Number,
       require: [true, "Please Provide Transfered Balance!"],
-      min: [50, "You Can Not Transfer Balance Less Than 50LE!"],
+      min: [50, "You Can Not Transfer Balance Less Than 50L.E"],
     },
   },
   {
@@ -29,7 +29,7 @@ const transferedOutSchema = new mongoose.Schema(
     balance_transfered: {
       type: Number,
       require: [true, "Please Provide Transfered Balance!"],
-      min: [50, "You Can Not Transfer Balance Less Than 50LE"],
+      min: [50, "You Can Not Transfer Balance Less Than 50L.E"],
     },
   },
   {
@@ -43,7 +43,7 @@ const withdrawLogSchema = new mongoose.Schema(
     withdrawed_amount: {
       type: Number,
       require: [true, "Please Provide Withdrawed Balance Amount"],
-      min: [1, "You Can Not Withdraw Balance Less Than 1 LE!"],
+      min: [100, "You Can Not Withdraw Balance Less Than 100L.E"],
     },
   },
   {
@@ -57,7 +57,7 @@ const depositLogSchema = new mongoose.Schema(
     depositted_amount: {
       type: Number,
       require: [true, "Please Provide Depositted Balance Amount"],
-      min: [1, "You Can Not Deposit Balance Less Than 1 LE!"],
+      min: [100, "You Can Not Deposit Balance Less Than 100L.E"],
     },
   },
   {

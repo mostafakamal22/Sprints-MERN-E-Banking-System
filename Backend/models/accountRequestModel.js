@@ -11,7 +11,7 @@ const AccountRequestSchema = new mongoose.Schema(
     initial_balance: {
       type: Number,
       require: [true, "please provide initial balance"],
-      min: [0, "Initial Balance Can Not less Than 0LE"],
+      min: [500, "Initial Balance Can Not less Than 500L.E"],
     },
   },
   {

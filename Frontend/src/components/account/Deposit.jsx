@@ -10,7 +10,7 @@ import MessagesContainer from "../shared/MessagesContainer";
 
 export const Deposit = () => {
   //state for withdraw balance
-  const [depositAmount, setDepositAmount] = useState(0);
+  const [depositAmount, setDepositAmount] = useState(100);
 
   //state for user password
   const [password, setPassword] = useState("");
@@ -77,9 +77,9 @@ export const Deposit = () => {
             className="basis-full  sm:basis-1/3  px-3 py-1.5 mx-4 text-base font-normal text-gray-700 bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out  focus:text-gray-700 focus:bg-white focus:border-blue-800 focus:outline-none"
             type="number"
             name="depositAmount"
-            defaultValue={depositAmount}
+            value={depositAmount}
             onChange={(e) => setDepositAmount(e.target.value)}
-            min="0"
+            min="100"
             required
           />
 
@@ -94,7 +94,7 @@ export const Deposit = () => {
             className="basis-full  sm:basis-1/3  px-3 py-1.5 mx-4 text-base font-normal text-gray-700 bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out  focus:text-gray-700 focus:bg-white focus:border-blue-800 focus:outline-none"
             type="password"
             name="password"
-            defaultValue={password}
+            value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
           />

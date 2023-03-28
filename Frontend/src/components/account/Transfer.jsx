@@ -9,7 +9,7 @@ import MessagesContainer from "../shared/MessagesContainer";
 
 export const Transfer = () => {
   //state for withdraw balance
-  const [balanceTransfered, setBalanceTransfered] = useState(0);
+  const [balanceTransfered, setBalanceTransfered] = useState(50);
 
   //state for user password
   const [password, setPassword] = useState("");
@@ -82,9 +82,9 @@ export const Transfer = () => {
             className="basis-full  sm:basis-1/3  px-3 py-1.5 mx-4 text-base font-normal text-gray-700 bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out  focus:text-gray-700 focus:bg-white focus:border-blue-800 focus:outline-none"
             type="number"
             name="balanceTransfered"
-            defaultValue={balanceTransfered}
+            value={balanceTransfered}
             onChange={(e) => setBalanceTransfered(e.target.value)}
-            min="0"
+            min="50"
             required
           />
 
@@ -99,7 +99,7 @@ export const Transfer = () => {
             className="basis-full  sm:basis-1/3  px-3 py-1.5 mx-4 text-base font-normal text-gray-700 bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out  focus:text-gray-700 focus:bg-white focus:border-blue-800 focus:outline-none"
             type="text"
             name="balanceTransfered"
-            defaultValue={receivingId}
+            value={receivingId}
             onChange={(e) => setReceivingId(e.target.value)}
             required
           />

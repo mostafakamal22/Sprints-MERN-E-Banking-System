@@ -9,7 +9,7 @@ import MessagesContainer from "../../shared/MessagesContainer";
 
 export const AccountRequest = () => {
   //state for initial balance
-  const [intitialBalance, setIntitialBalance] = useState(0);
+  const [intitialBalance, setIntitialBalance] = useState(500);
 
   //state for user password
   const [password, setPassword] = useState("");
@@ -67,9 +67,9 @@ export const AccountRequest = () => {
             className="basis-full  sm:basis-1/3  px-3 py-1.5 mx-4 text-base font-normal text-gray-700 bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out  focus:text-gray-700 focus:bg-white focus:border-blue-800 focus:outline-none"
             type="number"
             name="intitialBalance"
-            defaultValue={intitialBalance}
+            value={intitialBalance}
             onChange={(e) => setIntitialBalance(e.target.value)}
-            min="0"
+            min="500"
             required
           />
 
@@ -84,7 +84,7 @@ export const AccountRequest = () => {
             className="basis-full  sm:basis-1/3  px-3 py-1.5 mx-4 text-base font-normal text-gray-700  bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out  focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
             type="password"
             name="password"
-            defaultValue={password}
+            value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
           />
