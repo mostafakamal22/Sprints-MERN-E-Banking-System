@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const { autoIncrement } = require("mongoose-plugin-autoinc");
 
 //Define Balance Transfered in Schema
 const transferedInSchema = new mongoose.Schema(
@@ -83,8 +84,16 @@ const accountSchema = new mongoose.Schema(
   },
   {
     timestamps: true,
+    collection: "Accounts",
   }
 );
+
+//Auto Increament Account ID Plugin
+accountSchema.plugin(autoIncrement, {
+  model: "Account",
+  startAt: 202511545300,
+  incrementBy: 1,
+});
 
 //Define Account Model
 const Account = mongoose.model("Account", accountSchema);

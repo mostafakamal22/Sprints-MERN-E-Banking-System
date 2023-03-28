@@ -13,12 +13,14 @@ export const Account = ({ setPreferedAccount }) => {
     (state) => state.userAccount
   );
 
+  const spinnerSize = window.innerWidth < 400 ? 30 : 45;
+
   if (isLoading)
     return (
       isLoading && (
         <div className="max-w-5xl w-full p-6 bg-slate-50 rounded shadow-lg shadow-black/30">
           <div className="p-20 flex justify-center items-center">
-            <MainSpinner />
+            <MainSpinner spinnerSize={spinnerSize} />
           </div>
         </div>
       )

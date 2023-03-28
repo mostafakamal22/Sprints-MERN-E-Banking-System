@@ -42,7 +42,7 @@ shadow transition-all ease-in-out duration-300"
     );
 
   return (
-    <div className="max-w-5xl min-h-screen w-full p-10 bg-slate-50 rounded shadow-lg shadow-black/30">
+    <div className="max-w-5xl min-h-screen w-full p-6 bg-slate-50 rounded shadow-lg shadow-black/30">
       {/* Heading */}
       <div className="flex items-center w-full mb-10">
         <FcIdea className="mr-1" size={50} />
@@ -68,7 +68,7 @@ shadow transition-all ease-in-out duration-300"
           "bg-green-200"
         }
         ${notification.type === "declined" && "bg-red-200"}
-          px-4 sm:px-6 py-6  rounded-lg shadow w-full font-semibold
+          px-3 sm:px-6 py-3 sm:py-6 rounded-lg shadow w-full font-semibold
         `}
       >
         <div className="flex items-center justify-between w-full ">

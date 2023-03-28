@@ -9,13 +9,13 @@ export const ChooseAccount = ({ account, accounts, setPreferedAccount }) => {
             Choose Account
           </p>
           <select
-            value={accounts.indexOf(account._id) + 1}
-            onChange={(e) => setPreferedAccount(e.target.value - 1)}
+            value={account._id.toString()}
+            onChange={(e) => setPreferedAccount(+e.target.value)}
             className="w-full lg:w-auto bg-white text-gray-800 text-center  px-4 py-2 rounded-md"
           >
-            {accounts.map((account, index) => (
-              <option key={account} value={index + 1}>
-                {index + 1}
+            {accounts.map((account) => (
+              <option key={account} value={account}>
+                {account}
               </option>
             ))}
           </select>

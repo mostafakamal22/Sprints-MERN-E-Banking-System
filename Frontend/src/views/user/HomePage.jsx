@@ -12,20 +12,23 @@ import { resetUserStatus } from "../../state/features/User/UserData/userSlice";
 import { UseResetStatus } from "../../hooks/UseResetStatus";
 
 export const HomePage = () => {
-  //state for prefered account
-  const [preferedAccount, setPreferedAccount] = useState(0);
-
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.userAuth);
   const { isLoading } = useSelector((state) => state.userData);
   const info = useSelector((state) => state.userData.info);
+  const { account } = useSelector((state) => state.userAccount);
+
+  //state for prefered account
+  const [preferedAccount, setPreferedAccount] = useState(account?._id);
 
   //Get account data
   useEffect(() => {
     if (info && info.accounts.length > 0) {
       const payload = {
         token: user.token,
-        accountId: info.accounts[preferedAccount],
+        accountId: info.accounts.find(
+          (account) => account === preferedAccount.toString()
+        ),
       };
       dispatch(getAccount(payload));
     }
@@ -40,12 +43,14 @@ export const HomePage = () => {
     };
   });
 
+  const spinnerSize = window.innerWidth < 400 ? 30 : 45;
+
   if (isLoading)
     return (
       <div className="mx-5 h-min-screen">
         <div className="max-w-5xl w-full h-full flex justify-center items-center mx-auto my-10 p-6 bg-slate-50 rounded shadow-lg shadow-black/30">
           <div className="flex justify-center items-center">
-            <MainSpinner />
+            <MainSpinner spinnerSize={spinnerSize} />
           </div>
         </div>
       </div>

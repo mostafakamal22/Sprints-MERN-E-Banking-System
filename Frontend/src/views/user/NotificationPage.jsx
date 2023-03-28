@@ -25,7 +25,7 @@ export const NotificationPage = () => {
       <SideNavbar user={info} />
 
       <div className="w-full h-full flex justify-center items-center">
-        <div className="w-full flex justify-center items-center flex-col gap-6 p-4 md:px-20 md:py-10">
+        <div className="w-full flex justify-center items-center flex-col gap-6 px-2 py-4 md:px-20 md:py-10">
           <Notification />
         </div>
       </div>

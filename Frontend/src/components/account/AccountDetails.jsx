@@ -24,7 +24,7 @@ export const AccountDetails = ({ account }) => {
           Created At
         </p>
         <span className="w-full lg:w-auto text-slate-900 bg-white px-4 py-2 rounded-md">
-          {moment(account.createdAt).format("d MMMM YYYY")}
+          {moment(account.createdAt).format("DD MMMM YYYY")}
         </span>
       </div>
 

@@ -41,7 +41,7 @@ const UsersAccountRequests = ({ accountRequestsList }) => {
   const filteredRequests =
     accountRequestsList &&
     accountRequestsList.filter((request) => {
-      if (request._id.includes(searchQuery.trim())) {
+      if (request._id.toString().includes(searchQuery.trim())) {
         return request;
       }
     });

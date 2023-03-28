@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { BiMenu } from "react-icons/bi";
 import { TiDelete } from "react-icons/ti";
 import { AiFillHeart } from "react-icons/ai";
@@ -8,6 +8,32 @@ import { AdminNavLinks } from "../helpers/AdminNavLinks";
 
 export const SideNavbar = ({ admin = null, user = null }) => {
   //toggle sidebar
+  useEffect(() => {
+    //get navbar
+    const sidebar = document.getElementById("mobile-nav");
+    //get close btn
+    const closeBtn = document.getElementById("closeSidebar");
+    //get close btn
+    const showBtn = document.getElementById("openSideBar");
+    const detectClickOutsideNav = (e) => {
+      if (
+        !sidebar.contains(e.target) &&
+        !closeBtn.contains(e.target) &&
+        !showBtn.contains(e.target) &&
+        !sidebar.classList.contains("-translate-x-full")
+      ) {
+        //hide navbar
+        sidebar.classList.replace("translate-x-0", "-translate-x-full");
+      }
+    };
+
+    document.addEventListener("click", detectClickOutsideNav);
+
+    return () => {
+      document.removeEventListener("click", detectClickOutsideNav);
+    };
+  }, []);
+
   const sidebarHandler = () => {
     //get navbar
     const sidebar = document.getElementById("mobile-nav");
@@ -35,11 +61,7 @@ export const SideNavbar = ({ admin = null, user = null }) => {
 
       {/* Tablet/desktop Sidebar*/}
       <div className="w-64 absolute sm:relative bg-slate-50 shadow-lg flex-col justify-between hidden lg:flex ">
-        <div
-          className={`${
-            user && "h-screen overflow-y-auto"
-          } px-8 py-8 sticky top-0 scrollbar-thin scrollbar-track-transparent scrollbar-thumb-blue-400`}
-        >
+        <div className="h-screen overflow-y-auto px-8 py-8 sticky top-0 scrollbar-thin scrollbar-track-transparent scrollbar-thumb-blue-400">
           {/* Logo */}
           <Logo />
 
@@ -79,9 +101,8 @@ export const SideNavbar = ({ admin = null, user = null }) => {
           />
         </div>
         <div
-          className={`${
-            user && "h-screen overflow-y-auto"
-          } px-8 py-8 sticky top-0 scrollbar-thin scrollbar-track-transparent scrollbar-thumb-blue-400`}
+          className="
+            h-screen overflow-y-auto px-8 py-8 sticky top-0 scrollbar-thin scrollbar-track-transparent scrollbar-thumb-blue-400"
         >
           {/* Logo */}
           <Logo />

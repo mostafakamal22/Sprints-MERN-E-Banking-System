@@ -101,7 +101,7 @@ export const usersSlice = createSlice({
         state.isError = false;
         state.message = "User Deleted Successfully!";
         state.usersList = state.usersList.filter(
-          (user) => user._id !== action.payload.id
+          (user) => user._id !== Number(action.payload.id)
         );
       })
       .addCase(deleteUser.rejected, (state, action) => {
@@ -122,7 +122,7 @@ export const usersSlice = createSlice({
         state.isError = false;
         state.message = "User's Status Updated Successfully!";
         state.usersList = state.usersList.map((user) => {
-          if (user._id === action.payload._id) {
+          if (user._id === Number(action.payload._id)) {
             return action.payload;
           }
           return user;

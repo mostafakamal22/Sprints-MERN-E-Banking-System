@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const { notificationSchema } = require("./notificationSchema");
+const { autoIncrement } = require("mongoose-plugin-autoinc");
 
 //Define User Schema
 const userSchema = new mongoose.Schema(
@@ -88,7 +89,7 @@ const userSchema = new mongoose.Schema(
   },
   {
     timestamps: true,
-    collection: "E-Banking-Users",
+    collection: "Users",
   }
 );
 
@@ -110,6 +111,13 @@ userSchema.post("updateOne", function (error, doc, next) {
   } else {
     next();
   }
+});
+
+//Auto Increament Users ID Plugin
+userSchema.plugin(autoIncrement, {
+  model: "User",
+  startAt: 2525500300,
+  incrementBy: 1,
 });
 
 //Define User Model

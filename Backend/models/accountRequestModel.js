@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const { autoIncrement } = require("mongoose-plugin-autoinc");
 
 //Define Account request Schema
 const AccountRequestSchema = new mongoose.Schema(
@@ -15,8 +16,16 @@ const AccountRequestSchema = new mongoose.Schema(
   },
   {
     timestamps: true,
+    collection: "AccountRequests",
   }
 );
+
+//Auto Increament AccountRequest ID Plugin
+AccountRequestSchema.plugin(autoIncrement, {
+  model: "AccountRequest",
+  startAt: 202311500300,
+  incrementBy: 1,
+});
 
 //Define Account Request Model
 const AccountRequest = mongoose.model("AccountRequest", AccountRequestSchema);
