@@ -15,7 +15,7 @@ export default function AdminProfile() {
         {info.name}
       </h2>
 
-      <ul className="w-full max-w-[550px] py-2 px-3 mt-3 rounded">
+      <ul className="w-full max-w-[550px] py-2 px-3 mt-3">
         <li className="flex items-center p-3 mb-2  border-r-4 border-blue-800 rounded shadow bg-blue-200">
           <span className="font-semibold">Position</span>
           <span className="ml-auto">

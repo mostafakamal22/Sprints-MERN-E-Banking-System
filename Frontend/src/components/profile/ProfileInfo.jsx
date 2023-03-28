@@ -32,7 +32,7 @@ export default function ProfileInfo({ info }) {
           <div className="grid grid-cols-2 border-r-4 border-blue-800 rounded shadow bg-blue-200">
             <div className="px-4 py-2 font-semibold">Email</div>
             <div className="px-4 py-2  text-right">
-              <span className="hover:text-yellow-700 hover:underline hover:underline-offset-2">
+              <span className="hover:text-yellow-700 hover:underline hover:underline-offset-2 break-all">
                 {info.email}
               </span>
             </div>

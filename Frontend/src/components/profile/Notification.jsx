@@ -42,7 +42,7 @@ shadow transition-all ease-in-out duration-300"
     );
 
   return (
-    <div className="max-w-5xl min-h-screen w-full p-6 bg-slate-50 rounded shadow-lg shadow-black/30">
+    <div className="max-w-5xl min-h-screen w-full px-3 py-6 md:p-6 bg-slate-50 rounded shadow-lg shadow-black/30">
       {/* Heading */}
       <div className="flex items-center w-full mb-10">
         <FcIdea className="mr-1" size={50} />
@@ -68,7 +68,7 @@ shadow transition-all ease-in-out duration-300"
           "bg-green-200"
         }
         ${notification.type === "declined" && "bg-red-200"}
-          px-3 sm:px-6 py-3 sm:py-6 rounded-lg shadow w-full font-semibold
+          px-3 sm:px-6 py-3 sm:py-6 rounded-lg shadow w-full 
         `}
       >
         <div className="flex items-center justify-between w-full ">
@@ -97,7 +97,7 @@ shadow transition-all ease-in-out duration-300"
 
         {/*Case:- Account Request Notificaton*/}
         {notification.data && notification.type === "account-request" && (
-          <p className="mt-1 text-sm">
+          <p className="mt-1 text-sm font-semibold">
             Your Account Request Id is:-
             <span className="underline underline-offset-2 text-blue-900">
               {notification.data[0].account_id}.
@@ -107,7 +107,7 @@ shadow transition-all ease-in-out duration-300"
 
         {/*Case:- Approved Notificaton*/}
         {notification.data && notification.type === "approved" && (
-          <p className="mt-1 text-sm">
+          <p className="mt-1 text-sm font-semibold">
             Your New Account Id is:-
             <span className="underline underline-offset-2 text-blue-900 ml-1">
               {notification.data[0].account_id}

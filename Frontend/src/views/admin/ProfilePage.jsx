@@ -36,7 +36,7 @@ const AdminProfilePage = () => {
       <SideNavbar admin={info} />
 
       <div className="w-full h-full self-center flex justify-center items-center">
-        <div className="w-full flex justify-center items-center p-10 md:px-20 md:py-10">
+        <div className="w-full flex justify-center items-center p-4 md:p-6">
           <AdminProfile />
         </div>
       </div>
