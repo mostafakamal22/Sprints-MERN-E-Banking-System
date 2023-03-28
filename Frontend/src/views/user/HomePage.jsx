@@ -18,12 +18,18 @@ export const HomePage = () => {
   const info = useSelector((state) => state.userData.info);
   const { account } = useSelector((state) => state.userAccount);
 
+  const accountId = account?._id
+    ? account?._id
+    : info?.accounts?.length > 0
+    ? info?.accounts[0]
+    : null;
+
   //state for prefered account
-  const [preferedAccount, setPreferedAccount] = useState(account?._id);
+  const [preferedAccount, setPreferedAccount] = useState(accountId);
 
   //Get account data
   useEffect(() => {
-    if (info && info.accounts.length > 0) {
+    if (info && info.accounts.length > 0 && preferedAccount) {
       const payload = {
         token: user.token,
         accountId: info.accounts.find(
@@ -59,7 +65,7 @@ export const HomePage = () => {
   if (info)
     return (
       <div className="min-h-screen  flex flex-no-wrap">
-        {/* side navabr */}
+        {/* side navbar */}
         <SideNavbar user={info} />
 
         <div className="w-full h-full flex justify-center items-center">
