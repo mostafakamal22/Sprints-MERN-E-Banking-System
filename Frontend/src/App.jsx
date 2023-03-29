@@ -32,6 +32,7 @@ import { UnactiveSuspendedUserPage } from "./views/user/UnactiveSuspendedUserPag
 import { MainSpinner } from "./components/shared/MainSpinner";
 import { Index } from "./components/home/Index";
 import { RetrieveBalancePage } from "./views/user/RetrieveBalancePage";
+import { WindowFit } from "./components/shared/WindowFit";
 
 function App() {
   //Detect user
@@ -172,21 +173,23 @@ function App() {
       {/* Admin Routes */}
       {admin && !user && (
         <Routes>
-          <Route index element={<AdminDashboard />} />
-          <Route exact path="/register" element={<Navigate to={"/"} />} />
-          <Route exact path="/login" element={<Navigate to={"/"} />} />
-          <Route exact path="/admins/login" element={<Navigate to={"/"} />} />
-          <Route
-            exact
-            path="/admins/profile/:id"
-            element={<AdminProfilePage />}
-          />
-          <Route
-            exact
-            path="/admins/profile/:id/update"
-            element={<UpdateAdminProfile />}
-          />
-          <Route path="*" element={<NotFoundPage />} />
+          <Route element={<WindowFit />}>
+            <Route index element={<AdminDashboard />} />
+            <Route exact path="/register" element={<Navigate to={"/"} />} />
+            <Route exact path="/login" element={<Navigate to={"/"} />} />
+            <Route exact path="/admins/login" element={<Navigate to={"/"} />} />
+            <Route
+              exact
+              path="/admins/profile/:id"
+              element={<AdminProfilePage />}
+            />
+            <Route
+              exact
+              path="/admins/profile/:id/update"
+              element={<UpdateAdminProfile />}
+            />
+            <Route path="*" element={<NotFoundPage />} />
+          </Route>
         </Routes>
       )}
     </Router>
