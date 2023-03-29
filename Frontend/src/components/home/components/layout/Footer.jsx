@@ -5,6 +5,7 @@ import { AiFillSetting } from "react-icons/ai";
 import { MdOutlineSecurity, MdReviews } from "react-icons/md";
 import { Link } from "react-router-dom";
 import { Logo } from "../../../shared/Logo";
+import moment from "moment";
 
 const navIcons = [
   <AiFillHome size={17} className=" mr-1" />,
@@ -105,7 +106,7 @@ export default function Footer() {
             </Link>
 
             <p className="text-slate-100 text-sm">
-              All Rights Reserved ©E-Bank 2022
+              All Rights Reserved ©E-Bank {moment().year()}
             </p>
           </div>
         </div>
