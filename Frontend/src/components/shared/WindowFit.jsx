@@ -26,7 +26,7 @@ export const WindowFit = () => {
 
           <p className="w-full my-4 p-6 text-lg md:text-xl text-center font-semibold bg-red-500 text-white border-r-4 border-red-800 rounded shadow max-w-lg">
             For a better experience, please use a device with a minimum width of
-            600px.
+            800px.
           </p>
         </div>
       </div>
