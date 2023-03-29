@@ -28,7 +28,7 @@ export default function Navbar() {
   useEffect(() => {
     //navbar scroll changeBackground function
     const changeBackground = () => {
-      if (window.scrollY > 0) {
+      if (window.scrollY > 100) {
         setNavbar(true);
       } else {
         setNavbar(false);
@@ -75,12 +75,11 @@ export default function Navbar() {
             {navItems.map((navItem, index) => (
               <a
                 key={navItem}
-                className="flex justify-center items-center gap-1 p-3 !font-sans font-bold rounded-lg hover:text-white hover:bg-slate-800"
+                className="flex justify-center items-center   p-3 !font-sans font-bold rounded-lg hover:text-white hover:bg-slate-800"
                 href={`#${navItem}`}
               >
-                {navItem}
-
                 {navIcons[index]}
+                {navItem}
               </a>
             ))}
           </div>
@@ -95,11 +94,11 @@ export default function Navbar() {
             </Link>
             <Link
               to="/login"
-              className="inline-flex font-bold text-xs sm:text-sm bg-blue-800 text-white hover:bg-white px-2 sm:px-3 py-2 hover:text-blue-800 border-2 hover:border-blue-800 items-center rounded-lg
+              className="flex gap-1 justify-center items-center font-bold text-xs sm:text-sm bg-blue-800 text-white hover:bg-white px-2 sm:px-3 py-2 hover:text-blue-800 border-2 hover:border-blue-800 items-center rounded-lg
          shadow transition-all ease-in-out duration-300"
             >
-              Login
               <IoLogIn size={20} />
+              Login
             </Link>
           </div>
 
@@ -133,12 +132,12 @@ export default function Navbar() {
           {navItems.map((navItem, index) => (
             <a
               key={navItem}
-              className="nav-links flex justify-center items-center gap-1 py-2 !font-sans font-semibold bg-blue-200 border-x-4 border-blue-800 hover:underline focus:underline hover:text-slate-800 focus:text-slate-800"
+              className="nav-links flex justify-center items-center gap-[1px] py-2 !font-sans font-semibold bg-blue-200 border-x-4 border-blue-800 hover:underline focus:underline hover:text-slate-800 focus:text-slate-800"
               href={`#${navItem}`}
               onClick={() => setIsOpen(!isOpen)}
             >
-              {navItem}
               {navIcons[index]}
+              {navItem}
             </a>
           ))}
           <div className="flex justify-center items-center gap-4">
@@ -151,11 +150,11 @@ export default function Navbar() {
             </Link>
             <Link
               to="/login"
-              className="inline-flex font-bold text-xs sm:text-sm bg-blue-800 text-white hover:bg-white px-4  py-2 hover:text-blue-800 border-2 border-blue-800 hover:border-blue-800 items-center rounded-lg
+              className="flex gap-1 justify-center items-center font-bold text-xs sm:text-sm bg-blue-800 text-white hover:bg-white px-4  py-2 hover:text-blue-800 border-2 border-blue-800 hover:border-blue-800 items-center rounded-lg
          shadow transition-all ease-in-out duration-300"
             >
-              Login
               <IoLogIn size={20} />
+              Login
             </Link>
           </div>
         </nav>
