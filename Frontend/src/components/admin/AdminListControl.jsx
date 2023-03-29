@@ -199,7 +199,7 @@ const AdminListControl = ({ adminsList }) => {
           className=" block w-full md:w-auto px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-500 rounded transition ease-in-out m-0
           focus:text-gray-700 focus:bg-white focus:border-black focus:shadow-md focus:outline-none"
           placeholder="search admin"
-          defaultValue={searchQuery}
+          value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
         />
       </div>
@@ -215,7 +215,7 @@ const AdminListControl = ({ adminsList }) => {
           tableRow={tableRow}
           tableHeader={tableHeader}
           tableBodyData={filteredAdmins}
-          rowsPerPage={5}
+          rowsPerPage={20}
         />
       )}
 

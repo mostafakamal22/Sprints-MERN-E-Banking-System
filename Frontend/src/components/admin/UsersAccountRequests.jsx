@@ -229,7 +229,7 @@ const UsersAccountRequests = ({ accountRequestsList }) => {
             className="block w-full md:w-auto px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-500 rounded transition ease-in-out m-0
           focus:text-gray-700 focus:bg-white focus:border-black focus:shadow-md focus:outline-none"
             placeholder="search Request"
-            defaultValue={searchQuery}
+            value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
           />
         </div>
@@ -246,7 +246,7 @@ const UsersAccountRequests = ({ accountRequestsList }) => {
           tableRow={tableRow}
           tableHeader={tableHeader}
           tableBodyData={filteredRequests}
-          rowsPerPage={5}
+          rowsPerPage={20}
         />
       )}
 

@@ -248,7 +248,7 @@ export const UsersListControl = ({ usersList }) => {
             className="block w-full md:w-auto px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-500 rounded transition ease-in-out m-0
           focus:text-gray-700 focus:bg-white focus:border-black focus:shadow-md focus:outline-none"
             placeholder="search user"
-            defaultValue={searchQuery}
+            value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
           />
         </div>
@@ -265,7 +265,7 @@ export const UsersListControl = ({ usersList }) => {
           tableRow={tableRow}
           tableHeader={tableHeader}
           tableBodyData={filteredUsers}
-          rowsPerPage={5}
+          rowsPerPage={20}
         />
       )}
 
