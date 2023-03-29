@@ -44,10 +44,7 @@ export default function Motivation() {
                 E-Bank
               </span>{" "}
             </h2>
-            {/* <h2 className="text-3xl font-bold !font-sans lg:text-4xl text-green-600 pb-5 drop-shadow-md">
-              Why choose <span className="font-thin">E-Bank?</span>
-            </h2> */}
-            <p className="text-white !font-sans text-sm lg:text-base leading-5">
+            <p className="text-white !font-sans font-light  text-lg leading-5">
               We leverage Open Banking to turn your bank account into your
               financial hub. Control your finances like never before.
             </p>
