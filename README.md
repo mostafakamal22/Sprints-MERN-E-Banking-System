@@ -2,7 +2,7 @@
 
 <p align="center"><img src="https://socialify.git.ci/mostafakamal22/Sprints-MERN-E-Banking-System/image?font=Bitter&amp;language=1&amp;name=1&amp;owner=1&amp;pattern=Charlie%20Brown&amp;stargazers=1&amp;theme=Auto" alt="project-image"></p>
 
-<p id="description">Sure here's an improved description for the GitHub project: This Full Stack MERN Application is a comprehensive E-Bank system that allows users to create and manage their own secure online bank accounts. With this system users can easily perform common banking tasks such as depositing withdrawing and transferring money at any time. Additionally the application features an intuitive admin dashboard that enables administrators to efficiently manage user account requests and bank account statuses with ease. Whether you're a user looking for a convenient and secure way to manage your finances or an administrator seeking a powerful tool to streamline your workflow this application is the perfect solution.</p>
+<p id="description">This Full Stack MERN Application is a comprehensive E-Bank system that allows users to create and manage their own secure online bank accounts. With this system users can easily perform common banking tasks such as depositing withdrawing and transferring money at any time. Additionally the application features an intuitive admin dashboard that enables administrators to efficiently manage user account requests and bank account statuses with ease. Whether you're a user looking for a convenient and secure way to manage your finances or an administrator seeking a powerful tool to streamline your workflow this application is the perfect solution.</p>
 
 <h2>🚀 Demo</h2>
 
