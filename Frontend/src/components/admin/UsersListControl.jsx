@@ -22,6 +22,7 @@ import {
 import { PaginationTable } from "../helpers/PaginationTable";
 
 const tableHeaderTitles = [
+  "User ID",
   "User Name",
   "User Email",
   "User Status",
@@ -121,6 +122,14 @@ export const UsersListControl = ({ usersList }) => {
         key={user._id}
         className={`${index % 2 === 0 ? "bg-white" : "bg-gray-100"} border-b `}
       >
+        {/*user ID*/}
+        <th
+          scope="row"
+          className="p-2  text-gray-900 whitespace-nowrap  border-x-2 text-center"
+        >
+          {user._id}
+        </th>
+
         {/*user Name*/}
         <th
           scope="row"

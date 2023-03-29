@@ -16,6 +16,7 @@ import { AiFillCheckCircle } from "react-icons/ai";
 
 const tableHeaderTitles = [
   "User Id",
+  "User Name",
   "Request Id",
   "Initial Balance",
   "Decline Request",
@@ -28,6 +29,8 @@ const UsersAccountRequests = ({ accountRequestsList }) => {
   const { isLoading, isError, isSuccess, message } = useSelector(
     (state) => state.accountRequests
   );
+
+  const { usersList } = useSelector((state) => state.usersData);
 
   const dispatch = useDispatch();
 
@@ -117,6 +120,20 @@ const UsersAccountRequests = ({ accountRequestsList }) => {
           className="p-2 text-gray-900 whitespace-nowrap  border-x-2 text-center"
         >
           {request.client_id}
+        </th>
+
+        {/*User Name*/}
+        <th
+          scope="row"
+          className="p-2 text-gray-900 whitespace-nowrap  border-x-2 text-center"
+        >
+          {usersList.find(
+            (user) => Number(user?._id) === Number(request?.client_id)
+          )
+            ? usersList.find(
+                (user) => Number(user?._id) === Number(request?.client_id)
+              )?.user_name
+            : "-"}
         </th>
 
         {/*request Id*/}

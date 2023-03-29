@@ -17,7 +17,7 @@ export const UpdateUserStatus = ({ user, handleUpdating }) => {
       <select
         className="my-2 p-2 rounded"
         value={userStatus}
-        onChange={(e) => setUserStatus(e.target.value)}
+        onChange={(e) => setUserStatus(+e.target.value)}
       >
         <option value={0}>active</option>
         <option value={1}>unactive</option>

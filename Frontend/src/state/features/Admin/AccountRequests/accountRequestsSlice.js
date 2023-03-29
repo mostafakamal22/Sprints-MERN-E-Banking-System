@@ -104,7 +104,7 @@ export const accountRequestsSlice = createSlice({
         state.isError = false;
         state.message = "Request Declined Successfully!";
         state.accountRequestsList = state.accountRequestsList.filter(
-          (request) => request._id !== Number(action.payload.id)
+          (request) => Number(request._id) !== Number(action.payload.id)
         );
       })
       .addCase(declineAccountRequest.rejected, (state, action) => {
@@ -125,7 +125,7 @@ export const accountRequestsSlice = createSlice({
         state.isError = false;
         state.message = "Request Approved Successfully!";
         state.accountRequestsList = state.accountRequestsList.filter(
-          (request) => request._id !== Number(action.payload.id)
+          (request) => Number(request._id) !== Number(action.payload.id)
         );
       })
       .addCase(ApproveAccountRequest.rejected, (state, action) => {
