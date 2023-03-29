@@ -3,6 +3,7 @@ import React from "react";
 import { FcSalesPerformance } from "react-icons/fc";
 import { useSelector } from "react-redux";
 import { PaginationDepositList } from "../helpers/PaginationDepositList";
+import { FaCalendarAlt, FaMoneyBillWave } from "react-icons/fa";
 
 export const DepositLogs = () => {
   //Get account data
@@ -16,18 +17,20 @@ export const DepositLogs = () => {
     return (
       <li
         key={log._id}
-        className="min-h-[150px] my-4 flex flex-col gap-4 items-center justify-center flex-wrap  bg-blue-200 p-4 border-x-4 border-blue-800 rounded shadow"
+        className="min-h-[150px] my-4 flex flex-col gap-2 items-center justify-center flex-wrap bg-blue-200 p-4 border-x-4 border-blue-800 rounded shadow"
       >
-        <p className="w-full text-left md:text-center my-2">
-          Deposit Date:-
-          <span className="px-2  text-orange-600 underline underline-offset-2">
-            {moment(log.createdAt).fromNow()}
+        <p className="w-full flex items-center md:justify-center">
+          <FaCalendarAlt className="inline-block mr-2" />
+          Date:
+          <span className="ml-auto md:mx-2 p-2 bg-orange-600 rounded text-white">
+            {moment(log.createdAt).format("DD-MM-YYYY")}
           </span>
         </p>
 
-        <p className="w-full text-left md:text-center my-2">
-          Deposit Amount:-
-          <span className="mx-2 p-2 text-white bg-green-500 rounded shadow">
+        <p className="w-full flex items-center md:justify-center">
+          <FaMoneyBillWave className="inline-block mr-2" />
+          Amount:
+          <span className="ml-auto md:mx-2 p-2 text-white bg-green-500 rounded">
             {new Intl.NumberFormat("ar-EG", {
               style: "currency",
               currency: "EGP",

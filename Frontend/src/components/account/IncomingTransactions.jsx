@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 import moment from "moment";
 import { PaginationIncomingList } from "../helpers/PaginationIncomingList";
 import { FcInTransit } from "react-icons/fc";
+import { FaCalendarAlt, FaMoneyBillWave, FaUser } from "react-icons/fa";
 
 export const IncomingTransactions = () => {
   //Get account data
@@ -16,23 +17,26 @@ export const IncomingTransactions = () => {
     return (
       <li
         key={transaction._id}
-        className="min-h-[150px] my-4 flex flex-col gap-4 items-center justify-center flex-wrap  bg-blue-200 p-4 border-x-4 border-blue-800 rounded shadow"
+        className="min-h-[150px] my-4 flex flex-col gap-2 items-center justify-center flex-wrap bg-blue-200 p-4 border-x-4 border-blue-800 rounded shadow"
       >
-        <p className="w-full text-left md:text-center my-2">
-          Transaction Date:-
-          <span className="px-2  text-orange-600 underline underline-offset-2">
-            {moment(transaction.createdAt).fromNow()}
+        <p className="w-full flex items-center md:justify-center">
+          <FaCalendarAlt className="inline-block mr-2" />
+          Date:
+          <span className="ml-auto md:mx-2 p-2 bg-orange-600 rounded text-white">
+            {moment(transaction.createdAt).format("DD-MM-YYYY")}
           </span>
         </p>
-        <p className="w-full text-left md:text-center my-2">
-          Transfered From:-
-          <span className="px-2 text-blue-800 underline underline-offset-2">
+        <p className="w-full flex items-center md:justify-center">
+          <FaUser className="inline-block mr-2" />
+          From:
+          <span className="ml-auto md:mx-2 p-2 bg-blue-600 rounded text-white">
             {transaction.from}
           </span>
         </p>
-        <p className="w-full text-left md:text-center my-2">
-          Transaction Amount:-
-          <span className="mx-2 p-2 text-white bg-green-500 rounded shadow">
+        <p className="w-full flex items-center md:justify-center">
+          <FaMoneyBillWave className="inline-block mr-2" />
+          Amount:
+          <span className="ml-auto md:mx-2 p-2 text-white bg-green-500 rounded">
             {new Intl.NumberFormat("ar-EG", {
               style: "currency",
               currency: "EGP",
