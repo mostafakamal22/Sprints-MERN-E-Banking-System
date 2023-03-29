@@ -3,13 +3,13 @@ import { FcBusinessman } from "react-icons/fc";
 
 export default function ProfileSummery({ info }) {
   return (
-    <div className="p-3 py-8">
+    <div className="p-1">
       <h3 className="flex items-center text-gray-800 mb-10 text-xl font-bold px-2 py-4 my-4 rounded shadow bg-blue-200 border-b-4 border-blue-800">
         <FcBusinessman className="mr-1" size={50} />
         {info.name}
       </h3>
 
-      <ul className="w-full max-w-[550px] py-2 px-3 mt-3">
+      <ul className="w-full max-w-[550px] py-2  mt-3">
         <li className="flex items-center p-3 mb-2  border-r-4  border-blue-800 rounded shadow bg-blue-200">
           <span className="font-semibold">Status</span>
           <span className="ml-auto">

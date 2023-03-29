@@ -14,7 +14,7 @@ export default function ProfilePage() {
 
       <div className="w-full h-full flex justify-center items-center">
         <div className="w-full flex justify-center items-center flex-col gap-6 p-4 md:p-6">
-          <div className="max-w-5xl w-full p-6 bg-slate-50 rounded shadow-lg shadow-black/30">
+          <div className="max-w-5xl w-full p-3 bg-slate-50 rounded shadow-lg shadow-black/30">
             {/*profile summery */}
             <ProfileSummery info={info} />
 
