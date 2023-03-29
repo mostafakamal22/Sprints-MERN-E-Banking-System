@@ -31,7 +31,7 @@ export default function Hero() {
               <Link
                 to="/register"
                 className="flex justify-center items-center font-bold text-xl bg-teal-800 text-white hover:bg-white focus:bg-white mt-auto px-8 py-4  hover:text-blue-800 focus:text-blue-800 border-2  border-teal-800 hover:border-blue-800  focus:border-blue-800  rounded-lg
-         shadow transition-all ease-in-out duration-300"
+         shadow transition-all ease-in-out duration-300 mb-5"
               >
                 <span>Register</span>
               </Link>

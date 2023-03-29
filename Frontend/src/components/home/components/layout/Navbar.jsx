@@ -94,7 +94,7 @@ export default function Navbar() {
             </Link>
             <Link
               to="/login"
-              className="flex gap-1 justify-center items-center font-bold text-xs sm:text-sm bg-blue-800 text-white hover:bg-white px-2 sm:px-3 py-2 hover:text-blue-800 border-2 hover:border-blue-800 items-center rounded-lg
+              className="flex gap-1 justify-center items-center font-bold text-xs sm:text-sm bg-blue-800 text-white hover:bg-white px-2 sm:px-3 py-2 hover:text-blue-800 border-2 hover:border-blue-800  rounded-lg
          shadow transition-all ease-in-out duration-300"
             >
               <IoLogIn size={20} />
@@ -150,10 +150,10 @@ export default function Navbar() {
             </Link>
             <Link
               to="/login"
-              className="flex gap-1 justify-center items-center font-bold text-xs sm:text-sm bg-blue-800 text-white hover:bg-white px-4  py-2 hover:text-blue-800 border-2 border-blue-800 hover:border-blue-800 items-center rounded-lg
+              className="flex gap-1 justify-center items-center font-bold text-xs sm:text-sm bg-blue-800 text-white hover:bg-white px-4  py-2 hover:text-blue-800 border-2 border-blue-800 hover:border-blue-800  rounded-lg
          shadow transition-all ease-in-out duration-300"
             >
-              <IoLogIn size={20} />
+              <IoLogIn size={16} />
               Login
             </Link>
           </div>
