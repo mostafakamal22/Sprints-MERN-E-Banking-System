@@ -151,7 +151,7 @@ export const UsersListControl = ({ usersList }) => {
           <span
             className={`flex justify-center items-center w-full p-2  mx-auto rounded
                      shadow ${user.user_status === 0 && "bg-green-100"}
-                    ${user.user_status === 1 && "bg-gray-100"}
+                    ${user.user_status === 1 && "bg-orange-100"}
                     ${user.user_status === 2 && "bg-yellow-100"}`}
           >
             {user.user_status === 0 && (
