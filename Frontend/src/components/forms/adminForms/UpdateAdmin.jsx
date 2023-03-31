@@ -59,7 +59,7 @@ export default function UpdateAdmin() {
 
   if (info)
     return (
-      <div className="max-w-4xl w-full p-6 bg-slate-50 rounded shadow-lg shadow-black/30 ">
+      <div className="max-w-4xl w-full self-start">
         <h3 className="flex justify-center items-center text-2xl italic font-bold text-center px-2 py-4 mb-10 rounded shadow bg-blue-200 border-b-4 border-blue-800">
           <FcDoughnutChart className="ml-1" size={50} />
           <span>Update Your Info</span>
@@ -75,8 +75,9 @@ export default function UpdateAdmin() {
             <input
               type="email"
               name="email"
+              id="email"
               className="block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-800 focus:outline-none"
-              defaultValue={email}
+              value={email}
               onChange={(e) =>
                 setFormInputs({ ...formInputs, email: e.target.value })
               }
@@ -102,8 +103,9 @@ export default function UpdateAdmin() {
             <input
               type="password"
               name="oldPassword"
+              id="oldPassword"
               className="block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-800 focus:outline-none"
-              defaultValue={oldPassword}
+              value={oldPassword}
               onChange={(e) =>
                 setFormInputs({ ...formInputs, oldPassword: e.target.value })
               }
@@ -122,8 +124,9 @@ export default function UpdateAdmin() {
             <input
               type="password"
               name="password"
+              id="password"
               className="block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-800 focus:outline-none"
-              defaultValue={password}
+              value={password}
               onChange={(e) =>
                 setFormInputs({ ...formInputs, password: e.target.value })
               }
@@ -142,8 +145,9 @@ export default function UpdateAdmin() {
             <input
               type="password"
               name="repeatedPassword"
+              id="repeatedPassword"
               className="block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-800 focus:outline-none"
-              defaultValue={repeatedPassword}
+              value={repeatedPassword}
               onChange={(e) =>
                 setFormInputs({
                   ...formInputs,

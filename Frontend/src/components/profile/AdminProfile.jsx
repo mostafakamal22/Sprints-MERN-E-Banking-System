@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 export default function AdminProfile() {
   const { info } = useSelector((state) => state.adminAuth);
   return (
-    <div className="max-w-4xl w-full  p-6 bg-slate-50 rounded shadow-lg shadow-black/30">
+    <div className="max-w-4xl w-full self-start">
       <h2 className="flex items-center text-gray-800 mb-4 text-2xl font-bold px-2 py-4 my-4 rounded shadow bg-blue-200 border-b-4 border-blue-800">
         <span className="flex justify-center items-center mr-2">
           <FcVip size={50} />

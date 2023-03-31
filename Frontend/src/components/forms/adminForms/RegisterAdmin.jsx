@@ -74,7 +74,7 @@ export const RegisterAdmin = () => {
   };
 
   return (
-    <div className="max-w-5xl w-full p-6 bg-slate-50 rounded shadow-lg shadow-black/30">
+    <div className="max-w-5xl w-full">
       <h3 className="flex items-center justify-center text-2xl text-center font-bold px-2 py-4 mb-10 rounded shadow bg-blue-200 border-b-4 border-blue-800 text-gray-900">
         <FcPlus className="mr-2" size={50} />
         <span>Add New Admin</span>
@@ -90,8 +90,9 @@ export const RegisterAdmin = () => {
           <input
             type="name"
             name="name"
+            id="name"
             className="block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-800 focus:outline-none"
-            defaultValue={name}
+            value={name}
             onChange={(e) =>
               setFormInputs({ ...formInputs, name: e.target.value })
             }
@@ -113,8 +114,9 @@ export const RegisterAdmin = () => {
           <input
             type="email"
             name="email"
+            id="email"
             className="block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-800 focus:outline-none"
-            defaultValue={email}
+            value={email}
             onChange={(e) =>
               setFormInputs({ ...formInputs, email: e.target.value })
             }
@@ -134,8 +136,9 @@ export const RegisterAdmin = () => {
           <input
             type="password"
             name="password"
+            id="password"
             className="block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-800 focus:outline-none"
-            defaultValue={password}
+            value={password}
             onChange={(e) =>
               setFormInputs({ ...formInputs, password: e.target.value })
             }
@@ -146,16 +149,17 @@ export const RegisterAdmin = () => {
 
         <div className="mb-6">
           <label
-            htmlFor="repeated-password"
+            htmlFor="repeatedPassword"
             className="w-full inline-block font-semibold mb-4 p-2 text-gray-800 border-b-4 border-blue-800 rounded shadow bg-blue-200"
           >
             Repeat Password
           </label>
           <input
             type="password"
-            name="repeated-password"
+            name="repeatedPassword"
+            id="repeatedPassword"
             className="block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-800 focus:outline-none"
-            defaultValue={repeatedPassword}
+            value={repeatedPassword}
             onChange={(e) =>
               setFormInputs({ ...formInputs, repeatedPassword: e.target.value })
             }
@@ -177,14 +181,15 @@ export const RegisterAdmin = () => {
 
           <select
             name="role"
+            id="role"
             className="my-2 mx-auto p-2 rounded bg-slate-900 text-white  font-bold"
-            defaultValue={role}
+            value={role}
             onChange={(e) =>
               setFormInputs({ ...formInputs, role: e.target.value })
             }
           >
-            <option defaultValue={"admin"}>admin</option>
-            <option defaultValue={"owner"}>owner</option>
+            <option value={"admin"}>admin</option>
+            <option value={"owner"}>owner</option>
           </select>
         </div>
 

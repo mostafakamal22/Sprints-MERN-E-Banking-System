@@ -34,7 +34,7 @@ export const DashboardNavbar = ({ activeTab, setActiveTab }) => {
   const { info } = useSelector((state) => state.adminAuth);
 
   return (
-    <div className="max-w-5xl w-full p-6 bg-slate-50 rounded shadow-lg shadow-black/30 mb-5">
+    <div className="max-w-5xl w-full">
       <nav className="m-auto bg-blue-200 rounded text-blue-800 border-x-4 border-blue-800">
         <ul className="flex justify-center flex-wrap gap-4 p-4 text-sm">
           {navTabs.map((tab, index) => (

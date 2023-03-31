@@ -207,7 +207,7 @@ const UsersAccountRequests = ({ accountRequestsList }) => {
   });
 
   return (
-    <div className="max-w-5xl w-full overflow-x-auto  p-6 bg-slate-50 rounded shadow-lg shadow-black/30">
+    <div className="max-w-5xl w-full">
       <h3 className="text-2xl my-10 p-3 text-center font-bold bg-blue-200 text-gray-900 border-b-4 border-blue-800 rounded shadow">
         Users Account Requests List (
         {filteredRequests && filteredRequests.length})
@@ -218,9 +218,9 @@ const UsersAccountRequests = ({ accountRequestsList }) => {
         <div className="flex justify-center items-center flex-wrap md:flex-nowrap gap-4 mb-6 p-4 bg-blue-200 rounded-md border-b-4 border-blue-800">
           <label
             htmlFor="searchQuery"
-            className="flex items-center w-full md:w-auto text-black font-bold"
+            className="flex items-center w-full md:w-auto text-black text-base font-semibold"
           >
-            <FcSearch size={40} /> <span>Search Requests By id:- </span>
+            <FcSearch size={40} /> <span>Search Requests By ID:- </span>
           </label>
 
           <input

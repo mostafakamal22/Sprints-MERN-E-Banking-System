@@ -84,7 +84,7 @@ export default function AdminDashboard() {
         <SideNavbar admin={info} />
 
         <div className="overflow-x-auto w-full h-full flex justify-center items-center">
-          <div className="w-full flex justify-center items-center flex-col gap-6 p-4 md:p-6">
+          <div className="w-full min-h-screen flex  items-center flex-col gap-6 p-3 md:p-6 bg-slate-50">
             {/* admin dashboard navabr */}
             <DashboardNavbar
               activeTab={activeTab}
