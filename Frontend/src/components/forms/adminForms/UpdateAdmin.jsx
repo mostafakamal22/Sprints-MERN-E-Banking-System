@@ -3,7 +3,10 @@ import { useEffect } from "react";
 import { AiFillSlackCircle } from "react-icons/ai";
 import { FcDoughnutChart, FcInfo } from "react-icons/fc";
 import { useDispatch, useSelector } from "react-redux";
-import { updateAdmin } from "../../../state/features/Admin/Auth/adminAuthSlice";
+import {
+  resetAdminAuthStatus,
+  updateAdmin,
+} from "../../../state/features/Admin/Auth/adminAuthSlice";
 import FormButton from "../../shared/FormButton";
 import MessagesContainer from "../../shared/MessagesContainer";
 import { InputsValidator } from "../helpers/InputsValidator";
@@ -35,10 +38,12 @@ export default function UpdateAdmin() {
         msg: message,
       });
     }
-  }, [isError, message, msg, isSuccess]);
+  }, [isError, message, isSuccess]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    //Reset Admin Status
+    dispatch(resetAdminAuthStatus());
     //set msg to none first
     setFormInputs({ ...formInputs, msg: "" });
     //check for password match >>> if not matched then show error msg
@@ -163,11 +168,11 @@ export default function UpdateAdmin() {
           <InputsValidator passwordInput={password} />
 
           {/*Request Status and Errors*/}
-          {(isError || isSuccess) && msg && (
+          {msg && (
             <MessagesContainer
               msg={msg}
-              isSuccess={isSuccess}
-              isError={isError}
+              isSuccess={isSuccess ? isSuccess : false}
+              isError={isError || (msg && !isSuccess) ? true : false}
             />
           )}
 

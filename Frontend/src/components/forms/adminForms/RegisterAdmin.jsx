@@ -39,7 +39,7 @@ export const RegisterAdmin = () => {
     if (isSuccess && message) {
       setFormInputs({ ...formInputs, msg: message });
     }
-  }, [isError, message, isSuccess, msg]);
+  }, [isError, message, isSuccess]);
 
   //clean up for owner status (on mount , unmount)
   UseResetStatus(() => {
@@ -54,6 +54,8 @@ export const RegisterAdmin = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    //Reset Status
+    dispatch(resetOwnerStatus());
     //set msg to none first
     setFormInputs({ ...formInputs, msg: "" });
 
@@ -194,11 +196,11 @@ export const RegisterAdmin = () => {
         </div>
 
         {/*Request Status and Errors*/}
-        {(isError || isSuccess) && msg && (
+        {msg && (
           <MessagesContainer
             msg={msg}
-            isSuccess={isSuccess}
-            isError={isError}
+            isSuccess={isSuccess ? isSuccess : false}
+            isError={isError || (msg && !isSuccess) ? true : false}
           />
         )}
 
