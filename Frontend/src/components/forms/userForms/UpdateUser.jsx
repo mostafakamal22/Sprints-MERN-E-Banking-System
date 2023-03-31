@@ -42,20 +42,22 @@ export default function UpdateUser() {
   } = fromInputs;
 
   useEffect(() => {
-    if (isError && !msg) {
+    if (isError) {
       setFromInputs({ ...fromInputs, msg: message });
     }
 
-    if (isSuccess && !msg) {
+    if (isSuccess) {
       setFromInputs({
         ...fromInputs,
         msg: message,
       });
     }
-  }, [isError, message, msg, isSuccess]);
+  }, [isError, message, isSuccess]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    //Reset User Status
+    dispatch(resetUserStatus());
     //set msg to none first
     setFromInputs({ ...fromInputs, msg: "" });
     //check for password match >>> if not matched then show error msg
@@ -260,8 +262,8 @@ export default function UpdateUser() {
           {msg && (
             <MessagesContainer
               msg={msg}
-              isSuccess={isSuccess}
-              isError={isError}
+              isSuccess={isSuccess ? isSuccess : false}
+              isError={isError || (msg && !isSuccess) ? true : false}
             />
           )}
 
