@@ -33,8 +33,8 @@ export const NotificationOverView = () => {
   const oneNotification = (notification) => {
     return (
       <div
-        className={`mt-2 px-4 sm:px-6 py-4  rounded-lg shadow w-full select-none
-hover:bg-gray-500 
+        className={`max-w-xl mx-auto mt-2 px-4 sm:px-6 py-4  rounded-lg shadow w-full select-none
+hover:bg-blue-300 focus:bg-blue-300  active:bg-blue-300 
   ${notification.isSeen && "bg-white"}
   ${!notification.isSeen && "bg-gray-300"}
 `}
@@ -78,8 +78,8 @@ hover:bg-gray-500
   };
 
   return (
-    <div className="max-w-5xl w-full min-h-screen p-2 bg-slate-50 rounded shadow-lg shadow-black/30">
-      <div className="h-full w-full  px-2 py-6  sm:p-10 ">
+    <div className="max-w-5xl w-full min-h-screen">
+      <div className="h-full w-full">
         {/* Heading */}
         <h3 className="flex justify-center items-center text-2xl text-center font-bold px-2 py-4 mb-10 bg-blue-200 border-b-4 border-blue-800 rounded shadow">
           <FcIdea className="mr-1" size={50} />
@@ -89,10 +89,10 @@ hover:bg-gray-500
         {/* If there no notifications */}
         {!notifications ||
           (notifications.length === 0 && (
-            <div className="min-h-[150px] my-4 flex flex-col gap-4 items-center justify-center flex-wrap  bg-yellow-100 p-4 border-x-4 border-yellow-800 rounded shadow">
-              <FcNoIdea size={50} />
-              <p className="text-gray-800 text-xl p-4 font-bold">
-                You Do Not Have Any Notifications!
+            <div className="max-w-2xl w-full mx-auto my-4 flex flex-col gap-4 items-center justify-center flex-wrap  bg-pink-100 p-4 border-2 border-pink-800 rounded shadow">
+              <FcNoIdea size={60} />
+              <p className="text-gray-800 text-base font-semibold">
+                You do not have any Notifications!
               </p>
             </div>
           ))}

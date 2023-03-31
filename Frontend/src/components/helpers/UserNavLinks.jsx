@@ -29,9 +29,16 @@ import {
   userLogout,
 } from "../../state/features/User/UserData/userSlice";
 
-export const UserNavLinks = ({ user }) => {
+export const UserNavLinks = ({ user, navbarLinksClickHandler }) => {
   const dispatch = useDispatch();
-  const { account } = useSelector((state) => state.userAccount);
+  const { account, isLoading: isUserAccountLoading } = useSelector(
+    (state) => state.userAccount
+  );
+  const { info, isLoading: isUserDataLoading } = useSelector(
+    (state) => state.userData
+  );
+
+  const userStatus = info?.userStatus;
 
   //user navbar data
   const userNavData = [
@@ -43,17 +50,17 @@ export const UserNavLinks = ({ user }) => {
     {
       title: "Profile",
       icon: BsFilePersonFill,
-      to: `/profile/${user.id}`,
+      to: userStatus === 0 ? `/profile/${user.id}` : " ",
     },
     {
       title: "Request Account",
       icon: MdRequestPage,
-      to: `/account-request`,
+      to: userStatus === 0 ? `/account-request` : " ",
     },
     {
       title: "Notifications",
       icon: MdCircleNotifications,
-      to: `/notifications`,
+      to: userStatus === 0 ? `/notifications` : " ",
     },
     {
       title: "Deposit",
@@ -93,7 +100,7 @@ export const UserNavLinks = ({ user }) => {
     {
       title: "Setting",
       icon: AiFillSetting,
-      to: `/profile/${user.id}/update`,
+      to: userStatus === 0 ? `/profile/${user.id}/update` : " ",
     },
     {
       title: "Contact Support",
@@ -114,65 +121,65 @@ export const UserNavLinks = ({ user }) => {
     },
   ];
 
-  return (
-    <>
-      {/* //user navbar links creation */}
-
-      {userNavData.map((link) => (
-        <li
-          key={link.title}
-          className={`${
-            user.accountsCount === 0 &&
-            ![
-              "Profile",
-              "Setting",
-              "Notifications",
-              "Request Account",
-              "Home",
-              "Logout",
-            ].includes(link.title) &&
-            "hidden"
-          } flex w-full justify-between items-center mb-6 select-none`}
+  //user navbar links creation
+  const navbarLinks = userNavData.map((link) => (
+    <li
+      key={link.title}
+      className={`${
+        user.accountsCount === 0 &&
+        ![
+          "Profile",
+          "Setting",
+          "Notifications",
+          "Request Account",
+          "Home",
+          "Logout",
+        ].includes(link.title) &&
+        "hidden"
+      } flex w-full justify-between items-center mb-6 select-none`}
+    >
+      {link.title === "Logout" ? (
+        <button
+          onClick={link.handleLogout}
+          className="w-full flex items-center p-2 border-r-4 border-red-600 rounded shadow bg-red-200"
         >
-          {link.title === "Logout" ? (
-            <button
-              onClick={link.handleLogout}
-              className="w-full flex items-center p-2 border-r-4 border-red-600 rounded shadow bg-red-200"
-            >
-              <link.icon className="text-red-800" size={23} />
-              <span className="text-sm  ml-2 font-semibold text-red-800 hover:text-red-700 hover:underline">
-                {link.title}
-              </span>
-            </button>
-          ) : (
-            <Link
-              to={link.to}
-              className="w-full flex items-center p-2 border-r-4 border-blue-800 rounded shadow bg-blue-200"
-            >
-              <link.icon className="text-blue-800" size={22} />
-              <span
-                className={`text-sm ml-2 text-blue-800 hover:text-blue-700 hover:underline ${
-                  useMatch(link.to) ? "underline font-bold" : "font-semibold"
-                }`}
-              >
-                {link.title}
-              </span>
-              {link.title === "Notifications" &&
-                user.notifications.filter(
-                  (notification) => !notification.isSeen
-                ).length > 0 && (
-                  <div className="w-2 h-2 p-3 ml-auto  flex items-center justify-center bg-red-500 text-white font-bold text-xs rounded-full shadow">
-                    {
-                      user.notifications.filter(
-                        (notification) => !notification.isSeen
-                      ).length
-                    }
-                  </div>
-                )}
-            </Link>
-          )}
-        </li>
-      ))}
-    </>
-  );
+          <link.icon className="text-red-800" size={23} />
+          <span className="text-sm  ml-2 font-semibold text-red-800 hover:text-red-700 hover:underline">
+            {link.title}
+          </span>
+        </button>
+      ) : (
+        <Link
+          to={link.to}
+          className="w-full flex items-center p-2 border-r-4 border-blue-800 rounded shadow bg-blue-200"
+          onClick={navbarLinksClickHandler}
+        >
+          <link.icon className="text-blue-800" size={22} />
+          <span
+            className={`text-sm ml-2 text-blue-800 hover:text-blue-700 hover:underline ${
+              useMatch(link.to) ? "underline font-bold" : "font-semibold"
+            }`}
+          >
+            {link.title}
+          </span>
+          {link.title === "Notifications" &&
+            user.notifications.filter((notification) => !notification.isSeen)
+              .length > 0 && (
+              <div className="w-2 h-2 p-3 ml-auto  flex items-center justify-center bg-red-500 text-white font-bold text-xs rounded-full shadow">
+                {
+                  user.notifications.filter(
+                    (notification) => !notification.isSeen
+                  ).length
+                }
+              </div>
+            )}
+        </Link>
+      )}
+    </li>
+  ));
+
+  if ((!account || !info) && (isUserAccountLoading || isUserDataLoading))
+    return null;
+
+  return navbarLinks;
 };

@@ -3,10 +3,14 @@ import { FcDonate } from "react-icons/fc";
 import { HiReceiptRefund } from "react-icons/hi";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
-import { deposit } from "../../state/features/Account/accountSlice";
+import {
+  deposit,
+  resetAccountStatus,
+} from "../../state/features/Account/accountSlice";
 import { PaymentMethods } from "../payment/PaymentMethods";
 import FormButton from "../shared/FormButton";
 import MessagesContainer from "../shared/MessagesContainer";
+import { UseResetStatus } from "../../hooks/UseResetStatus";
 
 export const Deposit = () => {
   //state for withdraw balance
@@ -58,25 +62,32 @@ export const Deposit = () => {
     dispatch(deposit(withdrawData));
   };
 
+  UseResetStatus(() => {
+    return () => {
+      dispatch(resetAccountStatus());
+    };
+  });
+
   return (
-    <div className="max-w-5xl w-full p-6 bg-slate-50 rounded shadow-lg shadow-black/30">
+    <div className="max-w-5xl w-full">
       <h3 className="flex justify-center items-center text-2xl text-center font-bold px-2 py-4 mb-10 bg-blue-200 border-b-4 border-blue-800 rounded shadow ">
         <FcDonate className="mr-1" size={50} />
         Deposit Money
       </h3>
       <form onSubmit={handleSubmit}>
-        <div className="flex justify-center items-center font-semibold flex-wrap gap-4 px-5 py-5">
+        <div className="flex justify-center items-center font-semibold flex-wrap gap-4 mb-2 p-2">
           <label
-            className="basis-full sm:basis-[50%] text-md  my-2 sm:my-0 mx-2 p-2 sm:border-r-4 rounded shadow bg-blue-200 border-blue-800"
+            className="basis-full sm:basis-[50%] text-md  my-2 sm:my-0  p-2 border-r-4 rounded shadow bg-blue-200 border-blue-800"
             htmlFor="depositAmount"
           >
             Enter Deposit Amount
           </label>
 
           <input
-            className="basis-full  sm:basis-1/3  px-3 py-1.5 mx-4 text-base font-normal text-gray-700 bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out  focus:text-gray-700 focus:bg-white focus:border-blue-800 focus:outline-none"
+            className="basis-full  sm:basis-1/3  px-3 py-1.5 text-base font-normal text-gray-700 bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out  focus:text-gray-700 focus:bg-white focus:border-blue-800 focus:outline-none"
             type="number"
             name="depositAmount"
+            id="depositAmount"
             value={depositAmount}
             onChange={(e) => setDepositAmount(e.target.value)}
             min="100"
@@ -84,16 +95,17 @@ export const Deposit = () => {
           />
 
           <label
-            className="basis-full sm:basis-[50%] text-md  my-2 sm:my-0 mx-2 p-2 sm:border-r-4 rounded shadow bg-blue-200 border-blue-800"
+            className="basis-full sm:basis-[50%] text-md  my-2 sm:my-0  p-2 border-r-4 rounded shadow bg-blue-200 border-blue-800"
             htmlFor="password"
           >
             Type your Password
           </label>
 
           <input
-            className="basis-full  sm:basis-1/3  px-3 py-1.5 mx-4 text-base font-normal text-gray-700 bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out  focus:text-gray-700 focus:bg-white focus:border-blue-800 focus:outline-none"
+            className="basis-full  sm:basis-1/3  px-3 py-1.5 text-base font-normal text-gray-700 bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out  focus:text-gray-700 focus:bg-white focus:border-blue-800 focus:outline-none"
             type="password"
             name="password"
+            id="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required

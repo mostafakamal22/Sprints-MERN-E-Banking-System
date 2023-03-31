@@ -3,10 +3,14 @@ import { useState, useEffect } from "react";
 import { AiFillSlackCircle } from "react-icons/ai";
 import { FcDoughnutChart, FcInfo } from "react-icons/fc";
 import { useDispatch, useSelector } from "react-redux";
-import { updateUser } from "../../../state/features/User/UserData/userSlice";
+import {
+  resetUserStatus,
+  updateUser,
+} from "../../../state/features/User/UserData/userSlice";
 import FormButton from "../../shared/FormButton";
 import MessagesContainer from "../../shared/MessagesContainer";
 import { InputsValidator } from "../helpers/InputsValidator";
+import { UseResetStatus } from "../../../hooks/UseResetStatus";
 
 export default function UpdateUser() {
   const dispatch = useDispatch();
@@ -38,11 +42,11 @@ export default function UpdateUser() {
   } = fromInputs;
 
   useEffect(() => {
-    if (isError) {
+    if (isError && !msg) {
       setFromInputs({ ...fromInputs, msg: message });
     }
 
-    if (isSuccess) {
+    if (isSuccess && !msg) {
       setFromInputs({
         ...fromInputs,
         msg: message,
@@ -73,9 +77,15 @@ export default function UpdateUser() {
     dispatch(updateUser(userData));
   };
 
-  if (info)
+  UseResetStatus(() => {
+    return () => {
+      dispatch(resetUserStatus());
+    };
+  });
+
+  if (info) {
     return (
-      <div className="max-w-4xl w-full p-6 bg-slate-50 rounded shadow-lg shadow-black/30">
+      <div className="max-w-4xl w-full">
         <h3 className="flex justify-center items-center text-2xl italic font-bold text-center px-2 py-4 mb-10 rounded shadow bg-blue-200 border-b-4 border-blue-800">
           <FcDoughnutChart className="ml-1" size={50} />
           Update Your Info
@@ -91,8 +101,9 @@ export default function UpdateUser() {
             <input
               type="email"
               name="email"
+              id="email"
               className="block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-              defaultValue={email}
+              value={email}
               onChange={(e) =>
                 setFromInputs({ ...fromInputs, email: e.target.value })
               }
@@ -117,8 +128,9 @@ export default function UpdateUser() {
             <input
               type="password"
               name="oldPassword"
+              id="oldPassword"
               className="block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-              defaultValue={oldPassword}
+              value={oldPassword}
               onChange={(e) =>
                 setFromInputs({ ...fromInputs, oldPassword: e.target.value })
               }
@@ -137,8 +149,9 @@ export default function UpdateUser() {
             <input
               type="password"
               name="password"
+              id="password"
               className="block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-              defaultValue={password}
+              value={password}
               onChange={(e) =>
                 setFromInputs({ ...fromInputs, password: e.target.value })
               }
@@ -156,8 +169,9 @@ export default function UpdateUser() {
             <input
               type="password"
               name="repeatedPassword"
+              id="repeatedPassword"
               className="block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-              defaultValue={repeatedPassword}
+              value={repeatedPassword}
               onChange={(e) =>
                 setFromInputs({
                   ...fromInputs,
@@ -182,8 +196,9 @@ export default function UpdateUser() {
             <input
               type="text"
               name="phone"
+              id="phone"
               className="block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-              defaultValue={"0" + phone}
+              value={"0" + phone}
               onChange={(e) =>
                 setFromInputs({
                   ...fromInputs,
@@ -204,8 +219,9 @@ export default function UpdateUser() {
             <input
               type="text"
               name="address"
+              id="address"
               className="block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-              defaultValue={address}
+              value={address}
               onChange={(e) =>
                 setFromInputs({
                   ...fromInputs,
@@ -226,8 +242,9 @@ export default function UpdateUser() {
             <input
               type="text"
               name="postal"
+              id="postal"
               className="block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-              defaultValue={postal}
+              value={postal}
               onChange={(e) =>
                 setFromInputs({
                   ...fromInputs,
@@ -240,7 +257,7 @@ export default function UpdateUser() {
           </div>
 
           {/*Request Status and Errors*/}
-          {(isError || isSuccess) && msg && (
+          {msg && (
             <MessagesContainer
               msg={msg}
               isSuccess={isSuccess}
@@ -257,4 +274,7 @@ export default function UpdateUser() {
         </form>
       </div>
     );
+  } else {
+    return null;
+  }
 }

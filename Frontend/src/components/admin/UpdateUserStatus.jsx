@@ -20,7 +20,7 @@ export const UpdateUserStatus = ({ user, handleUpdating }) => {
         onChange={(e) => setUserStatus(+e.target.value)}
       >
         <option value={0}>active</option>
-        <option value={1}>unactive</option>
+        <option value={1}>Inactive</option>
         <option value={2}>suspended</option>
       </select>
       <FormButton

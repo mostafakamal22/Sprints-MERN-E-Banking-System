@@ -33,6 +33,23 @@ import { MainSpinner } from "./components/shared/MainSpinner";
 import { Index } from "./components/home/Index";
 import { RetrieveBalancePage } from "./views/user/RetrieveBalancePage";
 import { WindowFit } from "./components/shared/WindowFit";
+import { MainLayout } from "./components/shared/MainLayout";
+import { UserProfile } from "./components/profile/UserProfile";
+import UpdateUser from "./components/forms/userForms/UpdateUser";
+import { NotificationOverView } from "./components/profile/NotificationOverView";
+import { Notification } from "./components/profile/Notification";
+import { AccountRequest } from "./components/forms/userForms/AccountRequest";
+import { IncomingTransactions } from "./components/account/IncomingTransactions";
+import { OutgoingTransactions } from "./components/account/OutgoingTransactions";
+import { Withdraw } from "./components/account/Withdraw";
+import { Deposit } from "./components/account/Deposit";
+import { Transfer } from "./components/account/Transfer";
+import { DepositLogs } from "./components/account/DepositLogs";
+import { WithdrawLogs } from "./components/account/WithdrawLogs";
+import { RetrieveBalance } from "./components/account/RetrieveBalance";
+import { Contact } from "./components/forms/userForms/Contact";
+import { UnactiveSuspendedUser } from "./components/shared/UnactiveSuspendedUser";
+import { Account } from "./components/account/Account";
 
 function App() {
   //Detect user
@@ -62,14 +79,14 @@ function App() {
     "/admins/profile/:id/update",
   ];
 
+  const spinnerSize = window.innerWidth < 400 ? 30 : 45;
+
   //Loading Spinner After Login Waiting Until UserData if Fetched.
   if (!info && !admin && isLoading)
     return (
-      <div className="mx-5 h-min-screen">
-        <div className="max-w-5xl w-full h-full flex justify-center items-center mx-auto my-10 p-6 bg-slate-50 rounded shadow-lg shadow-black/30">
-          <div className="flex justify-center items-center">
-            <MainSpinner />
-          </div>
+      <div className="w-full min-h-screen">
+        <div className="w-full h-full min-h-screen flex justify-center items-center mx-auto bg-slate-50">
+          <MainSpinner spinnerSize={spinnerSize} />
         </div>
       </div>
     );
@@ -98,77 +115,73 @@ function App() {
       {/*Active Users Routes */}
       {user && info?.userStatus === 0 && !admin && (
         <Routes>
-          <Route index element={<HomePage />} />
-          <Route exact path="/register" element={<Navigate to={"/"} />} />
-          <Route exact path="/login" element={<Navigate to={"/"} />} />
-          <Route exact path="/profile/:id" element={<ProfilePage />} />
-          <Route
-            exact
-            path="/profile/:id/update"
-            element={<UpdateProfilePage />}
-          />
-          <Route exact path="/notifications" element={<NotificationsPage />} />
-          <Route
-            exact
-            path="/notifications/:id"
-            element={<NotificationPage />}
-          />
-          <Route
-            exact
-            path="/account-request"
-            element={<AccountRequestPage />}
-          />
-          <Route
-            exact
-            path="/account/in/:id"
-            element={<IncomingTransactionsPage />}
-          />
-          <Route
-            exact
-            path="/account/out/:id"
-            element={<OutgoingTransactionsPage />}
-          />
-          <Route
-            exact
-            path="/account/withdraw/:id"
-            element={<WithdrawPage />}
-          />
-          <Route exact path="/account/deposit/:id" element={<DepositPage />} />
-          <Route
-            exact
-            path="/account/transfer/:id"
-            element={<TransferPage />}
-          />
-          <Route
-            exact
-            path="/account/deposit-logs/:id"
-            element={<DepositLogsPage />}
-          />
-          <Route
-            exact
-            path="/account/withdraw-logs/:id"
-            element={<WithdrawLogsPage />}
-          />
-          <Route
-            exact
-            path="/retrieve-balance"
-            element={<RetrieveBalancePage />}
-          />
-          <Route exact path="/contact" element={<ContactPage />} />
-          <Route path="*" element={<NotFoundPage />} />
+          <Route element={<MainLayout />}>
+            <Route index element={<Account />} />
+            <Route exact path="/register" element={<Navigate to={"/"} />} />
+            <Route exact path="/login" element={<Navigate to={"/"} />} />
+            <Route exact path="/profile/:id" element={<UserProfile />} />
+            <Route exact path="/profile/:id/update" element={<UpdateUser />} />
+            <Route
+              exact
+              path="/notifications"
+              element={<NotificationOverView />}
+            />
+            <Route exact path="/notifications/:id" element={<Notification />} />
+            <Route exact path="/account-request" element={<AccountRequest />} />
+            <Route
+              exact
+              path="/account/in/:id"
+              element={<IncomingTransactions />}
+            />
+            <Route
+              exact
+              path="/account/out/:id"
+              element={<OutgoingTransactions />}
+            />
+            <Route exact path="/account/withdraw/:id" element={<Withdraw />} />
+            <Route exact path="/account/deposit/:id" element={<Deposit />} />
+            <Route exact path="/account/transfer/:id" element={<Transfer />} />
+            <Route
+              exact
+              path="/account/deposit-logs/:id"
+              element={<DepositLogs />}
+            />
+            <Route
+              exact
+              path="/account/withdraw-logs/:id"
+              element={<WithdrawLogs />}
+            />
+            <Route
+              exact
+              path="/retrieve-balance"
+              element={<RetrieveBalance />}
+            />
+            <Route exact path="/contact" element={<Contact />} />
+            <Route path="*" element={<NotFoundPage />} />
+          </Route>
         </Routes>
       )}
 
       {/*Unactive-Suspended Users Routes */}
-      {user && info?.userStatus !== 0 && !admin && (
-        <Routes>
-          <Route index element={<UnactiveSuspendedUserPage />} />
-          <Route exact path="/register" element={<Navigate to={"/"} />} />
-          <Route exact path="/login" element={<Navigate to={"/"} />} />
-          <Route exact path="/contact" element={<ContactPage />} />
-          <Route path="*" element={<NotFoundPage />} />
-        </Routes>
-      )}
+      {user &&
+        info?.userStatus !== 0 &&
+        info?.userStatus !== undefined &&
+        !admin && (
+          <Routes>
+            <Route element={<MainLayout />}>
+              <Route
+                index
+                element={
+                  <UnactiveSuspendedUser userStatus={info?.userStatus} />
+                }
+              />
+              <Route exact path="/register" element={<Navigate to={"/"} />} />
+              <Route exact path="/login" element={<Navigate to={"/"} />} />
+              <Route exact path="/contact" element={<Contact />} />
+              <Route path="*" element={<NotFoundPage />} />
+            </Route>
+          </Routes>
+        )}
 
       {/* Admin Routes */}
       {admin && !user && (

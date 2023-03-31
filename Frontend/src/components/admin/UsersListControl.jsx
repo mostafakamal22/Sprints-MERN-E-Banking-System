@@ -163,7 +163,7 @@ export const UsersListControl = ({ usersList }) => {
 
             {user.user_status === 1 && (
               <>
-                <span>Unactive</span>
+                <span>Inactive</span>
                 <FcMediumPriority className="ml-1" size={27} />
               </>
             )}

@@ -4,17 +4,19 @@ import { CreditCard } from "./CreditCard";
 import { VodafoneCash } from "./VodafoneCash";
 
 const paymentMethods = [
-  { id: "credit-card", title: "Credit card" },
   { id: "vodafoneCash", title: "Vodafone Cash" },
+  { id: "credit-card", title: "Credit card" },
 ];
 
 export const PaymentMethods = ({ title }) => {
   //state for payment methods
   const [method, setMethod] = useState(paymentMethods[0].title);
   return (
-    <div className="my-10 rounded shadow bg-white p-10">
+    <div className="p-2 mb-5">
       {/* Heading */}
-      <h3 className="text-lg font-bold text-gray-900">{title}</h3>
+      <h3 className="text-base font-semibold text-gray-900 p-2 bg-blue-200 border-r-4 border-blue-900 shadow-lg rounded">
+        {title}
+      </h3>
 
       {/* Choose Method */}
       <fieldset className="mt-4">
@@ -24,12 +26,13 @@ export const PaymentMethods = ({ title }) => {
             <div key={paymentMethod.id} className="flex items-center">
               <input
                 name="payment-type"
+                id={paymentMethod.id}
                 type="radio"
                 onChange={() =>
                   setMethod(paymentMethods[paymentMethodIdx].title)
                 }
                 defaultChecked={paymentMethodIdx === 0}
-                className="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-200"
+                className="focus:ring-indigo-500 accent-pink-500 h-4 w-4 text-indigo-600 border-gray-200"
                 required
               />
 
@@ -49,8 +52,8 @@ export const PaymentMethods = ({ title }) => {
       </p>
 
       {/* Methods inputs Details */}
-      {method === paymentMethods[0].title && <CreditCard />}
-      {method === paymentMethods[1].title && <VodafoneCash />}
+      {method === paymentMethods[0].title && <VodafoneCash />}
+      {method === paymentMethods[1].title && <CreditCard />}
     </div>
   );
 };

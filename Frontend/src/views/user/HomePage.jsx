@@ -53,8 +53,8 @@ export const HomePage = () => {
 
   if (isLoading)
     return (
-      <div className="mx-5 h-min-screen">
-        <div className="max-w-5xl w-full h-full flex justify-center items-center mx-auto my-10 p-6 bg-slate-50 rounded shadow-lg shadow-black/30">
+      <div className="w-full min-h-screen bg-slate-50">
+        <div className="max-w-5xl w-full h-full min-h-screen flex justify-center items-center mx-auto">
           <div className="flex justify-center items-center">
             <MainSpinner spinnerSize={spinnerSize} />
           </div>
@@ -68,8 +68,8 @@ export const HomePage = () => {
         {/* side navbar */}
         <SideNavbar user={info} />
 
-        <div className="w-full h-full flex justify-center items-center">
-          <div className="w-full flex justify-center items-center flex-col gap-6 p-4 md:p-6">
+        <div className="w-full h-full min-h-screen self-center flex justify-center items-center">
+          <div className="w-full h-full min-h-screen flex justify-center items-center p-3 md:p-6 bg-slate-50">
             <Account setPreferedAccount={setPreferedAccount} />
           </div>
         </div>

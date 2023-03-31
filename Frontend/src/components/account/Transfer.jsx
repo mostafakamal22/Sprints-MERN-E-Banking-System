@@ -3,9 +3,13 @@ import { FcPaid } from "react-icons/fc";
 import { RiFileTransferFill } from "react-icons/ri";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
-import { transfer } from "../../state/features/Account/accountSlice";
+import {
+  resetAccountStatus,
+  transfer,
+} from "../../state/features/Account/accountSlice";
 import FormButton from "../shared/FormButton";
 import MessagesContainer from "../shared/MessagesContainer";
+import { UseResetStatus } from "../../hooks/UseResetStatus";
 
 export const Transfer = () => {
   //state for withdraw balance
@@ -27,25 +31,8 @@ export const Transfer = () => {
 
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    if (isError) {
-      setMsg(message);
-    }
-
-    if (isSuccess) {
-      setMsg(
-        `You Have Transfered ${new Intl.NumberFormat("ar-EG", {
-          style: "currency",
-          currency: "EGP",
-        }).format(
-          balanceTransfered
-        )} To Account ID:- [${receivingId}] Successfully!`
-      );
-    }
-  }, [isError, isSuccess, message, account, msg]);
-
   //get account id
-  const accountId = useLocation().pathname.split("/").at(-1);
+  const accountId = useLocation()?.pathname?.split("/").at(-1);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -63,25 +50,49 @@ export const Transfer = () => {
     dispatch(transfer(transferData));
   };
 
+  useEffect(() => {
+    if (isError) {
+      setMsg(message);
+    }
+
+    if (isSuccess) {
+      setMsg(
+        `You Have Transfered ${new Intl.NumberFormat("ar-EG", {
+          style: "currency",
+          currency: "EGP",
+        }).format(
+          balanceTransfered
+        )} To Account ID:- [${receivingId}] Successfully!`
+      );
+    }
+  }, [isError, isSuccess, message, account, msg]);
+
+  UseResetStatus(() => {
+    return () => {
+      dispatch(resetAccountStatus());
+    };
+  });
+
   return (
-    <div className="max-w-5xl w-full p-6 bg-slate-50 rounded shadow-lg shadow-black/30">
+    <div className="max-w-5xl w-full self-start">
       <h3 className="flex justify-center items-center text-2xl text-center font-bold px-2 py-4 mb-10 bg-blue-200 border-b-4 border-blue-800 rounded shadow ">
         <FcPaid className="mr-1" size={50} />
         Transfer Money
       </h3>
       <form onSubmit={handleSubmit}>
-        <div className="flex justify-center items-center font-semibold flex-wrap gap-4 px-5 py-5">
+        <div className="flex justify-center items-center font-semibold flex-wrap gap-4 mb-5 p-2">
           <label
-            className="basis-full sm:basis-[50%] text-md  my-2 sm:my-0 mx-2 p-2 sm:border-r-4 rounded shadow bg-blue-200 border-blue-800"
+            className="basis-full sm:basis-[50%] text-md  my-2 sm:my-0  p-2 border-r-4 rounded shadow bg-blue-200 border-blue-800"
             htmlFor="balanceTransfered"
           >
-            Enter Transfer Amount
+            Transfer Amount
           </label>
 
           <input
-            className="basis-full  sm:basis-1/3  px-3 py-1.5 mx-4 text-base font-normal text-gray-700 bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out  focus:text-gray-700 focus:bg-white focus:border-blue-800 focus:outline-none"
+            className="basis-full  sm:basis-1/3  px-3 py-1.5 text-base font-normal text-gray-700 bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out  focus:text-gray-700 focus:bg-white focus:border-blue-800 focus:outline-none"
             type="number"
             name="balanceTransfered"
+            id="balanceTransfered"
             value={balanceTransfered}
             onChange={(e) => setBalanceTransfered(e.target.value)}
             min="50"
@@ -89,33 +100,35 @@ export const Transfer = () => {
           />
 
           <label
-            className="basis-full sm:basis-[50%] text-md  my-2 sm:my-0 mx-2 p-2 sm:border-r-4 rounded shadow bg-blue-200 border-blue-800"
-            htmlFor="receivingId"
+            className="basis-full sm:basis-[50%] text-md  my-2 sm:my-0  p-2 border-r-4 rounded shadow bg-blue-200 border-blue-800"
+            htmlFor="recipientId"
           >
-            Enter Receiving Account Id
+            Recipient Account ID
           </label>
 
           <input
-            className="basis-full  sm:basis-1/3  px-3 py-1.5 mx-4 text-base font-normal text-gray-700 bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out  focus:text-gray-700 focus:bg-white focus:border-blue-800 focus:outline-none"
+            className="basis-full  sm:basis-1/3  px-3 py-1.5 text-base font-normal text-gray-700 bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out  focus:text-gray-700 focus:bg-white focus:border-blue-800 focus:outline-none"
             type="text"
-            name="balanceTransfered"
+            name="recipientId"
+            id="recipientId"
             value={receivingId}
             onChange={(e) => setReceivingId(e.target.value)}
             required
           />
 
           <label
-            className="basis-full sm:basis-[50%] text-md  my-2 sm:my-0 mx-2 p-2 sm:border-r-4 rounded shadow bg-blue-200 border-blue-800"
+            className="basis-full sm:basis-[50%] text-md  my-2 sm:my-0  p-2 border-r-4 rounded shadow bg-blue-200 border-blue-800"
             htmlFor="password"
           >
             Type your Password
           </label>
 
           <input
-            className="basis-full  sm:basis-1/3  px-3 py-1.5 mx-4 text-base font-normal text-gray-700 bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out  focus:text-gray-700 focus:bg-white focus:border-blue-800 focus:outline-none"
+            className="basis-full  sm:basis-1/3  px-3 py-1.5 text-base font-normal text-gray-700 bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out  focus:text-gray-700 focus:bg-white focus:border-blue-800 focus:outline-none"
             type="password"
             name="password"
-            defaultValue={password}
+            id="password"
+            value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
           />

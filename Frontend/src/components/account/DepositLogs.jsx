@@ -3,7 +3,7 @@ import React from "react";
 import { FcSalesPerformance } from "react-icons/fc";
 import { useSelector } from "react-redux";
 import { PaginationDepositList } from "../helpers/PaginationDepositList";
-import { FaCalendarAlt, FaMoneyBillWave } from "react-icons/fa";
+import { FaCalendarAlt, FaInfoCircle, FaMoneyBillWave } from "react-icons/fa";
 
 export const DepositLogs = () => {
   //Get account data
@@ -41,20 +41,19 @@ export const DepositLogs = () => {
     );
   };
 
-  //Incase Of No Deposit Logs
+  //In case Of No Deposit Logs
   if (!depositLogs || depositLogs.length === 0)
     return (
-      <div className="max-w-5xl w-full p-6 bg-slate-50 rounded shadow-lg shadow-black/30">
-        <div className="min-h-[150px] my-4 flex flex-col gap-4 items-center justify-center flex-wrap  bg-yellow-100 p-4 border-x-4 border-yellow-800 rounded shadow">
-          <p className="text-gray-800 text-xl p-4 font-bold">
-            There is no Deposit Logs yet!
-          </p>
-        </div>
+      <div className="max-w-2xl w-full mx-auto my-4 flex flex-col gap-4 items-center justify-center flex-wrap  bg-pink-100 p-4 border-2 border-pink-800 rounded shadow">
+        <FaInfoCircle className="text-yellow-500" size={60} />
+        <p className="text-gray-800 text-base font-semibold">
+          There are no Deposit Logs yet
+        </p>
       </div>
     );
 
   return (
-    <div className="max-w-5xl w-full px-2 py-6 md:p-6 bg-slate-50 rounded shadow-lg shadow-black/30">
+    <div className="max-w-5xl w-full self-start">
       <h3 className="flex justify-center items-center text-2xl text-center font-bold px-2 py-4 mb-10 bg-blue-200 border-b-4 border-blue-800 rounded shadow ">
         <FcSalesPerformance className="mr-1" size={50} />
         Deposit Logs

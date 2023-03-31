@@ -8,8 +8,8 @@ export const NoAccountYet = () => {
     <div className="flex justify-center items-center flex-col gap-4 max-w-5xl min-h-[350px] w-full p-6 bg-slate-50 rounded shadow-lg shadow-black/30">
       <FcExpired size={150} />
 
-      <p className="w-full my-4 p-6 text-xl text-center font-semibold bg-yellow-200 border-r-4 border-yellow-800 rounded shadow">
-        You Do not Have Any Accounts Yet!
+      <p className="w-full text-lg font-semibold text-center text-red-500 bg-red-100 border border-red-200 rounded p-4 mb-6">
+        You do not have any accounts yet!
       </p>
 
       <Link

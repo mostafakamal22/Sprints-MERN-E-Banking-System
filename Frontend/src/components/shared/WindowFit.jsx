@@ -1,8 +1,12 @@
 import { useEffect, useState } from "react";
 import { FaMobileAlt } from "react-icons/fa";
 import { Outlet } from "react-router-dom";
+import { SideNavbar } from "./SideNavbar";
+import { useSelector } from "react-redux";
 
 export const WindowFit = () => {
+  const { info } = useSelector((state) => state.adminAuth);
+
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
   useEffect(() => {
@@ -20,14 +24,21 @@ export const WindowFit = () => {
 
   if (windowWidth <= 800) {
     content = (
-      <div className="w-full min-h-screen p-4 flex justify-center items-center">
-        <div className="flex justify-center items-center flex-col gap-4 max-w-5xl min-h-[350px] w-full p-6 bg-slate-50 rounded shadow-lg shadow-black/30">
-          <FaMobileAlt size={64} className="text-blue-500" />
+      <div className="min-h-screen flex flex-no-wrap">
+        {/* admin dashboard side navabr */}
+        <SideNavbar admin={info} />
 
-          <p className="w-full my-4 p-6 text-lg md:text-xl text-center font-semibold bg-red-500 text-white border-r-4 border-red-800 rounded shadow max-w-lg">
-            For a better experience, please use a device with a minimum width of
-            800px.
-          </p>
+        <div className="w-full h-full min-h-screen self-center flex justify-center items-center">
+          <div className="w-full h-full min-h-screen flex justify-center items-center  bg-slate-50 ">
+            <div className="flex justify-center items-center flex-col gap-4  w-full p-6  bg-white rounded shadow-lg">
+              <FaMobileAlt size={64} className="text-blue-500" />
+
+              <p className="text-lg font-semibold text-center text-red-500 bg-red-100 border border-red-200 rounded p-4 mb-6">
+                For a better experience, please use a device with a minimum
+                width of 800px.
+              </p>
+            </div>
+          </div>
         </div>
       </div>
     );

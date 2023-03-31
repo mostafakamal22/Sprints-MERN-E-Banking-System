@@ -39,13 +39,13 @@ export const RetrieveBalance = () => {
 
   if (intialBalance)
     return (
-      <div className="max-w-5xl w-full p-6 bg-slate-50 rounded shadow-lg shadow-black/30">
-        <h3 className="flex justify-center items-center text-2xl text-center font-bold px-2 py-4 mb-10 bg-blue-200 border-b-4 border-blue-800 rounded shadow ">
+      <div className="max-w-5xl w-full">
+        <h3 className="flex justify-center items-center text-xl  sm:text-2xl text-center font-bold px-2 py-4 mb-10 bg-blue-200 border-b-4 border-blue-800 rounded shadow ">
           <FcDebt className="mr-1" size={50} />
           Retrieve Your Balance
         </h3>
         <form onSubmit={handleSubmit}>
-          <p className="text-xl text-center font-semibold !font-sans px-2 py-4 mb-10 bg-blue-200 border-b-4 border-blue-800 rounded shadow ">
+          <p className="text-base  text-center font-semibold !font-sans px-2 py-4 mb-10 bg-blue-200 border-b-4 border-blue-800 rounded shadow ">
             Your initial balance was{" "}
             {new Intl.NumberFormat("ar-EG", {
               style: "currency",

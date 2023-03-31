@@ -2,7 +2,6 @@ import React from "react";
 import { RiArrowUpFill } from "react-icons/ri";
 
 export const ScrollToTopBtn = ({ startAnimation }) => {
-  console.log(startAnimation);
   return (
     <a
       title="Scroll To Top"

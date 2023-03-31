@@ -20,11 +20,11 @@ export const Notification = () => {
 
   if (!notification)
     return (
-      <div className="max-w-5xl min-h-screen w-full p-6 bg-slate-50  rounded shadow-lg shadow-black/30">
-        <div className="flex flex-col gap-4">
+      <div className="max-w-5xl w-full">
+        <div className="flex justify-center items-center flex-col gap-4  w-full p-6  bg-white rounded shadow-lg">
           <FcCancel size={150} className="mx-auto" />
 
-          <p className="w-full my-4 p-6 text-xl text-center font-semibold bg-yellow-200 border-r-4 border-yellow-800 rounded shadow">
+          <p className="w-full text-lg font-semibold text-center text-red-500 bg-red-100 border border-red-200 rounded p-4 mb-6">
             Wrong Notification Path!
           </p>
 
@@ -42,7 +42,7 @@ shadow transition-all ease-in-out duration-300"
     );
 
   return (
-    <div className="max-w-5xl min-h-screen w-full px-3 py-6 md:p-6 bg-slate-50 rounded shadow-lg shadow-black/30">
+    <div className="max-w-2xl w-full self-start">
       {/* Heading */}
       <div className="flex items-center w-full mb-10">
         <FcIdea className="mr-1" size={50} />
@@ -118,7 +118,6 @@ shadow transition-all ease-in-out duration-300"
         {/*Case:- New Transfer Balance Notificaton*/}
         {notification.data && notification.type === "transfered-in" && (
           <>
-            {console.log(notification.message.split("!"))}
             <p className="mt-1 text-sm font-semibold">
               New Balance Transfered:-
               <span className="underline underline-offset-2 text-blue-900 ml-1">
