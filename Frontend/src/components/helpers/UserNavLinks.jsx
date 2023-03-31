@@ -28,8 +28,9 @@ import {
   resetUserStatus,
   userLogout,
 } from "../../state/features/User/UserData/userSlice";
+import { navbarLinksClickHandler } from "./navbarLinksClickHandler";
 
-export const UserNavLinks = ({ user, navbarLinksClickHandler }) => {
+export const UserNavLinks = ({ user }) => {
   const dispatch = useDispatch();
   const { account, isLoading: isUserAccountLoading } = useSelector(
     (state) => state.userAccount
