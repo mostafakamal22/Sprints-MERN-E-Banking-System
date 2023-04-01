@@ -4,7 +4,6 @@ import {
   Route,
   Navigate,
 } from "react-router-dom";
-import ProfilePage from "./views/user/ProfilePage";
 import AdminProfilePage from "./views/admin/ProfilePage";
 import NotFoundPage from "./views/NotFound";
 import UseDetectUser from "./state/features/Hooks/DetectUser";
@@ -13,25 +12,10 @@ import AdminDashboard from "./views/admin/AdminDashboardPage";
 import UpdateAdminProfile from "./views/admin/UpdateProfilePage";
 import { AdminLoginPage } from "./views/admin/AdminLoginPage";
 import { UserLoginPage } from "./views/user/UserLoginPage";
-import { HomePage } from "./views/user/HomePage";
-import { AccountRequestPage } from "./views/user/AccountRequestPage";
-import { NotificationsPage } from "./views/user/NotificationsPage";
-import { UpdateProfilePage } from "./views/user/UpdateProfilePage";
 import { RegisterPage } from "./views/guest/RegisterPage";
-import { NotificationPage } from "./views/user/NotificationPage";
-import { DepositPage } from "./views/user/DepositPage";
-import { WithdrawPage } from "./views/user/WithdrawPage";
-import { TransferPage } from "./views/user/TransferPage";
-import { OutgoingTransactionsPage } from "./views/user/OutgoingTransactionsPage";
-import { IncomingTransactionsPage } from "./views/user/IncomingTransactionsPage";
-import { DepositLogsPage } from "./views/user/DepositLogsPage";
-import { WithdrawLogsPage } from "./views/user/WithdrawLogsPage";
-import { ContactPage } from "./views/user/ContactPage";
 import { useSelector } from "react-redux";
-import { UnactiveSuspendedUserPage } from "./views/user/UnactiveSuspendedUserPage";
 import { MainSpinner } from "./components/shared/MainSpinner";
 import { Index } from "./components/home/Index";
-import { RetrieveBalancePage } from "./views/user/RetrieveBalancePage";
 import { WindowFit } from "./components/shared/WindowFit";
 import { MainLayout } from "./components/shared/MainLayout";
 import { UserProfile } from "./components/profile/UserProfile";

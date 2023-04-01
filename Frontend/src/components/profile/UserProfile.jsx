@@ -6,7 +6,7 @@ export const UserProfile = () => {
   const info = useSelector((state) => state.userData.info);
 
   return (
-    <div className="max-w-5xl w-full">
+    <div className="max-w-4xl w-full self-start">
       {/*profile summery */}
       <ProfileSummery info={info} />
 
