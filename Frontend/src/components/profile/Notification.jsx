@@ -1,5 +1,5 @@
 import React from "react";
-import { BiArrowBack, BiLeftArrowAlt } from "react-icons/bi";
+import { BiLeftArrowAlt } from "react-icons/bi";
 import { useSelector } from "react-redux";
 import { Link, useLocation } from "react-router-dom";
 import moment from "moment";
@@ -47,15 +47,6 @@ shadow transition-all ease-in-out duration-300"
       <div className="flex items-center w-full mb-10">
         <FcIdea className="mr-1" size={50} />
         <h3 className="font-bold text-2xl  text-gray-800">Notifications</h3>
-        <Link
-          to={"/notifications"}
-          className="ml-auto inline-flex font-bold text-xs sm:text-sm bg-white px-2 sm:px-3 py-2 text-blue-500 items-center rounded
-         shadow  focus:outline-none hover:bg-blue-500 hover:text-white
-          "
-        >
-          <BiArrowBack className="mb-[-1px] mr-1 font-bold" size={15} />
-          Go Back
-        </Link>
       </div>
 
       {/* Display notification details*/}

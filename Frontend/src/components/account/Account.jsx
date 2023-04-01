@@ -81,7 +81,8 @@ export const Account = () => {
 
   //No Account yet
   if (
-    (!account || !info?.accounts?.length) &&
+    !account &&
+    !info?.accounts?.length &&
     (!isUserAccountLoading || !isUserDataLoading)
   )
     return <NoAccountYet />;
