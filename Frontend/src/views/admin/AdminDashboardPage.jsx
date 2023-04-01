@@ -68,48 +68,40 @@ export default function AdminDashboard() {
 
   if (!usersList)
     return (
-      <div className="mx-5 h-min-screen">
-        <div className="max-w-5xl w-full h-full flex justify-center items-center mx-auto my-10 p-6 bg-slate-50 rounded shadow-lg shadow-black/30">
-          <div className="flex justify-center items-center">
-            <MainSpinner />
-          </div>
-        </div>
+      <div className="w-full h-full min-h-screen flex justify-center items-center mx-auto  bg-slate-50">
+        <MainSpinner />
       </div>
     );
 
-  if (usersList)
-    return (
-      <div className="min-h-screen  flex flex-nowrap">
-        {/* admin dashboard side navabr */}
-        <SideNavbar admin={info} />
+  return (
+    <div className="min-h-screen  flex flex-nowrap">
+      {/* admin dashboard side navabr */}
+      <SideNavbar admin={info} />
 
-        <div className="overflow-x-auto w-full h-full flex justify-center items-center">
-          <div className="w-full min-h-screen flex  items-center flex-col gap-6 p-3 md:p-6 bg-slate-50">
-            {/* admin dashboard navabr */}
-            <DashboardNavbar
-              activeTab={activeTab}
-              setActiveTab={setActiveTab}
-            />
+      <div className="overflow-x-auto w-full h-full flex justify-center items-center">
+        <div className="w-full min-h-screen flex  items-center flex-col gap-6 p-3 md:p-6 bg-slate-50">
+          {/* admin dashboard navabr */}
+          <DashboardNavbar activeTab={activeTab} setActiveTab={setActiveTab} />
 
-            {/* Add New Admin panel */}
-            {activeTab === "addAdmin" && <RegisterAdmin />}
+          {/* Add New Admin panel */}
+          {activeTab === "addAdmin" && <RegisterAdmin />}
 
-            {/* admins control panel */}
-            {activeTab === "adminsList" && (
-              <AdminListControl adminsList={adminsList} />
-            )}
+          {/* admins control panel */}
+          {activeTab === "adminsList" && (
+            <AdminListControl adminsList={adminsList} />
+          )}
 
-            {/* users control panel */}
-            {activeTab === "usersList" && (
-              <UsersListControl usersList={usersList} />
-            )}
+          {/* users control panel */}
+          {activeTab === "usersList" && (
+            <UsersListControl usersList={usersList} />
+          )}
 
-            {/* users Account Request*/}
-            {activeTab === "usersRequests" && (
-              <UsersAccountRequests accountRequestsList={accountRequestsList} />
-            )}
-          </div>
+          {/* users Account Request*/}
+          {activeTab === "usersRequests" && (
+            <UsersAccountRequests accountRequestsList={accountRequestsList} />
+          )}
         </div>
       </div>
-    );
+    </div>
+  );
 }
