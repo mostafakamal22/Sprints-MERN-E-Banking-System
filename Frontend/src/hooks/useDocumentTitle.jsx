@@ -14,7 +14,8 @@ export function useDocumentTitle() {
       document.title = titleText;
       setTitle(titleText);
 
-      if (hideTitle) {
+      const isHidden = h3.classList?.contains("hidden");
+      if (hideTitle && !isHidden && titleText !== "Home") {
         h3.classList.toggle("hidden");
       }
     }
