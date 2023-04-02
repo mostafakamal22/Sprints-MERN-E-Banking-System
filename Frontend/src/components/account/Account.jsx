@@ -90,10 +90,10 @@ export const Account = () => {
   if (account && !isUserAccountLoading && !isUserDataLoading)
     return (
       <div className="max-w-5xl w-full">
-        <h2 className="flex justify-center items-center text-3xl my-5 px-6 py-3 text-center font-bold bg-blue-200 text-blue-900 border-x-4 border-blue-800 rounded shadow">
+        <h3 className="flex justify-center items-center text-3xl my-5 px-6 py-3 text-center font-bold bg-blue-200 text-blue-900 border-x-4 border-blue-800 rounded shadow">
           <FcHome className="mr-1" size={45} />
           <span>Home</span>
-        </h2>
+        </h3>
 
         {/* Choose Account */}
         <ChooseAccount

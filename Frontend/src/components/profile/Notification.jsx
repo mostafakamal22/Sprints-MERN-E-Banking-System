@@ -45,7 +45,7 @@ shadow transition-all ease-in-out duration-300"
     <div className="max-w-2xl w-full self-start">
       {/* Heading */}
       <div className="flex items-center w-full mb-10">
-        <FcIdea className="mr-1" size={50} />
+        <FcIdea className="mx-auto md:ml-0 md:mr-1" size={50} />
         <h3 className="font-bold text-2xl  text-gray-800">Notifications</h3>
       </div>
 
