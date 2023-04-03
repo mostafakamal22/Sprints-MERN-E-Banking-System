@@ -167,13 +167,15 @@ export const UserNavLinks = ({ user }) => {
           {link.title === "Notifications" &&
             user.notifications.filter((notification) => !notification.isSeen)
               .length > 0 && (
-              <div className="w-2 h-2 p-3 ml-auto  flex items-center justify-center bg-red-500 text-white font-bold text-xs rounded-full shadow">
-                {
-                  user.notifications.filter(
-                    (notification) => !notification.isSeen
-                  ).length
-                }
-              </div>
+              <span className="w-2 h-2 p-3 ml-auto  flex items-center justify-center bg-red-500 text-white font-bold text-xs rounded-full shadow">
+                {user.notifications.filter(
+                  (notification) => !notification.isSeen
+                ).length > 9
+                  ? "+9"
+                  : user.notifications.filter(
+                      (notification) => !notification.isSeen
+                    ).length}
+              </span>
             )}
         </Link>
       )}
