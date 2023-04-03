@@ -15,6 +15,7 @@ export const MainLayout = () => {
   //clean up status (when mount and unmount)
   UseResetStatus(() => {
     dispatch(resetUserStatus());
+    document.title = "Home";
   });
 
   UseResetStatus(() => {
