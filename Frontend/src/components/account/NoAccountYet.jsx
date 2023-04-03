@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 
 export const NoAccountYet = () => {
   return (
-    <div className="flex justify-center items-center flex-col gap-4 max-w-5xl min-h-[350px] w-full p-6 bg-slate-50 rounded shadow-lg shadow-black/30">
+    <div className="flex justify-center items-center flex-col gap-4 max-w-5xl min-h-[350px] w-full p-6 bg-slate-50 border rounded">
       <FcExpired size={150} />
 
       <p className="w-full text-lg font-semibold text-center text-red-500 bg-red-100 border border-red-200 rounded p-4 mb-6">

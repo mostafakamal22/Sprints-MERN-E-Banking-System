@@ -59,14 +59,11 @@ export const DepositLogs = () => {
         Deposit Logs
       </h3>
 
-      {/* incase of there are Deposit log */}
-      {depositLogs && depositLogs.length !== 0 && (
-        <PaginationDepositList
-          depositLogs={depositLogs.slice(0).reverse()}
-          depositLog={depositLog}
-          rowsPerPage={10}
-        />
-      )}
+      <PaginationDepositList
+        depositLogs={depositLogs.slice(0).reverse()}
+        depositLog={depositLog}
+        rowsPerPage={10}
+      />
     </div>
   );
 };

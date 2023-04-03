@@ -71,14 +71,11 @@ export const OutgoingTransactions = () => {
         Outgoing Transactions
       </h3>
 
-      {/* incase of there are transactions log */}
-      {outgoing && outgoing.length !== 0 && (
-        <PaginationOutgoingList
-          outgoingTransactions={outgoing.slice(0).reverse()}
-          outgoingTransaction={outgoingTransaction}
-          rowsPerPage={10}
-        />
-      )}
+      <PaginationOutgoingList
+        outgoingTransactions={outgoing.slice(0).reverse()}
+        outgoingTransaction={outgoingTransaction}
+        rowsPerPage={10}
+      />
     </div>
   );
 };

@@ -70,14 +70,11 @@ export const IncomingTransactions = () => {
         Incoming Transactions
       </h3>
 
-      {/* incase of there are transactions log */}
-      {incoming && incoming.length !== 0 && (
-        <PaginationIncomingList
-          incomingTransactions={incoming.slice(0).reverse()}
-          incomingTransaction={incomingTransaction}
-          rowsPerPage={10}
-        />
-      )}
+      <PaginationIncomingList
+        incomingTransactions={incoming.slice(0).reverse()}
+        incomingTransaction={incomingTransaction}
+        rowsPerPage={10}
+      />
     </div>
   );
 };

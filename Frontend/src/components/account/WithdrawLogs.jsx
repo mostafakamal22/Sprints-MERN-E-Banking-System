@@ -59,14 +59,11 @@ export const WithdrawLogs = () => {
         Withdraw Logs
       </h3>
 
-      {/* incase of there are Withdraw Log */}
-      {withdrawLogs && withdrawLogs.length !== 0 && (
-        <PaginationWithdrawList
-          withdrawLogs={withdrawLogs.slice(0).reverse()}
-          withdrawLog={withdrawLog}
-          rowsPerPage={10}
-        />
-      )}
+      <PaginationWithdrawList
+        withdrawLogs={withdrawLogs.slice(0).reverse()}
+        withdrawLog={withdrawLog}
+        rowsPerPage={10}
+      />
     </div>
   );
 };

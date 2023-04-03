@@ -1,35 +1,26 @@
 import React from "react";
 import { AiFillHome } from "react-icons/ai";
 import { BiArrowBack } from "react-icons/bi";
-import { useSelector } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 
 export const Buttons = ({ title }) => {
   const navigate = useNavigate();
 
-  const { account, isLoading: isUserAccountLoading } = useSelector(
-    (state) => state.userAccount
-  );
-  const { info, isLoading: isUserDataLoading } = useSelector(
-    (state) => state.userData
-  );
+  const location = useLocation();
 
-  if ((!account || !info) && (isUserAccountLoading || isUserDataLoading))
-    return null;
+  if (location?.pathname === "/") return null;
 
   return (
     <div className="md:hidden w-full flex justify-between items-center gap-1 p-3 bg-slate-50">
-      {title !== "Home" && (
-        <Link
-          to={"/"}
-          className="inline-flex font-bold text-xs sm:text-sm bg-white px-2 sm:px-3 py-2 text-blue-500 items-center rounded
+      <Link
+        to={"/"}
+        className="inline-flex font-bold text-xs sm:text-sm bg-white px-2 sm:px-3 py-2 text-blue-500 items-center rounded
          shadow  focus:outline-none hover:bg-blue-500 active:bg-blue-500 hover:text-white
           "
-        >
-          <AiFillHome className="mb-[-1px] mr-1 font-bold" size={15} />
-          Home
-        </Link>
-      )}
+      >
+        <AiFillHome className="mb-[-1px] mr-1 font-bold" size={15} />
+        Home
+      </Link>
 
       {title && title !== "Home" && (
         <span className="text-xs text-blue-500 text-center bg-white p-2 font-bold rounded shadow">
