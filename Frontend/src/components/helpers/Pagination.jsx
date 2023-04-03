@@ -6,11 +6,21 @@ const Pagination = ({ range, setPage, page, slice }) => {
       setPage(page - 1);
     }
   }, [slice, page, setPage]);
+
   return (
     <nav className="mx-auto my-5 text-center">
       <ul className="inline-flex items-center flex-wrap -space-x-px">
         {range.map((el, index) => (
-          <li key={index} onClick={() => setPage(el)}>
+          <li
+            key={index}
+            onClick={() => {
+              setPage(el);
+              window.scrollTo({
+                top: 0,
+                behavior: "smooth",
+              });
+            }}
+          >
             <button
               className={`${
                 el === page && "bg-blue-100"
