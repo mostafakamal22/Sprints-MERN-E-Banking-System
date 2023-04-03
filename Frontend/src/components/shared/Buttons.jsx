@@ -8,7 +8,8 @@ export const Buttons = ({ title }) => {
 
   const location = useLocation();
 
-  if (location?.pathname === "/") return null;
+  if (location?.pathname === "/" || location?.pathname === "/login")
+    return null;
 
   return (
     <div className="md:hidden w-full flex justify-between items-center gap-1 p-3 bg-slate-50">
