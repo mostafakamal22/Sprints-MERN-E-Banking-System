@@ -17,7 +17,13 @@ const checkAccount = async (req, res, next) => {
     account = await Account.findById(req.params.to_id);
 
     //check for account being exist.
-    if (account) {
+    if (!account) {
+      return res
+        .status(400)
+        .send(
+          "The Account you Sending to is Not Exist!, Make Sure you type Correctly"
+        );
+    } else {
       //okay valid account to proceed
       return next();
     }
