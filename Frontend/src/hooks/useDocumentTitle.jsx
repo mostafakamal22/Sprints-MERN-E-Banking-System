@@ -18,6 +18,9 @@ export function useDocumentTitle() {
       if (hideTitle && !isHidden && titleText !== "Home") {
         h3.classList.toggle("hidden");
       }
+    } else {
+      document.title = "E-Bank | Everything You Need";
+      setTitle("");
     }
   }, [location]);
 

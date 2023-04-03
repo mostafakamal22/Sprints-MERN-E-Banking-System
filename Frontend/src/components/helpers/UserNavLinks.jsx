@@ -29,6 +29,7 @@ import {
   userLogout,
 } from "../../state/features/User/UserData/userSlice";
 import { navbarLinksClickHandler } from "./navbarLinksClickHandler";
+import { UserNavbarSkeleton } from "./UserNavbarSkeleton";
 
 export const UserNavLinks = ({ user }) => {
   const dispatch = useDispatch();
@@ -180,7 +181,7 @@ export const UserNavLinks = ({ user }) => {
   ));
 
   if ((!account || !info) && (isUserAccountLoading || isUserDataLoading))
-    return null;
+    return <UserNavbarSkeleton />;
 
   return navbarLinks;
 };

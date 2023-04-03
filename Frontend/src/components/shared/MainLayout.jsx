@@ -20,6 +20,7 @@ export const MainLayout = () => {
   UseResetStatus(() => {
     return () => {
       dispatch(resetUserStatus());
+      document.title = "E-Bank | Everything You Need";
     };
   });
 
