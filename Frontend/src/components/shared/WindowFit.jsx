@@ -30,7 +30,7 @@ export const WindowFit = () => {
 
         <div className="w-full h-full min-h-screen self-center flex justify-center items-center">
           <div className="w-full h-full min-h-screen flex justify-center items-center  bg-slate-50 ">
-            <div className="flex justify-center items-center flex-col gap-4  w-full p-6  bg-white rounded shadow-lg">
+            <div className="flex justify-center items-center flex-col gap-4  w-full p-6 mx-2  bg-white rounded border">
               <FaMobileAlt size={64} className="text-blue-500" />
 
               <p className="text-lg font-semibold text-center text-red-500 bg-red-100 border border-red-200 rounded p-4 mb-6">
