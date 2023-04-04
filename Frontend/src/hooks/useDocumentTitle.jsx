@@ -21,6 +21,8 @@ export function useDocumentTitle() {
     } else if (location?.pathname !== "/" && location?.pathname !== "/login") {
       document.title = "E-Bank | Everything You Need";
       setTitle("");
+    } else if (location?.pathname === "/") {
+      document.title = "Home";
     }
   }, [location]);
 
