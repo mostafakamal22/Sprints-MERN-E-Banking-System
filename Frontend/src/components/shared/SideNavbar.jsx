@@ -93,7 +93,7 @@ export const SideNavbar = ({ admin = null, user = null }) => {
         id="mobile-nav"
       >
         <div
-          className="h-10 w-10 bg-slate-50 absolute right-0 mt-16 -mr-10 p-1 flex items-center shadow rounded-tr rounded-br justify-center cursor-pointer"
+          className="h-10 w-10 backdrop-blur-[1px] bg-slate-50/30 absolute right-0 mt-16 -mr-10 p-1 flex items-center shadow rounded-tr rounded-br justify-center cursor-pointer ${"
           id="mobile-toggler"
           onClick={sidebarHandler}
         >
