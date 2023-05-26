@@ -27,7 +27,7 @@ Here're some of the project's best features:
 
 <h2>🛠️ Installation Steps:</h2>
 
-## Adding a Manual Owner(Admin)
+### Adding a Manual Owner(Admin)
 
 You NEED to add the first Admin(The Owner) Of the project manually after that you can add any additional admins/owners through admins' dashboard.
 
@@ -40,7 +40,7 @@ To add a manual admin to the E-Banking system, follow these steps:
 5. Save the document.
 
 
-## Setting Up API URL On Frontend
+### Setting Up API URL On Frontend
 
 please make sure to add the following lines in your .env file or you will get a CORS Error after production deploy:
 
@@ -70,11 +70,11 @@ const API_URL =
   ```
 
 
-## Accessing The Admin Dashboard:-
+### Accessing The Admin Dashboard:-
 
 You can use the route ``"/admins/login"`` to log in to the admin's dashboard. However, you will need a registered admin/owner account in the database before you can do so. You can manually add a new admin document into the MongoDB database admins collection with the role of "owner" THE STEPS ARE SHOWN ABOVE. Once you have created the account and logged in with the credentials, you can add other admins through the admin's dashboard.
 
-## Getting Started
+### Getting Started
 
 <p>1. install (Frontend & Backend) dependencies</p>
 
