@@ -76,14 +76,22 @@ You can use the route ``"/admins/login"`` to log in to the admin's dashboard. Ho
 
 ## Getting Started
 
-<p>1. install dependencies</p>
+<p>1. install (Frontend & Backend) dependencies</p>
 
+for backend:-
 ```
+npm insatll
+```
+
+for frontend:-
+```
+cd Frontend
 npm insatll
 ```
 
 <p>2. run the server</p>
 
 ```
+cd ..
 npm run both
 ```
