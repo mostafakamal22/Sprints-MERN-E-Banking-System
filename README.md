@@ -29,7 +29,11 @@ Here're some of the project's best features:
 
 ### Adding a Manual Owner(Admin)
 
-You NEED to add the first Admin(The Owner) Of the project manually after that you can add any additional admins/owners through admins' dashboard.
+You NEED to add the first Admin(The Owner) Of the project after that you can add any additional admins/owners through admins' dashboard.
+
+####You have Two Approaches:-
+
+<p>1. Add Manual Owner Document Direct to MongoDB</p>
 
 To add a manual admin to the E-Banking system, follow these steps:
 
@@ -38,6 +42,63 @@ To add a manual admin to the E-Banking system, follow these steps:
 3. Copy the admin schema and paste it into the document editor.
 4. Replace the values in the schema with the admin's name, email, password, and role.
 5. Save the document.
+
+<p>2. Add Owner Through Public API</p>
+
+To create the first owner of the e-bank platform, you can use the ```api/admins/owner/create``` route. This feature is publicly accessible and can be used using Postman, Thunder client, or any other REST client.
+
+Note: Make sure to comment out or remove this feature from your code after creating the first owner to avoid any security risks.
+
+####Request
+
+To create the first owner, send a ```POST request``` to the ```api/admins/owner/create``` route with the following required parameters:
+```
+    name: The name of the first owner.
+    email: The email address of the first owner.
+    password: The password of the first owner.
+```
+
+####Example request using cURL:
+```
+scheme
+
+curl --location --request POST 'http://localhost:3000/api/admins/owner/create' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "name": "John Doe",
+    "email": "johndoe@example.com",
+    "password": "password123"
+}'
+```
+
+####Response
+
+If the request is successful, the API will return a JSON response with the following properties:
+```
+    _id: The ID of the created admin.
+    admin_name: The name of the created admin.
+    -email: The email address of the created admin.
+    role: The role of the created admin, which will be set to "owner".
+```
+####Example response:
+```
+apache
+
+{
+    "_id": "60af48b1f6e3c30c9cbbf0ad",
+    "admin_name": "John Doe",
+    "email": "johndoe@example.com",
+    "role": "owner"
+}
+```
+If there is an error during the creation process, the API will return an error message in the response body.
+####Security Note
+
+It is important to note that this feature is publicly accessible and can be used by anyone. Therefore, it is crucial that you remove or comment out this feature from your code after creating the first owner. Leaving it in your code exposes your application to security risks.
+
+That's it! Follow these steps to create the first owner of your e-bank platform using the ```api/admins/owner/create``` route.
+
+Let me know if you have any questions or need further assistance.
 
 
 ### Setting Up API URL On Frontend
