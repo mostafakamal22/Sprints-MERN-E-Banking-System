@@ -31,9 +31,9 @@ Here're some of the project's best features:
 
 You NEED to add the first Admin(The Owner) Of the project after that you can add any additional admins/owners through admins' dashboard.
 
-####You have Two Approaches:-
+**You have Two Approaches:-**
 
-<p>1. Add Manual Owner Document Direct to MongoDB</p>
+<p>1. Add Manual Owner Document Direct to MongoDB cluster collection</p>
 
 To add a manual admin to the E-Banking system, follow these steps:
 
@@ -49,7 +49,7 @@ To create the first owner of the e-bank platform, you can use the ```api/admins/
 
 Note: Make sure to comment out or remove this feature from your code after creating the first owner to avoid any security risks.
 
-####Request
+**Request**
 
 To create the first owner, send a ```POST request``` to the ```api/admins/owner/create``` route with the following required parameters:
 ```
@@ -58,7 +58,7 @@ To create the first owner, send a ```POST request``` to the ```api/admins/owner/
     password: The password of the first owner.
 ```
 
-####Example request using cURL:
+**Example request using cURL:**
 ```
 scheme
 
@@ -71,7 +71,7 @@ curl --location --request POST 'http://localhost:3000/api/admins/owner/create' \
 }'
 ```
 
-####Response
+**Response**
 
 If the request is successful, the API will return a JSON response with the following properties:
 ```
@@ -80,7 +80,7 @@ If the request is successful, the API will return a JSON response with the follo
     -email: The email address of the created admin.
     role: The role of the created admin, which will be set to "owner".
 ```
-####Example response:
+**Example response:**
 ```
 apache
 
@@ -92,7 +92,8 @@ apache
 }
 ```
 If there is an error during the creation process, the API will return an error message in the response body.
-####Security Note
+
+**Security Note**
 
 It is important to note that this feature is publicly accessible and can be used by anyone. Therefore, it is crucial that you remove or comment out this feature from your code after creating the first owner. Leaving it in your code exposes your application to security risks.
 
