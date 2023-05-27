@@ -35,7 +35,7 @@ You NEED to add the first Admin(The Owner) Of the project after that you can add
 
 <p>1. Add Manual Owner Document Direct to MongoDB cluster collection</p>
 
-To add a manual admin to the E-Banking system, follow these steps:
+To add a manual Owner to the E-Banking system, follow these steps:
 
 1. Open your MongoDB cluster and navigate to the Admins collection.
 2. Click on the "Insert Document" button to add a new document to the collection.
