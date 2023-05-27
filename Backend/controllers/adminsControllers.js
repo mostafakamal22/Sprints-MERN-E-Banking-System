@@ -95,6 +95,35 @@ const createAdmin = async (req, res) => {
   }
 };
 
+//@desc   >>>> Create The First Owner
+//@route  >>>> POST /api/admins/owner/create
+//@Access >>>> Public(Use Postman/Thunder client/Rest Client)
+
+// IMPORTANT:- You NEED to Comment/remove This feature after creating the first owner
+// const createFirstAdmin = async (req, res) => {
+//   try {
+//     const hashedPassword = await bcrypt.hash(req.body.password, 10);
+//     const admin = await Admin.create({
+//       admin_name: req.body.name,
+//       email: req.body.email,
+//       password: hashedPassword,
+//       role: "owner",
+//     });
+//     res.status(201).json({
+//       _id: admin.id,
+//       admin_name: admin.admin_name,
+//       email: admin.email,
+//       role: admin.role,
+//     });
+//   } catch (error) {
+//     if (error.message.match(/(email|password|name|role)/gi)) {
+//       return res.status(400).send(error.message);
+//     }
+
+//     res.status(500).send("Ooops!! Something Went Wrong, Try again...");
+//   }
+// };
+
 //@desc   >>>> UPDATE Admin
 //@route  >>>> PUT /api/admins/:id
 //@Access >>>> private(all Admin for their accounts)
@@ -198,6 +227,7 @@ module.exports = {
   getAdmins,
   getOneAdmin,
   createAdmin,
+  // createFirstAdmin,
   adminLogin,
   updateAdmin,
   updateOwner,

@@ -24,12 +24,15 @@ const {
   deleteAdmin,
   adminLogin,
   updateAdminRole,
+  createFirstAdmin,
 } = require("../controllers/adminsControllers");
 
 router
   .route("/")
   .get(authAdminProtect, checkRole, getAdmins)
   .post(authAdminProtect, checkRole, validatePassword, createAdmin);
+
+router.route("/login").post(adminLogin);
 
 router
   .route("/:id")
@@ -45,6 +48,7 @@ router
   .route("/owner/:id")
   .put(authAdminProtect, checkPassword, validatePassword, updateOwner);
 
-router.route("/login").post(adminLogin);
+//Comment/Remove This Route after creating the first owner
+// router.route("/owner/create").post(createFirstAdmin);
 
 module.exports = router;
