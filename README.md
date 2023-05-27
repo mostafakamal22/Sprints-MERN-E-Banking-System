@@ -27,14 +27,71 @@ Here're some of the project's best features:
 
 <h2>🛠️ Installation Steps:</h2>
 
-<p>1. install dependencies</p>
+### Adding a Manual Owner(Admin)
+
+You NEED to add the first Admin(The Owner) Of the project manually after that you can add any additional admins/owners through admins' dashboard.
+
+To add a manual admin to the E-Banking system, follow these steps:
+
+1. Open your MongoDB cluster and navigate to the Admins collection.
+2. Click on the "Insert Document" button to add a new document to the collection.
+3. Copy the admin schema and paste it into the document editor.
+4. Replace the values in the schema with the admin's name, email, password, and role.
+5. Save the document.
+
+
+### Setting Up API URL On Frontend
+
+please make sure to add the following lines in your .env file or you will get a CORS Error after production deploy:
 
 ```
+MONGO_URI= your Mongodb URI
+JWT_SECRET=your JWT secret
+CORS_DOMAINS = http://localhost:3000, https://yourAPIHost
+```
+
+Additionally, you need to modify every services file in the features directory to make API calls to your API host. 
+For example, in ```Frontend\src\state\features\Account\accountServices.tsx```, you need to edit the following line:
+
+```
+const API_URL =
+  process.env.NODE_ENV === "production"
+    ? "https://ebank-2t3r.onrender.com/api/account/"
+    : "http://localhost:5000/api/account/";
+ ```
+
+To be like this:
+
+```
+const API_URL =
+  process.env.NODE_ENV === "production"
+    ? "https://YourAPIHost/api/account/"
+    : "http://localhost:5000/api/account/";
+  ```
+
+
+### Accessing The Admin Dashboard:-
+
+You can use the route ``"/admins/login"`` to log in to the admin's dashboard. However, you will need a registered admin/owner account in the database before you can do so. You can manually add a new admin document into the MongoDB database admins collection with the role of "owner" THE STEPS ARE SHOWN ABOVE. Once you have created the account and logged in with the credentials, you can add other admins through the admin's dashboard.
+
+### Getting Started
+
+<p>1. install (Frontend & Backend) dependencies</p>
+
+for backend:-
+```
+npm insatll
+```
+
+for frontend:-
+```
+cd Frontend
 npm insatll
 ```
 
 <p>2. run the server</p>
 
 ```
+cd ..
 npm run both
 ```
