@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "",
   "main": "Backend/server.js",
+  "engines": {
+    "node": ">=18"
+  },
   "scripts": {
     "both": "concurrently \"npm:dev\" \"npm:dev2\"",
     "start": "node Backend/server.js",
