@@ -11,7 +11,7 @@
     "start": "node Backend/server.js",
     "dev": "nodemon Backend/server.js",
     "dev2": "cd Frontend && npm run dev",
-    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix Frontend && npm run build --prefix Frontend"
+    "deploy": "npm install && cd Frontend && npm install && npm run build"
   },
   "keywords": [],
   "author": "",
