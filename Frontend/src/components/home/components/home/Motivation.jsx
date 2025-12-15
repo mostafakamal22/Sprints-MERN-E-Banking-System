@@ -1,8 +1,7 @@
-import React from "react";
-import { ReactComponent as OnlineIcon } from "../../../../assets/icons/icon-online.svg";
-import { ReactComponent as OnboardingIcon } from "../../../../assets/icons/icon-onboarding.svg";
-import { ReactComponent as BudgetingIcon } from "../../../../assets/icons/icon-budgeting.svg";
-import { ReactComponent as ApiIcon } from "../../../../assets/icons/icon-api.svg";
+import OnlineIcon from "../../../../assets/icons/icon-online.svg?react";
+import OnboardingIcon from "../../../../assets/icons/icon-onboarding.svg?react";
+import BudgetingIcon from "../../../../assets/icons/icon-budgeting.svg?react";
+import ApiIcon from "../../../../assets/icons/icon-api.svg?react";
 
 const motivationItems = [
   {

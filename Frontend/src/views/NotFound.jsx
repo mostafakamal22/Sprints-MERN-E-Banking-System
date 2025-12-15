@@ -1,7 +1,6 @@
-import React from "react";
 import { AiFillHome } from "react-icons/ai";
 import { Link } from "react-router-dom";
-import { ReactComponent as NotFoundSVG } from "../assets/imgs/E-BANK-404.svg";
+import NotFoundSVG from "../assets/imgs/E-BANK-404.svg?react";
 
 const NotFoundPage = () => {
   return (

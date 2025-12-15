@@ -1,9 +1,8 @@
-import React from "react";
 import { useDispatch } from "react-redux";
-import Login from "../../components/forms/userForms/Login";
 import { resetAuthStatus } from "../../state/features/User/Auth/authSlice";
 import { UseResetStatus } from "../../hooks/UseResetStatus";
-import { ReactComponent as LoginImg } from "../../assets/imgs/E-BANK-Login.svg";
+import Login from "../../components/forms/userForms/Login";
+import LoginImg from "../../assets/imgs/E-BANK-Login.svg?react";
 
 export const UserLoginPage = () => {
   const dispatch = useDispatch();
