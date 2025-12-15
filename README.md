@@ -25,6 +25,8 @@ Here're some of the project's best features:
 
 <h2>🛠️ Installation Steps:</h2>
 
+[Installation Steps on YT](https://www.youtube.com/watch?v=W8Wuxw3mHSw)
+
 ### Adding a Manual Owner(Admin)
 
 You NEED to add the first Admin(The Owner) Of the project after that you can add any additional admins/owners through admins' dashboard.
