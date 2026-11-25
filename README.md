@@ -170,3 +170,25 @@ alright
 kkkk.
 So, this is my new branch i have created this to just fro testing something.
 alright now i can move on to the next step
+
+
+
+### Accessing The Admin Dashboard:-
+
+You can use the route `"/admins/login"` to log in to the admin's dashboard. However, you will need a registered admin/owner account in the database before you can do so. You can manually add a new admin document into the MongoDB database admins collection with the role of "owner" THE STEPS ARE SHOWN ABOVE. Once you have created the account and logged in with the credentials, you can add other admins through the admin's dashboard.
+
+### Getting Started
+
+<p>1. install (Frontend & Backend) dependencies</p>
+
+for backend:-
+
+```
+npm insatll
+```
+
+for frontend:-
+
+```
+cd Frontend
+npm insatll
