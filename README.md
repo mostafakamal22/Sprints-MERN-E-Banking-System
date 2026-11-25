@@ -163,3 +163,10 @@ npm insatll
 cd ..
 npm run both
 ```
+
+Well i got this folder
+so, i use this repo for one experiment..
+alright
+kkkk.
+So, this is my new branch i have created this to just fro testing something.
+alright now i can move on to the next step
